@@ -33,7 +33,7 @@ export function HeroSection() {
           </h1>
 
           <p className="text-xl md:text-2xl text-white mb-12 leading-relaxed max-w-3xl mx-auto">
-          Experience compassionate, top-quality care tailored to your loved one's needs. Trust us to provide a brighter, healthier future through personalized care and support. 
+          Experience compassionate, top-quality care tailored to your loved one&apos;s needs. Trust us to provide a brighter, healthier future through personalized care and support. 
 
           </p>
 
