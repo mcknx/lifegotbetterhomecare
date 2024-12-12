@@ -9,28 +9,46 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Menu, Phone, ChevronDown, X } from 'lucide-react'
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 
 export function NavBar() {
   const [isOpen, setIsOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 0)
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   return (
-    <nav className="bg-white shadow-md">
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      scrolled ? 'bg-white shadow-md' : ''
+    }`}>
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
           <Link href="/" className="flex items-center">
-            <span className="text-2xl font-bold text-blue-600">Life Got Better</span>
+            <span className={`text-2xl font-bold ${
+              scrolled ? 'text-blue-600' : 'text-white'
+            }`}>Life Got Better</span>
           </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-8">
-            <Link href="/" className="text-gray-700 hover:text-blue-600 transition-colors">
+            <Link href="/" className={`hover:text-blue-600 transition-colors ${
+              scrolled ? 'text-gray-700' : 'text-white'
+            }`}>
               Home
             </Link>
             
             <DropdownMenu>
-              <DropdownMenuTrigger className="flex items-center gap-1 text-gray-700 hover:text-blue-600 transition-colors">
+              <DropdownMenuTrigger className={`flex items-center gap-1 hover:text-blue-600 transition-colors ${
+                scrolled ? 'text-gray-700' : 'text-white'
+              }`}>
                 Services <ChevronDown className="w-4 h-4" />
               </DropdownMenuTrigger>
               <DropdownMenuContent>
@@ -41,15 +59,21 @@ export function NavBar() {
               </DropdownMenuContent>
             </DropdownMenu>
 
-            <Link href="/about" className="text-gray-700 hover:text-blue-600 transition-colors">
+            <Link href="/about" className={`hover:text-blue-600 transition-colors ${
+              scrolled ? 'text-gray-700' : 'text-white'
+            }`}>
               About Us
             </Link>
             
-            <Link href="/careers" className="text-gray-700 hover:text-blue-600 transition-colors">
+            <Link href="/careers" className={`hover:text-blue-600 transition-colors ${
+              scrolled ? 'text-gray-700' : 'text-white'
+            }`}>
               Careers
             </Link>
             
-            <Link href="/contact" className="text-gray-700 hover:text-blue-600 transition-colors">
+            <Link href="/contact" className={`hover:text-blue-600 transition-colors ${
+              scrolled ? 'text-gray-700' : 'text-white'
+            }`}>
               Contact
             </Link>
 
@@ -61,7 +85,9 @@ export function NavBar() {
 
           {/* Mobile Menu Button */}
           <button
-            className="lg:hidden p-2"
+            className={`lg:hidden p-2 ${
+              scrolled ? 'text-gray-700' : 'text-white'
+            }`}
             onClick={() => setIsOpen(!isOpen)}
           >
             {isOpen ? <X /> : <Menu />}
@@ -76,9 +102,9 @@ export function NavBar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden"
+            className="lg:hidden bg-white"
           >
-            <div className="px-4 py-4 space-y-4 bg-gray-50">
+            <div className="px-4 py-4 space-y-4">
               <Link
                 href="/"
                 className="block text-gray-700 hover:text-blue-600 transition-colors"
