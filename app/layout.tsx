@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Qualified Staffing",
+  title: "Life Got Better",
   description: "Professional staffing solutions",
 };
 
