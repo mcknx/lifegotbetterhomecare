@@ -25,12 +25,12 @@ export function NavBar() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, sectionId: string) => {
+  const handleNavClick = (e: React.MouseEvent<HTMLElement>, sectionId: string) => {
     e.preventDefault()
     const element = document.getElementById(sectionId)
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' })
-      setIsOpen(false) // Close mobile menu if open
+      setIsOpen(false)
     }
   }
 
@@ -65,7 +65,7 @@ export function NavBar() {
                 Services <ChevronDown className="w-4 h-4" />
               </DropdownMenuTrigger>
               <DropdownMenuContent>
-                <DropdownMenuItem onClick={(e) => handleNavClick(e as any, 'services')}>
+                <DropdownMenuItem onClick={(e: React.MouseEvent<HTMLDivElement>) => handleNavClick(e, 'services')}>
                   Personal Care
                 </DropdownMenuItem>
                 <DropdownMenuItem>Post-Operative Care</DropdownMenuItem>
