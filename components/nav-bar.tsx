@@ -25,6 +25,15 @@ export function NavBar() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, sectionId: string) => {
+    e.preventDefault()
+    const element = document.getElementById(sectionId)
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' })
+      setIsOpen(false) // Close mobile menu if open
+    }
+  }
+
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
       scrolled ? 'bg-white shadow-md' : ''
@@ -39,11 +48,15 @@ export function NavBar() {
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-8">
-            <Link href="/" className={`hover:text-blue-600 transition-colors ${
-              scrolled ? 'text-gray-700' : 'text-white'
-            }`}>
+            <a
+              href="#home"
+              onClick={(e) => handleNavClick(e, 'home')}
+              className={`hover:text-blue-600 transition-colors ${
+                scrolled ? 'text-gray-700' : 'text-white'
+              }`}
+            >
               Home
-            </Link>
+            </a>
             
             <DropdownMenu>
               <DropdownMenuTrigger className={`flex items-center gap-1 hover:text-blue-600 transition-colors ${
@@ -52,30 +65,44 @@ export function NavBar() {
                 Services <ChevronDown className="w-4 h-4" />
               </DropdownMenuTrigger>
               <DropdownMenuContent>
-                <DropdownMenuItem>Personal Care</DropdownMenuItem>
+                <DropdownMenuItem onClick={(e) => handleNavClick(e as any, 'services')}>
+                  Personal Care
+                </DropdownMenuItem>
                 <DropdownMenuItem>Post-Operative Care</DropdownMenuItem>
                 <DropdownMenuItem>Meal Preparation</DropdownMenuItem>
                 <DropdownMenuItem>Medication Management</DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
 
-            <Link href="/about" className={`hover:text-blue-600 transition-colors ${
-              scrolled ? 'text-gray-700' : 'text-white'
-            }`}>
+            <a
+              href="#about"
+              onClick={(e) => handleNavClick(e, 'about')}
+              className={`hover:text-blue-600 transition-colors ${
+                scrolled ? 'text-gray-700' : 'text-white'
+              }`}
+            >
               About Us
-            </Link>
+            </a>
             
-            <Link href="/careers" className={`hover:text-blue-600 transition-colors ${
-              scrolled ? 'text-gray-700' : 'text-white'
-            }`}>
+            <a
+              href="#careers"
+              onClick={(e) => handleNavClick(e, 'careers')}
+              className={`hover:text-blue-600 transition-colors ${
+                scrolled ? 'text-gray-700' : 'text-white'
+              }`}
+            >
               Careers
-            </Link>
+            </a>
             
-            <Link href="/contact" className={`hover:text-blue-600 transition-colors ${
-              scrolled ? 'text-gray-700' : 'text-white'
-            }`}>
+            <a
+              href="#contact"
+              onClick={(e) => handleNavClick(e, 'contact')}
+              className={`hover:text-blue-600 transition-colors ${
+                scrolled ? 'text-gray-700' : 'text-white'
+              }`}
+            >
               Contact
-            </Link>
+            </a>
 
             <Button className="bg-blue-600 hover:bg-blue-700">
               <Phone className="w-4 h-4 mr-2" />
@@ -105,36 +132,41 @@ export function NavBar() {
             className="lg:hidden bg-white"
           >
             <div className="px-4 py-4 space-y-4">
-              <Link
-                href="/"
+              <a
+                href="#home"
+                onClick={(e) => handleNavClick(e, 'home')}
                 className="block text-gray-700 hover:text-blue-600 transition-colors"
               >
                 Home
-              </Link>
-              <Link
-                href="/services"
+              </a>
+              <a
+                href="#services"
+                onClick={(e) => handleNavClick(e, 'services')}
                 className="block text-gray-700 hover:text-blue-600 transition-colors"
               >
                 Services
-              </Link>
-              <Link
-                href="/about"
+              </a>
+              <a
+                href="#about"
+                onClick={(e) => handleNavClick(e, 'about')}
                 className="block text-gray-700 hover:text-blue-600 transition-colors"
               >
                 About Us
-              </Link>
-              <Link
-                href="/careers"
+              </a>
+              <a
+                href="#careers"
+                onClick={(e) => handleNavClick(e, 'careers')}
                 className="block text-gray-700 hover:text-blue-600 transition-colors"
               >
                 Careers
-              </Link>
-              <Link
-                href="/contact"
+              </a>
+              <a
+                href="#contact"
+                onClick={(e) => handleNavClick(e, 'contact')}
                 className="block text-gray-700 hover:text-blue-600 transition-colors"
               >
                 Contact
-              </Link>
+              </a>
               <Button className="w-full bg-blue-600 hover:bg-blue-700">
                 <Phone className="w-4 h-4 mr-2" />
                 (555) 123-4567
