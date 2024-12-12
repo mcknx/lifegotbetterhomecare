@@ -23,11 +23,10 @@ export function HeroSection() {
           transition={{ duration: 1 }}
           className="max-w-4xl mx-auto"
         >
-          <h1 className="text-5xl md:text-7xl font-bold mb-8 text-white tracking-wide">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-8 text-white tracking-wide">
           Life Got Better 
 
-
-            <span className="block text-4xl md:text-6xl text-blue-600 mt-2">
+            <span className="block text-3xl sm:text-4xl lg:text-5xl text-blue-600 mt-2">
             Home Health Care
             </span>
           </h1>

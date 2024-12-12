@@ -55,7 +55,7 @@ export function FeaturesSection() {
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
-                className="text-4xl sm:text-5xl font-bold text-white"
+                className="text-3xl sm:text-4xl font-bold text-white"
               >
                 Careers.
                 <span className="block">We&apos;re hiring!</span>
