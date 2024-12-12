@@ -13,7 +13,7 @@ export function HeroSection() {
           muted
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-black/60" />
+        <div className="absolute inset-0 bg-black/70" />
       </div>
 
       <div className="container mx-auto px-4 z-10 text-center">

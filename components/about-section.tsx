@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button"
 import { motion } from "framer-motion"
 
-export function HeroSection1() {
+export function AboutSection() {
   return (
     <div className="relative min-h-[80vh] bg-gradient-to-r from-blue-50 to-blue-100">
       <div className="container mx-auto px-4 py-20">
