@@ -2,8 +2,9 @@ import { NavBar } from "@/components/nav-bar"
 import { HeroSection } from "@/components/hero-section"
 import { ServicesSection } from "@/components/services-section"
 import { ContactForm } from "@/components/contact-form"
-import { AboutSection } from "@/components/about-section"
-import { FeaturesSection } from "@/components/features-section"
+import { BenefitsSection } from "@/components/benefits-section"
+import { Footer } from "@/components/footer"
+import { FindCareSection } from "@/components/find-care-section"
 
 export default function Home() {
   return (
@@ -12,18 +13,18 @@ export default function Home() {
       <div id="home">
         <HeroSection />
       </div>
-      <div id="about">
-        <AboutSection />
+      <div id="benefits">
+        <BenefitsSection />
       </div>
-      <div id="careers">
-        <FeaturesSection />
-      </div>
+      <FindCareSection />
+      
       <div id="services">
         <ServicesSection />
       </div>
       <div id="contact">
         <ContactForm />
       </div>
+      <Footer />
     </main>
   )
 }

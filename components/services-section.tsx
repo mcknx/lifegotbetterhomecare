@@ -65,7 +65,7 @@ export function ServicesSection() {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className="text-blue-600 font-medium mb-4"
+            className="text-green-900 font-medium mb-4"
           >
             EXPERTISE
           </motion.p>
@@ -99,8 +99,8 @@ export function ServicesSection() {
               className="flex gap-4"
             >
               <div className="flex-shrink-0">
-                <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center">
-                  <service.icon className="w-6 h-6 text-blue-600" />
+                <div className="w-12 h-12 rounded-full bg-green-900/10 flex items-center justify-center">
+                  <service.icon className="w-6 h-6 text-green-900" />
                 </div>
               </div>
               <div>
