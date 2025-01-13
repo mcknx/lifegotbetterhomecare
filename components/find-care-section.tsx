@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button"
 import { motion } from "framer-motion"
-import { MapPin, Star } from 'lucide-react'
+import { MapPin, Star, Phone } from 'lucide-react'
 import { useState } from 'react'
 
 export function FindCareSection() {
@@ -34,7 +34,7 @@ export function FindCareSection() {
               className="absolute -bottom-6 -right-6 bg-white rounded-2xl shadow-xl p-6 max-w-[300px]"
             >
               <div className="flex items-center gap-4">
-                <div className="bg-blue-600 p-3 rounded-full">
+                <div className="bg-green-900 p-3 rounded-full">
                   <Star className="w-6 h-6 text-white" />
                 </div>
                 <div>
@@ -68,7 +68,7 @@ export function FindCareSection() {
                 <button
                   onClick={() => setActiveTab('care')}
                   className={`pb-2 ${activeTab === 'care' 
-                    ? 'border-b-2 border-[#2F5233] text-[#2F5233] font-medium' 
+                    ? 'border-b-2 border-green-900 text-green-900 font-medium' 
                     : 'text-gray-500'}`}
                 >
                   Find Care
@@ -76,7 +76,7 @@ export function FindCareSection() {
                 <button
                   onClick={() => setActiveTab('jobs')}
                   className={`pb-2 ${activeTab === 'jobs' 
-                    ? 'border-b-2 border-[#2F5233] text-[#2F5233] font-medium' 
+                    ? 'border-b-2 border-green-900 text-green-900 font-medium' 
                     : 'text-gray-500'}`}
                 >
                   Find Jobs
@@ -90,8 +90,9 @@ export function FindCareSection() {
                   <input
                     type="text"
                     placeholder="Postal Code or City & State"
-                    className="w-full p-3 border border-gray-300 rounded-md"
+                    className="w-full p-3 border border-gray-300 rounded-md pl-10"
                   />
+                  <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                 </div>
                 
                 <div className="flex flex-col sm:flex-row gap-4">

@@ -117,9 +117,9 @@ export function ServicesSection() {
           viewport={{ once: true }}
           className="mt-12 text-center"
         >
-          <div className="inline-flex items-center gap-3 bg-blue-50 px-6 py-3 rounded-full">
-            <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
-              <Phone className="w-5 h-5 text-blue-600" />
+          <div className="inline-flex items-center gap-3 bg-green-50 px-6 py-3 rounded-full">
+            <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
+              <Phone className="w-5 h-5 text-green-900" />
             </div>
             <div className="text-left">
               <p className="text-sm text-gray-600">Expert Caregivers</p>
