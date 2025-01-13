@@ -38,7 +38,7 @@ export function ContactForm() {
 
             <form className="space-y-5">
               <div className="space-y-3">
-                <p className="text-sm font-medium text-gray-700">I'm interested in:</p>
+                <p className="text-sm font-medium text-gray-700">I&apos;m interested in:</p>
                 <div className="flex gap-4">
                   <label className="flex items-center space-x-2 text-sm">
                     <input 
@@ -129,7 +129,7 @@ export function ContactForm() {
 
               <p className="text-xs text-gray-500 leading-relaxed">
                 By submitting this form, I agree to be contacted via call, email and text. 
-                Message and data rates may apply. Reply 'stop' or click unsubscribe to opt out.
+                Message and data rates may apply. Reply &apos;stop&apos; or click unsubscribe to opt out.
               </p>
             </form>
           </div>

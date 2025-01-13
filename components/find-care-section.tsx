@@ -2,8 +2,9 @@
 
 import { Button } from "@/components/ui/button"
 import { motion } from "framer-motion"
-import { MapPin, Star, Phone } from 'lucide-react'
+import { MapPin, Star } from 'lucide-react'
 import { useState } from 'react'
+import Image from 'next/image'
 
 export function FindCareSection() {
   const [activeTab, setActiveTab] = useState<'care' | 'jobs'>('care')
@@ -19,9 +20,11 @@ export function FindCareSection() {
             viewport={{ once: true }}
             className="relative"
           >
-            <img 
+            <Image 
               src="https://media.gettyimages.com/id/809822820/photo/caring-comes-naturally-to-her.jpg?s=2048x2048&w=gi&k=20&c=U3s_FRX7Ng5zYkkvP6CDh2h1UJIq6_t9z-2TzchySvg="
               alt="Senior woman receiving care at home"
+              width={500}
+              height={300}
               className="rounded-2xl shadow-2xl w-full h-auto"
             />
             
