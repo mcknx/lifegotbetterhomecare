@@ -17,10 +17,12 @@ export default function Home() {
       <div id="benefits">
         <BenefitsSection />
       </div>
-      <FindCareSection />
-      <AboutSection />
-
-      
+      <div id="find-care">
+        <FindCareSection />
+      </div>
+      <div id="about">
+        <AboutSection />
+      </div>
       <div id="services">
         <ServicesSection />
       </div>

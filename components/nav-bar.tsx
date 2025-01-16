@@ -43,7 +43,7 @@ export function NavBar() {
           <Link href="/" className="flex items-center">
             <span className={`text-2xl font-bold ${
               scrolled ? 'text-blue-600' : 'text-white'
-            }`}>Life Got Better</span>
+            }`}>Life Got Better Home Healthcare</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -51,28 +51,32 @@ export function NavBar() {
             <a
               href="#home"
               onClick={(e) => handleNavClick(e, 'home')}
-              className={`hover:text-blue-900 transition-colors ${
+              className={`hover:text-blue-600 transition-colors ${
                 scrolled ? 'text-gray-700' : 'text-white'
               }`}
             >
               Home
             </a>
             
-            <DropdownMenu>
-              <DropdownMenuTrigger className={`flex items-center gap-1 hover:text-blue-900 transition-colors ${
+            <a
+              href="#benefits"
+              onClick={(e) => handleNavClick(e, 'benefits')}
+              className={`hover:text-blue-600 transition-colors ${
                 scrolled ? 'text-gray-700' : 'text-white'
-              }`}>
-                Services <ChevronDown className="w-4 h-4" />
-              </DropdownMenuTrigger>
-              <DropdownMenuContent>
-                <DropdownMenuItem onClick={(e: React.MouseEvent<HTMLDivElement>) => handleNavClick(e, 'services')}>
-                  Personal Care
-                </DropdownMenuItem>
-                <DropdownMenuItem>Post-Operative Care</DropdownMenuItem>
-                <DropdownMenuItem>Meal Preparation</DropdownMenuItem>
-                <DropdownMenuItem>Medication Management</DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+              }`}
+            >
+              Benefits
+            </a>
+
+            <a
+              href="#find-care"
+              onClick={(e) => handleNavClick(e, 'find-care')}
+              className={`hover:text-blue-600 transition-colors ${
+                scrolled ? 'text-gray-700' : 'text-white'
+              }`}
+            >
+              Find Care
+            </a>
 
             <a
               href="#about"
@@ -85,19 +89,19 @@ export function NavBar() {
             </a>
             
             <a
-              href="#careers"
-              onClick={(e) => handleNavClick(e, 'careers')}
-              className={`hover:text-blue-900 transition-colors ${
+              href="#services"
+              onClick={(e) => handleNavClick(e, 'services')}
+              className={`hover:text-blue-600 transition-colors ${
                 scrolled ? 'text-gray-700' : 'text-white'
               }`}
             >
-              Careers
+              Services
             </a>
             
             <a
               href="#contact"
               onClick={(e) => handleNavClick(e, 'contact')}
-              className={`hover:text-blue-900 transition-colors ${
+              className={`hover:text-blue-600 transition-colors ${
                 scrolled ? 'text-gray-700' : 'text-white'
               }`}
             >
@@ -140,11 +144,18 @@ export function NavBar() {
                 Home
               </a>
               <a
-                href="#services"
-                onClick={(e) => handleNavClick(e, 'services')}
+                href="#benefits"
+                onClick={(e) => handleNavClick(e, 'benefits')}
                 className="block text-gray-700 hover:text-blue-600 transition-colors"
               >
-                Services
+                Benefits
+              </a>
+              <a
+                href="#find-care"
+                onClick={(e) => handleNavClick(e, 'find-care')}
+                className="block text-gray-700 hover:text-blue-600 transition-colors"
+              >
+                Find Care
               </a>
               <a
                 href="#about"
@@ -154,11 +165,11 @@ export function NavBar() {
                 About Us
               </a>
               <a
-                href="#careers"
-                onClick={(e) => handleNavClick(e, 'careers')}
+                href="#services"
+                onClick={(e) => handleNavClick(e, 'services')}
                 className="block text-gray-700 hover:text-blue-600 transition-colors"
               >
-                Careers
+                Services
               </a>
               <a
                 href="#contact"
