@@ -63,10 +63,10 @@ export function BenefitsSection() {
               transition={{ delay: index * 0.1 }}
               className="flex flex-col items-center text-center"
             >
-              <div className="w-16 h-16 bg-green-900/10 rounded-full flex items-center justify-center mb-3">
-                <service.icon className="w-8 h-8 text-green-900" />
+              <div className="w-16 h-16 bg-blue-600/10 rounded-full flex items-center justify-center mb-3">
+                <service.icon className="w-8 h-8 text-blue-600" />
               </div>
-              <h3 className="text-sm text-green-900 font-medium">
+              <h3 className="text-sm text-blue-600 font-medium">
                 {service.title}
               </h3>
             </motion.div>

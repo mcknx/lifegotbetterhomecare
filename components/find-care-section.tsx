@@ -37,7 +37,7 @@ export function FindCareSection() {
               className="absolute -bottom-6 -right-6 bg-white rounded-2xl shadow-xl p-6 max-w-[300px]"
             >
               <div className="flex items-center gap-4">
-                <div className="bg-green-900 p-3 rounded-full">
+                <div className="bg-blue-600 p-3 rounded-full">
                   <Star className="w-6 h-6 text-white" />
                 </div>
                 <div>
@@ -55,7 +55,7 @@ export function FindCareSection() {
             viewport={{ once: true }}
             className="space-y-6"
           >
-            <h2 className="text-4xl md:text-5xl font-serif text-[#2F5233] leading-tight">
+            <h2 className="text-4xl md:text-5xl font-serif text-[#2563EB] leading-tight">
               Compassionate <span className="italic">Home Care</span>.
               <br />
               For Your <span className="italic">Loved Ones</span>.
@@ -71,7 +71,7 @@ export function FindCareSection() {
                 <button
                   onClick={() => setActiveTab('care')}
                   className={`pb-2 ${activeTab === 'care' 
-                    ? 'border-b-2 border-green-900 text-green-900 font-medium' 
+                    ? 'border-b-2 border-blue-600 text-blue-600 font-medium' 
                     : 'text-gray-500'}`}
                 >
                   Find Care
@@ -79,7 +79,7 @@ export function FindCareSection() {
                 <button
                   onClick={() => setActiveTab('jobs')}
                   className={`pb-2 ${activeTab === 'jobs' 
-                    ? 'border-b-2 border-green-900 text-green-900 font-medium' 
+                    ? 'border-b-2 border-blue-600 text-blue-600 font-medium' 
                     : 'text-gray-500'}`}
                 >
                   Find Jobs
@@ -101,14 +101,14 @@ export function FindCareSection() {
                 <div className="flex flex-col sm:flex-row gap-4">
                   <Button 
                     size="lg"
-                    className="bg-green-900 hover:bg-green-800 text-white"
+                    className="bg-blue-600 hover:bg-blue-500 text-white"
                   >
                     Schedule a Free Consultation
                   </Button>
                   <Button 
                     size="lg"
                     variant="outline"
-                    className="border-2 border-green-900 text-green-900 hover:bg-green-900/10"
+                    className="border-2 border-blue-600 text-blue-600 hover:bg-blue-600/10"
                   >
                     Learn About Our Services
                   </Button>
@@ -118,14 +118,14 @@ export function FindCareSection() {
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button 
                   size="lg"
-                  className="bg-green-900 hover:bg-green-800 text-white"
+                  className="bg-blue-600 hover:bg-blue-500 text-white"
                 >
                   View Open Positions
                 </Button>
                 <Button 
                   size="lg"
                   variant="outline"
-                  className="border-2 border-green-900 text-green-900 hover:bg-green-900/10"
+                  className="border-2 border-blue-600 text-blue-600 hover:bg-blue-600/10"
                 >
                   Learn About Careers
                 </Button>

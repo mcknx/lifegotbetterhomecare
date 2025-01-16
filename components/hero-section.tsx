@@ -36,7 +36,7 @@ export function HeroSection() {
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-8 text-white tracking-wide">
           Life Got Better 
 
-            <span className="block text-3xl sm:text-4xl lg:text-5xl text-green-400 mt-2">
+            <span className="block text-3xl sm:text-4xl lg:text-5xl text-blue-300 mt-2">
             Home Health Care
             </span>
           </h1>
@@ -48,8 +48,8 @@ export function HeroSection() {
 
           <div className="flex flex-col md:flex-row gap-4 justify-center">
             <a 
-              href="https://www.facebook.com/lifegotbetterstaffing/" 
-              className="bg-green-900 border-2 border-green-900 text-white px-8 py-4 rounded text-lg font-semibold hover:bg-green-800 transition-colors inline-block min-w-[200px]"
+              href="#contact"
+              className="bg-blue-600 border-2 border-blue-600 text-white px-8 py-4 rounded text-lg font-semibold hover:bg-blue-500 transition-colors inline-block min-w-[200px]"
             >
               Connect with Us
             </a>

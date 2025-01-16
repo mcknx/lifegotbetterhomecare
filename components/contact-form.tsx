@@ -29,11 +29,11 @@ export function ContactForm() {
         <div className="grid md:grid-cols-2 gap-12 items-start max-w-5xl mx-auto">
           {/* Left side - Form */}
           <div className="bg-white p-8 rounded-2xl shadow-md border border-gray-100">
-            <h2 className="text-2xl font-bold text-green-900 mb-3">
+            <h2 className="text-2xl font-bold text-blue-600 mb-3">
               Contact Us About Our Home Care
             </h2>
             <p className="text-gray-600 text-sm mb-6">
-              Call <a href="tel:(555) 123-4567" className="text-green-900 hover:underline font-medium">(555) 123-4567</a> or fill out the form below.
+              Call <a href="tel:(555) 123-4567" className="text-blue-600 hover:underline font-medium">(555) 123-4567</a> or fill out the form below.
             </p>
 
             <form className="space-y-5">
@@ -46,7 +46,7 @@ export function ContactForm() {
                       name="service" 
                       value="care" 
                       defaultChecked 
-                      className="text-green-900 focus:ring-green-900" 
+                      className="text-blue-600 focus:ring-blue-600" 
                     />
                     <span>Home Care Services</span>
                   </label>
@@ -55,7 +55,7 @@ export function ContactForm() {
                       type="radio" 
                       name="service" 
                       value="employment" 
-                      className="text-green-900 focus:ring-green-900" 
+                      className="text-blue-600 focus:ring-blue-600" 
                     />
                     <span>Employment</span>
                   </label>
@@ -68,7 +68,7 @@ export function ContactForm() {
                     type="text" 
                     placeholder="Name*"
                     required 
-                    className="w-full p-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-green-900 focus:border-green-900"
+                    className="w-full p-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-600 focus:border-blue-600"
                   />
                 </div>
                 <div>
@@ -76,7 +76,7 @@ export function ContactForm() {
                     type="email" 
                     placeholder="Email*"
                     required 
-                    className="w-full p-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-green-900 focus:border-green-900"
+                    className="w-full p-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-600 focus:border-blue-600"
                   />
                 </div>
               </div>
@@ -87,7 +87,7 @@ export function ContactForm() {
                     type="tel" 
                     placeholder="Phone*"
                     required 
-                    className="w-full p-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-green-900 focus:border-green-900"
+                    className="w-full p-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-600 focus:border-blue-600"
                   />
                 </div>
                 <div>
@@ -95,13 +95,13 @@ export function ContactForm() {
                     type="text" 
                     placeholder="Zip Code*"
                     required 
-                    className="w-full p-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-green-900 focus:border-green-900"
+                    className="w-full p-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-600 focus:border-blue-600"
                   />
                 </div>
               </div>
 
               <div>
-                <select className="w-full p-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-green-900 focus:border-green-900 text-gray-600">
+                <select className="w-full p-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-600 focus:border-blue-600 text-gray-600">
                   <option value="">Who needs care?*</option>
                   <option value="self">Self</option>
                   <option value="spouse">Spouse</option>
@@ -111,7 +111,7 @@ export function ContactForm() {
               </div>
 
               <div>
-                <select className="w-full p-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-green-900 focus:border-green-900 text-gray-600">
+                <select className="w-full p-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-600 focus:border-blue-600 text-gray-600">
                   <option value="">How did you hear about us?*</option>
                   <option value="search">Internet Search</option>
                   <option value="referral">Friend/Family Referral</option>
@@ -122,7 +122,7 @@ export function ContactForm() {
 
               <button 
                 type="submit" 
-                className="w-full bg-green-900 hover:bg-green-800 text-white py-2.5 px-4 rounded-lg transition-colors text-sm font-medium"
+                className="w-full bg-blue-600 hover:bg-blue-500 text-white py-2.5 px-4 rounded-lg transition-colors text-sm font-medium"
               >
                 Send Message
               </button>
@@ -141,7 +141,7 @@ export function ContactForm() {
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
-                className="text-sm font-medium text-green-900 mb-2"
+                className="text-sm font-medium text-blue-600 mb-2"
               >
                 WHY CHOOSE US
               </motion.p>
@@ -150,7 +150,7 @@ export function ContactForm() {
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
-                className="text-3xl font-bold text-green-900 mb-4"
+                className="text-3xl font-bold text-blue-600 mb-4"
               >
                 Careers.
                 <span className="block">We&apos;re hiring!</span>
@@ -178,8 +178,8 @@ export function ContactForm() {
                   className="flex gap-4 items-start"
                 >
                   <div className="flex-shrink-0">
-                    <div className="w-10 h-10 rounded-lg bg-green-900/10 flex items-center justify-center">
-                      <benefit.icon className="w-5 h-5 text-green-900" />
+                    <div className="w-10 h-10 rounded-lg bg-blue-600/10 flex items-center justify-center">
+                      <benefit.icon className="w-5 h-5 text-blue-600" />
                     </div>
                   </div>
                   <div>
@@ -197,7 +197,7 @@ export function ContactForm() {
             >
               <Button 
                 size="lg" 
-                className="bg-green-900 hover:bg-green-800 text-white px-6 py-2.5 rounded-lg text-sm font-medium"
+                className="bg-blue-600 hover:bg-blue-500 text-white px-6 py-2.5 rounded-lg text-sm font-medium"
               >
                 Apply Now
               </Button>
