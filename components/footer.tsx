@@ -19,18 +19,23 @@ export function Footer() {
               <div className="flex items-start gap-2">
                 <MapPin className="w-5 h-5 mt-1 text-blue-400" />
                 <div>
-                  <p>123 Healthcare Avenue</p>
-                  <p>Suite 100</p>
-                  <p>New York, NY 10001</p>
+                  <p>6001 W Center St</p>
+                  <p>Suite 208</p>
+                  <p>Milwaukee, WI 53210</p>
                 </div>
               </div>
               <div className="flex items-center gap-2">
-                <Phone className="w-5 h-5 text-blue-400" />
-                <p>(555) 123-4567</p>
+                <Phone className="w-4 h-4 text-blue-600" />
+                <a 
+                  href="tel:(414) 847-6498" 
+                  className="hover:text-blue-600 transition-colors"
+                >
+                  (414) 847-6498
+                </a>
               </div>
               <div className="flex items-center gap-2">
                 <Mail className="w-5 h-5 text-blue-400" />
-                <p>contact@lifegotbetter.com</p>
+                <p>lifegotbetterhomecare@gmail.com</p>
               </div>
             </div>
           </div>
@@ -104,44 +109,20 @@ export function Footer() {
             <h3 className="text-xl font-bold text-white mb-4">Connect With Us</h3>
             <div className="flex gap-4">
               <a
-                href="https://facebook.com"
+                href="https://www.facebook.com/lifegotbetterstaffingservices/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-green-900 transition-colors"
+                className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-blue-600 transition-colors"
               >
                 <Facebook className="w-5 h-5" />
               </a>
               <a
-                href="https://twitter.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-blue-400 transition-colors"
-              >
-                <Twitter className="w-5 h-5" />
-              </a>
-              <a
-                href="https://linkedin.com"
+                href="https://www.linkedin.com/company/life-got-better-staffing-services/about/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-blue-700 transition-colors"
               >
                 <Linkedin className="w-5 h-5" />
-              </a>
-              <a
-                href="https://youtube.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-red-600 transition-colors"
-              >
-                <Youtube className="w-5 h-5" />
-              </a>
-              <a
-                href="https://instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-pink-600 transition-colors"
-              >
-                <Instagram className="w-5 h-5" />
               </a>
             </div>
           </div>

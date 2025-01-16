@@ -19,7 +19,7 @@ export function ContactForm() {
     {
       icon: Mail,
       title: "Submit Your Resume",
-      description: "Send your resume to LifeGotBetterHomeCare@gmail.com to join a supportive team"
+      description: "Send your resume to lifegotbetterhomecare@gmail.com to join a supportive team"
     }
   ]
 
@@ -33,7 +33,7 @@ export function ContactForm() {
               Contact Us About Our Home Care
             </h2>
             <p className="text-gray-600 text-sm mb-6">
-              Call <a href="tel:(555) 123-4567" className="text-blue-600 hover:underline font-medium">(555) 123-4567</a> or fill out the form below.
+              Call <a href="tel:(414) 847-6498" className="text-blue-600 hover:underline font-medium">(414) 847-6498</a> or fill out the form below.
             </p>
 
             <form className="space-y-5">
@@ -189,19 +189,6 @@ export function ContactForm() {
                 </motion.div>
               ))}
             </div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-            >
-              <Button 
-                size="lg" 
-                className="bg-blue-600 hover:bg-blue-500 text-white px-6 py-2.5 rounded-lg text-sm font-medium"
-              >
-                Apply Now
-              </Button>
-            </motion.div>
           </div>
         </div>
       </div>

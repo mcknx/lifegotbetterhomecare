@@ -106,7 +106,7 @@ export function NavBar() {
 
             <Button className="bg-blue-600 hover:bg-blue-500">
               <Phone className="w-4 h-4 mr-2" />
-              (555) 123-4567
+              (414) 847-6498
             </Button>
           </div>
 
@@ -169,7 +169,7 @@ export function NavBar() {
               </a>
               <Button className="w-full bg-blue-600 hover:bg-blue-500">
                 <Phone className="w-4 h-4 mr-2" />
-                (555) 123-4567
+                (414) 847-6498
               </Button>
             </div>
           </motion.div>
