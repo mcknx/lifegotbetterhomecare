@@ -77,7 +77,7 @@ export function NavBar() {
             <a
               href="#about"
               onClick={(e) => handleNavClick(e, 'about')}
-              className={`hover:text-blue-900 transition-colors ${
+              className={`hover:text-blue-600 transition-colors ${
                 scrolled ? 'text-gray-700' : 'text-white'
               }`}
             >

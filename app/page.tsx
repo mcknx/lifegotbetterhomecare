@@ -5,6 +5,7 @@ import { ContactForm } from "@/components/contact-form"
 import { BenefitsSection } from "@/components/benefits-section"
 import { Footer } from "@/components/footer"
 import { FindCareSection } from "@/components/find-care-section"
+import { AboutSection } from "@/components/about-section"
 
 export default function Home() {
   return (
@@ -17,6 +18,8 @@ export default function Home() {
         <BenefitsSection />
       </div>
       <FindCareSection />
+      <AboutSection />
+
       
       <div id="services">
         <ServicesSection />
