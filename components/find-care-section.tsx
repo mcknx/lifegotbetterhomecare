@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button"
 import { motion } from "framer-motion"
-import { MapPin, Star } from 'lucide-react'
+import { Star } from 'lucide-react'
 import { useState } from 'react'
 import Image from 'next/image'
 import { useRouter } from "next/navigation"

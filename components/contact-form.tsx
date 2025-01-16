@@ -280,7 +280,7 @@ export function ContactForm() {
               </button>
 
               {submitStatus === 'success' && (
-                <p className="text-green-600 text-sm">Thank you for your message. We'll be in touch soon!</p>
+                <p className="text-green-600 text-sm">Thank you for your message. We&apos;ll be in touch soon!</p>
               )}
 
               {submitStatus === 'error' && (

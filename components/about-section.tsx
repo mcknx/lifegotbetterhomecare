@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion"
 import Image from "next/image"
-import { ArrowRight, Shield, Heart, Home, Car, Utensils, Briefcase, ClipboardList, Stethoscope } from 'lucide-react'
 
 export function AboutSection() {
 
