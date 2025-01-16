@@ -5,9 +5,33 @@ import { motion } from "framer-motion"
 import { MapPin, Star } from 'lucide-react'
 import { useState } from 'react'
 import Image from 'next/image'
+import { useRouter } from "next/navigation"
 
 export function FindCareSection() {
   const [activeTab, setActiveTab] = useState<'care' | 'jobs'>('care')
+  const router = useRouter()
+
+  const handleScheduleConsultation = () => {
+    // Scroll to contact form and select "care" option
+    const contactForm = document.getElementById('contact')
+    if (contactForm) {
+      contactForm.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
+
+  const handleViewPositions = () => {
+    // Scroll to contact form and select "employment" option
+    const contactForm = document.getElementById('contact')
+    if (contactForm) {
+      contactForm.scrollIntoView({ behavior: 'smooth' })
+      // Find and click the employment radio button
+      const employmentRadio = document.querySelector('input[value="employment"]') as HTMLInputElement
+      if (employmentRadio) {
+        employmentRadio.checked = true
+        employmentRadio.dispatchEvent(new Event('change', { bubbles: true }))
+      }
+    }
+  }
 
   return (
     <div className="relative py-20 bg-[#f8fafc]">
@@ -89,19 +113,20 @@ export function FindCareSection() {
 
             {activeTab === 'care' ? (
               <div className="space-y-4">
-                <div className="relative">
+                {/* <div className="relative">
                   <input
                     type="text"
                     placeholder="Postal Code or City & State"
                     className="w-full p-3 border border-gray-300 rounded-md pl-10"
                   />
                   <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-                </div>
+                </div> */}
                 
                 <div className="flex flex-col sm:flex-row gap-4">
                   <Button 
                     size="lg"
                     className="bg-blue-600 hover:bg-blue-500 text-white"
+                    onClick={handleScheduleConsultation}
                   >
                     Schedule a Free Consultation
                   </Button>
@@ -109,6 +134,7 @@ export function FindCareSection() {
                     size="lg"
                     variant="outline"
                     className="border-2 border-blue-600 text-blue-600 hover:bg-blue-600/10"
+                    onClick={() => router.push('#services')}
                   >
                     Learn About Our Services
                   </Button>
@@ -119,6 +145,7 @@ export function FindCareSection() {
                 <Button 
                   size="lg"
                   className="bg-blue-600 hover:bg-blue-500 text-white"
+                  onClick={handleViewPositions}
                 >
                   View Open Positions
                 </Button>
@@ -126,6 +153,7 @@ export function FindCareSection() {
                   size="lg"
                   variant="outline"
                   className="border-2 border-blue-600 text-blue-600 hover:bg-blue-600/10"
+                  onClick={() => router.push('#contact')}
                 >
                   Learn About Careers
                 </Button>

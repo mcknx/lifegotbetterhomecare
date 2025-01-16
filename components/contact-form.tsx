@@ -71,7 +71,7 @@ export function ContactForm() {
   }
 
   return (
-    <section className="py-16 bg-gradient-to-b from-white to-[#EBF3FA]">
+    <section id="contact" className="py-16 bg-gradient-to-b from-white to-[#EBF3FA]">
       <div className="container mx-auto px-4">
         <div className="grid md:grid-cols-2 gap-12 items-start max-w-5xl mx-auto">
           {/* Left side - Form */}
