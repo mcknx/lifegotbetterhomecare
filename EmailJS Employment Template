@@ -17,35 +17,36 @@
     <div class="container">
         <div class="header">
             <div class="logo">Life Got Better Home Healthcare</div>
-            <div>New Contact Form Submission</div>
+            <div>New Employment Application</div>
         </div>
         
         <div class="content">
             <div class="info-item">
-                <span class="label">Service Type:</span> {{service_type}}
-            </div>
-            
-            <div class="info-item">
-                <span class="label">Client Information:</span><br>
+                <span class="label">Applicant Information:</span><br>
                 Name: {{user_name}}<br>
                 Email: {{user_email}}<br>
-                Phone: {{user_phone}}<br>
-                Zip Code: {{zip_code}}
+                Phone: {{user_phone}}
             </div>
             
             <div class="info-item">
-                <span class="label">Care Details:</span><br>
-                Care Recipient: {{care_recipient}}<br>
-                Referral Source: {{referral_source}}
+                <span class="label">Position Details:</span><br>
+                Position: {{position_type}}<br>
+                Experience: {{experience_level}}<br>
+                Availability: {{availability}}
+            </div>
+
+            <div class="info-item">
+                <span class="label">Additional Information:</span><br>
+                {{additional_info}}
             </div>
 
             <div style="text-align: center; margin-top: 30px;">
-                <a href="tel:(414) 847-6498" class="button">Contact Client</a>
+                <a href="mailto:{{user_email}}" class="button">Contact Applicant</a>
             </div>
         </div>
         
         <div class="footer">
-            <p>This inquiry was received from Life Got Better Home Healthcare's contact form.</p>
+            <p>This application was received from Life Got Better Home Healthcare's careers page.</p>
             <p>6001 W Center St, Suite 208<br>
             Milwaukee, WI 53210<br>
             (414) 847-6498</p>

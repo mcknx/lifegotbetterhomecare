@@ -9,6 +9,7 @@ import { useState } from 'react'
 export function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
+  const [serviceType, setServiceType] = useState('care')
   
   const benefits = [
     {
@@ -35,26 +36,32 @@ export function ContactForm() {
 
     const form = e.currentTarget
     const templateParams = {
-      service_type: form.service_type.value,
       user_name: form.user_name.value,
       user_email: form.user_email.value,
       user_phone: form.user_phone.value,
-      zip_code: form.zip_code.value,
-      care_recipient: form.care_recipient.value,
-      referral_source: form.referral_source.value,
-      to_email: 'mcasmakeen@gmail.com'
+      ...(serviceType === 'care' ? {
+        zip_code: form.zip_code.value,
+        care_recipient: form.care_recipient.value,
+        referral_source: form.referral_source.value,
+      } : {
+        position_type: form.position_type.value,
+        experience_level: form.experience_level.value,
+        availability: form.availability.value,
+        additional_info: form.additional_info.value,
+      })
     }
     
     try {
       await emailjs.send(
         'service_y3oo2si',
-        'template_csqtwpf',
+        serviceType === 'care' ? 'template_tj5d2cp' : 'template_csqtwpf',
         templateParams,
         'Xeu-hioZNC6XZvx_d'
       )
       
       setSubmitStatus('success')
       form.reset()
+      setServiceType('care')
     } catch (error) {
       console.error('Error sending email:', error)
       setSubmitStatus('error')
@@ -85,7 +92,8 @@ export function ContactForm() {
                       type="radio" 
                       name="service_type" 
                       value="care" 
-                      defaultChecked 
+                      checked={serviceType === 'care'}
+                      onChange={(e) => setServiceType(e.target.value)}
                       className="text-blue-600 focus:ring-blue-600" 
                     />
                     <span>Home Care Services</span>
@@ -94,7 +102,9 @@ export function ContactForm() {
                     <input 
                       type="radio" 
                       name="service_type" 
-                      value="employment" 
+                      value="employment"
+                      checked={serviceType === 'employment'}
+                      onChange={(e) => setServiceType(e.target.value)}
                       className="text-blue-600 focus:ring-blue-600" 
                     />
                     <span>Employment</span>
@@ -102,75 +112,162 @@ export function ContactForm() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <input 
-                    type="text" 
-                    name="user_name"
-                    placeholder="Name*"
-                    required 
-                    className="w-full p-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-600 focus:border-blue-600"
-                  />
-                </div>
-                <div>
-                  <input 
-                    type="email" 
-                    name="user_email"
-                    placeholder="Email*"
-                    required 
-                    className="w-full p-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-600 focus:border-blue-600"
-                  />
-                </div>
-              </div>
+              {serviceType === 'care' ? (
+                <>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <input 
+                        type="text" 
+                        name="user_name"
+                        placeholder="Name*"
+                        required 
+                        className="w-full p-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-600 focus:border-blue-600"
+                      />
+                    </div>
+                    <div>
+                      <input 
+                        type="email" 
+                        name="user_email"
+                        placeholder="Email*"
+                        required 
+                        className="w-full p-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-600 focus:border-blue-600"
+                      />
+                    </div>
+                  </div>
 
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <input 
-                    type="tel" 
-                    name="user_phone"
-                    placeholder="Phone*"
-                    required 
-                    className="w-full p-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-600 focus:border-blue-600"
-                  />
-                </div>
-                <div>
-                  <input 
-                    type="text" 
-                    name="zip_code"
-                    placeholder="Zip Code*"
-                    required 
-                    className="w-full p-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-600 focus:border-blue-600"
-                  />
-                </div>
-              </div>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <input 
+                        type="tel" 
+                        name="user_phone"
+                        placeholder="Phone*"
+                        required 
+                        className="w-full p-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-600 focus:border-blue-600"
+                      />
+                    </div>
+                    <div>
+                      <input 
+                        type="text" 
+                        name="zip_code"
+                        placeholder="Zip Code*"
+                        required 
+                        className="w-full p-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-600 focus:border-blue-600"
+                      />
+                    </div>
+                  </div>
 
-              <div>
-                <select 
-                  name="care_recipient" 
-                  className="w-full p-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-600 focus:border-blue-600 text-gray-600"
-                  required
-                >
-                  <option value="">Who needs care?*</option>
-                  <option value="self">Self</option>
-                  <option value="spouse">Spouse</option>
-                  <option value="parent">Parent</option>
-                  <option value="other">Other Family Member</option>
-                </select>
-              </div>
+                  <div>
+                    <select 
+                      name="care_recipient" 
+                      className="w-full p-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-600 focus:border-blue-600 text-gray-600"
+                      required
+                    >
+                      <option value="">Who needs care?*</option>
+                      <option value="self">Self</option>
+                      <option value="spouse">Spouse</option>
+                      <option value="parent">Parent</option>
+                      <option value="other">Other Family Member</option>
+                    </select>
+                  </div>
 
-              <div>
-                <select 
-                  name="referral_source"
-                  className="w-full p-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-600 focus:border-blue-600 text-gray-600"
-                  required
-                >
-                  <option value="">How did you hear about us?*</option>
-                  <option value="search">Internet Search</option>
-                  <option value="referral">Friend/Family Referral</option>
-                  <option value="social">Social Media</option>
-                  <option value="other">Other</option>
-                </select>
-              </div>
+                  <div>
+                    <select 
+                      name="referral_source"
+                      className="w-full p-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-600 focus:border-blue-600 text-gray-600"
+                      required
+                    >
+                      <option value="">How did you hear about us?*</option>
+                      <option value="search">Internet Search</option>
+                      <option value="referral">Friend/Family Referral</option>
+                      <option value="social">Social Media</option>
+                      <option value="other">Other</option>
+                    </select>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <input 
+                        type="text" 
+                        name="user_name"
+                        placeholder="Full Name*"
+                        required 
+                        className="w-full p-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-600 focus:border-blue-600"
+                      />
+                    </div>
+                    <div>
+                      <input 
+                        type="email" 
+                        name="user_email"
+                        placeholder="Email*"
+                        required 
+                        className="w-full p-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-600 focus:border-blue-600"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <input 
+                        type="tel" 
+                        name="user_phone"
+                        placeholder="Phone*"
+                        required 
+                        className="w-full p-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-600 focus:border-blue-600"
+                      />
+                    </div>
+                    <div>
+                      <select 
+                        name="position_type"
+                        className="w-full p-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-600 focus:border-blue-600 text-gray-600"
+                        required
+                      >
+                        <option value="">Position Interested In*</option>
+                        <option value="caregiver">Caregiver</option>
+                        <option value="nurse">Nurse</option>
+                        <option value="coordinator">Care Coordinator</option>
+                        <option value="other">Other</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div>
+                    <select 
+                      name="experience_level"
+                      className="w-full p-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-600 focus:border-blue-600 text-gray-600"
+                      required
+                    >
+                      <option value="">Years of Experience*</option>
+                      <option value="0-1">0-1 years</option>
+                      <option value="1-3">1-3 years</option>
+                      <option value="3-5">3-5 years</option>
+                      <option value="5+">5+ years</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <select 
+                      name="availability"
+                      className="w-full p-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-600 focus:border-blue-600 text-gray-600"
+                      required
+                    >
+                      <option value="">Availability*</option>
+                      <option value="full-time">Full Time</option>
+                      <option value="part-time">Part Time</option>
+                      <option value="flexible">Flexible</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <textarea 
+                      name="additional_info"
+                      placeholder="Additional Information (Optional)"
+                      className="w-full p-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-600 focus:border-blue-600 min-h-[100px]"
+                    />
+                  </div>
+                </>
+              )}
 
               <button 
                 type="submit" 
