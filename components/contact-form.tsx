@@ -3,8 +3,13 @@
 import { Button } from "@/components/ui/button"
 import { motion } from "framer-motion"
 import { Clock, Mail, Heart } from 'lucide-react'
+import emailjs from '@emailjs/browser'
+import { useState } from 'react'
 
 export function ContactForm() {
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
+  
   const benefits = [
     {
       icon: Heart,
@@ -23,6 +28,41 @@ export function ContactForm() {
     }
   ]
 
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+    setSubmitStatus('idle')
+
+    const form = e.currentTarget
+    const templateParams = {
+      service_type: form.service_type.value,
+      user_name: form.user_name.value,
+      user_email: form.user_email.value,
+      user_phone: form.user_phone.value,
+      zip_code: form.zip_code.value,
+      care_recipient: form.care_recipient.value,
+      referral_source: form.referral_source.value,
+      to_email: 'mcasmakeen@gmail.com'
+    }
+    
+    try {
+      await emailjs.send(
+        'service_y3oo2si',
+        'template_csqtwpf',
+        templateParams,
+        'Xeu-hioZNC6XZvx_d'
+      )
+      
+      setSubmitStatus('success')
+      form.reset()
+    } catch (error) {
+      console.error('Error sending email:', error)
+      setSubmitStatus('error')
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
   return (
     <section className="py-16 bg-gradient-to-b from-white to-[#EBF3FA]">
       <div className="container mx-auto px-4">
@@ -36,14 +76,14 @@ export function ContactForm() {
               Call <a href="tel:(414) 847-6498" className="text-blue-600 hover:underline font-medium">(414) 847-6498</a> or fill out the form below.
             </p>
 
-            <form className="space-y-5">
+            <form onSubmit={handleSubmit} className="space-y-5">
               <div className="space-y-3">
                 <p className="text-sm font-medium text-gray-700">I&apos;m interested in:</p>
                 <div className="flex gap-4">
                   <label className="flex items-center space-x-2 text-sm">
                     <input 
                       type="radio" 
-                      name="service" 
+                      name="service_type" 
                       value="care" 
                       defaultChecked 
                       className="text-blue-600 focus:ring-blue-600" 
@@ -53,7 +93,7 @@ export function ContactForm() {
                   <label className="flex items-center space-x-2 text-sm">
                     <input 
                       type="radio" 
-                      name="service" 
+                      name="service_type" 
                       value="employment" 
                       className="text-blue-600 focus:ring-blue-600" 
                     />
@@ -66,6 +106,7 @@ export function ContactForm() {
                 <div>
                   <input 
                     type="text" 
+                    name="user_name"
                     placeholder="Name*"
                     required 
                     className="w-full p-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-600 focus:border-blue-600"
@@ -74,6 +115,7 @@ export function ContactForm() {
                 <div>
                   <input 
                     type="email" 
+                    name="user_email"
                     placeholder="Email*"
                     required 
                     className="w-full p-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-600 focus:border-blue-600"
@@ -85,6 +127,7 @@ export function ContactForm() {
                 <div>
                   <input 
                     type="tel" 
+                    name="user_phone"
                     placeholder="Phone*"
                     required 
                     className="w-full p-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-600 focus:border-blue-600"
@@ -93,6 +136,7 @@ export function ContactForm() {
                 <div>
                   <input 
                     type="text" 
+                    name="zip_code"
                     placeholder="Zip Code*"
                     required 
                     className="w-full p-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-600 focus:border-blue-600"
@@ -101,7 +145,11 @@ export function ContactForm() {
               </div>
 
               <div>
-                <select className="w-full p-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-600 focus:border-blue-600 text-gray-600">
+                <select 
+                  name="care_recipient" 
+                  className="w-full p-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-600 focus:border-blue-600 text-gray-600"
+                  required
+                >
                   <option value="">Who needs care?*</option>
                   <option value="self">Self</option>
                   <option value="spouse">Spouse</option>
@@ -111,7 +159,11 @@ export function ContactForm() {
               </div>
 
               <div>
-                <select className="w-full p-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-600 focus:border-blue-600 text-gray-600">
+                <select 
+                  name="referral_source"
+                  className="w-full p-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-600 focus:border-blue-600 text-gray-600"
+                  required
+                >
                   <option value="">How did you hear about us?*</option>
                   <option value="search">Internet Search</option>
                   <option value="referral">Friend/Family Referral</option>
@@ -122,10 +174,21 @@ export function ContactForm() {
 
               <button 
                 type="submit" 
-                className="w-full bg-blue-600 hover:bg-blue-500 text-white py-2.5 px-4 rounded-lg transition-colors text-sm font-medium"
+                disabled={isSubmitting}
+                className={`w-full bg-blue-600 hover:bg-blue-500 text-white py-2.5 px-4 rounded-lg transition-colors text-sm font-medium ${
+                  isSubmitting ? 'opacity-50 cursor-not-allowed' : ''
+                }`}
               >
-                Send Message
+                {isSubmitting ? 'Sending...' : 'Send Message'}
               </button>
+
+              {submitStatus === 'success' && (
+                <p className="text-green-600 text-sm">Thank you for your message. We'll be in touch soon!</p>
+              )}
+
+              {submitStatus === 'error' && (
+                <p className="text-red-600 text-sm">There was an error sending your message. Please try again.</p>
+              )}
 
               <p className="text-xs text-gray-500 leading-relaxed">
                 By submitting this form, I agree to be contacted via call, email and text. 
