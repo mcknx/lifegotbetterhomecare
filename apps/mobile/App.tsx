@@ -4,6 +4,7 @@ import { StatusBar } from 'expo-status-bar';
 import NavigationBar from './components/NavigationBar';
 import { HeroSection } from './components/HeroSection';
 import { BenefitsSection } from './components/BenefitsSection';
+import { FindCareSection } from './components/FindCareSection';
 
 export default function App() {
   const [activeSection, setActiveSection] = useState('home');
@@ -12,8 +13,9 @@ export default function App() {
   const scrollToSection = (sectionId: string) => {
     const sectionOffsets: Record<string, number> = {
       'home': 0,
-      'benefits': 600, // Approximate height of HeroSection
-      // Add other section offsets as needed
+      'benefits': 600,
+      'find-care': 1200,
+      // Add other sections as needed
     };
 
     scrollViewRef.current?.scrollTo({
@@ -40,13 +42,18 @@ export default function App() {
             setActiveSection('home');
           } else if (offset < 900) {
             setActiveSection('benefits');
+          } else if (offset < 1500) {
+            setActiveSection('find-care');
           }
-          // Add other section conditions as needed
         }}
         scrollEventThrottle={16}
       >
         <HeroSection />
         <BenefitsSection />
+        <FindCareSection 
+          onContactPress={() => scrollToSection('contact')}
+          onServicesPress={() => scrollToSection('services')}
+        />
         {/* Other sections will go here */}
       </ScrollView>
     </SafeAreaView>
