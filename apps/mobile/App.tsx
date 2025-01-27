@@ -10,6 +10,7 @@ import { ServicesSection } from './components/ServicesSection';
 import { SECTION_HEIGHT } from './constants';
 import { ContactSection } from './components/ContactSection';
 import { CareersSection } from './components/CareersSection';
+import { Footer } from './components/Footer';
 
 export default function App() {
   const [activeSection, setActiveSection] = useState('home');
@@ -76,6 +77,7 @@ export default function App() {
         <ServicesSection />
         <CareersSection />
         <ContactSection />
+        <Footer />
       </ScrollView>
     </SafeAreaView>
   );
