@@ -6,6 +6,7 @@ import { HeroSection } from './components/HeroSection';
 import { BenefitsSection } from './components/BenefitsSection';
 import { FindCareSection } from './components/FindCareSection';
 import { AboutSection } from './components/AboutSection';
+import { ServicesSection } from './components/ServicesSection';
 import { SECTION_HEIGHT } from './constants';
 
 export default function App() {
@@ -67,7 +68,8 @@ export default function App() {
           onServicesPress={() => scrollToSection('services')}
         />
         <AboutSection />
-        {/* Other sections will go here */}
+        <ServicesSection />
+        {/* Contact section will go here */}
       </ScrollView>
     </SafeAreaView>
   );
