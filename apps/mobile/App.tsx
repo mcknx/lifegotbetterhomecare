@@ -8,6 +8,8 @@ import { FindCareSection } from './components/FindCareSection';
 import { AboutSection } from './components/AboutSection';
 import { ServicesSection } from './components/ServicesSection';
 import { SECTION_HEIGHT } from './constants';
+import { ContactSection } from './components/ContactSection';
+import { CareersSection } from './components/CareersSection';
 
 export default function App() {
   const [activeSection, setActiveSection] = useState('home');
@@ -20,7 +22,8 @@ export default function App() {
       'find-care': SECTION_HEIGHT * 2,
       'about': SECTION_HEIGHT * 3,
       'services': SECTION_HEIGHT * 4,
-      'contact': SECTION_HEIGHT * 5,
+      'careers': SECTION_HEIGHT * 5,
+      'contact': SECTION_HEIGHT * 6,
     };
 
     scrollViewRef.current?.scrollTo({
@@ -55,6 +58,8 @@ export default function App() {
             setActiveSection('about');
           } else if (offset < SECTION_HEIGHT * 4.5) {
             setActiveSection('services');
+          } else if (offset < SECTION_HEIGHT * 5.5) {
+            setActiveSection('careers');
           } else {
             setActiveSection('contact');
           }
@@ -69,7 +74,8 @@ export default function App() {
         />
         <AboutSection />
         <ServicesSection />
-        {/* Contact section will go here */}
+        <CareersSection />
+        <ContactSection />
       </ScrollView>
     </SafeAreaView>
   );

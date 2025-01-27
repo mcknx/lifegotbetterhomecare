@@ -16,6 +16,7 @@ const NavigationBar = ({ activeSection, onSectionChange }: NavigationProps) => {
     { id: 'find-care', label: 'Find Care' },
     { id: 'about', label: 'About Us' },
     { id: 'services', label: 'Services' },
+    { id: 'careers', label: 'Careers' },
     { id: 'contact', label: 'Contact' },
   ];
 
