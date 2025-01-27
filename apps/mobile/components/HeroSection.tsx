@@ -4,7 +4,7 @@ import { WebView } from 'react-native-webview';
 import { SECTION_HEIGHT } from '../constants';
 
 const { width } = Dimensions.get('window');
-const VIDEO_HEIGHT = 1800; // Increased height to show more of the video
+const VIDEO_HEIGHT = 1800;
 
 export function HeroSection() {
   return (

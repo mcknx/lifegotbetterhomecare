@@ -15,10 +15,7 @@ export function FindCareSection({ onContactPress, onServicesPress }: FindCareSec
     <View style={styles.container}>
       <View style={styles.imageContainer}>
         <Image 
-          source={{ 
-            uri: "https://picsum.photos/800/600" // Random high-quality image
-            // Alternative with specific image: "https://picsum.photos/id/237/800/600"
-          }}
+          source={require('../assets/healthcare-worker.jpg')}
           style={styles.image}
           resizeMode="cover"
         />

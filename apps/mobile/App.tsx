@@ -5,6 +5,7 @@ import NavigationBar from './components/NavigationBar';
 import { HeroSection } from './components/HeroSection';
 import { BenefitsSection } from './components/BenefitsSection';
 import { FindCareSection } from './components/FindCareSection';
+import { AboutSection } from './components/AboutSection';
 import { SECTION_HEIGHT } from './constants';
 
 export default function App() {
@@ -65,6 +66,7 @@ export default function App() {
           onContactPress={() => scrollToSection('contact')}
           onServicesPress={() => scrollToSection('services')}
         />
+        <AboutSection />
         {/* Other sections will go here */}
       </ScrollView>
     </SafeAreaView>
