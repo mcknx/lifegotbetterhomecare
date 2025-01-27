@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { View, Text, ScrollView, StyleSheet, Dimensions, FlatList } from 'react-native';
+import { View, Text, StyleSheet, Dimensions, ScrollView } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 
 export function ServicesSection() {
-  const [activePage, setActivePage] = useState(0);
+  const [currentPage, setCurrentPage] = useState(0);
   const services = [
     {
       icon: 'coffee',
@@ -56,100 +56,96 @@ export function ServicesSection() {
   const itemsPerPage = 5;
   const totalPages = Math.ceil(services.length / itemsPerPage);
 
-  const handleScroll = (event: any) => {
+  const onScroll = (event: any) => {
     const contentOffset = event.nativeEvent.contentOffset.x;
     const page = Math.round(contentOffset / windowWidth);
-    setActivePage(page);
+    setCurrentPage(page);
   };
 
   return (
-    <ScrollView style={styles.container}>
-      <View style={styles.content}>
-        {/* Header Section */}
-        <View style={styles.header}>
-          <Text style={styles.subtitle}>EXPERTISE</Text>
-          <Text style={styles.title}>Commitment to your needs</Text>
-          <Text style={styles.description}>
-            A specialist caregiver is available for any need. We are available in 150+ locations.
-          </Text>
-        </View>
+    <View style={styles.container}>
+      {/* Header Section */}
+      <View style={styles.header}>
+        <Text style={styles.subtitle}>EXPERTISE</Text>
+        <Text style={styles.title}>Commitment to your needs</Text>
+        <Text style={styles.description}>
+          A specialist caregiver is available for any need. We are available in 150+ locations.
+        </Text>
+      </View>
 
-        {/* Services List with Pagination */}
-        <View style={styles.servicesWrapper}>
-          <FlatList
-            horizontal
-            pagingEnabled
-            showsHorizontalScrollIndicator={false}
-            data={Array.from({ length: totalPages })}
-            onScroll={handleScroll}
-            renderItem={({ index: pageIndex }) => (
-              <View style={[styles.servicesPage, { width: windowWidth - 40 }]}>
-                {services
-                  .slice(pageIndex * itemsPerPage, (pageIndex + 1) * itemsPerPage)
-                  .map((service, index) => (
-                    <View key={index} style={styles.serviceItem}>
-                      <View style={styles.iconContainer}>
-                        <Feather name={service.icon as any} size={24} color="#2563eb" />
-                      </View>
-                      <View style={styles.textContainer}>
-                        <Text style={styles.serviceTitle}>{service.title}</Text>
-                        <Text style={styles.serviceDescription}>{service.description}</Text>
-                      </View>
-                    </View>
-                  ))}
-              </View>
-            )}
-          />
-
-          {/* Pagination Dots */}
-          <View style={styles.paginationDots}>
-            {Array.from({ length: totalPages }).map((_, index) => (
-              <View
-                key={index}
-                style={[
-                  styles.dot,
-                  { backgroundColor: index === activePage ? '#2563eb' : '#e5e7eb' }
-                ]}
-              />
-            ))}
+      {/* Services List */}
+      <ScrollView
+        horizontal
+        pagingEnabled
+        showsHorizontalScrollIndicator={false}
+        onScroll={onScroll}
+        scrollEventThrottle={16}
+        style={styles.scrollView}
+      >
+        {Array.from({ length: totalPages }).map((_, pageIndex) => (
+          <View key={pageIndex} style={[styles.page, { width: windowWidth }]}>
+            {services
+              .slice(pageIndex * itemsPerPage, (pageIndex + 1) * itemsPerPage)
+              .map((service, index) => (
+                <View key={index} style={styles.serviceItem}>
+                  <View style={styles.iconContainer}>
+                    <Feather name={service.icon as any} size={24} color="#2563eb" />
+                  </View>
+                  <View style={styles.textContainer}>
+                    <Text style={styles.serviceTitle}>{service.title}</Text>
+                    <Text style={styles.serviceDescription}>{service.description}</Text>
+                  </View>
+                </View>
+              ))}
           </View>
-        </View>
+        ))}
+      </ScrollView>
 
-        {/* Stats Box */}
-        <View style={styles.statsContainer}>
-          <View style={styles.statsBox}>
-            <View style={styles.statsIconContainer}>
-              <Feather name="phone" size={20} color="#2563eb" />
-            </View>
-            <View>
-              <Text style={styles.statsLabel}>Expert Caregivers</Text>
-              <Text style={styles.statsNumber}>250+</Text>
-            </View>
+      {/* Pagination Dots */}
+      <View style={styles.paginationDots}>
+        {Array.from({ length: totalPages }).map((_, index) => (
+          <View
+            key={index}
+            style={[
+              styles.dot,
+              { backgroundColor: index === currentPage ? '#2563eb' : '#e5e7eb' }
+            ]}
+          />
+        ))}
+      </View>
+
+      {/* Stats Box */}
+      <View style={styles.statsContainer}>
+        <View style={styles.statsBox}>
+          <View style={styles.statsIconContainer}>
+            <Feather name="phone" size={20} color="#2563eb" />
+          </View>
+          <View>
+            <Text style={styles.statsLabel}>Expert Caregivers</Text>
+            <Text style={styles.statsNumber}>250+</Text>
           </View>
         </View>
       </View>
-    </ScrollView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    height: Dimensions.get('window').height,
     backgroundColor: 'white',
   },
-  content: {
-    padding: 20,
-    paddingBottom: 40,
-  },
   header: {
-    alignItems: 'center',
-    marginBottom: 30,
+    paddingTop: 120,
+    paddingHorizontal: 20,
+    backgroundColor: 'white',
   },
   subtitle: {
     color: '#2563eb',
     fontWeight: '500',
     marginBottom: 8,
     fontSize: 14,
+    textAlign: 'center',
   },
   title: {
     fontSize: 28,
@@ -163,16 +159,17 @@ const styles = StyleSheet.create({
     color: '#666',
     fontSize: 16,
     lineHeight: 24,
+    marginBottom: 20,
   },
-  servicesWrapper: {
-    marginTop: 20,
+  scrollView: {
+    flexGrow: 0,
   },
-  servicesPage: {
-    paddingHorizontal: 0,
+  page: {
+    padding: 20,
   },
   serviceItem: {
     flexDirection: 'row',
-    marginBottom: 24,
+    marginBottom: 20,
     alignItems: 'flex-start',
   },
   iconContainer: {
@@ -202,7 +199,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 20,
+    paddingVertical: 10,
   },
   dot: {
     width: 8,
@@ -212,7 +209,7 @@ const styles = StyleSheet.create({
   },
   statsContainer: {
     alignItems: 'center',
-    marginTop: 20,
+    paddingBottom: 20,
   },
   statsBox: {
     flexDirection: 'row',
