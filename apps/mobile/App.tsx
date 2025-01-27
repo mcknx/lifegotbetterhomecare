@@ -1,10 +1,11 @@
 import React, { useState, useRef } from 'react';
-import { ScrollView, SafeAreaView, StyleSheet } from 'react-native';
+import { ScrollView, SafeAreaView, StyleSheet, Dimensions } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import NavigationBar from './components/NavigationBar';
 import { HeroSection } from './components/HeroSection';
 import { BenefitsSection } from './components/BenefitsSection';
 import { FindCareSection } from './components/FindCareSection';
+import { SECTION_HEIGHT } from './constants';
 
 export default function App() {
   const [activeSection, setActiveSection] = useState('home');
@@ -13,9 +14,11 @@ export default function App() {
   const scrollToSection = (sectionId: string) => {
     const sectionOffsets: Record<string, number> = {
       'home': 0,
-      'benefits': 600,
-      'find-care': 1200,
-      // Add other sections as needed
+      'benefits': SECTION_HEIGHT,
+      'find-care': SECTION_HEIGHT * 2,
+      'about': SECTION_HEIGHT * 3,
+      'services': SECTION_HEIGHT * 4,
+      'contact': SECTION_HEIGHT * 5,
     };
 
     scrollViewRef.current?.scrollTo({
@@ -36,14 +39,22 @@ export default function App() {
       <ScrollView 
         ref={scrollViewRef}
         style={styles.content}
+        snapToInterval={SECTION_HEIGHT}
+        decelerationRate="fast"
         onScroll={({ nativeEvent }) => {
           const offset = nativeEvent.contentOffset.y;
-          if (offset < 300) {
+          if (offset < SECTION_HEIGHT / 2) {
             setActiveSection('home');
-          } else if (offset < 900) {
+          } else if (offset < SECTION_HEIGHT * 1.5) {
             setActiveSection('benefits');
-          } else if (offset < 1500) {
+          } else if (offset < SECTION_HEIGHT * 2.5) {
             setActiveSection('find-care');
+          } else if (offset < SECTION_HEIGHT * 3.5) {
+            setActiveSection('about');
+          } else if (offset < SECTION_HEIGHT * 4.5) {
+            setActiveSection('services');
+          } else {
+            setActiveSection('contact');
           }
         }}
         scrollEventThrottle={16}

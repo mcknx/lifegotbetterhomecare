@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image, Dimensions } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { SECTION_HEIGHT } from '../constants';
 
 interface FindCareSectionProps {
   onContactPress: () => void;
@@ -111,6 +112,7 @@ export function FindCareSection({ onContactPress, onServicesPress }: FindCareSec
 
 const styles = StyleSheet.create({
   container: {
+    height: SECTION_HEIGHT,
     backgroundColor: '#f8fafc',
     padding: 16,
   },
@@ -155,23 +157,23 @@ const styles = StyleSheet.create({
     borderRadius: 20,
   },
   statsTitle: {
-    fontSize: 16,
+    fontSize: 15,
     fontWeight: '600',
     color: '#111827',
   },
   statsText: {
-    fontSize: 14,
+    fontSize: 13,
     color: '#6B7280',
   },
   content: {
     marginTop: 32,
   },
   title: {
-    fontSize: 32,
+    fontSize: 24,
     fontWeight: 'bold',
     color: '#2563EB',
     marginBottom: 16,
-    lineHeight: 40,
+    lineHeight: 32,
   },
   description: {
     fontSize: 16,
@@ -195,7 +197,7 @@ const styles = StyleSheet.create({
   },
   tabText: {
     color: '#6B7280',
-    fontSize: 16,
+    fontSize: 15,
   },
   activeTabText: {
     color: '#2563EB',
@@ -206,27 +208,27 @@ const styles = StyleSheet.create({
   },
   primaryButton: {
     backgroundColor: '#2563EB',
-    paddingVertical: 16,
+    paddingVertical: 12,
     paddingHorizontal: 24,
     borderRadius: 8,
     alignItems: 'center',
   },
   primaryButtonText: {
     color: 'white',
-    fontSize: 16,
+    fontSize: 15,
     fontWeight: '600',
   },
   secondaryButton: {
     borderWidth: 2,
     borderColor: '#2563EB',
-    paddingVertical: 16,
+    paddingVertical: 12,
     paddingHorizontal: 24,
     borderRadius: 8,
     alignItems: 'center',
   },
   secondaryButtonText: {
     color: '#2563EB',
-    fontSize: 16,
+    fontSize: 15,
     fontWeight: '600',
   },
 }); 

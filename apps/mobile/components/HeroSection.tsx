@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
 import { WebView } from 'react-native-webview';
+import { SECTION_HEIGHT } from '../constants';
 
 export function HeroSection() {
   return (
@@ -45,7 +46,7 @@ export function HeroSection() {
 
 const styles = StyleSheet.create({
   container: {
-    height: Dimensions.get('window').height - 60,
+    height: SECTION_HEIGHT,
     justifyContent: 'center',
   },
   videoContainer: {
@@ -67,35 +68,35 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   title: {
-    fontSize: 36,
+    fontSize: 28,
     fontWeight: 'bold',
     color: '#fff',
     textAlign: 'center',
     marginBottom: 8,
   },
   subtitle: {
-    fontSize: 28,
+    fontSize: 24,
     color: '#93c5fd',
     textAlign: 'center',
     marginBottom: 24,
   },
   description: {
-    fontSize: 18,
+    fontSize: 16,
     color: '#fff',
     textAlign: 'center',
     marginBottom: 32,
-    lineHeight: 28,
+    lineHeight: 24,
   },
   button: {
     backgroundColor: '#2563eb',
-    paddingVertical: 16,
-    paddingHorizontal: 32,
+    paddingVertical: 12,
+    paddingHorizontal: 24,
     borderRadius: 8,
     minWidth: 200,
   },
   buttonText: {
     color: '#fff',
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: '600',
     textAlign: 'center',
   },
