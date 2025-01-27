@@ -2,12 +2,6 @@
 
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
 import { Menu, Phone, ChevronDown, X } from 'lucide-react'
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
