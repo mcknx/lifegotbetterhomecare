@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, StyleSheet, TouchableOpacity, ScrollView, SafeAreaView, Platform, Modal } from 'react-native';
+import { View, Text, TextInput, StyleSheet, TouchableOpacity, ScrollView, SafeAreaView, Platform, Modal, Linking } from 'react-native';
 import { SECTION_HEIGHT } from '../constants';
 
 // Add this type definition at the top of the file, after the imports
@@ -94,26 +94,61 @@ export function ContactSection() {
     </>
   );
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     // Basic form validation
     if (!formData.name || !formData.email || !formData.phone) {
       alert('Please fill in all required fields');
       return;
     }
-    
-    console.log('Form submitted:', formData);
-    
-    // Reset form
-    setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      zipCode: '',
-      position: '',
-      experience: '',
-      availability: '',
-      additionalInfo: '',
-    });
+
+    try {
+      // Prepare email body based on service type
+      let emailBody = `Name: ${formData.name}%0D%0A`;
+      emailBody += `Email: ${formData.email}%0D%0A`;
+      emailBody += `Phone: ${formData.phone}%0D%0A%0D%0A`;
+
+      if (serviceType === 'care') {
+        emailBody += `Service Type: Home Care Services%0D%0A`;
+        emailBody += `Zip Code: ${formData.zipCode}%0D%0A`;
+      } else {
+        emailBody += `Service Type: Employment%0D%0A`;
+        emailBody += `Position: ${formData.position}%0D%0A`;
+        emailBody += `Experience: ${formData.experience}%0D%0A`;
+        emailBody += `Availability: ${formData.availability}%0D%0A`;
+        emailBody += `Additional Information: ${formData.additionalInfo}%0D%0A`;
+      }
+
+      const subject = serviceType === 'care' 
+        ? 'New Home Care Service Inquiry'
+        : 'New Employment Application';
+
+      const mailtoUrl = `mailto:lifegotbetterhomecare@gmail.com?subject=${encodeURIComponent(subject)}&body=${emailBody}`;
+
+      const canOpen = await Linking.canOpenURL(mailtoUrl);
+      
+      if (!canOpen) {
+        alert('Unable to open email client');
+        return;
+      }
+
+      await Linking.openURL(mailtoUrl);
+      
+      // Reset form after email client opens
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        zipCode: '',
+        position: '',
+        experience: '',
+        availability: '',
+        additionalInfo: '',
+      });
+
+    } catch (error) {
+      console.error('Error opening email:', error);
+      alert('There was an error opening your email client. Please try again.');
+    }
   };
 
   return (
