@@ -1,24 +1,106 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, StyleSheet, TouchableOpacity, ScrollView, SafeAreaView } from 'react-native';
+import { View, Text, TextInput, StyleSheet, TouchableOpacity, ScrollView, SafeAreaView, Platform, Modal } from 'react-native';
 import { SECTION_HEIGHT } from '../constants';
+
+// Add this type definition at the top of the file, after the imports
+type FormData = {
+  name: string;
+  email: string;
+  phone: string;
+  zipCode: string;
+  position: string;
+  experience: string;
+  availability: string;
+  additionalInfo: string;
+};
 
 export function ContactSection() {
   const [serviceType, setServiceType] = useState('care');
-  const [formData, setFormData] = useState({
+  const [showModal, setShowModal] = useState('');
+  const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
     phone: '',
     zipCode: '',
+    position: '',
+    experience: '',
+    availability: '',
+    additionalInfo: '',
   });
+
+  // Dropdown options
+  const positions = [
+    'Caregiver',
+    'Nurse',
+    'Care Coordinator',
+    'Other'
+  ];
+
+  const experiences = [
+    '0-1 years',
+    '1-3 years',
+    '3-5 years',
+    '5+ years'
+  ];
+
+  const availabilities = [
+    'Full Time',
+    'Part Time',
+    'Flexible'
+  ];
+
+  // Update the selectOption function to use the type
+  const selectOption = (type: keyof FormData, value: string) => {
+    setFormData(prev => ({ ...prev, [type]: value }));
+    setShowModal('');
+  };
+
+  // Update renderDropdown to use the type
+  const renderDropdown = (type: keyof FormData, options: string[], placeholder: string) => (
+    <>
+      <TouchableOpacity
+        style={styles.input}
+        onPress={() => setShowModal(type)}
+      >
+        <Text style={formData[type] ? styles.inputText : styles.placeholderText}>
+          {formData[type] || placeholder}
+        </Text>
+      </TouchableOpacity>
+
+      <Modal
+        visible={showModal === type}
+        transparent
+        animationType="slide"
+        onRequestClose={() => setShowModal('')}
+      >
+        <TouchableOpacity 
+          style={styles.modalOverlay}
+          activeOpacity={1} 
+          onPress={() => setShowModal('')}
+        >
+          <View style={styles.modalContent}>
+            {options.map((option) => (
+              <TouchableOpacity
+                key={option}
+                style={styles.modalOption}
+                onPress={() => selectOption(type, option)}
+              >
+                <Text style={styles.modalOptionText}>{option}</Text>
+              </TouchableOpacity>
+            ))}
+          </View>
+        </TouchableOpacity>
+      </Modal>
+    </>
+  );
 
   const handleSubmit = () => {
     // Basic form validation
-    if (!formData.name || !formData.email || !formData.phone || !formData.zipCode) {
+    if (!formData.name || !formData.email || !formData.phone) {
       alert('Please fill in all required fields');
       return;
     }
     
-    // Here you would typically send the data to your backend
     console.log('Form submitted:', formData);
     
     // Reset form
@@ -27,6 +109,10 @@ export function ContactSection() {
       email: '',
       phone: '',
       zipCode: '',
+      position: '',
+      experience: '',
+      availability: '',
+      additionalInfo: '',
     });
   };
 
@@ -65,7 +151,7 @@ export function ContactSection() {
               </View>
             </View>
 
-            {/* Form Fields */}
+            {/* Common Fields */}
             <TextInput
               style={styles.input}
               placeholder="Name*"
@@ -90,13 +176,32 @@ export function ContactSection() {
               keyboardType="phone-pad"
             />
 
-            <TextInput
-              style={styles.input}
-              placeholder="Zip Code*"
-              value={formData.zipCode}
-              onChangeText={(text) => setFormData(prev => ({ ...prev, zipCode: text }))}
-              keyboardType="numeric"
-            />
+            {serviceType === 'care' ? (
+              // Care Service Fields
+              <TextInput
+                style={styles.input}
+                placeholder="Zip Code*"
+                value={formData.zipCode}
+                onChangeText={(text) => setFormData(prev => ({ ...prev, zipCode: text }))}
+                keyboardType="numeric"
+              />
+            ) : (
+              // Employment Fields
+              <>
+                {renderDropdown('position', positions, 'Position Interested In*')}
+                {renderDropdown('experience', experiences, 'Years of Experience*')}
+                {renderDropdown('availability', availabilities, 'Availability*')}
+
+                <TextInput
+                  style={[styles.input, styles.textArea]}
+                  placeholder="Additional Information (Optional)"
+                  value={formData.additionalInfo}
+                  onChangeText={(text) => setFormData(prev => ({ ...prev, additionalInfo: text }))}
+                  multiline
+                  numberOfLines={4}
+                />
+              </>
+            )}
 
             <TouchableOpacity 
               style={styles.submitButton}
@@ -196,6 +301,13 @@ const styles = StyleSheet.create({
     marginBottom: 12,
     fontSize: 16,
   },
+  textArea: {
+    height: 100,
+    textAlignVertical: 'top',
+  },
+  select: {
+    marginBottom: 12,
+  },
   submitButton: {
     backgroundColor: '#2563eb',
     padding: 14,
@@ -214,5 +326,45 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop: 16,
     lineHeight: 18,
+  },
+  pickerContainer: {
+    borderWidth: 1,
+    borderColor: '#e5e7eb',
+    borderRadius: 8,
+    marginBottom: 12,
+    backgroundColor: '#fff',
+  },
+  picker: {
+    height: 50,
+    width: '100%',
+  },
+  inputText: {
+    color: '#000',
+    fontSize: 16,
+  },
+  placeholderText: {
+    color: '#6B7280',
+    fontSize: 16,
+  },
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    justifyContent: 'flex-end',
+  },
+  modalContent: {
+    backgroundColor: '#fff',
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    padding: 20,
+    maxHeight: '50%',
+  },
+  modalOption: {
+    paddingVertical: 15,
+    borderBottomWidth: 1,
+    borderBottomColor: '#e5e7eb',
+  },
+  modalOptionText: {
+    fontSize: 16,
+    color: '#000',
   },
 }); 
