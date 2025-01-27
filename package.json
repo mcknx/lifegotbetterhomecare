@@ -2,8 +2,7 @@
   "name": "lifegotbetterhomecare-monorepo",
   "private": true,
   "workspaces": [
-    "apps/*",
-    "packages/*"
+    "apps/*"
   ],
   "scripts": {
     "web:dev": "npm run dev --workspace=lifegotbetterhomecare",
