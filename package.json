@@ -9,6 +9,8 @@
     "web:build": "npm run build --workspace=lifegotbetterhomecare",
     "web:start": "npm run start --workspace=lifegotbetterhomecare",
     "web:lint": "npm run lint --workspace=lifegotbetterhomecare",
-    "mobile:dev": "npm run start --workspace=lifegotbetterhomecare-mobile"
+    "mobile:dev": "npm run start --workspace=lifegotbetterhomecare-mobile",
+    "clean": "rm -rf node_modules && rm -rf apps/*/node_modules",
+    "clean:install": "npm run clean && npm install"
   }
 }
