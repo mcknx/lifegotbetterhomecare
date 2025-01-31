@@ -8,6 +8,7 @@
     "web:lint": "cd apps/web && npm run lint",
     "mobile:dev": "cd apps/mobile && npm run start",
     "clean": "rm -rf node_modules && rm -rf apps/*/node_modules",
-    "clean:install": "npm run clean && cd apps/mobile && npm install"
+    "install:mobile": "cd apps/mobile && npm install",
+    "install:web": "cd apps/web && npm install"
   }
 }
