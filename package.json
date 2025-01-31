@@ -1,16 +1,13 @@
 {
   "name": "lifegotbetterhomecare-monorepo",
   "private": true,
-  "workspaces": [
-    "apps/*"
-  ],
   "scripts": {
-    "web:dev": "npm run dev --workspace=lifegotbetterhomecare",
-    "web:build": "npm run build --workspace=lifegotbetterhomecare",
-    "web:start": "npm run start --workspace=lifegotbetterhomecare",
-    "web:lint": "npm run lint --workspace=lifegotbetterhomecare",
-    "mobile:dev": "npm run start --workspace=lifegotbetterhomecare-mobile",
+    "web:dev": "cd apps/web && npm run dev",
+    "web:build": "cd apps/web && npm run build",
+    "web:start": "cd apps/web && npm run start",
+    "web:lint": "cd apps/web && npm run lint",
+    "mobile:dev": "cd apps/mobile && npm run start",
     "clean": "rm -rf node_modules && rm -rf apps/*/node_modules",
-    "clean:install": "npm run clean && npm install"
+    "clean:install": "npm run clean && cd apps/mobile && npm install"
   }
 }
