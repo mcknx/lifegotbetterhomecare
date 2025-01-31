@@ -19,3 +19,7 @@ waljrdev
 
 --- video
 https://dm0qx8t0i9gc9.cloudfront.net/watermarks/video/HrrabAxWinloumzm/videoblocks-413_u0vosu9siehfquxusenbukugmje_htd_56jkk__b2fbd0d30fdf4d9afe10971242ac6f14__P360.mp4
+
+
+--- Error: EMFILE: too many open files, watch
+watchman watch-del-all
