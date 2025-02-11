@@ -4,6 +4,8 @@
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "start": "expo start",
+    "start:dev": "expo start --dev-client",
+    "setup:dev-client": "npm install expo-dev-client && npm install && npx expo install --fix",
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web"
