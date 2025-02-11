@@ -92,7 +92,7 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="#" className="hover:text-blue-400 transition-colors">
+                <Link href="/privacy" className="hover:text-blue-400 transition-colors">
                   Privacy Policy
                 </Link>
               </li>
@@ -140,7 +140,7 @@ export function Footer() {
               <Link href="#" className="hover:text-green-400 transition-colors">
                 Terms of Service
               </Link>
-              <Link href="#" className="hover:text-green-400 transition-colors">
+              <Link href="/privacy" className="hover:text-green-400 transition-colors">
                 Privacy Policy
               </Link>
               <Link href="#" className="hover:text-green-400 transition-colors">
