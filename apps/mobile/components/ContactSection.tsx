@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, StyleSheet, TouchableOpacity, ScrollView, SafeAreaView, Platform, Modal, Linking } from 'react-native';
-import { SECTION_HEIGHT } from '../constants';
 
-// Add this type definition at the top of the file, after the imports
 type FormData = {
   name: string;
   email: string;
@@ -49,13 +47,11 @@ export function ContactSection() {
     'Flexible'
   ];
 
-  // Update the selectOption function to use the type
   const selectOption = (type: keyof FormData, value: string) => {
     setFormData(prev => ({ ...prev, [type]: value }));
     setShowModal('');
   };
 
-  // Update renderDropdown to use the type
   const renderDropdown = (type: keyof FormData, options: string[], placeholder: string) => (
     <>
       <TouchableOpacity
@@ -102,52 +98,53 @@ export function ContactSection() {
     }
 
     try {
-      // Prepare email body based on service type
-      let emailBody = `Name: ${formData.name}%0D%0A`;
-      emailBody += `Email: ${formData.email}%0D%0A`;
-      emailBody += `Phone: ${formData.phone}%0D%0A%0D%0A`;
+      const templateParams = {
+        user_name: formData.name,
+        user_email: formData.email,
+        user_phone: formData.phone,
+        ...(serviceType === 'care' ? {
+          zip_code: formData.zipCode,
+        } : {
+          position_type: formData.position,
+          experience_level: formData.experience,
+          availability: formData.availability,
+          additional_info: formData.additionalInfo,
+        })
+      };
 
-      if (serviceType === 'care') {
-        emailBody += `Service Type: Home Care Services%0D%0A`;
-        emailBody += `Zip Code: ${formData.zipCode}%0D%0A`;
-      } else {
-        emailBody += `Service Type: Employment%0D%0A`;
-        emailBody += `Position: ${formData.position}%0D%0A`;
-        emailBody += `Experience: ${formData.experience}%0D%0A`;
-        emailBody += `Availability: ${formData.availability}%0D%0A`;
-        emailBody += `Additional Information: ${formData.additionalInfo}%0D%0A`;
-      }
-
-      const subject = serviceType === 'care' 
-        ? 'New Home Care Service Inquiry'
-        : 'New Employment Application';
-
-      const mailtoUrl = `mailto:lifegotbetterhomecare@gmail.com?subject=${encodeURIComponent(subject)}&body=${emailBody}`;
-
-      const canOpen = await Linking.canOpenURL(mailtoUrl);
-      
-      if (!canOpen) {
-        alert('Unable to open email client');
-        return;
-      }
-
-      await Linking.openURL(mailtoUrl);
-      
-      // Reset form after email client opens
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        zipCode: '',
-        position: '',
-        experience: '',
-        availability: '',
-        additionalInfo: '',
+      const response = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'origin': 'https://lifegotbetterhomecare.com',
+        },
+        body: JSON.stringify({
+          service_id: 'service_y3oo2si',
+          template_id: serviceType === 'care' ? 'template_tj5d2cp' : 'template_csqtwpf',
+          user_id: 'Xeu-hioZNC6XZvx_d',
+          template_params: templateParams,
+        }),
       });
 
+      if (response.status === 200) {
+        alert('Message sent successfully!');
+        // Reset form
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          zipCode: '',
+          position: '',
+          experience: '',
+          availability: '',
+          additionalInfo: '',
+        });
+      } else {
+        throw new Error('Failed to send message');
+      }
     } catch (error) {
-      console.error('Error opening email:', error);
-      alert('There was an error opening your email client. Please try again.');
+      console.error('Error sending message:', error);
+      alert('Unable to send message. Please try again or contact us directly.');
     }
   };
 
@@ -260,7 +257,7 @@ const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
     backgroundColor: '#fff',
-    height: SECTION_HEIGHT,
+    height: '100%',
   },
   container: {
     flex: 1,
@@ -269,7 +266,7 @@ const styles = StyleSheet.create({
   scrollContent: {
     flexGrow: 1,
     paddingVertical: 20,
-    minHeight: SECTION_HEIGHT,
+    minHeight: '100%',
   },
   formWrapper: {
     paddingHorizontal: 16,
