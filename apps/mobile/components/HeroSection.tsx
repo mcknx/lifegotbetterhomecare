@@ -1,12 +1,16 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Dimensions, Image } from 'react-native';
 import { WebView } from 'react-native-webview';
 import { SECTION_HEIGHT } from '../constants';
 
 const { width } = Dimensions.get('window');
 const VIDEO_HEIGHT = 1800;
 
-export function HeroSection() {
+type HeroSectionProps = {
+  onContactPress: () => void;
+};
+
+export function HeroSection({ onContactPress }: HeroSectionProps) {
   return (
     <View style={styles.container}>
       <View style={styles.videoContainer}>
@@ -47,7 +51,7 @@ export function HeroSection() {
           Trust us to provide a brighter, healthier future through personalized care and support.
         </Text>
         
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={onContactPress}>
           <Text style={styles.buttonText}>Connect with Us</Text>
         </TouchableOpacity>
       </View>

@@ -59,7 +59,7 @@ export default function App() {
         <View 
           style={styles.section} 
           onLayout={({ nativeEvent }) => measureSection('home', nativeEvent.layout.y)}>
-          <HeroSection />
+          <HeroSection onContactPress={() => scrollToSection('contact')} />
         </View>
         
         <View 
@@ -92,7 +92,7 @@ export default function App() {
         <View 
           style={styles.section}
           onLayout={({ nativeEvent }) => measureSection('careers', nativeEvent.layout.y)}>
-          <CareersSection />
+          <CareersSection onContactPress={() => scrollToSection('contact')} />
         </View>
         
         <View 

@@ -5,7 +5,11 @@ import { Ionicons } from '@expo/vector-icons';
 
 type BenefitIcon = keyof typeof Ionicons.glyphMap;
 
-export function CareersSection() {
+type CareersSectionProps = {
+  onContactPress: () => void;
+};
+
+export function CareersSection({ onContactPress }: CareersSectionProps) {
   const benefits: Array<{
     icon: BenefitIcon;
     title: string;
@@ -56,7 +60,7 @@ export function CareersSection() {
 
         <TouchableOpacity 
           style={styles.button}
-          onPress={() => Linking.openURL('mailto:lifegotbetterhomecare@gmail.com')}
+          onPress={onContactPress}
         >
           <Text style={styles.buttonText}>Apply Now</Text>
         </TouchableOpacity>
