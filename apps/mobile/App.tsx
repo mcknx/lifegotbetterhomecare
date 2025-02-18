@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { ScrollView, SafeAreaView, StyleSheet, Dimensions } from 'react-native';
+import { ScrollView, SafeAreaView, StyleSheet, Dimensions, View } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import NavigationBar from './components/NavigationBar';
 import { HeroSection } from './components/HeroSection';
@@ -15,21 +15,17 @@ import { Footer } from './components/Footer';
 export default function App() {
   const [activeSection, setActiveSection] = useState('home');
   const scrollViewRef = useRef<ScrollView>(null);
+  const sectionRefs = useRef<Record<string, number>>({});
+
+  const measureSection = (sectionId: string, y: number) => {
+    sectionRefs.current[sectionId] = y;
+  };
 
   const scrollToSection = (sectionId: string) => {
-    const sectionOffsets: Record<string, number> = {
-      'home': 0,
-      'benefits': SECTION_HEIGHT,
-      'find-care': SECTION_HEIGHT * 2,
-      'about': SECTION_HEIGHT * 3,
-      'services': SECTION_HEIGHT * 4,
-      'careers': SECTION_HEIGHT * 5,
-      'contact': SECTION_HEIGHT * 6,
-    };
-
+    const yOffset = sectionRefs.current[sectionId] || 0;
     scrollViewRef.current?.scrollTo({
-      y: sectionOffsets[sectionId] || 0,
-      animated: true,
+      y: yOffset,
+      animated: true
     });
     setActiveSection(sectionId);
   };
@@ -45,38 +41,65 @@ export default function App() {
       <ScrollView 
         ref={scrollViewRef}
         style={styles.content}
-        snapToInterval={SECTION_HEIGHT}
-        decelerationRate="fast"
+        showsVerticalScrollIndicator={true}
         onScroll={({ nativeEvent }) => {
+          // Update active section based on scroll position
           const offset = nativeEvent.contentOffset.y;
-          if (offset < SECTION_HEIGHT / 2) {
-            setActiveSection('home');
-          } else if (offset < SECTION_HEIGHT * 1.5) {
-            setActiveSection('benefits');
-          } else if (offset < SECTION_HEIGHT * 2.5) {
-            setActiveSection('find-care');
-          } else if (offset < SECTION_HEIGHT * 3.5) {
-            setActiveSection('about');
-          } else if (offset < SECTION_HEIGHT * 4.5) {
-            setActiveSection('services');
-          } else if (offset < SECTION_HEIGHT * 5.5) {
-            setActiveSection('careers');
-          } else {
-            setActiveSection('contact');
-          }
+          const sections = ['home', 'benefits', 'find-care', 'about', 'services', 'careers', 'contact'];
+          const viewportHeight = nativeEvent.layoutMeasurement.height;
+          const contentHeight = nativeEvent.contentSize.height;
+          
+          // Simple calculation to determine which section is most visible
+          const scrollPercentage = offset / (contentHeight - viewportHeight);
+          const sectionIndex = Math.floor(scrollPercentage * sections.length);
+          setActiveSection(sections[Math.min(sectionIndex, sections.length - 1)] || 'home');
         }}
         scrollEventThrottle={16}
       >
-        <HeroSection />
-        <BenefitsSection />
-        <FindCareSection 
-          onContactPress={() => scrollToSection('contact')}
-          onServicesPress={() => scrollToSection('services')}
-        />
-        <AboutSection />
-        <ServicesSection />
-        <CareersSection />
-        <ContactSection />
+        <View 
+          style={styles.section} 
+          onLayout={({ nativeEvent }) => measureSection('home', nativeEvent.layout.y)}>
+          <HeroSection />
+        </View>
+        
+        <View 
+          style={styles.section}
+          onLayout={({ nativeEvent }) => measureSection('benefits', nativeEvent.layout.y)}>
+          <BenefitsSection />
+        </View>
+        
+        <View 
+          style={styles.section}
+          onLayout={({ nativeEvent }) => measureSection('find-care', nativeEvent.layout.y)}>
+          <FindCareSection 
+            onContactPress={() => scrollToSection('contact')}
+            onServicesPress={() => scrollToSection('services')}
+          />
+        </View>
+        
+        <View 
+          style={styles.section}
+          onLayout={({ nativeEvent }) => measureSection('about', nativeEvent.layout.y)}>
+          <AboutSection />
+        </View>
+        
+        <View 
+          style={styles.section}
+          onLayout={({ nativeEvent }) => measureSection('services', nativeEvent.layout.y)}>
+          <ServicesSection />
+        </View>
+        
+        <View 
+          style={styles.section}
+          onLayout={({ nativeEvent }) => measureSection('careers', nativeEvent.layout.y)}>
+          <CareersSection />
+        </View>
+        
+        <View 
+          style={styles.section}
+          onLayout={({ nativeEvent }) => measureSection('contact', nativeEvent.layout.y)}>
+          <ContactSection />
+        </View>
         <Footer />
       </ScrollView>
     </SafeAreaView>
@@ -90,5 +113,11 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
+    backgroundColor: '#fff',
+  },
+  section: {
+    minHeight: Dimensions.get('window').height,
+    padding: 20,
+    backgroundColor: '#fff',
   },
 });
