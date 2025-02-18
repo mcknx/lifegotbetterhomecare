@@ -132,7 +132,7 @@ export function ServicesSection() {
 
 const styles = StyleSheet.create({
   container: {
-    height: Dimensions.get('window').height,
+    // height: Dimensions.get('window').height,
     backgroundColor: 'white',
   },
   header: {
