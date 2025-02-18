@@ -27,7 +27,7 @@ export function BenefitsSection() {
             <View style={styles.iconContainer}>
               <Ionicons 
                 name={service.icon as any} 
-                size={32} 
+                size={24} 
                 color="#2563EB"
               />
             </View>
@@ -59,29 +59,30 @@ const styles = StyleSheet.create({
   grid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    justifyContent: 'space-between',
-    gap: 32,
+    justifyContent: 'space-around',
     width: '100%',
-    maxWidth: 500,
+    maxWidth: 600,
+    paddingHorizontal: 8,
   },
   serviceItem: {
-    width: '45%',
+    width: '40%',
+    alignItems: 'center',
+    marginBottom: 32,
+    opacity: 1,
+  },
+  iconContainer: {
+    width: 56,
+    height: 56,
+    backgroundColor: 'rgba(37, 99, 235, 0.08)',
+    borderRadius: 12,
+    justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 8,
   },
-  iconContainer: {
-    width: 64,
-    height: 64,
-    backgroundColor: 'rgba(37, 99, 235, 0.1)',
-    borderRadius: 32,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 12,
-  },
   serviceTitle: {
-    fontSize: 16,
-    fontWeight: '500',
-    color: '#2563EB',
+    fontSize: 15,
+    color: '#374151',
     textAlign: 'center',
+    fontWeight: 'normal',
   },
 }); 
