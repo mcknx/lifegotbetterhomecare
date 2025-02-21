@@ -1,10 +1,14 @@
 #!/bin/bash
 
+# Get the absolute path to the mobile directory
+MOBILE_DIR="$(cd "$(dirname "$0")/.." && pwd)"
+cd "$MOBILE_DIR" || exit 1
+
 # Source logo path
-SOURCE_LOGO="../assets/lgb_logo.png"
+SOURCE_LOGO="$MOBILE_DIR/assets/icon_1024x1024.png"
 
 # Create assets directory if it doesn't exist
-mkdir -p ./assets/ios/AppIcon.appiconset
+mkdir -p "$MOBILE_DIR/assets/ios/AppIcon.appiconset"
 
 # iOS icon sizes
 declare -a IOS_SIZES=(
@@ -26,11 +30,11 @@ declare -a IOS_SIZES=(
 # Generate iOS icons
 for size in "${IOS_SIZES[@]}"
 do
-  magick "$SOURCE_LOGO" -resize "$size^" -gravity center -extent "$size" -background white -alpha remove -alpha off "../assets/ios/AppIcon.appiconset/icon_${size}.png"
+  magick "$SOURCE_LOGO" -resize "$size^" -gravity center -extent "$size" -background "$BRAND_COLOR" -alpha remove -alpha off "$MOBILE_DIR/assets/ios/AppIcon.appiconset/icon_${size}.png"
 done
 
 # Create Contents.json for iOS
-cat > ../assets/ios/AppIcon.appiconset/Contents.json << 'EOL'
+cat > "$MOBILE_DIR/assets/ios/AppIcon.appiconset/Contents.json" << 'EOL'
 {
   "images": [
     {
