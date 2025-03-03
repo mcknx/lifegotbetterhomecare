@@ -69,9 +69,11 @@ function TabNavigator() {
           shadowOpacity: 0.1,
           shadowRadius: 4,
           paddingTop: 5,
-          paddingBottom: 10,
-          height: 60,
+          paddingBottom: 25, // Increased padding for iPhone 15 Pro home indicator
+          height: 75, // Increased height to accommodate the home indicator
           borderTopWidth: 0,
+          backgroundColor: '#ffffff',
+          safeAreaInsets: { bottom: 10 }, // Add safe area insets for modern iPhones
         },
         tabBarLabelStyle: {
           fontWeight: '500',
@@ -182,7 +184,10 @@ export default function App() {
   };
 
   return (
-    <SafeAreaProvider>
+    <SafeAreaProvider
+      style={{ flex: 1 }}
+      initialSafeAreaInsets={{ top: 0, right: 0, bottom: 34, left: 0 }} // Default insets for iPhone with home indicator
+    >
       <NavigationContainer>
         <Stack.Navigator
           screenOptions={{

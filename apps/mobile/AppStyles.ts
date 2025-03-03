@@ -4,9 +4,10 @@ import { theme } from './theme';
 export const styles = StyleSheet.create({
   nativeFeaturesContainer: {
     position: 'absolute',
-    bottom: 80,
+    bottom: 100, // Increased to avoid overlap with the taller tab bar
     right: 20,
     alignItems: 'flex-end',
+    zIndex: 1000, // Ensure it appears above other elements
   },
   featureButton: {
     flexDirection: 'row',
