@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background gradient -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1059B3;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0A3B76;stop-opacity:1" />
+    </linearGradient>
+    <!-- Inner shadow for 3D effect -->
+    <filter id="innerShadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="20" result="blur" />
+      <feOffset dx="0" dy="10" result="offsetBlur" />
+      <feComposite in="SourceAlpha" in2="offsetBlur" operator="out" result="innerShadow" />
+      <feFlood flood-color="#000000" flood-opacity="0.3" result="color" />
+      <feComposite in="color" in2="innerShadow" operator="in" result="shadowColor" />
+      <feComposite in="shadowColor" in2="SourceGraphic" operator="over" />
+    </filter>
+  </defs>
+  
+  <!-- Background square with rounded corners -->
+  <rect width="1024" height="1024" rx="180" ry="180" fill="url(#bgGradient)" />
+  
+  <!-- White circle for logo backdrop -->
+  <circle cx="512" cy="512" r="380" fill="white" filter="url(#innerShadow)" />
+  
+  <!-- LGB Letters - Enlarged and more prominent -->
+  <g transform="translate(512, 512) scale(1.2)">
+    <!-- L -->
+    <path d="M-180 -120 L-180 120 L-60 120 L-60 60 L-120 60 L-120 -120 Z" fill="#0D7731" />
+    
+    <!-- G - Modified to be fuller and match Apple's aesthetic -->
+    <path d="M20 -120 C-80 -120 -150 -50 -150 50 C-150 150 -80 220 20 220 C120 220 190 150 190 50 L190 -20 L60 -20 L60 40 L130 40 L130 50 C130 120 80 160 20 160 C-40 160 -90 120 -90 50 C-90 -20 -40 -60 20 -60 C50 -60 80 -40 90 -10 L150 -40 C130 -90 80 -120 20 -120 Z" fill="#0D7731" />
+    
+    <!-- B - Modified to be fuller -->
+    <path d="M210 -120 L210 120 L330 120 C380 120 420 80 420 30 C420 -10 400 -40 370 -50 C390 -60 400 -80 400 -100 C400 -140 360 -120 330 -120 Z M270 -60 L330 -60 C340 -60 350 -50 350 -40 C350 -30 340 -20 330 -20 L270 -20 Z M270 40 L330 40 C340 40 350 50 350 60 C350 70 340 80 330 80 L270 80 Z" fill="#0D7731" />
+  </g>
+  
+  <!-- CARE Text - replacing STAFFING, larger and more legible -->
+  <text x="512" y="760" font-family="Arial, sans-serif" font-size="80" font-weight="bold" fill="#FF6633" text-anchor="middle">CARE</text>
+</svg>

@@ -12,5 +12,8 @@
     "clean": "rm -rf node_modules && rm -rf apps/*/node_modules",
     "install:mobile": "cd apps/mobile && npm install",
     "install:web": "cd apps/web && npm install"
+  },
+  "dependencies": {
+    "expo": "^52.0.37"
   }
 }

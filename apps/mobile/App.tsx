@@ -1,123 +1,235 @@
-import React, { useState, useRef } from 'react';
-import { ScrollView, SafeAreaView, StyleSheet, Dimensions, View } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StatusBar } from 'expo-status-bar';
-import NavigationBar from './components/NavigationBar';
-import { HeroSection } from './components/HeroSection';
-import { BenefitsSection } from './components/BenefitsSection';
-import { FindCareSection } from './components/FindCareSection';
-import { AboutSection } from './components/AboutSection';
-import { ServicesSection } from './components/ServicesSection';
-import { SECTION_HEIGHT } from './constants';
-import { ContactSection } from './components/ContactSection';
-import { CareersSection } from './components/CareersSection';
-import { Footer } from './components/Footer';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { Ionicons } from '@expo/vector-icons';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as Sharing from 'expo-sharing';
+import * as Location from 'expo-location';
+import { Button, View, StyleSheet, TouchableOpacity, Text } from 'react-native';
 
-export default function App() {
-  const [activeSection, setActiveSection] = useState('home');
-  const scrollViewRef = useRef<ScrollView>(null);
-  const sectionRefs = useRef<Record<string, number>>({});
+// Screens
+import LandingScreen from './screens/LandingScreen';
+import ServicesScreen from './screens/ServicesScreen';
+import ContactScreen from './screens/ContactScreen';
 
-  const measureSection = (sectionId: string, y: number) => {
-    sectionRefs.current[sectionId] = y;
-  };
+// Theme
+import { theme } from './theme';
+import { styles } from './AppStyles';
 
-  const scrollToSection = (sectionId: string) => {
-    const yOffset = sectionRefs.current[sectionId] || 0;
-    scrollViewRef.current?.scrollTo({
-      y: yOffset,
-      animated: true
-    });
-    setActiveSection(sectionId);
-  };
+// Storage keys
+const THEME_PREFERENCE_KEY = 'user_theme_preference';
 
+const Tab = createBottomTabNavigator();
+const Stack = createNativeStackNavigator();
+
+function TabNavigator() {
   return (
-    <SafeAreaView style={styles.container}>
-      <StatusBar style="dark" />
-      <NavigationBar 
-        activeSection={activeSection}
-        onSectionChange={scrollToSection}
+    <Tab.Navigator
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, color, size }) => {
+          let iconName: keyof typeof Ionicons.glyphMap;
+
+          switch (route.name) {
+            case 'Landing':
+              iconName = focused ? 'home' : 'home-outline';
+              break;
+            case 'Services':
+              iconName = focused ? 'medical' : 'medical-outline';
+              break;
+            case 'FindCare':
+              iconName = focused ? 'location' : 'location-outline';
+              break;
+            case 'Jobs':
+              iconName = focused ? 'briefcase' : 'briefcase-outline';
+              break;
+            default:
+              iconName = 'help-circle-outline';
+          }
+
+          return <Ionicons name={iconName as any} size={size} color={color} />;
+        },
+        tabBarActiveTintColor: theme.colors.primary,
+        tabBarInactiveTintColor: theme.colors.secondary,
+        headerShown: true,
+        headerStyle: {
+          backgroundColor: theme.colors.primary,
+          elevation: 0,
+          shadowOpacity: 0,
+          borderBottomWidth: 0,
+        },
+        headerTitleStyle: {
+          fontWeight: 'bold',
+          color: theme.colors.white,
+        },
+        tabBarStyle: {
+          elevation: 10,
+          shadowOpacity: 0.1,
+          shadowRadius: 4,
+          paddingTop: 5,
+          paddingBottom: 10,
+          height: 60,
+          borderTopWidth: 0,
+        },
+        tabBarLabelStyle: {
+          fontWeight: '500',
+          fontSize: 12,
+          marginBottom: 5,
+        },
+        tabBarItemStyle: {
+          padding: 5,
+        },
+        tabBarBadgeStyle: {
+          backgroundColor: theme.colors.accent,
+        },
+      })}
+    >
+      <Tab.Screen 
+        name="Landing" 
+        component={LandingScreen} 
+        options={{ 
+          title: 'Home',
+          headerTitle: 'Life Got Better Homecare',
+          tabBarBadge: null, 
+        }} 
       />
-      
-      <ScrollView 
-        ref={scrollViewRef}
-        style={styles.content}
-        showsVerticalScrollIndicator={true}
-        onScroll={({ nativeEvent }) => {
-          // Update active section based on scroll position
-          const offset = nativeEvent.contentOffset.y;
-          const sections = ['home', 'benefits', 'find-care', 'about', 'services', 'careers', 'contact'];
-          const viewportHeight = nativeEvent.layoutMeasurement.height;
-          const contentHeight = nativeEvent.contentSize.height;
-          
-          // Simple calculation to determine which section is most visible
-          const scrollPercentage = offset / (contentHeight - viewportHeight);
-          const sectionIndex = Math.floor(scrollPercentage * sections.length);
-          setActiveSection(sections[Math.min(sectionIndex, sections.length - 1)] || 'home');
-        }}
-        scrollEventThrottle={16}
-      >
-        <View 
-          style={styles.section} 
-          onLayout={({ nativeEvent }) => measureSection('home', nativeEvent.layout.y)}>
-          <HeroSection onContactPress={() => scrollToSection('contact')} />
-        </View>
-        
-        <View 
-          style={styles.section}
-          onLayout={({ nativeEvent }) => measureSection('benefits', nativeEvent.layout.y)}>
-          <BenefitsSection />
-        </View>
-        
-        <View 
-          style={styles.section}
-          onLayout={({ nativeEvent }) => measureSection('find-care', nativeEvent.layout.y)}>
-          <FindCareSection 
-            onContactPress={() => scrollToSection('contact')}
-            onServicesPress={() => scrollToSection('services')}
-          />
-        </View>
-        
-        <View 
-          style={styles.section}
-          onLayout={({ nativeEvent }) => measureSection('about', nativeEvent.layout.y)}>
-          <AboutSection />
-        </View>
-        
-        <View 
-          style={styles.section}
-          onLayout={({ nativeEvent }) => measureSection('services', nativeEvent.layout.y)}>
-          <ServicesSection />
-        </View>
-        
-        <View 
-          style={styles.section}
-          onLayout={({ nativeEvent }) => measureSection('careers', nativeEvent.layout.y)}>
-          <CareersSection onContactPress={() => scrollToSection('contact')} />
-        </View>
-        
-        <View 
-          style={styles.section}
-          onLayout={({ nativeEvent }) => measureSection('contact', nativeEvent.layout.y)}>
-          <ContactSection />
-        </View>
-        <Footer />
-      </ScrollView>
-    </SafeAreaView>
+      <Tab.Screen 
+        name="Services" 
+        component={ServicesScreen}
+        options={{ 
+          title: 'Services',
+          headerTitle: 'Our Services',
+        }} 
+      />
+      <Tab.Screen 
+        name="Contact" 
+        component={ContactScreen} 
+        options={{ 
+          title: 'Contact',
+          headerTitle: 'Contact Us',
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="mail-outline" color={color} size={size} />
+          ),
+        }} 
+      />
+    </Tab.Navigator>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
-  content: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
-  section: {
-    minHeight: Dimensions.get('window').height,
-    padding: 20,
-    backgroundColor: '#fff',
-  },
-});
+export default function App() {
+  const [userThemePreference, setUserThemePreference] = useState('default');
+  const [locationPermission, setLocationPermission] = useState(false);
+
+  // Load user theme preference from AsyncStorage on app start
+  useEffect(() => {
+    const loadThemePreference = async () => {
+      try {
+        const savedTheme = await AsyncStorage.getItem(THEME_PREFERENCE_KEY);
+        if (savedTheme) {
+          setUserThemePreference(savedTheme);
+          console.log('Loaded user theme preference:', savedTheme);
+        }
+      } catch (error) {
+        console.error('Error loading theme preference:', error);
+      }
+    };
+
+    loadThemePreference();
+  }, []);
+
+  // Save theme preference function
+  const saveThemePreference = async (themeType: string) => {
+    try {
+      await AsyncStorage.setItem(THEME_PREFERENCE_KEY, themeType);
+      setUserThemePreference(themeType);
+      console.log('Saved user theme preference:', themeType);
+    } catch (error) {
+      console.error('Error saving theme preference:', error);
+    }
+  };
+
+  // Request location permission
+  const requestLocationPermission = async () => {
+    try {
+      const { status } = await Location.requestForegroundPermissionsAsync();
+      if (status === 'granted') {
+        setLocationPermission(true);
+        const location = await Location.getCurrentPositionAsync({});
+        console.log('Location obtained:', location);
+      }
+    } catch (error) {
+      console.error('Error requesting location permission:', error);
+    }
+  };
+
+  // Share app info
+  const shareAppInfo = async () => {
+    try {
+      const shareOptions = {
+        message: 'Check out Life Got Better Homecare for quality home health care services!',
+      };
+      
+      if (await Sharing.isAvailableAsync()) {
+        await Sharing.shareAsync('https://lifegotbetterhomecare.com', shareOptions);
+      } else {
+        alert('Sharing is not available on this device');
+      }
+    } catch (error) {
+      console.error('Error sharing app info:', error);
+    }
+  };
+
+  return (
+    <SafeAreaProvider>
+      <NavigationContainer>
+        <Stack.Navigator
+          screenOptions={{
+            headerStyle: {
+              backgroundColor: theme.colors.white,
+            },
+            headerTintColor: theme.colors.primary,
+            headerTitleStyle: {
+              fontWeight: '600',
+            },
+          }}
+        >
+          <Stack.Screen
+            name="MainTabs"
+            component={TabNavigator}
+            options={{ headerShown: false }}
+          />
+        </Stack.Navigator>
+        <StatusBar style="auto" />
+
+        {/* Native functionality demo buttons - floating at bottom right */}
+        <View style={styles.nativeFeaturesContainer}>
+          {/* <TouchableOpacity 
+            style={styles.featureButton} 
+            onPress={() => saveThemePreference(userThemePreference === 'default' ? 'dark' : 'default')}
+          >
+            <Ionicons name="color-palette-outline" size={20} color="#fff" />
+            <Text style={styles.buttonText}>Theme: {userThemePreference}</Text>
+          </TouchableOpacity> */}
+          
+          {/* <TouchableOpacity 
+            style={styles.featureButton} 
+            onPress={requestLocationPermission}
+          >
+            <Ionicons name="location-outline" size={20} color="#fff" />
+            <Text style={styles.buttonText}>{locationPermission ? 'Location Enabled' : 'Enable Location'}</Text>
+          </TouchableOpacity> */}
+          
+          <TouchableOpacity 
+            style={styles.featureButton} 
+            onPress={shareAppInfo}
+          >
+            <Ionicons name="share-social-outline" size={20} color="#fff" />
+            <Text style={styles.buttonText}>Share App</Text>
+          </TouchableOpacity>
+        </View>
+      </NavigationContainer>
+    </SafeAreaProvider>
+  );
+}

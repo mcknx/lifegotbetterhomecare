@@ -44,7 +44,7 @@ export function FindCareSection({ onContactPress, onServicesPress }: FindCareSec
         </Text>
 
         {/* Tabs */}
-        <View style={styles.tabContainer}>
+        {/* <View style={styles.tabContainer}>
           <TouchableOpacity 
             onPress={() => setActiveTab('care')}
             style={[styles.tab, activeTab === 'care' && styles.activeTab]}
@@ -61,9 +61,9 @@ export function FindCareSection({ onContactPress, onServicesPress }: FindCareSec
               Find Jobs
             </Text>
           </TouchableOpacity>
-        </View>
+        </View> */}
 
-        {activeTab === 'care' ? (
+        {/* {activeTab === 'care' ? (
           <View style={styles.buttonContainer}>
             <TouchableOpacity 
               style={styles.primaryButton}
@@ -101,7 +101,16 @@ export function FindCareSection({ onContactPress, onServicesPress }: FindCareSec
               </Text>
             </TouchableOpacity>
           </View>
-        )}
+        )} */}
+
+        {/* <TouchableOpacity 
+          style={styles.secondaryButton}
+          onPress={onContactPress}
+        >
+          <Text style={styles.secondaryButtonText}>
+            Learn About Careers
+          </Text>
+        </TouchableOpacity> */}
       </View>
     </View>
   );
@@ -109,7 +118,7 @@ export function FindCareSection({ onContactPress, onServicesPress }: FindCareSec
 
 const styles = StyleSheet.create({
   container: {
-    height: SECTION_HEIGHT,
+    // height: SECTION_HEIGHT,
     backgroundColor: '#f8fafc',
     padding: 16,
   },

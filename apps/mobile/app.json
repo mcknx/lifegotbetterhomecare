@@ -18,7 +18,8 @@
       "supportsTablet": true,
       "bundleIdentifier": "com.lifegotbetterhomecare.mobile",
       "buildNumber": "1",
-      "icon": "./assets/ios/AppIcon.appiconset"
+      "icon": "./assets/icon.png",
+      "iconFamily": "./assets/ios/AppIcon.appiconset/Contents.json"
     },
     "android": {
       "package": "com.lifegotbetterhomecare.mobile",
