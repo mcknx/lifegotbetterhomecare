@@ -62,39 +62,58 @@ export function ContactSection() {
       
       setLocationPermission(true);
       
-      // Get the current position
-      const location = await Location.getCurrentPositionAsync({
-        accuracy: Location.Accuracy.Balanced
-      });
+      try {
+        // Get the current position
+        const location = await Location.getCurrentPositionAsync({
+          accuracy: Location.Accuracy.Balanced
+        });
+        
+        try {
+          // Reverse geocode to get address
+          const [address] = await Location.reverseGeocodeAsync({
+            latitude: location.coords.latitude,
+            longitude: location.coords.longitude
+          });
+          
+          // Format address
+          const addressStr = address 
+            ? `${address.street || ''}, ${address.city || ''}, ${address.region || ''} ${address.postalCode || ''}`
+            : 'Location found';
+          
+          // Update form data with location
+          setFormData(prev => ({
+            ...prev,
+            location: {
+              latitude: location.coords.latitude,
+              longitude: location.coords.longitude,
+              address: addressStr
+            },
+            // If we have a postal code from geocoding and zipCode is empty, use it
+            zipCode: prev.zipCode || address?.postalCode || ''
+          }));
+          
+          Alert.alert('Location Added', 'Your location has been added to the form.');
+        } catch (geocodeError) {
+          console.error('Error geocoding location:', geocodeError);
+          // Still update with coordinates even if geocoding fails
+          setFormData(prev => ({
+            ...prev,
+            location: {
+              latitude: location.coords.latitude,
+              longitude: location.coords.longitude,
+            }
+          }));
+          Alert.alert('Location Added', 'Your coordinates have been added to the form.');
+        }
+      } catch (positionError) {
+        console.error('Error getting position:', positionError);
+        Alert.alert('Error', 'There was a problem getting your precise location. Please enter your zip code manually.');
+      }
       
-      // Reverse geocode to get address
-      const [address] = await Location.reverseGeocodeAsync({
-        latitude: location.coords.latitude,
-        longitude: location.coords.longitude
-      });
-      
-      // Format address
-      const addressStr = address 
-        ? `${address.street || ''}, ${address.city || ''}, ${address.region || ''} ${address.postalCode || ''}`
-        : 'Location found';
-      
-      // Update form data with location
-      setFormData(prev => ({
-        ...prev,
-        location: {
-          latitude: location.coords.latitude,
-          longitude: location.coords.longitude,
-          address: addressStr
-        },
-        // If we have a postal code from geocoding and zipCode is empty, use it
-        zipCode: prev.zipCode || address?.postalCode || ''
-      }));
-      
-      Alert.alert('Location Added', 'Your location has been added to the form.');
       setLocationLoading(false);
     } catch (error) {
-      console.error('Error getting location:', error);
-      Alert.alert('Error', 'There was a problem getting your location. Please try again.');
+      console.error('Error in location process:', error);
+      Alert.alert('Error', 'There was a problem with location services. Please try again or enter your information manually.');
       setLocationLoading(false);
     }
   };
@@ -141,22 +160,31 @@ export function ContactSection() {
         transparent
         animationType="slide"
         onRequestClose={() => setShowModal('')}
+        supportedOrientations={['portrait', 'landscape']}
       >
         <TouchableOpacity 
           style={styles.modalOverlay}
           activeOpacity={1} 
           onPress={() => setShowModal('')}
         >
-          <View style={styles.modalContent}>
-            {options.map((option) => (
-              <TouchableOpacity
-                key={option}
-                style={styles.modalOption}
-                onPress={() => selectOption(type, option)}
-              >
-                <Text style={styles.modalOptionText}>{option}</Text>
+          <View style={[styles.modalContent, Platform.OS === 'ios' && Platform.isPad && styles.iPadModalContent]}>
+            <View style={styles.modalHeader}>
+              <Text style={styles.modalTitle}>{placeholder}</Text>
+              <TouchableOpacity onPress={() => setShowModal('')}>
+                <Ionicons name="close" size={24} color="#000" />
               </TouchableOpacity>
-            ))}
+            </View>
+            <ScrollView>
+              {options.map((option) => (
+                <TouchableOpacity
+                  key={option}
+                  style={styles.modalOption}
+                  onPress={() => selectOption(type, option)}
+                >
+                  <Text style={styles.modalOptionText}>{option}</Text>
+                </TouchableOpacity>
+              ))}
+            </ScrollView>
           </View>
         </TouchableOpacity>
       </Modal>
@@ -309,7 +337,7 @@ export function ContactSection() {
                 </View>
                 {formData.location && (
                   <Text style={styles.locationText}>
-                    Location: {formData.location.address || 'Current location added'}
+                    Location: {typeof formData.location === 'object' && formData.location.address ? formData.location.address : 'Current location added'}
                   </Text>
                 )}
               </>
@@ -516,7 +544,25 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     padding: 20,
-    maxHeight: '50%',
+    maxHeight: Platform.OS === 'ios' ? '50%' : '70%',
+  },
+  iPadModalContent: {
+    maxHeight: '40%',
+    marginHorizontal: 100,
+    borderRadius: 20,
+  },
+  modalHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 15,
+    borderBottomWidth: 1,
+    borderBottomColor: '#e5e7eb',
+    paddingBottom: 10,
+  },
+  modalTitle: {
+    fontSize: 18,
+    fontWeight: '600',
   },
   modalOption: {
     paddingVertical: 15,

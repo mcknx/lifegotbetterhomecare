@@ -14,6 +14,8 @@ import { Button, View, StyleSheet, TouchableOpacity, Text } from 'react-native';
 import LandingScreen from './screens/LandingScreen';
 import ServicesScreen from './screens/ServicesScreen';
 import ContactScreen from './screens/ContactScreen';
+import JobsScreen from './screens/JobsScreen';
+import TrainingsScreen from './screens/TrainingsScreen';
 
 // Theme
 import { theme } from './theme';
@@ -39,11 +41,14 @@ function TabNavigator() {
             case 'Services':
               iconName = focused ? 'medical' : 'medical-outline';
               break;
-            case 'FindCare':
-              iconName = focused ? 'location' : 'location-outline';
-              break;
             case 'Jobs':
               iconName = focused ? 'briefcase' : 'briefcase-outline';
+              break;
+            case 'Trainings':
+              iconName = focused ? 'school' : 'school-outline';
+              break;
+            case 'FindCare':
+              iconName = focused ? 'location' : 'location-outline';
               break;
             default:
               iconName = 'help-circle-outline';
@@ -94,7 +99,7 @@ function TabNavigator() {
         options={{ 
           title: 'Home',
           headerTitle: 'Life Got Better Homecare',
-          tabBarBadge: null, 
+          tabBarBadge: undefined, 
         }} 
       />
       <Tab.Screen 
@@ -103,6 +108,28 @@ function TabNavigator() {
         options={{ 
           title: 'Services',
           headerTitle: 'Our Services',
+        }} 
+      />
+      <Tab.Screen 
+        name="Jobs" 
+        component={JobsScreen}
+        options={{ 
+          title: 'Jobs',
+          headerTitle: 'Career Opportunities',
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="briefcase-outline" color={color} size={size} />
+          ),
+        }} 
+      />
+      <Tab.Screen 
+        name="Trainings" 
+        component={TrainingsScreen}
+        options={{ 
+          title: 'Trainings',
+          headerTitle: 'Training Programs',
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="school-outline" color={color} size={size} />
+          ),
         }} 
       />
       <Tab.Screen 
@@ -170,7 +197,9 @@ export default function App() {
   const shareAppInfo = async () => {
     try {
       const shareOptions = {
-        message: 'Check out Life Got Better Homecare for quality home health care services!',
+        dialogTitle: 'Share Life Got Better Homecare',
+        UTI: 'public.url',
+        mimeType: 'text/plain'
       };
       
       if (await Sharing.isAvailableAsync()) {
@@ -226,13 +255,13 @@ export default function App() {
             <Text style={styles.buttonText}>{locationPermission ? 'Location Enabled' : 'Enable Location'}</Text>
           </TouchableOpacity> */}
           
-          <TouchableOpacity 
+          {/* <TouchableOpacity 
             style={styles.featureButton} 
             onPress={shareAppInfo}
           >
             <Ionicons name="share-social-outline" size={20} color="#fff" />
             <Text style={styles.buttonText}>Share App</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
       </NavigationContainer>
     </SafeAreaProvider>
