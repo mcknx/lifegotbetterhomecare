@@ -237,13 +237,41 @@ All instructors are certified professionals with extensive experience in emergen
     {
       id: '5',
       title: 'Combined CBRF and CNA Program',
-      description: 'Comprehensive dual training program that prepares you for both CBRF and CNA roles.',
+      description: 'Fast-track program providing dual certification in both CBRF and CNA roles, preparing you for diverse healthcare career opportunities.',
       image: 'https://images.unsplash.com/photo-1527613426441-4da17471b66d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
-      availability: 'Limited sessions available',
-      duration: '8 weeks',
+      availability: 'Intensive 6-week sessions',
+      duration: '100 Hours Total (25 CBRF + 75 CNA)',
       notificationChannel: 'combined_program',
-      price: '$1,700.00',
-      classHours: 'Monday to Friday 1:00 PM – 5:00 PM'
+      price: '$4,500.00',
+      classHours: 'Monday to Friday - Full-time schedule',
+      scheduleUrl: 'https://lgbstaffing.com/wp-content/uploads/2024/12/Combined-CNA-CBRF-CALENDAR-2025.pdf',
+      additionalDetails: `The Combined CBRF and CNA Program is an intensive course designed to provide students with essential skills and certifications in a condensed timeframe. This comprehensive program prepares students for careers in both residential care and nursing environments.
+
+Program Structure:
+- CBRF Training (1 Week, 25 Hours): Medication Administration, Standard Precautions, Fire Safety, First Aid and Choking, Resident Rights, Abuse and Neglect
+- CNA Training (75 Hours, 5 Weeks): Basic Nursing Skills, Infection Control, Personal Care Skills, Vital Signs Monitoring, Communication, Safety and Emergency Procedures, Clinical practice
+
+Learning Methods:
+- Classroom instruction
+- Hands-on lab sessions
+- Clinical rotations in a healthcare facility
+- Distance learning options for theory components
+
+Career Opportunities:
+Upon successful completion, graduates will be prepared for roles including CBRF Caregiver, Certified Nursing Assistant, Home Health Aide, and Personal Care Worker.
+
+Important Note:
+The clinical schedule is designed to meet minimum required hours, and absences are not permitted without prior notification. Valid reasons for missing skills class or clinical sessions include verifiable family emergencies and illness.`,
+      requirements: [
+        'Minimum age of 18 years old',
+        'High school diploma or GED required',
+        'Pass a criminal background check',
+        'Negative TB test result',
+        'Proof of flu vaccination',
+        'Medical clearance for pregnant students',
+        'Drug and alcohol-free status during class and clinical sessions',
+        'Proper nursing attire: scrubs, closed-toe shoes, watch with second hand'
+      ]
     }
   ];
 
