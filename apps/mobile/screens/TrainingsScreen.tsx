@@ -351,110 +351,14 @@ Cancellation Policy:
   const renderTrainingCard = (training: Training) => {
     const isSubscribed = subscriptions[training.id] || false;
     
-    // Determine image size based on screen orientation and size
-    const imageStyle = [
-      styles.trainingImage,
-      isSmallScreen && { width: 100, height: 140 },
-      isLandscape && { width: 180, height: 140 }
-    ];
-    
-    // Use different layout for landscape mode
-    if (isLandscape) {
-      return (
-        <View key={training.id} style={[styles.trainingCard, styles.trainingCardLandscape]}>
-          <View style={styles.trainingCardContent}>
-            {/* Left side with image */}
-            <Image 
-              source={{ uri: training.image }} 
-              style={imageStyle}
-              resizeMode="cover"
-            />
-            
-            {/* Middle content */}
-            <View style={styles.trainingContentWrapper}>
-              <Text style={styles.trainingTitle}>{training.title}</Text>
-              
-              <View style={styles.trainingMetaContainer}>
-                <View style={styles.metaItem}>
-                  <Ionicons name="calendar-outline" size={16} color="#666" style={styles.metaIcon} />
-                  <Text style={styles.metaText} numberOfLines={1} ellipsizeMode="tail">
-                    {training.availability}
-                  </Text>
-                </View>
-                <View style={styles.metaItem}>
-                  <Ionicons name="time-outline" size={16} color="#666" style={styles.metaIcon} />
-                  <Text style={styles.metaText} numberOfLines={1} ellipsizeMode="tail">
-                    {training.duration}
-                  </Text>
-                </View>
-              </View>
-              
-              <Text style={styles.trainingDescription} numberOfLines={2} ellipsizeMode="tail">
-                {training.description}
-              </Text>
-            </View>
-            
-            {/* Right side with pricing and buttons */}
-            <View style={styles.landscapeRightColumn}>
-              {training.price && (
-                <View style={styles.pricingContainer}>
-                  {training.originalPrice && (
-                    <Text style={styles.originalPrice}>{training.originalPrice}</Text>
-                  )}
-                  <Text style={styles.price}>{training.price}</Text>
-                  {training.id === '1' && (
-                    <Text style={styles.priceNote}>Down payment (50% of full price)</Text>
-                  )}
-                </View>
-              )}
-              
-              <View style={styles.actionButtonsLandscape}>
-                <TouchableOpacity 
-                  style={styles.detailsButton}
-                  onPress={() => showTrainingDetails(training)}
-                >
-                  <Text style={styles.detailsButtonText}>View Details</Text>
-                </TouchableOpacity>
-                
-                {training.scheduleUrl && (
-                  <TouchableOpacity 
-                    style={styles.scheduleButton}
-                    onPress={() => openSchedulePdf(training.scheduleUrl || '')}
-                    disabled={isLoading}
-                  >
-                    <Text style={styles.scheduleButtonText} numberOfLines={1} ellipsizeMode="tail">
-                      {isLoading ? 'Opening...' : 'Class Schedule'}
-                    </Text>
-                  </TouchableOpacity>
-                )}
-                
-                <View style={styles.notificationToggle}>
-                  <Text style={styles.notificationText} numberOfLines={1} ellipsizeMode="tail">
-                    {isSubscribed ? 'Notifications On' : 'Get Notified'}
-                  </Text>
-                  <Switch
-                    value={isSubscribed}
-                    onValueChange={(value) => toggleTrainingNotification(training, value)}
-                    trackColor={{ false: '#d1d5db', true: theme.colors.primary }}
-                    thumbColor={isSubscribed ? theme.colors.accent : '#f4f3f4'}
-                    disabled={!notificationsEnabled}
-                  />
-                </View>
-              </View>
-            </View>
-          </View>
-        </View>
-      );
-    }
-    
-    // Portrait mode layout (original)
+    // Portrait mode layout (optimized for space)
     return (
       <View key={training.id} style={styles.trainingCard}>
         <View style={styles.trainingCardContent}>
           {/* Left side with image */}
           <Image 
             source={{ uri: training.image }} 
-            style={imageStyle}
+            style={styles.trainingImageCompact}
             resizeMode="cover"
           />
           
@@ -464,13 +368,13 @@ Cancellation Policy:
             
             <View style={styles.trainingMetaContainer}>
               <View style={styles.metaItem}>
-                <Ionicons name="calendar-outline" size={16} color="#666" style={styles.metaIcon} />
+                <Ionicons name="calendar-outline" size={14} color="#666" style={styles.metaIcon} />
                 <Text style={styles.metaText} numberOfLines={1} ellipsizeMode="tail">
                   {training.availability}
                 </Text>
               </View>
               <View style={styles.metaItem}>
-                <Ionicons name="time-outline" size={16} color="#666" style={styles.metaIcon} />
+                <Ionicons name="time-outline" size={14} color="#666" style={styles.metaIcon} />
                 <Text style={styles.metaText} numberOfLines={1} ellipsizeMode="tail">
                   {training.duration}
                 </Text>
@@ -492,52 +396,83 @@ Cancellation Policy:
             {training.classHours && (
               <View style={styles.classHoursContainer}>
                 <Text style={styles.classHoursLabel}>Class Hours:</Text>
-                <Text style={styles.classHours} numberOfLines={2} ellipsizeMode="tail">
+                <Text style={styles.classHours}>
                   {training.classHours}
                 </Text>
               </View>
             )}
             
-            <Text style={styles.trainingDescription} numberOfLines={2} ellipsizeMode="tail">
+            <Text style={styles.trainingDescription}>
               {training.description}
             </Text>
           </View>
         </View>
         
-        <View style={styles.trainingActions}>
-          <View style={styles.actionButtons}>
-            <TouchableOpacity 
-              style={styles.detailsButton}
-              onPress={() => showTrainingDetails(training)}
-            >
-              <Text style={styles.detailsButtonText}>View Details</Text>
-            </TouchableOpacity>
-            
-            {training.scheduleUrl && (
-              <TouchableOpacity 
-                style={styles.scheduleButton}
-                onPress={() => openSchedulePdf(training.scheduleUrl || '')}
-                disabled={isLoading}
-              >
-                <Text style={styles.scheduleButtonText} numberOfLines={1} ellipsizeMode="tail">
-                  {isLoading ? 'Opening...' : 'Class Schedule'}
-                </Text>
-              </TouchableOpacity>
-            )}
-          </View>
+        {/* Compact buttons row */}
+        <View style={styles.compactButtonsRow}>
+          {/* Register Now button */}
+          <TouchableOpacity 
+            style={styles.registerNowButtonCompact}
+            onPress={() => {
+              Alert.alert(
+                'Registration',
+                'Would you like to register for this training program?',
+                [
+                  { text: 'Cancel', style: 'cancel' },
+                  { 
+                    text: 'Register Now', 
+                    onPress: () => {
+                      if (training.id === '1') {
+                        Linking.openURL('https://lgbstaffing.com/cna-certification/');
+                      } else {
+                        Linking.openURL('https://lgbstaffing.com/training/');
+                      }
+                    }
+                  }
+                ]
+              );
+            }}
+          >
+            <Ionicons name="log-in-outline" size={16} color="#fff" style={{marginRight: 5}} />
+            <Text style={styles.registerNowButtonTextCompact}>Register Now</Text>
+          </TouchableOpacity>
           
-          <View style={styles.notificationToggle}>
-            <Text style={styles.notificationText} numberOfLines={1} ellipsizeMode="tail">
-              {isSubscribed ? 'Notifications On' : 'Get Notified'}
-            </Text>
-            <Switch
-              value={isSubscribed}
-              onValueChange={(value) => toggleTrainingNotification(training, value)}
-              trackColor={{ false: '#d1d5db', true: theme.colors.primary }}
-              thumbColor={isSubscribed ? theme.colors.accent : '#f4f3f4'}
-              disabled={!notificationsEnabled}
-            />
-          </View>
+          {/* Details button */}
+          <TouchableOpacity 
+            style={styles.detailsButtonCompact}
+            onPress={() => showTrainingDetails(training)}
+          >
+            <Ionicons name="information-circle" size={16} color="#fff" style={{marginRight: 3}} />
+            <Text style={styles.detailsButtonTextCompact}>Details</Text>
+          </TouchableOpacity>
+          
+          {/* Schedule button */}
+          {training.scheduleUrl && (
+            <TouchableOpacity 
+              style={styles.scheduleButtonCompact}
+              onPress={() => openSchedulePdf(training.scheduleUrl || '')}
+              disabled={isLoading}
+            >
+              <Ionicons name="calendar" size={16} color="#fff" style={{marginRight: 3}} />
+              <Text style={styles.scheduleButtonTextCompact}>
+                {isLoading ? 'Opening...' : 'Schedule'}
+              </Text>
+            </TouchableOpacity>
+          )}
+        </View>
+        
+        {/* Notification toggle */}
+        <View style={styles.notificationToggleCompact}>
+          <Text style={styles.notificationTextCompact}>
+            {isSubscribed ? 'Notifications On' : 'Get Notified'}
+          </Text>
+          <Switch
+            value={isSubscribed}
+            onValueChange={(value) => toggleTrainingNotification(training, value)}
+            trackColor={{ false: '#d1d5db', true: theme.colors.primary }}
+            thumbColor={isSubscribed ? theme.colors.accent : '#f4f3f4'}
+            disabled={!notificationsEnabled}
+          />
         </View>
       </View>
     );
@@ -621,7 +556,7 @@ Cancellation Policy:
                 </View>
               )}
               
-              {/* {selectedTraining.scheduleUrl && (
+              {selectedTraining.scheduleUrl && (
                 <TouchableOpacity 
                   style={styles.modalScheduleButton}
                   onPress={() => {
@@ -636,7 +571,7 @@ Cancellation Policy:
                     View 2025 Class Schedule
                   </Text>
                 </TouchableOpacity>
-              )} */}
+              )}
               
               <TouchableOpacity 
                 style={styles.registerButton}
@@ -810,24 +745,24 @@ const styles = StyleSheet.create({
   trainingCardContent: {
     flexDirection: 'row',
   },
-  trainingImage: {
-    width: 140,
-    height: 180,
+  trainingImageCompact: {
+    width: 120,
+    height: 140,
     borderTopLeftRadius: 10,
     borderBottomLeftRadius: 10,
   },
   trainingContentWrapper: {
     flex: 1,
-    padding: 15,
+    padding: 10,
   },
   trainingTitle: {
-    fontSize: 18,
+    fontSize: 17,
     fontWeight: 'bold',
     color: theme.colors.primary,
-    marginBottom: 8,
+    marginBottom: 5,
   },
   trainingMetaContainer: {
-    marginBottom: 8,
+    marginBottom: 5,
   },
   metaItem: {
     flexDirection: 'row',
@@ -844,10 +779,10 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   pricingContainer: {
-    marginBottom: 8,
+    marginBottom: 5,
   },
   price: {
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: 'bold',
     color: theme.colors.success,
   },
@@ -864,9 +799,9 @@ const styles = StyleSheet.create({
     marginTop: 2,
   },
   classHoursContainer: {
-    marginBottom: 8,
+    marginBottom: 5,
     backgroundColor: '#f9f9f9',
-    padding: 8,
+    padding: 6,
     borderRadius: 5,
     borderLeftWidth: 3,
     borderLeftColor: theme.colors.primary,
@@ -886,7 +821,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#444',
     lineHeight: 18,
-    marginBottom: 10,
+    marginBottom: 5,
   },
   trainingActions: {
     padding: 15,
@@ -1122,6 +1057,94 @@ const styles = StyleSheet.create({
   actionButtonsLandscape: {
     flexDirection: 'column',
     width: '100%',
+  },
+  registerNowButton: {
+    backgroundColor: theme.colors.success,
+    padding: 12,
+    borderRadius: 5,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginHorizontal: 15,
+    marginTop: 10,
+    marginBottom: 5,
+  },
+  registerNowButtonText: {
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
+  compactButtonsRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingHorizontal: 10,
+    paddingTop: 8,
+    paddingBottom: 6,
+  },
+  registerNowButtonCompact: {
+    backgroundColor: theme.colors.success,
+    paddingVertical: 6,
+    paddingHorizontal: 10,
+    borderRadius: 5,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flex: 1.2,
+    marginRight: 5,
+  },
+  registerNowButtonTextCompact: {
+    color: '#fff',
+    fontWeight: '600',
+    fontSize: 14,
+  },
+  detailsButtonCompact: {
+    backgroundColor: theme.colors.primary,
+    paddingVertical: 6,
+    paddingHorizontal: 10,
+    borderRadius: 5,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flex: 0.8,
+    marginHorizontal: 5,
+  },
+  detailsButtonTextCompact: {
+    color: '#fff',
+    fontWeight: '600',
+    fontSize: 14,
+  },
+  scheduleButtonCompact: {
+    backgroundColor: theme.colors.accent,
+    paddingVertical: 6,
+    paddingHorizontal: 10,
+    borderRadius: 5,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flex: 0.9,
+    marginLeft: 5,
+  },
+  scheduleButtonTextCompact: {
+    color: '#fff',
+    fontWeight: '600',
+    fontSize: 14,
+  },
+  notificationToggleCompact: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    backgroundColor: '#f0f9ff',
+    padding: 6,
+    paddingHorizontal: 10,
+    marginHorizontal: 10,
+    marginBottom: 10,
+    borderRadius: 5,
+  },
+  notificationTextCompact: {
+    fontSize: 13,
+    color: '#666',
+    flex: 1,
+    marginRight: 10,
   },
 });
 
