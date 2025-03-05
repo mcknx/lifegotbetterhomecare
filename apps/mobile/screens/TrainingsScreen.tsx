@@ -124,13 +124,40 @@ Cancellation Policy:
     {
       id: '2',
       title: 'CBRF Certification',
-      description: 'Community-Based Residential Facility training covering medication administration, standard precautions, and more.',
+      description: 'Welcome to the CBRF Training Program, Your First Step into the Healthcare Field! This course covers Fire Safety, Standard Precautions, Medication Administration and First Aid and Choking.',
       image: 'https://images.unsplash.com/photo-1576765608866-5b51046452be?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
-      availability: 'Quarterly sessions',
-      duration: '4 weeks',
+      availability: 'Five-day instructional program',
+      duration: '25 Hours Total Training',
       notificationChannel: 'cbrf_certification',
-      price: '$800.00',
-      classHours: 'Monday to Friday 9:00 AM – 1:00 PM'
+      price: '$538.00',
+      classHours: 'Monday to Friday 9:00 AM – 3:00 PM',
+      scheduleUrl: 'https://lgbstaffing.com/wp-content/uploads/2024/12/CBRF-TRAINING-CALENDAR-2025.pdf',
+      additionalDetails: `At Life Got Better, we offer comprehensive C.B.R.F. training to cover all required cores. This five-day training includes:
+
+First Aid Certification: Gain essential skills in emergency care, covering situations such as choking, bleeding, diabetic emergencies, strokes, heart attacks, muscle and bone injuries, and more.
+
+Fire Safety: Learn about different codes and fire procedures, along with the correct usage of various extinguishers.
+
+Medication Administration: Understand various medications, laws, and procedures. This class involves practical exercises, including a medication pass simulation.
+
+Standard Precautions: Learn and apply infection control techniques, including handwashing and gloving. Understand aspects of bloodborne pathogens and other diseases.
+
+ISP (Individual Service Plan): Focus on understanding and implementing the client's individual service plan. Explore rules and learn to meet the client's needs and create effective care plans.
+
+Note: These Courses are required for all individuals who work in community based residential facilities. CBRF Certification allows Candidates to be employed in a residential living facility (Group Home) or an Assisted Living Facility.
+
+Cancellation Policy:
+• Downpayment of 50% required 24 hours before class starts
+• Cancellations up to 3 days before class: 25% processing fee applies
+• No refunds for cancellations within 15 days or less
+• No refunds for policy violations, self-termination, or exam failure`,
+      requirements: [
+        'Group Engagement in classroom activities',
+        'Achieve/maintain a 90% or better on all CBRF tests',
+        'Professional conduct and attendance',
+        'Participation in learning activities',
+        'Completion of all course modules'
+      ]
     },
     {
       id: '3',
@@ -594,7 +621,7 @@ Cancellation Policy:
       
       <ScrollView contentContainerStyle={styles.scrollContent}>
         <View style={styles.header}>
-          <Text style={styles.title}>Training Programs</Text>
+          <Text style={styles.title}>Healthcare Certification Pathways</Text>
           <Text style={styles.subtitle}>
             Enhance your skills with our professional training programs. Subscribe to get notified about upcoming sessions.
           </Text>
