@@ -556,23 +556,6 @@ Cancellation Policy:
                 </View>
               )}
               
-              {selectedTraining.scheduleUrl && (
-                <TouchableOpacity 
-                  style={styles.modalScheduleButton}
-                  onPress={() => {
-                    setDetailsModalVisible(false);
-                    setTimeout(() => {
-                      openSchedulePdf(selectedTraining.scheduleUrl || '');
-                    }, 500);
-                  }}
-                >
-                  <Ionicons name="calendar" size={20} color="#fff" />
-                  <Text style={styles.modalScheduleButtonText}>
-                    View 2025 Class Schedule
-                  </Text>
-                </TouchableOpacity>
-              )}
-              
               <TouchableOpacity 
                 style={styles.registerButton}
                 onPress={() => {
