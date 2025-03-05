@@ -162,13 +162,40 @@ Cancellation Policy:
     {
       id: '3',
       title: 'Continuing Education Course',
-      description: 'Stay current with industry best practices and enhance your skills with our continuing education program.',
+      description: 'Elevate your CBRF expertise with our Continuing Education Course. Keep your certification current by reviewing core competencies and expanding your healthcare knowledge.',
       image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
-      availability: 'Ongoing enrollment',
-      duration: 'Flexible',
+      availability: 'Multiple schedules available',
+      duration: '6 Hours',
       notificationChannel: 'continuing_education',
-      price: '$600.00',
-      classHours: 'Flexible Schedule'
+      price: '$135.00',
+      classHours: 'Weekdays 1:00 PM – 6:00 PM (varies by session)',
+      scheduleUrl: 'https://lgbstaffing.com/wp-content/uploads/2025/02/CE-2025.pdf',
+      additionalDetails: `Our Continuing Education Course is designed for CBRF certified professionals who need to maintain their certification and stay current with best practices in the field.
+
+This comprehensive review course covers:
+
+- Medication Administration
+- Standard Precautions
+- First Aid and Choking
+- Fire Safety
+- Resident Rights
+- Abuse & Neglect Prevention
+
+These topics are essential for maintaining your professional credentials and providing the highest quality care in community-based residential facilities.
+
+The course is scheduled in convenient 6-hour sessions throughout the year, with various weekday options to fit your schedule.
+
+Cancellation Policy:
+• Downpayment of 50% required 24 hours before class starts
+• Cancellations up to 3 days before class: 25% processing fee applies
+• No refunds for cancellations within 15 days or less`,
+      requirements: [
+        'Current CBRF certification',
+        'Active participation in all course modules',
+        'Professional conduct',
+        'Completion of all review materials',
+        'Passing final assessment'
+      ]
     },
     {
       id: '4',
