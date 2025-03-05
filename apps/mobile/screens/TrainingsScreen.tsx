@@ -200,13 +200,39 @@ Cancellation Policy:
     {
       id: '4',
       title: 'AED/CPR/First Aid Course',
-      description: 'Essential training for emergency response, including CPR techniques and first aid procedures.',
+      description: 'Learn life-saving emergency response skills with our comprehensive CPR, AED, and First Aid training program.',
       image: 'https://images.unsplash.com/photo-1516574187841-cb9cc2ca948b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
-      availability: 'Monthly workshops',
-      duration: '2 days',
+      availability: 'Weekly sessions available',
+      duration: '2 Days (Virtual + In-Person)',
       notificationChannel: 'first_aid',
-      price: '$350.00',
-      classHours: 'Saturday & Sunday 9:00 AM – 5:00 PM'
+      price: '$74.99',
+      classHours: 'Wednesday 1:00 PM - 5:00 PM (Virtual) & Friday 3:00 PM - 5:00 PM (In-Person)',
+      scheduleUrl: 'https://lgbstaffing.com/wp-content/uploads/2024/12/AED-CPR-Calendar-2025.pdf',
+      additionalDetails: `Life Got Better Staffing's CPR/AED/First Aid training empowers you to respond effectively in emergency situations. Our program features:
+
+- Basic life support techniques, including chest compressions and rescue breathing
+- AED (Automated External Defibrillator) operation training
+- Comprehensive first aid skills for treating injuries, burns, choking incidents, and allergic reactions
+- Recognition and response to common medical emergencies like heart attacks and strokes
+
+Our two-part training program includes:
+Step 1: Virtual Class (Wednesday, 1:00 PM – 5:00 PM)
+Step 2: Hands-on Skills (In Person, Friday 3:00 PM – 5:00 PM)
+
+Upon successful completion, participants receive a nationally recognized certification valid for two years.
+
+Courses Offered:
+- Adult First Aid/CPR/AED: Prepare to respond to respiratory and heart-related emergencies affecting adults
+- Pediatric First Aid/CPR/AED: Essential training for those working with children
+
+All instructors are certified professionals with extensive experience in emergency response training.`,
+      requirements: [
+        'Attendance at both virtual and in-person sessions',
+        'Active participation in hands-on practice',
+        'Successful demonstration of CPR techniques',
+        'Completion of AED operation training',
+        'Passing the final assessment'
+      ]
     },
     {
       id: '5',

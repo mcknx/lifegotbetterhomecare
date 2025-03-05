@@ -23,3 +23,12 @@ https://dm0qx8t0i9gc9.cloudfront.net/watermarks/video/HrrabAxWinloumzm/videobloc
 
 --- Error: EMFILE: too many open files, watch
 watchman watch-del-all
+
+
+
+--- prompt
+Let's now go to the 3rd item for const trainings data, please take the data from this website.
+@https://lgbstaffing.com/continuing-education-course/ 
+
+Schedule here
+@https://docs.google.com/viewerng/viewer?url=https://lgbstaffing.com/wp-content/uploads/2025/02/CE-2025.pdf 
