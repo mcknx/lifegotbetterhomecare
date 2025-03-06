@@ -13,7 +13,8 @@ import {
   Linking,
   Modal,
   ActivityIndicator,
-  Dimensions
+  Dimensions,
+  RefreshControl
 } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { Ionicons } from '@expo/vector-icons';
@@ -66,6 +67,64 @@ const TrainingsScreen: React.FC = () => {
   const [isLandscape, setIsLandscape] = useState(width > height);
   const isSmallScreen = width < 360;
 
+  // Add state for training data and loading states
+  const [trainings, setTrainings] = useState<Training[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  // API URL for trainings
+  const API_URL = 'https://lifegotbetterhomecare.com/api/trainings';
+
+  // Fetch trainings from the API
+  const fetchTrainings = async () => {
+    try {
+      const response = await fetch(API_URL);
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error('Error fetching trainings:', error);
+      throw error;
+    }
+  };
+
+  // Load trainings on component mount
+  useEffect(() => {
+    const loadTrainings = async () => {
+      setLoading(true);
+      try {
+        const trainingsData = await fetchTrainings();
+        setTrainings(trainingsData);
+      } catch (error) {
+        console.error('Error loading trainings:', error);
+        setTrainings([]);
+        setError('Failed to load trainings. Please check your connection and try again.');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadTrainings();
+  }, []);
+
+  // Add refreshing logic for pull-to-refresh
+  const onRefresh = async () => {
+    setRefreshing(true);
+    try {
+      const trainingsData = await fetchTrainings();
+      setTrainings(trainingsData);
+      setError(null);
+    } catch (error) {
+      console.error('Error refreshing trainings:', error);
+      setError('Failed to refresh trainings. Please try again.');
+    } finally {
+      setRefreshing(false);
+    }
+  };
+
   // Add orientation change handler
   useEffect(() => {
     const onChange = () => {
@@ -82,198 +141,6 @@ const TrainingsScreen: React.FC = () => {
       subscription.remove();
     };
   }, []);
-
-  // Sample training data
-  const trainings: Training[] = [
-    {
-      id: '1',
-      title: 'CNA Certification',
-      description: 'Comprehensive training program to become a Certified Nursing Assistant. Learn essential skills for patient care.',
-      image: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
-      availability: 'Multiple sessions available',
-      duration: '60 Hours + 15 Clinical Hours',
-      notificationChannel: 'cna_certification',
-      price: '$1,000.00',
-      originalPrice: '$3,800.00',
-      classHours: 'Monday to Friday 2:00 PM – 6:00 PM',
-      scheduleUrl: 'https://lgbstaffing.com/wp-content/uploads/2024/12/CNA-CALENDAR-2025.pdf',
-      additionalDetails: `The basic learning in a CNA class includes essential patient care skills, such as bathing, dressing, vital signs monitoring, and safe transfer techniques.
-
-Our CNAs are distinguished by their clear and empathetic communication skills. Actively interacting with patients, families, and the healthcare team, they ensure a smooth and compassionate exchange of information.
-
-The objective of a CNA course is to equip students with the knowledge, skills, and hands-on experience required to administer safe and efficient care to patients across diverse healthcare settings.
-
-Includes: National Test
-
-Cancellation Policy:
-• Downpayment of 50% required 3 days before class starts
-• Cancellations up to 3 days before class: 25% processing fee applies
-• No refunds for cancellations within 15 days or less
-• No refunds for policy violations, self-termination, or exam failure`,
-      requirements: [
-        'Background Information Disclosure',
-        'Valid Driver\'s License or State ID',
-        'Valid social security card',
-        'TB Test Results within 90 days',
-        'Influenza Vaccination (Oct-Mar)',
-        'CPR & AED Certification',
-        'Medical clearance for pregnant students',
-        'Clean criminal record (7 years)'
-      ]
-    },
-    {
-      id: '2',
-      title: 'CBRF Certification',
-      description: 'Welcome to the CBRF Training Program, Your First Step into the Healthcare Field! This course covers Fire Safety, Standard Precautions, Medication Administration and First Aid and Choking.',
-      image: 'https://images.unsplash.com/photo-1576765608866-5b51046452be?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
-      availability: 'Five-day instructional program',
-      duration: '25 Hours Total Training',
-      notificationChannel: 'cbrf_certification',
-      price: '$538.00',
-      classHours: 'Monday to Friday 9:00 AM – 3:00 PM',
-      scheduleUrl: 'https://lgbstaffing.com/wp-content/uploads/2024/12/CBRF-TRAINING-CALENDAR-2025.pdf',
-      additionalDetails: `At Life Got Better, we offer comprehensive C.B.R.F. training to cover all required cores. This five-day training includes:
-
-First Aid Certification: Gain essential skills in emergency care, covering situations such as choking, bleeding, diabetic emergencies, strokes, heart attacks, muscle and bone injuries, and more.
-
-Fire Safety: Learn about different codes and fire procedures, along with the correct usage of various extinguishers.
-
-Medication Administration: Understand various medications, laws, and procedures. This class involves practical exercises, including a medication pass simulation.
-
-Standard Precautions: Learn and apply infection control techniques, including handwashing and gloving. Understand aspects of bloodborne pathogens and other diseases.
-
-ISP (Individual Service Plan): Focus on understanding and implementing the client's individual service plan. Explore rules and learn to meet the client's needs and create effective care plans.
-
-Note: These Courses are required for all individuals who work in community based residential facilities. CBRF Certification allows Candidates to be employed in a residential living facility (Group Home) or an Assisted Living Facility.
-
-Cancellation Policy:
-• Downpayment of 50% required 24 hours before class starts
-• Cancellations up to 3 days before class: 25% processing fee applies
-• No refunds for cancellations within 15 days or less
-• No refunds for policy violations, self-termination, or exam failure`,
-      requirements: [
-        'Group Engagement in classroom activities',
-        'Achieve/maintain a 90% or better on all CBRF tests',
-        'Professional conduct and attendance',
-        'Participation in learning activities',
-        'Completion of all course modules'
-      ]
-    },
-    {
-      id: '3',
-      title: 'Continuing Education Course',
-      description: 'Elevate your CBRF expertise with our Continuing Education Course. Keep your certification current by reviewing core competencies and expanding your healthcare knowledge.',
-      image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
-      availability: 'Multiple schedules available',
-      duration: '6 Hours',
-      notificationChannel: 'continuing_education',
-      price: '$135.00',
-      classHours: 'Weekdays 1:00 PM – 6:00 PM (varies by session)',
-      scheduleUrl: 'https://lgbstaffing.com/wp-content/uploads/2025/02/CE-2025.pdf',
-      additionalDetails: `Our Continuing Education Course is designed for CBRF certified professionals who need to maintain their certification and stay current with best practices in the field.
-
-This comprehensive review course covers:
-
-- Medication Administration
-- Standard Precautions
-- First Aid and Choking
-- Fire Safety
-- Resident Rights
-- Abuse & Neglect Prevention
-
-These topics are essential for maintaining your professional credentials and providing the highest quality care in community-based residential facilities.
-
-The course is scheduled in convenient 6-hour sessions throughout the year, with various weekday options to fit your schedule.
-
-Cancellation Policy:
-• Downpayment of 50% required 24 hours before class starts
-• Cancellations up to 3 days before class: 25% processing fee applies
-• No refunds for cancellations within 15 days or less`,
-      requirements: [
-        'Current CBRF certification',
-        'Active participation in all course modules',
-        'Professional conduct',
-        'Completion of all review materials',
-        'Passing final assessment'
-      ]
-    },
-    {
-      id: '4',
-      title: 'AED/CPR/First Aid Course',
-      description: 'Learn life-saving emergency response skills with our comprehensive CPR, AED, and First Aid training program.',
-      image: 'https://images.unsplash.com/photo-1516574187841-cb9cc2ca948b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
-      availability: 'Weekly sessions available',
-      duration: '2 Days (Virtual + In-Person)',
-      notificationChannel: 'first_aid',
-      price: '$74.99',
-      classHours: 'Wednesday 1:00 PM - 5:00 PM (Virtual) & Friday 3:00 PM - 5:00 PM (In-Person)',
-      scheduleUrl: 'https://lgbstaffing.com/wp-content/uploads/2024/12/AED-CPR-Calendar-2025.pdf',
-      additionalDetails: `Life Got Better Staffing's CPR/AED/First Aid training empowers you to respond effectively in emergency situations. Our program features:
-
-- Basic life support techniques, including chest compressions and rescue breathing
-- AED (Automated External Defibrillator) operation training
-- Comprehensive first aid skills for treating injuries, burns, choking incidents, and allergic reactions
-- Recognition and response to common medical emergencies like heart attacks and strokes
-
-Our two-part training program includes:
-Step 1: Virtual Class (Wednesday, 1:00 PM – 5:00 PM)
-Step 2: Hands-on Skills (In Person, Friday 3:00 PM – 5:00 PM)
-
-Upon successful completion, participants receive a nationally recognized certification valid for two years.
-
-Courses Offered:
-- Adult First Aid/CPR/AED: Prepare to respond to respiratory and heart-related emergencies affecting adults
-- Pediatric First Aid/CPR/AED: Essential training for those working with children
-
-All instructors are certified professionals with extensive experience in emergency response training.`,
-      requirements: [
-        'Attendance at both virtual and in-person sessions',
-        'Active participation in hands-on practice',
-        'Successful demonstration of CPR techniques',
-        'Completion of AED operation training',
-        'Passing the final assessment'
-      ]
-    },
-    {
-      id: '5',
-      title: 'Combined CBRF and CNA Program',
-      description: 'Fast-track program providing dual certification in both CBRF and CNA roles, preparing you for diverse healthcare career opportunities.',
-      image: 'https://images.unsplash.com/photo-1527613426441-4da17471b66d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
-      availability: 'Intensive 6-week sessions',
-      duration: '100 Hours Total (25 CBRF + 75 CNA)',
-      notificationChannel: 'combined_program',
-      price: '$4,500.00',
-      classHours: 'Monday to Friday - Full-time schedule',
-      scheduleUrl: 'https://lgbstaffing.com/wp-content/uploads/2024/12/Combined-CNA-CBRF-CALENDAR-2025.pdf',
-      additionalDetails: `The Combined CBRF and CNA Program is an intensive course designed to provide students with essential skills and certifications in a condensed timeframe. This comprehensive program prepares students for careers in both residential care and nursing environments.
-
-Program Structure:
-- CBRF Training (1 Week, 25 Hours): Medication Administration, Standard Precautions, Fire Safety, First Aid and Choking, Resident Rights, Abuse and Neglect
-- CNA Training (75 Hours, 5 Weeks): Basic Nursing Skills, Infection Control, Personal Care Skills, Vital Signs Monitoring, Communication, Safety and Emergency Procedures, Clinical practice
-
-Learning Methods:
-- Classroom instruction
-- Hands-on lab sessions
-- Clinical rotations in a healthcare facility
-- Distance learning options for theory components
-
-Career Opportunities:
-Upon successful completion, graduates will be prepared for roles including CBRF Caregiver, Certified Nursing Assistant, Home Health Aide, and Personal Care Worker.
-
-Important Note:
-The clinical schedule is designed to meet minimum required hours, and absences are not permitted without prior notification. Valid reasons for missing skills class or clinical sessions include verifiable family emergencies and illness.`,
-      requirements: [
-        'Minimum age of 18 years old',
-        'High school diploma or GED required',
-        'Pass a criminal background check',
-        'Negative TB test result',
-        'Proof of flu vaccination',
-        'Medical clearance for pregnant students',
-        'Drug and alcohol-free status during class and clinical sessions',
-        'Proper nursing attire: scrubs, closed-toe shoes, watch with second hand'
-      ]
-    }
-  ];
 
   // Request notification permissions
   useEffect(() => {
@@ -700,7 +567,16 @@ The clinical schedule is designed to meet minimum required hours, and absences a
     <SafeAreaView style={styles.container}>
       <StatusBar style="dark" />
       
-      <ScrollView contentContainerStyle={styles.scrollContent}>
+      <ScrollView 
+        contentContainerStyle={styles.scrollContent}
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+            colors={['#0066cc']}
+          />
+        }
+      >
         <View style={styles.header}>
           <Text style={styles.title}>Healthcare Certification Pathways</Text>
           <Text style={styles.subtitle}>
@@ -718,9 +594,30 @@ The clinical schedule is designed to meet minimum required hours, and absences a
           </View>
         </View>
         
-        <View style={styles.trainingsContainer}>
-          {trainings.map(training => renderTrainingCard(training))}
-        </View>
+        {loading && !refreshing ? (
+          <View style={styles.loadingContainer}>
+            <ActivityIndicator size="large" color="#0066cc" />
+            <Text style={styles.loadingText}>Loading trainings...</Text>
+          </View>
+        ) : error ? (
+          <View style={styles.errorContainer}>
+            <Text style={styles.errorText}>{error}</Text>
+            <TouchableOpacity 
+              style={styles.retryButton} 
+              onPress={onRefresh}
+            >
+              <Text style={styles.retryButtonText}>Try Again</Text>
+            </TouchableOpacity>
+          </View>
+        ) : trainings.length === 0 ? (
+          <View style={styles.emptyContainer}>
+            <Text style={styles.emptyText}>No trainings available</Text>
+          </View>
+        ) : (
+          <View style={styles.trainingsContainer}>
+            {trainings.map(training => renderTrainingCard(training))}
+          </View>
+        )}
         
         <View style={styles.infoSection}>
           <Text style={styles.infoTitle}>Why Choose Our Training Programs?</Text>
@@ -771,7 +668,7 @@ The clinical schedule is designed to meet minimum required hours, and absences a
       {isLoading && (
         <View style={styles.loadingOverlay}>
           <ActivityIndicator size="large" color={theme.colors.primary} />
-          <Text style={styles.loadingText}>Opening class schedule...</Text>
+          <Text style={styles.overlayLoadingText}>Opening class schedule...</Text>
         </View>
       )}
     </SafeAreaView>
@@ -820,7 +717,8 @@ const styles = StyleSheet.create({
     color: theme.colors.primary,
   },
   trainingsContainer: {
-    padding: 15,
+    paddingHorizontal: 15,
+    marginBottom: 20,
   },
   trainingCard: {
     backgroundColor: '#fff',
@@ -1131,7 +1029,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  loadingText: {
+  overlayLoadingText: {
     color: '#fff',
     marginTop: 10,
     fontSize: 16,
@@ -1236,6 +1134,45 @@ const styles = StyleSheet.create({
     color: '#666',
     flex: 1,
     marginRight: 10,
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+  },
+  loadingText: {
+    color: '#0066cc',
+    marginTop: 10,
+    fontSize: 16,
+  },
+  errorContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+  },
+  errorText: {
+    color: '#cc0000',
+    marginBottom: 10,
+  },
+  retryButton: {
+    backgroundColor: theme.colors.primary,
+    padding: 12,
+    borderRadius: 5,
+  },
+  retryButtonText: {
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
+  emptyContainer: {
+    padding: 30,
+    alignItems: 'center',
+  },
+  emptyText: {
+    color: '#666',
+    fontSize: 16,
   },
 });
 
