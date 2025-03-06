@@ -105,7 +105,7 @@ export default function JobsPage() {
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                     <Link
-                      href={`/admin/jobs/edit/${job.id}`}
+                      href={`/admin/jobs/edit?id=${job.id}`}
                       className="text-indigo-600 hover:text-indigo-900 mr-4"
                     >
                       Edit
