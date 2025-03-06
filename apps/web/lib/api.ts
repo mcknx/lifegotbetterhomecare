@@ -96,7 +96,24 @@ export async function getAllTrainings(): Promise<Training[]> {
     return [];
   }
 
-  return data || [];
+  if (!data) return [];
+
+  // Convert snake_case to camelCase for frontend
+  return data.map(item => ({
+    id: item.id,
+    title: item.title,
+    description: item.description,
+    image: item.image,
+    availability: item.availability,
+    duration: item.duration,
+    notificationChannel: item.notification_channel,
+    price: item.price,
+    originalPrice: item.original_price,
+    classHours: item.class_hours,
+    additionalDetails: item.additional_details,
+    scheduleUrl: item.schedule_url,
+    requirements: item.requirements,
+  }));
 }
 
 // Fetch a single training by ID
@@ -112,14 +129,47 @@ export async function getTrainingById(id: string): Promise<Training | null> {
     return null;
   }
 
-  return data;
+  if (!data) return null;
+
+  // Convert snake_case to camelCase for frontend
+  return {
+    id: data.id,
+    title: data.title,
+    description: data.description,
+    image: data.image,
+    availability: data.availability,
+    duration: data.duration,
+    notificationChannel: data.notification_channel,
+    price: data.price,
+    originalPrice: data.original_price,
+    classHours: data.class_hours,
+    additionalDetails: data.additional_details,
+    scheduleUrl: data.schedule_url,
+    requirements: data.requirements,
+  };
 }
 
 // Create a new training
 export async function createTraining(training: Omit<Training, 'id'>): Promise<Training | null> {
+  // Convert camelCase to snake_case for backend
+  const dbTraining = {
+    title: training.title,
+    description: training.description,
+    image: training.image,
+    availability: training.availability,
+    duration: training.duration,
+    notification_channel: training.notificationChannel,
+    price: training.price,
+    original_price: training.originalPrice,
+    class_hours: training.classHours,
+    additional_details: training.additionalDetails,
+    schedule_url: training.scheduleUrl,
+    requirements: training.requirements,
+  };
+
   const { data, error } = await supabase
     .from(TRAINING_TABLE)
-    .insert([training])
+    .insert([dbTraining])
     .select();
 
   if (error) {
@@ -127,14 +177,47 @@ export async function createTraining(training: Omit<Training, 'id'>): Promise<Tr
     return null;
   }
 
-  return data?.[0] || null;
+  if (!data || data.length === 0) return null;
+
+  // Convert snake_case back to camelCase for frontend
+  return {
+    id: data[0].id,
+    title: data[0].title,
+    description: data[0].description,
+    image: data[0].image,
+    availability: data[0].availability,
+    duration: data[0].duration,
+    notificationChannel: data[0].notification_channel,
+    price: data[0].price,
+    originalPrice: data[0].original_price,
+    classHours: data[0].class_hours,
+    additionalDetails: data[0].additional_details,
+    scheduleUrl: data[0].schedule_url,
+    requirements: data[0].requirements,
+  };
 }
 
 // Update an existing training
 export async function updateTraining(id: string, updates: Partial<Training>): Promise<Training | null> {
+  // Convert camelCase to snake_case for backend
+  const dbUpdates = {
+    title: updates.title,
+    description: updates.description,
+    image: updates.image,
+    availability: updates.availability,
+    duration: updates.duration,
+    notification_channel: updates.notificationChannel,
+    price: updates.price,
+    original_price: updates.originalPrice,
+    class_hours: updates.classHours,
+    additional_details: updates.additionalDetails,
+    schedule_url: updates.scheduleUrl,
+    requirements: updates.requirements,
+  };
+
   const { data, error } = await supabase
     .from(TRAINING_TABLE)
-    .update(updates)
+    .update(dbUpdates)
     .eq('id', id)
     .select();
 
@@ -143,7 +226,24 @@ export async function updateTraining(id: string, updates: Partial<Training>): Pr
     return null;
   }
 
-  return data?.[0] || null;
+  if (!data || data.length === 0) return null;
+
+  // Convert snake_case back to camelCase for frontend
+  return {
+    id: data[0].id,
+    title: data[0].title,
+    description: data[0].description,
+    image: data[0].image,
+    availability: data[0].availability,
+    duration: data[0].duration,
+    notificationChannel: data[0].notification_channel,
+    price: data[0].price,
+    originalPrice: data[0].original_price,
+    classHours: data[0].class_hours,
+    additionalDetails: data[0].additional_details,
+    scheduleUrl: data[0].schedule_url,
+    requirements: data[0].requirements,
+  };
 }
 
 // Delete a training

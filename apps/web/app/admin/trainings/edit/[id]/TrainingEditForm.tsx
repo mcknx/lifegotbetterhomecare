@@ -4,72 +4,66 @@ import { useState, useEffect, FormEvent } from 'react';
 import { useRouter } from 'next/navigation';
 import { getTrainingById, updateTraining } from '@/lib/api';
 import { Training } from '@/types/training';
+import Link from 'next/link';
 
-export default function EditTrainingPage({ searchParams }: { searchParams: { id?: string } }) {
+export default function TrainingEditForm({ training, id }: { training: Training | null; id: string }) {
   const router = useRouter();
-  const trainingId = searchParams.id;
-  
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [training, setTraining] = useState<Training | null>(null);
-  const [requirements, setRequirements] = useState<string[]>([]);
+  const [formData, setFormData] = useState<Training | null>(training);
+  const [requirements, setRequirements] = useState<string[]>(training?.requirements || []);
   const [newRequirement, setNewRequirement] = useState('');
 
   useEffect(() => {
-    async function loadTraining() {
-      if (!trainingId) {
-        setError('Training ID is required');
-        setLoading(false);
-        return;
-      }
-
-      try {
-        const data = await getTrainingById(trainingId);
-        if (data) {
-          setTraining(data);
-          setRequirements(data.requirements || []);
-        } else {
-          setError('Training not found');
-        }
-      } catch (err) {
-        console.error('Error loading training:', err);
-        setError('Failed to load training');
-      } finally {
-        setLoading(false);
-      }
+    if (!training) {
+      loadTraining();
+    } else {
+      setLoading(false);
     }
+  }, [training]);
 
-    loadTraining();
-  }, [trainingId]);
+  async function loadTraining() {
+    try {
+      const data = await getTrainingById(id);
+      if (data) {
+        setFormData(data);
+        setRequirements(data.requirements || []);
+      } else {
+        setError('Training not found');
+      }
+    } catch (err) {
+      console.error('Error loading training:', err);
+      setError('Failed to load training');
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    if (formData) {
+      setFormData({
+        ...formData,
+        [name]: value
+      });
+    }
+  };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!trainingId || !training) return;
+    if (!id || !formData) return;
 
     setSaving(true);
     setError(null);
 
-    const form = e.currentTarget;
-    const formData = new FormData(form);
-    
     try {
       const trainingData = {
-        title: formData.get('title') as string,
-        description: formData.get('description') as string,
-        image: formData.get('image') as string,
-        availability: formData.get('availability') as string,
-        duration: formData.get('duration') as string,
-        notificationChannel: formData.get('notificationChannel') as string,
-        price: formData.get('price') as string,
-        originalPrice: formData.get('originalPrice') as string || undefined,
-        classHours: formData.get('classHours') as string || undefined,
-        additionalDetails: formData.get('additionalDetails') as string || undefined,
-        scheduleUrl: formData.get('scheduleUrl') as string || undefined,
+        ...formData,
         requirements: requirements.length > 0 ? requirements : undefined,
       };
 
-      const result = await updateTraining(trainingId, trainingData);
+      const result = await updateTraining(id, trainingData);
       
       if (result) {
         router.push('/admin/trainings');
@@ -99,17 +93,25 @@ export default function EditTrainingPage({ searchParams }: { searchParams: { id?
     return <div className="text-center py-8">Loading...</div>;
   }
 
-  if (error && !training) {
+  if (error && !formData) {
     return <div className="text-center py-8 text-red-500">{error}</div>;
   }
 
-  if (!training) {
+  if (!formData) {
     return <div className="text-center py-8">Training not found</div>;
   }
 
   return (
     <div className="py-6">
-      <h1 className="text-2xl font-bold mb-6">Edit Training</h1>
+      <div className="flex justify-between items-center mb-6">
+        <h1 className="text-2xl font-bold">Edit Training</h1>
+        <Link
+          href="/admin/trainings"
+          className="px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700"
+        >
+          Back to Trainings
+        </Link>
+      </div>
       
       {error && (
         <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
@@ -126,7 +128,8 @@ export default function EditTrainingPage({ searchParams }: { searchParams: { id?
             <input
               type="text"
               name="title"
-              defaultValue={training.title}
+              value={formData.title}
+              onChange={handleChange}
               required
               className="w-full px-3 py-2 border border-gray-300 rounded-md"
             />
@@ -138,7 +141,8 @@ export default function EditTrainingPage({ searchParams }: { searchParams: { id?
             </label>
             <textarea
               name="description"
-              defaultValue={training.description}
+              value={formData.description}
+              onChange={handleChange}
               required
               rows={3}
               className="w-full px-3 py-2 border border-gray-300 rounded-md"
@@ -152,7 +156,8 @@ export default function EditTrainingPage({ searchParams }: { searchParams: { id?
             <input
               type="url"
               name="image"
-              defaultValue={training.image}
+              value={formData.image}
+              onChange={handleChange}
               required
               className="w-full px-3 py-2 border border-gray-300 rounded-md"
             />
@@ -165,7 +170,8 @@ export default function EditTrainingPage({ searchParams }: { searchParams: { id?
             <input
               type="text"
               name="availability"
-              defaultValue={training.availability}
+              value={formData.availability}
+              onChange={handleChange}
               required
               className="w-full px-3 py-2 border border-gray-300 rounded-md"
             />
@@ -178,7 +184,8 @@ export default function EditTrainingPage({ searchParams }: { searchParams: { id?
             <input
               type="text"
               name="duration"
-              defaultValue={training.duration}
+              value={formData.duration}
+              onChange={handleChange}
               required
               className="w-full px-3 py-2 border border-gray-300 rounded-md"
             />
@@ -191,7 +198,8 @@ export default function EditTrainingPage({ searchParams }: { searchParams: { id?
             <input
               type="text"
               name="notificationChannel"
-              defaultValue={training.notificationChannel}
+              value={formData.notificationChannel}
+              onChange={handleChange}
               required
               className="w-full px-3 py-2 border border-gray-300 rounded-md"
             />
@@ -204,7 +212,8 @@ export default function EditTrainingPage({ searchParams }: { searchParams: { id?
             <input
               type="text"
               name="price"
-              defaultValue={training.price}
+              value={formData.price || ''}
+              onChange={handleChange}
               required
               className="w-full px-3 py-2 border border-gray-300 rounded-md"
             />
@@ -217,7 +226,8 @@ export default function EditTrainingPage({ searchParams }: { searchParams: { id?
             <input
               type="text"
               name="originalPrice"
-              defaultValue={training.originalPrice}
+              value={formData.originalPrice || ''}
+              onChange={handleChange}
               className="w-full px-3 py-2 border border-gray-300 rounded-md"
             />
           </div>
@@ -229,7 +239,8 @@ export default function EditTrainingPage({ searchParams }: { searchParams: { id?
             <input
               type="text"
               name="classHours"
-              defaultValue={training.classHours}
+              value={formData.classHours || ''}
+              onChange={handleChange}
               className="w-full px-3 py-2 border border-gray-300 rounded-md"
             />
           </div>
@@ -241,7 +252,8 @@ export default function EditTrainingPage({ searchParams }: { searchParams: { id?
             <input
               type="url"
               name="scheduleUrl"
-              defaultValue={training.scheduleUrl}
+              value={formData.scheduleUrl || ''}
+              onChange={handleChange}
               className="w-full px-3 py-2 border border-gray-300 rounded-md"
             />
           </div>
@@ -252,7 +264,8 @@ export default function EditTrainingPage({ searchParams }: { searchParams: { id?
             </label>
             <textarea
               name="additionalDetails"
-              defaultValue={training.additionalDetails}
+              value={formData.additionalDetails || ''}
+              onChange={handleChange}
               rows={6}
               className="w-full px-3 py-2 border border-gray-300 rounded-md"
             ></textarea>
@@ -297,7 +310,7 @@ export default function EditTrainingPage({ searchParams }: { searchParams: { id?
           </div>
         </div>
         
-        <div className="mt-6 flex items-center justify-end">
+        <div className="mt-6 flex justify-end">
           <button
             type="button"
             onClick={() => router.push('/admin/trainings')}
@@ -308,9 +321,9 @@ export default function EditTrainingPage({ searchParams }: { searchParams: { id?
           <button
             type="submit"
             disabled={saving}
-            className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:opacity-50"
+            className="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 disabled:bg-indigo-300"
           >
-            {saving ? 'Saving...' : 'Save Changes'}
+            {saving ? 'Saving...' : 'Update Training'}
           </button>
         </div>
       </form>
