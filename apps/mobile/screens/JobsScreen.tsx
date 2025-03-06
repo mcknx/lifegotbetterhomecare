@@ -14,8 +14,10 @@ import {
 import { StatusBar } from 'expo-status-bar';
 import { Ionicons } from '@expo/vector-icons';
 import { theme } from '../theme';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
-// Job type definition
+// Define job interface directly
 interface Job {
   id: string;
   title: string;
@@ -26,7 +28,21 @@ interface Job {
   category: string;
 }
 
+// Define navigation type
+type RootStackParamList = {
+  Home: undefined;
+  About: undefined;
+  Services: undefined;
+  Jobs: undefined;
+  Training: undefined;
+  Contact: { jobData?: Job };
+};
+
+// Define the navigation prop type for this screen
+type JobsScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Jobs'>;
+
 const JobsScreen: React.FC = () => {
+  const navigation = useNavigation<JobsScreenNavigationProp>();
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
   const [jobs, setJobs] = useState<Job[]>([]);
@@ -152,27 +168,40 @@ const JobsScreen: React.FC = () => {
   };
 
   // Render a job card
-  const renderJobCard = (job: Job) => (
-    <View key={job.id} style={styles.jobCard}>
-      <Text style={styles.jobDate}>{job.date}</Text>
-      <Text style={styles.jobTitle}>{job.title}</Text>
-      <Text style={styles.jobLocation}>
-        <Ionicons name="location-outline" size={16} color="#666" /> {job.location}
-      </Text>
-      <Text style={styles.jobType}>
-        <Ionicons name="time-outline" size={16} color="#666" /> {job.type}
-      </Text>
-      <Text style={styles.jobCategory}>
-        <Ionicons name="briefcase-outline" size={16} color="#666" /> {job.category}
-      </Text>
-      <Text style={styles.jobDescription} numberOfLines={3}>
-        {job.description}
-      </Text>
-      <TouchableOpacity style={styles.applyButton}>
-        <Text style={styles.applyButtonText}>Apply Now</Text>
-      </TouchableOpacity>
-    </View>
-  );
+  const renderJobCard = (job: Job) => {
+    return (
+      <View key={job.id} style={styles.jobCard}>
+        <View style={styles.jobHeader}>
+          <Text style={styles.jobTitle}>{job.title}</Text>
+          <Text style={styles.jobLocation}>
+            <Ionicons name="location-outline" size={16} color="#666" /> {job.location}
+          </Text>
+        </View>
+        
+        <Text style={styles.jobDescription}>{job.description}</Text>
+        
+        <View style={styles.jobMeta}>
+          <Text style={styles.jobDate}>
+            <Ionicons name="calendar-outline" size={14} color="#666" /> {job.date}
+          </Text>
+          <Text style={styles.jobType}>
+            <Ionicons name="time-outline" size={14} color="#666" /> {job.type}
+          </Text>
+        </View>
+        
+        <View style={styles.jobActions}>
+          <TouchableOpacity 
+            style={styles.applyButton}
+            onPress={() => {
+              navigation.navigate('Contact', { jobData: job });
+            }}
+          >
+            <Text style={styles.applyButtonText}>Apply Now</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    );
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -302,13 +331,16 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: theme.colors.primary,
+    color: '#333',
     marginBottom: 10,
+    flexWrap: 'wrap',
   },
   subtitle: {
     fontSize: 16,
-    color: theme.colors.secondary,
+    color: '#666',
+    marginBottom: 25,
     lineHeight: 22,
+    flexWrap: 'wrap',
   },
   filterContainer: {
     padding: 15,
@@ -321,17 +353,23 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: '#f5f5f5',
+    borderWidth: 1,
+    borderColor: '#e0e0e0',
     borderRadius: 8,
-    paddingHorizontal: 10,
-    marginBottom: 15,
+    paddingHorizontal: 15,
+    paddingVertical: 4,
+    marginBottom: 20,
   },
   searchIcon: {
-    marginRight: 10,
+    marginRight: 12,
   },
   searchInput: {
     flex: 1,
-    height: 45,
+    height: 48,
     fontSize: 16,
+    paddingVertical: 8,
+    fontWeight: '400',
+    color: '#333',
   },
   filtersRow: {
     marginBottom: 10,
@@ -385,58 +423,75 @@ const styles = StyleSheet.create({
   jobCard: {
     backgroundColor: '#fff',
     borderRadius: 10,
-    padding: 15,
-    marginBottom: 15,
+    padding: 20,
+    marginBottom: 20,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 4,
     elevation: 3,
   },
-  jobDate: {
-    fontSize: 12,
-    color: '#999',
-    marginBottom: 5,
+  jobHeader: {
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    marginBottom: 12,
   },
   jobTitle: {
     fontSize: 18,
     fontWeight: 'bold',
     color: theme.colors.primary,
-    marginBottom: 10,
+    marginBottom: 6,
+    flexWrap: 'wrap',
+    width: '100%',
   },
   jobLocation: {
     fontSize: 14,
     color: '#666',
-    marginBottom: 5,
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  jobType: {
-    fontSize: 14,
-    color: '#666',
-    marginBottom: 5,
-  },
-  jobCategory: {
-    fontSize: 14,
-    color: '#666',
-    marginBottom: 10,
+    flexWrap: 'wrap',
+    width: '100%',
+    marginBottom: 4,
   },
   jobDescription: {
     fontSize: 14,
     color: '#444',
-    marginBottom: 15,
+    marginBottom: 14,
     lineHeight: 20,
+    flexWrap: 'wrap',
+  },
+  jobMeta: {
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    marginBottom: 12,
+  },
+  jobDate: {
+    fontSize: 13,
+    color: '#999',
+    marginBottom: 4,
+    flexWrap: 'wrap',
+    width: '100%',
+  },
+  jobType: {
+    fontSize: 13,
+    color: '#999',
+    flexWrap: 'wrap',
+    width: '100%',
+  },
+  jobActions: {
+    marginTop: 15,
   },
   applyButton: {
     backgroundColor: theme.colors.primary,
-    paddingVertical: 10,
-    borderRadius: 5,
+    paddingVertical: 12,
+    paddingHorizontal: 15,
+    borderRadius: 8,
     alignItems: 'center',
+    justifyContent: 'center',
+    minHeight: 45,
   },
   applyButtonText: {
     color: '#fff',
     fontWeight: '600',
-    fontSize: 16,
+    fontSize: 15,
   },
   loadingContainer: {
     padding: 30,
