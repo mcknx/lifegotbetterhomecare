@@ -26,81 +26,35 @@ interface Job {
   date: string;
   type: string;
   category: string;
+  posted_at: string;
+  salary_min: number;
+  salary_max: number;
 }
 
-// Define navigation type
+// Define navigation types
 type RootStackParamList = {
   Home: undefined;
   About: undefined;
   Services: undefined;
-  Jobs: undefined;
   Training: undefined;
+  Jobs: undefined;
   Contact: { jobData?: Job };
 };
 
-// Define the navigation prop type for this screen
-type JobsScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Jobs'>;
+type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 const JobsScreen: React.FC = () => {
-  const navigation = useNavigation<JobsScreenNavigationProp>();
+  const navigation = useNavigation<NavigationProp>();
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
   const [jobs, setJobs] = useState<Job[]>([]);
   const [filteredJobs, setFilteredJobs] = useState<Job[]>([]);
+  const [error, setError] = useState<string | null>(null);
   
   // Filter states
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
   const [selectedLocation, setSelectedLocation] = useState('');
-
-  // Sample job data - in a real app, this would come from an API
-  const sampleJobs: Job[] = [
-    {
-      id: '1',
-      title: 'Certified Nursing Assistant (CNA) Instructor',
-      location: 'Milwaukee, Wisconsin',
-      description: 'We are seeking a dedicated and experienced Certified Nursing Assistant (CNA) Instructor to join our team. The successful candidate will be responsible for delivering comprehensive instruction to students aspiring to become CNAs.',
-      date: 'December 7, 2024',
-      type: 'Full-Time',
-      category: 'RN'
-    },
-    {
-      id: '2',
-      title: 'Certified CNA',
-      location: 'Milwaukee, Wisconsin',
-      description: 'Life Got Better Staffing Services is a healthcare staffing, focusing on all Community-Based Residential Facilities. We are a growing company and have multiple roles open for skilled CNAs in Milwaukee.',
-      date: 'December 18, 2024',
-      type: 'Full-Time',
-      category: 'CNA'
-    },
-    {
-      id: '3',
-      title: 'Caregiver/CBRF',
-      location: 'Dane County, Wisconsin',
-      description: 'Job Opportunity in DANE COUNTY, WI! Do you have a passion for caring? Do you need flexibility? Do you need stability? Do you need transportation?',
-      date: 'January 14, 2025',
-      type: 'Full-Time',
-      category: 'CBRF'
-    },
-    {
-      id: '4',
-      title: 'Caregiver/CBRF',
-      location: 'Racine, Wisconsin',
-      description: 'Job Opportunity in RACINE, WI! Do you have a passion for caring? Do you need flexibility? Do you need stability? Do you need transportation?',
-      date: 'January 14, 2025',
-      type: 'Full-Time',
-      category: 'CBRF'
-    },
-    {
-      id: '5',
-      title: 'CBRF/Caregiver',
-      location: 'Milwaukee, Wisconsin',
-      description: 'Life Got Better Staffing Services is a healthcare staffing, focusing on all Community-Based Residential Facilities. We are a growing company and have multiple roles open for skilled CBRF\'s in Milwaukee.',
-      date: 'February 5, 2025',
-      type: 'Full-Time',
-      category: 'CBRF'
-    }
-  ];
 
   // Categories for filtering
   const categories = ['CNA', 'RN', 'CBRF', 'Caregiver'];
@@ -108,8 +62,8 @@ const JobsScreen: React.FC = () => {
   // Locations for filtering
   const locations = ['Milwaukee, Wisconsin', 'Racine, Wisconsin', 'Dane County, Wisconsin'];
 
-  // API URL - replace with your actual website URL when deployed
-  const API_URL = 'https://www.lifegotbetterhomecare.com/api/jobs';
+  // API URL - updated to use the deployed endpoint
+  const API_URL = 'https://lifegotbetterhomecare.com/api/jobs';
   
   // Fetch jobs from the API
   const fetchJobs = async () => {
@@ -122,8 +76,8 @@ const JobsScreen: React.FC = () => {
       return data;
     } catch (error) {
       console.error('Error fetching jobs:', error);
-      // Fallback to sample jobs if API fails
-      return sampleJobs;
+      // Don't fallback to sample jobs if API fails, just throw the error
+      throw error;
     }
   };
 
@@ -137,9 +91,10 @@ const JobsScreen: React.FC = () => {
         setFilteredJobs(jobsData);
       } catch (error) {
         console.error('Error loading jobs:', error);
-        // Fallback to sample jobs
-        setJobs(sampleJobs);
-        setFilteredJobs(sampleJobs);
+        // Don't fallback to sample jobs, just set empty arrays and show error
+        setJobs([]);
+        setFilteredJobs([]);
+        setError('Failed to load jobs. Please check your connection and try again.');
       } finally {
         setLoading(false);
       }
@@ -181,12 +136,15 @@ const JobsScreen: React.FC = () => {
   // Refresh jobs
   const onRefresh = async () => {
     setRefreshing(true);
+    setError(null); // Clear any previous errors
     try {
       const jobsData = await fetchJobs();
       setJobs(jobsData);
       setFilteredJobs(jobsData);
     } catch (error) {
       console.error('Error refreshing jobs:', error);
+      // Set error message instead of falling back to sample data
+      setError('Failed to refresh jobs. Please check your connection and try again.');
     } finally {
       setRefreshing(false);
     }
@@ -205,20 +163,38 @@ const JobsScreen: React.FC = () => {
     return (
       <View key={job.id} style={styles.jobCard}>
         <View style={styles.jobHeader}>
-          <Text style={styles.jobTitle}>{job.title}</Text>
-          <Text style={styles.jobLocation}>
-            <Ionicons name="location-outline" size={16} color="#666" /> {job.location}
-          </Text>
+          <View style={styles.jobTitleContainer}>
+            <Text style={styles.jobTitle}>{job.title}</Text>
+            <View style={styles.jobMeta}>
+              <Text style={styles.jobLocation}>
+                <Ionicons name="location-outline" size={14} color="#666" style={styles.jobIcon} />
+                {job.location}
+              </Text>
+              <Text style={styles.jobDate}>
+                <Ionicons name="calendar-outline" size={14} color="#666" style={styles.jobIcon} />
+                {job.posted_at ? new Date(job.posted_at).toLocaleDateString() : job.date}
+              </Text>
+            </View>
+          </View>
+          <View style={styles.salaryContainer}>
+            <Text style={styles.salaryAmount}>
+              {job.salary_min && job.salary_max 
+                ? `$${job.salary_min} - $${job.salary_max}` 
+                : job.type}
+            </Text>
+            <Text style={styles.salaryPeriod}>
+              {job.salary_min && job.salary_max ? 'per hour' : ''}
+            </Text>
+          </View>
         </View>
         
-        <Text style={styles.jobDescription}>{job.description}</Text>
+        <View style={styles.categoryBadge}>
+          <Text style={styles.categoryText}>{job.category}</Text>
+        </View>
         
-        <View style={styles.jobMeta}>
-          <Text style={styles.jobDate}>
-            <Ionicons name="calendar-outline" size={14} color="#666" /> {job.date}
-          </Text>
-          <Text style={styles.jobType}>
-            <Ionicons name="time-outline" size={14} color="#666" /> {job.type}
+        <View style={styles.jobBody}>
+          <Text style={styles.jobDescription}>
+            {job.description}
           </Text>
         </View>
         
@@ -240,10 +216,14 @@ const JobsScreen: React.FC = () => {
     <SafeAreaView style={styles.container}>
       <StatusBar style="dark" />
       
-      <ScrollView 
+      <ScrollView
         contentContainerStyle={styles.scrollContent}
         refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+            colors={[theme.colors.primary]}
+          />
         }
       >
         <View style={styles.header}>
@@ -252,7 +232,7 @@ const JobsScreen: React.FC = () => {
             Browse through our latest job openings and find the perfect match for your skills and experience.
           </Text>
         </View>
-        
+         
         {/* Search and Filter Section */}
         <View style={styles.filterContainer}>
           <View style={styles.searchContainer}>
@@ -261,7 +241,10 @@ const JobsScreen: React.FC = () => {
               style={styles.searchInput}
               placeholder="Search jobs..."
               value={searchQuery}
-              onChangeText={setSearchQuery}
+              onChangeText={(text) => {
+                setSearchQuery(text);
+                filterJobs();
+              }}
             />
           </View>
           
@@ -270,39 +253,51 @@ const JobsScreen: React.FC = () => {
             <View style={styles.filterDropdown}>
               <Text style={styles.filterLabel}>Category</Text>
               <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-                <TouchableOpacity 
+                <TouchableOpacity
                   style={[styles.filterChip, !selectedCategory && styles.activeFilterChip]} 
-                  onPress={() => setSelectedCategory('')}
+                  onPress={() => {
+                    setSelectedCategory('');
+                    filterJobs();
+                  }}
                 >
                   <Text style={[styles.filterChipText, !selectedCategory && styles.activeFilterChipText]}>All</Text>
                 </TouchableOpacity>
                 {categories.map(category => (
-                  <TouchableOpacity 
+                  <TouchableOpacity
                     key={category}
                     style={[styles.filterChip, selectedCategory === category && styles.activeFilterChip]} 
-                    onPress={() => setSelectedCategory(category)}
+                    onPress={() => {
+                      setSelectedCategory(category);
+                      filterJobs();
+                    }}
                   >
                     <Text style={[styles.filterChipText, selectedCategory === category && styles.activeFilterChipText]}>{category}</Text>
                   </TouchableOpacity>
                 ))}
               </ScrollView>
             </View>
-            
+           
             {/* Location Filter */}
             <View style={styles.filterDropdown}>
               <Text style={styles.filterLabel}>Location</Text>
               <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-                <TouchableOpacity 
+                <TouchableOpacity
                   style={[styles.filterChip, !selectedLocation && styles.activeFilterChip]} 
-                  onPress={() => setSelectedLocation('')}
+                  onPress={() => {
+                    setSelectedLocation('');
+                    filterJobs();
+                  }}
                 >
                   <Text style={[styles.filterChipText, !selectedLocation && styles.activeFilterChipText]}>All</Text>
                 </TouchableOpacity>
                 {locations.map(location => (
-                  <TouchableOpacity 
+                  <TouchableOpacity
                     key={location}
                     style={[styles.filterChip, selectedLocation === location && styles.activeFilterChip]} 
-                    onPress={() => setSelectedLocation(location)}
+                    onPress={() => {
+                      setSelectedLocation(location);
+                      filterJobs();
+                    }}
                   >
                     <Text style={[styles.filterChipText, selectedLocation === location && styles.activeFilterChipText]}>
                       {location.split(',')[0]}
@@ -312,7 +307,7 @@ const JobsScreen: React.FC = () => {
               </ScrollView>
             </View>
           </View>
-          
+           
           {/* Reset Filters Button */}
           {(searchQuery || selectedCategory || selectedLocation) && (
             <TouchableOpacity style={styles.resetButton} onPress={resetFilters}>
@@ -321,13 +316,24 @@ const JobsScreen: React.FC = () => {
             </TouchableOpacity>
           )}
         </View>
-        
-        {/* Jobs List */}
+
+        {/* Jobs List or Error/Loading States */}
         <View style={styles.jobsContainer}>
           {loading ? (
             <View style={styles.loadingContainer}>
               <ActivityIndicator size="large" color={theme.colors.primary} />
               <Text style={styles.loadingText}>Loading jobs...</Text>
+            </View>
+          ) : error ? (
+            <View style={styles.errorContainer}>
+              <Ionicons name="alert-circle-outline" size={50} color="#e53935" />
+              <Text style={styles.errorText}>{error}</Text>
+              <TouchableOpacity 
+                style={styles.retryButton}
+                onPress={onRefresh}
+              >
+                <Text style={styles.retryButtonText}>Try Again</Text>
+              </TouchableOpacity>
             </View>
           ) : filteredJobs.length > 0 ? (
             filteredJobs.map(job => renderJobCard(job))
@@ -349,14 +355,13 @@ const JobsScreen: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
+    backgroundColor: '#f8f9fa',
   },
   scrollContent: {
-    paddingBottom: 30,
+    flexGrow: 1,
   },
   header: {
     padding: 20,
-    paddingTop: 10,
     backgroundColor: '#fff',
     borderBottomWidth: 1,
     borderBottomColor: '#eee',
@@ -365,15 +370,12 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     color: '#333',
-    marginBottom: 10,
-    flexWrap: 'wrap',
+    marginBottom: 8,
   },
   subtitle: {
-    fontSize: 16,
+    fontSize: 14,
     color: '#666',
-    marginBottom: 25,
-    lineHeight: 22,
-    flexWrap: 'wrap',
+    lineHeight: 20,
   },
   filterContainer: {
     padding: 15,
@@ -386,41 +388,35 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: '#f5f5f5',
-    borderWidth: 1,
-    borderColor: '#e0e0e0',
     borderRadius: 8,
-    paddingHorizontal: 15,
-    paddingVertical: 4,
-    marginBottom: 20,
+    paddingHorizontal: 10,
+    marginBottom: 15,
   },
   searchIcon: {
-    marginRight: 12,
+    marginRight: 8,
   },
   searchInput: {
     flex: 1,
-    height: 48,
-    fontSize: 16,
-    paddingVertical: 8,
-    fontWeight: '400',
-    color: '#333',
+    height: 40,
+    fontSize: 15,
   },
   filtersRow: {
     marginBottom: 10,
   },
   filterDropdown: {
-    marginBottom: 15,
+    marginBottom: 12,
   },
   filterLabel: {
     fontSize: 14,
     fontWeight: '600',
-    marginBottom: 8,
     color: '#333',
+    marginBottom: 8,
   },
   filterChip: {
-    backgroundColor: '#f0f0f0',
     paddingHorizontal: 15,
     paddingVertical: 8,
     borderRadius: 20,
+    backgroundColor: '#f5f5f5',
     marginRight: 10,
     borderWidth: 1,
     borderColor: '#e0e0e0',
@@ -430,24 +426,26 @@ const styles = StyleSheet.create({
     borderColor: theme.colors.primary,
   },
   filterChipText: {
-    color: '#666',
-    fontWeight: '500',
+    fontSize: 14,
+    color: '#333',
   },
   activeFilterChipText: {
     color: '#fff',
+    fontWeight: '500',
   },
   resetButton: {
-    backgroundColor: theme.colors.accent,
-    paddingVertical: 8,
-    paddingHorizontal: 15,
-    borderRadius: 20,
-    alignSelf: 'flex-start',
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: theme.colors.primary,
+    paddingVertical: 8,
+    paddingHorizontal: 15,
+    borderRadius: 8,
+    alignSelf: 'center',
   },
   resetButtonText: {
     color: '#fff',
-    fontWeight: '500',
+    fontWeight: '600',
     marginLeft: 5,
   },
   jobsContainer: {
@@ -455,9 +453,9 @@ const styles = StyleSheet.create({
   },
   jobCard: {
     backgroundColor: '#fff',
-    borderRadius: 10,
-    padding: 20,
-    marginBottom: 20,
+    borderRadius: 12,
+    padding: 16,
+    marginBottom: 15,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
@@ -465,52 +463,74 @@ const styles = StyleSheet.create({
     elevation: 3,
   },
   jobHeader: {
-    flexDirection: 'column',
-    alignItems: 'flex-start',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     marginBottom: 12,
+  },
+  jobTitleContainer: {
+    flex: 1,
+    marginRight: 10,
   },
   jobTitle: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: theme.colors.primary,
+    color: '#333',
     marginBottom: 6,
-    flexWrap: 'wrap',
-    width: '100%',
+  },
+  jobMeta: {
+    flexDirection: 'column',
+  },
+  jobIcon: {
+    marginRight: 4,
   },
   jobLocation: {
     fontSize: 14,
     color: '#666',
-    flexWrap: 'wrap',
-    width: '100%',
     marginBottom: 4,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  jobDate: {
+    fontSize: 14,
+    color: '#666',
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  salaryContainer: {
+    alignItems: 'flex-end',
+  },
+  salaryAmount: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: theme.colors.primary,
+  },
+  salaryPeriod: {
+    fontSize: 12,
+    color: '#666',
+  },
+  categoryBadge: {
+    backgroundColor: '#f5f5f5',
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: 16,
+    alignSelf: 'flex-start',
+    marginBottom: 10,
+  },
+  categoryText: {
+    fontSize: 12,
+    color: '#555',
+    fontWeight: '600',
+  },
+  jobBody: {
+    marginBottom: 14,
   },
   jobDescription: {
     fontSize: 14,
-    color: '#444',
-    marginBottom: 14,
+    color: '#666',
     lineHeight: 20,
-    flexWrap: 'wrap',
-  },
-  jobMeta: {
-    flexDirection: 'column',
-    alignItems: 'flex-start',
-    marginBottom: 12,
-  },
-  jobDate: {
-    fontSize: 13,
-    color: '#999',
-    marginBottom: 4,
-    flexWrap: 'wrap',
-    width: '100%',
-  },
-  jobType: {
-    fontSize: 13,
-    color: '#999',
-    flexWrap: 'wrap',
-    width: '100%',
   },
   jobActions: {
-    marginTop: 15,
+    marginTop: 10,
   },
   applyButton: {
     backgroundColor: theme.colors.primary,
@@ -519,7 +539,6 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     alignItems: 'center',
     justifyContent: 'center',
-    minHeight: 45,
   },
   applyButtonText: {
     color: '#fff',
@@ -527,13 +546,35 @@ const styles = StyleSheet.create({
     fontSize: 15,
   },
   loadingContainer: {
-    padding: 30,
+    padding: 50,
     alignItems: 'center',
   },
   loadingText: {
-    marginTop: 10,
+    marginTop: 15,
     color: '#666',
     fontSize: 16,
+  },
+  errorContainer: {
+    padding: 30,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  errorText: {
+    marginTop: 10,
+    marginBottom: 15,
+    color: '#e53935',
+    fontSize: 16,
+    textAlign: 'center',
+  },
+  retryButton: {
+    backgroundColor: theme.colors.primary,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 8,
+  },
+  retryButtonText: {
+    color: '#fff',
+    fontWeight: '600',
   },
   noJobsContainer: {
     padding: 30,
