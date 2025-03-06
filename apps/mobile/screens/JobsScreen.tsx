@@ -108,14 +108,44 @@ const JobsScreen: React.FC = () => {
   // Locations for filtering
   const locations = ['Milwaukee, Wisconsin', 'Racine, Wisconsin', 'Dane County, Wisconsin'];
 
+  // API URL - replace with your actual website URL when deployed
+  const API_URL = 'https://www.lifegotbetterhomecare.com/api/jobs';
+  
+  // Fetch jobs from the API
+  const fetchJobs = async () => {
+    try {
+      const response = await fetch(API_URL);
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error('Error fetching jobs:', error);
+      // Fallback to sample jobs if API fails
+      return sampleJobs;
+    }
+  };
+
   // Load jobs on component mount
   useEffect(() => {
-    // Simulate API call
-    setTimeout(() => {
-      setJobs(sampleJobs);
-      setFilteredJobs(sampleJobs);
-      setLoading(false);
-    }, 1000);
+    const loadJobs = async () => {
+      setLoading(true);
+      try {
+        const jobsData = await fetchJobs();
+        setJobs(jobsData);
+        setFilteredJobs(jobsData);
+      } catch (error) {
+        console.error('Error loading jobs:', error);
+        // Fallback to sample jobs
+        setJobs(sampleJobs);
+        setFilteredJobs(sampleJobs);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadJobs();
   }, []);
 
   // Filter jobs based on search query and filters
@@ -148,15 +178,18 @@ const JobsScreen: React.FC = () => {
     filterJobs();
   }, [searchQuery, selectedCategory, selectedLocation]);
 
-  // Handle refresh
-  const onRefresh = () => {
+  // Refresh jobs
+  const onRefresh = async () => {
     setRefreshing(true);
-    // Simulate refreshing data
-    setTimeout(() => {
-      setJobs(sampleJobs);
-      setFilteredJobs(sampleJobs);
+    try {
+      const jobsData = await fetchJobs();
+      setJobs(jobsData);
+      setFilteredJobs(jobsData);
+    } catch (error) {
+      console.error('Error refreshing jobs:', error);
+    } finally {
       setRefreshing(false);
-    }, 1000);
+    }
   };
 
   // Reset all filters
