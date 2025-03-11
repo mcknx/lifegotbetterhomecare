@@ -5,7 +5,7 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
 
   const openPhone = () => {
-    Linking.openURL('tel:(414) 847-6498');
+    Linking.openURL('tel:1414-240-6913');
   };
 
   const openEmail = () => {
@@ -32,7 +32,7 @@ export function Footer() {
           <Text style={styles.text}>Milwaukee, WI 53210</Text>
           
           <TouchableOpacity onPress={openPhone}>
-            <Text style={styles.link}>(414) 847-6498</Text>
+            <Text style={styles.link}>1414-240-6913</Text>
           </TouchableOpacity>
           
           <TouchableOpacity onPress={openEmail}>

@@ -11,12 +11,14 @@
         .footer { text-align: center; margin-top: 20px; color: #64748b; font-size: 14px; }
         .logo { font-size: 24px; font-weight: bold; margin-bottom: 10px; }
         .button { background-color: #2563eb; color: white; padding: 12px 25px; text-decoration: none; border-radius: 5px; display: inline-block; margin-top: 15px; }
+        .map-link { color: #2563eb; text-decoration: underline; }
+        .highlight { background-color: #f0f9ff; border-left: 3px solid #2563eb; padding-left: 10px; }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <div class="logo">Life Got Better Home Healthcare</div>
+            <div class="logo">Life Got Better Home Care</div>
             <div>New Care Service Inquiry</div>
         </div>
         
@@ -30,21 +32,32 @@
             </div>
             
             <div class="info-item">
+                <span class="label">Location Information:</span><br>
+                {{user_location}}
+                <br><a href="https://www.google.com/maps/search/?api=1&query={{user_location}}" class="map-link" target="_blank">View on Map</a>
+            </div>
+            
+            <div class="info-item">
                 <span class="label">Care Details:</span><br>
                 Care Recipient: {{care_recipient}}<br>
-                Referral Source: {{referral_source}}
+                Referral Source: {{referral_source}}<br>
+                <br>
+                <div class="highlight">
+                    <strong>Care Needs:</strong><br>
+                    {{care_needs}}
+                </div>
             </div>
 
             <div style="text-align: center; margin-top: 30px;">
-                <a href="tel:(414) 847-6498" class="button">Contact Client</a>
+                <a href="tel:{{user_phone}}" class="button">Contact Client</a>
             </div>
         </div>
         
         <div class="footer">
-            <p>This inquiry was received from Life Got Better Home Healthcare's contact form.</p>
+            <p>This inquiry was received from Life Got Better Home Care's contact form.</p>
             <p>6001 W Center St, Suite 208<br>
             Milwaukee, WI 53210<br>
-            (414) 847-6498</p>
+            1414-240-6913</p>
         </div>
     </div>
 </body>

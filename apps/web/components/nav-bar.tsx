@@ -100,13 +100,13 @@ export function NavBar() {
           <Link 
             href="/" 
             className="flex items-center"
-            aria-label="Life Got Better Home Healthcare"
+            aria-label="Life Got Better Homecare"
           >
             <span className={cn(
               "md:text-md xl:text-2xl font-bold",
               scrolled ? "text-blue-600" : "text-white"
             )}>
-              Life Got Better Home Healthcare
+              Life Got Better Homecare
             </span>
           </Link>
 
@@ -126,7 +126,7 @@ export function NavBar() {
               aria-label="Call us"
             >
               <Phone className="w-4 h-4 mr-2" />
-              (414) 847-6498
+              1414-240-6913
             </Button>
           </div>
 
@@ -178,7 +178,7 @@ export function NavBar() {
               <div className="pt-2">
                 <Button className="w-full bg-blue-600 hover:bg-blue-700 transition-colors">
                   <Phone className="w-4 h-4 mr-2" />
-                  (414) 847-6498
+                  1414-240-6913
                 </Button>
               </div>
             </div>
