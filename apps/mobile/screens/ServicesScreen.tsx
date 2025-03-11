@@ -95,8 +95,11 @@ export const ServicesScreen: React.FC = () => {
     : services.filter(service => service.categories.includes(selectedCategory));
 
   const renderServiceCard = ({ item }: { item: typeof services[0] }) => (
-    <View style={styles.serviceCard}>
-
+    <View 
+      style={styles.serviceCard}
+      accessible={true}
+      accessibilityLabel={`${item.title}: ${item.description}`}
+    >
       <View style={styles.serviceCardContent}>
         <View style={styles.iconContainer}>
           <Feather name={item.icon as any} size={24} color={theme.colors.primary} />
@@ -109,12 +112,33 @@ export const ServicesScreen: React.FC = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView contentContainerStyle={styles.scrollContent}>
+      <ScrollView 
+        contentContainerStyle={styles.scrollContent}
+        showsVerticalScrollIndicator={true}
+        accessible={true}
+        accessibilityLabel="Services screen showing different care services offered"
+      >
         {/* Header */}
         <View style={styles.header}>
-          <Text style={styles.subtitle}>OUR EXPERTISE</Text>
-          <Text style={styles.title}>Commitment to your needs</Text>
-          <Text style={styles.description}>
+          <Text 
+            style={styles.subtitle}
+            accessible={true}
+            accessibilityLabel="Our expertise"
+          >
+            OUR EXPERTISE
+          </Text>
+          <Text 
+            style={styles.title}
+            accessible={true}
+            accessibilityLabel="Commitment to your needs"
+          >
+            Commitment to your needs
+          </Text>
+          <Text 
+            style={styles.description}
+            accessible={true}
+            accessibilityLabel="A specialist caregiver is available for any need. We are available in over 150 locations."
+          >
             A specialist caregiver is available for any need. We are available in 150+ locations.
           </Text>
         </View>
@@ -125,6 +149,8 @@ export const ServicesScreen: React.FC = () => {
           showsHorizontalScrollIndicator={false} 
           style={styles.categoriesContainer}
           contentContainerStyle={styles.categoriesContent}
+          accessible={true}
+          accessibilityLabel="Categories filter for services"
         >
           {categories.map(category => (
             <TouchableOpacity
@@ -134,6 +160,10 @@ export const ServicesScreen: React.FC = () => {
                 selectedCategory === category && styles.selectedCategoryButton
               ]}
               onPress={() => setSelectedCategory(category)}
+              accessible={true}
+              accessibilityLabel={`${category} category ${selectedCategory === category ? 'selected' : ''}`}
+              accessibilityRole="button"
+              accessibilityState={{ selected: selectedCategory === category }}
             >
               <Text 
                 style={[
@@ -158,7 +188,11 @@ export const ServicesScreen: React.FC = () => {
         />
 
         {/* Stats Box */}
-        <View style={styles.statsContainer}>
+        <View 
+          style={styles.statsContainer}
+          accessible={true}
+          accessibilityLabel="Statistics showing over 250 expert caregivers and over 150 locations"
+        >
           <View style={styles.statsBox}>
             <View style={styles.statsIconContainer}>
               <Feather name="users" size={20} color={theme.colors.primary} />
@@ -182,13 +216,26 @@ export const ServicesScreen: React.FC = () => {
         
         {/* Need Help Section */}
         <View style={styles.needHelpSection}>
-          <Text style={styles.needHelpTitle}>Need personalized assistance?</Text>
-          <Text style={styles.needHelpDescription}>
+          <Text 
+            style={styles.needHelpTitle}
+            accessible={true}
+            accessibilityLabel="Need personalized assistance?"
+          >
+            Need personalized assistance?
+          </Text>
+          <Text 
+            style={styles.needHelpDescription}
+            accessible={true}
+            accessibilityLabel="Our care specialists are available to help you find the right services for your needs."
+          >
             Our care specialists are available to help you find the right services for your needs.
           </Text>
           <TouchableOpacity 
             style={styles.contactButton}
             onPress={() => navigation.navigate('Contact' as never)}
+            accessible={true}
+            accessibilityLabel="Contact Us button"
+            accessibilityRole="button"
           >
             <Text style={styles.contactButtonText}>Contact Us</Text>
           </TouchableOpacity>
@@ -228,7 +275,8 @@ const styles = StyleSheet.create({
   },
   description: {
     textAlign: 'center',
-    color: theme.colors.textLight,
+    color: theme.colors.text,
+    opacity: 0.7,
     fontSize: 16,
     lineHeight: 24,
     marginBottom: 20,
@@ -250,7 +298,9 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.primary,
   },
   categoryText: {
-    color: theme.colors.textLight,
+    fontSize: 14,
+    color: theme.colors.text,
+    opacity: 0.7,
     fontWeight: '500',
   },
   selectedCategoryText: {
@@ -289,10 +339,10 @@ const styles = StyleSheet.create({
     color: theme.colors.text,
   },
   serviceDescription: {
-    color: theme.colors.textLight,
     fontSize: 14,
-    lineHeight: 20,
-    marginBottom: 12,
+    lineHeight: 21,
+    color: theme.colors.text,
+    opacity: 0.7,
   },
 
   statsContainer: {
@@ -320,8 +370,10 @@ const styles = StyleSheet.create({
     marginRight: 12,
   },
   statsLabel: {
-    fontSize: 14,
-    color: theme.colors.textLight,
+    fontSize: 12,
+    color: theme.colors.text,
+    opacity: 0.7,
+    marginBottom: 2,
   },
   statsNumber: {
     fontSize: 18,
@@ -341,10 +393,14 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   needHelpDescription: {
-    color: theme.colors.textLight,
-    fontSize: 14,
-    lineHeight: 20,
-    marginBottom: 16,
+    textAlign: 'center',
+    fontSize: 16,
+    lineHeight: 24,
+    color: theme.colors.text,
+    opacity: 0.7,
+    marginBottom: 20,
+    maxWidth: 300,
+    alignSelf: 'center',
   },
   contactButton: {
     backgroundColor: theme.colors.primary,

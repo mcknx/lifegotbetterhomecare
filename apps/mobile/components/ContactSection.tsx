@@ -83,27 +83,74 @@ export function ContactSection({ jobData }: ContactSectionProps) {
     setLocationLoading(true);
     
     try {
-      // Check for permissions first
-      let { status } = await Location.requestForegroundPermissionsAsync();
+      // Check for existing permissions first
+      let { status } = await Location.getForegroundPermissionsAsync();
       
+      // If permission not granted yet, show an explanation before requesting
       if (status !== 'granted') {
+        // Show explanation dialog
         Alert.alert(
-          'Location Permission Denied',
-          'We need location permission to connect you with nearby caregivers. You can enable this in your device settings.',
+          'Location Permission',
+          'We need your location to help match you with caregivers in your area. This helps us provide more personalized service. Your location is only used within the app and never shared with third parties.',
           [
-            { text: 'OK', style: 'cancel' },
             { 
-              text: 'Open Settings', 
+              text: 'Cancel', 
+              style: 'cancel',
               onPress: () => {
-                Linking.openSettings();
+                setLocationLoading(false);
+              }
+            },
+            { 
+              text: 'Continue', 
+              onPress: async () => {
+                // Now request the permission after explanation
+                const { status: newStatus } = await Location.requestForegroundPermissionsAsync();
+                if (newStatus !== 'granted') {
+                  Alert.alert(
+                    'Location Permission Denied',
+                    'You can still use the app, but we won\'t be able to suggest caregivers in your specific area. You can provide your zip code manually or enable location permission in your device settings later.',
+                    [
+                      { text: 'OK', style: 'cancel' },
+                      { 
+                        text: 'Open Settings', 
+                        onPress: () => {
+                          Linking.openSettings();
+                        }
+                      }
+                    ]
+                  );
+                  setLocationLoading(false);
+                  return;
+                } else {
+                  setLocationPermission(true);
+                  // Continue with getting location
+                  getLocation();
+                }
               }
             }
           ]
         );
-        setLocationLoading(false);
         return false;
+      } else {
+        // Permission already granted, get location
+        setLocationPermission(true);
+        return await getLocation();
       }
-      
+    } catch (error) {
+      console.error('Error with location permission:', error);
+      Alert.alert(
+        'Location Error',
+        'We couldn\'t access your location. Please try again or enter your zip code manually.',
+        [{ text: 'OK' }]
+      );
+      setLocationLoading(false);
+      return false;
+    }
+  };
+
+  // Separate function to get location after permission is granted
+  const getLocation = async (): Promise<boolean> => {
+    try {
       // Get current location
       const location = await Location.getCurrentPositionAsync({
         accuracy: Location.Accuracy.Balanced,

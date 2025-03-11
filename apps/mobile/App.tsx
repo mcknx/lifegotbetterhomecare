@@ -16,6 +16,8 @@ import ServicesScreen from './screens/ServicesScreen';
 import ContactScreen from './screens/ContactScreen';
 import JobsScreen from './screens/JobsScreen';
 import TrainingsScreen from './screens/TrainingsScreen';
+import PrivacyPolicy from './components/PrivacyPolicy';
+import TermsOfService from './components/TermsOfService';
 
 // Theme
 import { theme } from './theme';
@@ -47,8 +49,8 @@ function TabNavigator() {
             case 'Trainings':
               iconName = focused ? 'school' : 'school-outline';
               break;
-            case 'FindCare':
-              iconName = focused ? 'location' : 'location-outline';
+            case 'Contact':
+              iconName = focused ? 'mail' : 'mail-outline';
               break;
             default:
               iconName = 'help-circle-outline';
@@ -232,6 +234,16 @@ export default function App() {
           <Stack.Screen
             name="MainTabs"
             component={TabNavigator}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="PrivacyPolicy"
+            component={PrivacyPolicy}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="TermsOfService"
+            component={TermsOfService}
             options={{ headerShown: false }}
           />
         </Stack.Navigator>

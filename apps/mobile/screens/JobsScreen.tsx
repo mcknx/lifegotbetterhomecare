@@ -65,36 +65,64 @@ const JobsScreen: React.FC = () => {
   // API URL - updated to use the deployed endpoint
   const API_URL = 'https://lifegotbetterhomecare.com/api/jobs';
   
-  // Fetch jobs from the API
+  // Fetch jobs from the API with improved error handling
   const fetchJobs = async () => {
     try {
-      const response = await fetch(API_URL);
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
+      
+      const response = await fetch(API_URL, {
+        signal: controller.signal,
+        headers: {
+          'Cache-Control': 'no-cache',
+          'Pragma': 'no-cache'
+        }
+      });
+      
+      clearTimeout(timeoutId);
+      
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        throw new Error(`Server responded with ${response.status}: ${response.statusText}`);
       }
+      
       const data = await response.json();
       return data;
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error fetching jobs:', error);
-      // Don't fallback to sample jobs if API fails, just throw the error
-      throw error;
+      
+      // Provide more specific error message based on the error type
+      if (error instanceof TypeError && error.message.includes('Network request failed')) {
+        throw new Error('Network connection issue. Please check your internet connection and try again.');
+      } else if (error.name === 'AbortError') {
+        throw new Error('Request timed out. Please try again later when connection improves.');
+      } else {
+        throw new Error('Could not load jobs. Please try again later.');
+      }
     }
   };
 
-  // Load jobs on component mount
+  // Load jobs on component mount with improved error handling
   useEffect(() => {
     const loadJobs = async () => {
       setLoading(true);
+      setError(null); // Clear any previous errors
+      
       try {
         const jobsData = await fetchJobs();
-        setJobs(jobsData);
-        setFilteredJobs(jobsData);
-      } catch (error) {
+        
+        if (!jobsData || !Array.isArray(jobsData) || jobsData.length === 0) {
+          setJobs([]);
+          setFilteredJobs([]);
+          setError('No job listings are currently available. Please check back later for new opportunities.');
+        } else {
+          setJobs(jobsData);
+          setFilteredJobs(jobsData);
+        }
+      } catch (error: any) {
         console.error('Error loading jobs:', error);
-        // Don't fallback to sample jobs, just set empty arrays and show error
         setJobs([]);
         setFilteredJobs([]);
-        setError('Failed to load jobs. Please check your connection and try again.');
+        setError(error.message || 'Failed to load jobs. Please check your connection and try again.');
       } finally {
         setLoading(false);
       }
@@ -133,18 +161,26 @@ const JobsScreen: React.FC = () => {
     filterJobs();
   }, [searchQuery, selectedCategory, selectedLocation]);
 
-  // Refresh jobs
+  // Refresh jobs with improved error handling
   const onRefresh = async () => {
     setRefreshing(true);
     setError(null); // Clear any previous errors
+    
     try {
       const jobsData = await fetchJobs();
-      setJobs(jobsData);
-      setFilteredJobs(jobsData);
-    } catch (error) {
+      
+      if (!jobsData || !Array.isArray(jobsData) || jobsData.length === 0) {
+        setJobs([]);
+        setFilteredJobs([]);
+        setError('No job listings are currently available. Please check back later for new opportunities.');
+      } else {
+        setJobs(jobsData);
+        setFilteredJobs(jobsData);
+      }
+    } catch (error: any) {
       console.error('Error refreshing jobs:', error);
-      // Set error message instead of falling back to sample data
-      setError('Failed to refresh jobs. Please check your connection and try again.');
+      // We keep the old data but show an error message
+      setError(error.message || 'Failed to refresh jobs. Please check your connection and try again.');
     } finally {
       setRefreshing(false);
     }
@@ -317,36 +353,34 @@ const JobsScreen: React.FC = () => {
           )}
         </View>
 
-        {/* Jobs List or Error/Loading States */}
-        <View style={styles.jobsContainer}>
-          {loading ? (
-            <View style={styles.loadingContainer}>
-              <ActivityIndicator size="large" color={theme.colors.primary} />
-              <Text style={styles.loadingText}>Loading jobs...</Text>
-            </View>
-          ) : error ? (
-            <View style={styles.errorContainer}>
-              <Ionicons name="alert-circle-outline" size={50} color="#e53935" />
-              <Text style={styles.errorText}>{error}</Text>
-              <TouchableOpacity 
-                style={styles.retryButton}
-                onPress={onRefresh}
-              >
-                <Text style={styles.retryButtonText}>Try Again</Text>
-              </TouchableOpacity>
-            </View>
-          ) : filteredJobs.length > 0 ? (
-            filteredJobs.map(job => renderJobCard(job))
-          ) : (
-            <View style={styles.noJobsContainer}>
-              <Ionicons name="search-outline" size={50} color="#ccc" />
-              <Text style={styles.noJobsText}>No jobs found matching your criteria</Text>
-              <TouchableOpacity style={styles.resetButton} onPress={resetFilters}>
-                <Text style={styles.resetButtonText}>Reset Filters</Text>
-              </TouchableOpacity>
-            </View>
-          )}
-        </View>
+        {/* Loading and Error States */}
+        {loading && !refreshing ? (
+          <View style={styles.loadingContainer}>
+            <ActivityIndicator size="large" color={theme.colors.primary} />
+            <Text style={styles.loadingText}>Loading job opportunities...</Text>
+          </View>
+        ) : error ? (
+          <View style={styles.errorContainer}>
+            <Ionicons name="alert-circle-outline" size={50} color={theme.colors.error} />
+            <Text style={styles.errorText}>{error}</Text>
+            <TouchableOpacity style={styles.retryButton} onPress={onRefresh}>
+              <Text style={styles.retryButtonText}>Retry</Text>
+            </TouchableOpacity>
+          </View>
+        ) : filteredJobs.length === 0 ? (
+          <View style={styles.emptyContainer}>
+            <Ionicons name="search-outline" size={50} color={theme.colors.secondary} />
+            <Text style={styles.emptyText}>No jobs match your current filters.</Text>
+            <TouchableOpacity style={styles.resetButton} onPress={resetFilters}>
+              <Text style={styles.resetButtonText}>Reset Filters</Text>
+            </TouchableOpacity>
+          </View>
+        ) : (
+          // Job listings section
+          <View style={styles.jobsContainer}>
+            {filteredJobs.map(job => renderJobCard(job))}
+          </View>
+        )}
       </ScrollView>
     </SafeAreaView>
   );
@@ -546,45 +580,49 @@ const styles = StyleSheet.create({
     fontSize: 15,
   },
   loadingContainer: {
-    padding: 50,
+    padding: 40,
     alignItems: 'center',
+    justifyContent: 'center',
   },
   loadingText: {
-    marginTop: 15,
-    color: '#666',
+    marginTop: 12,
     fontSize: 16,
+    color: theme.colors.text,
+    textAlign: 'center',
   },
   errorContainer: {
-    padding: 30,
+    padding: 40,
     alignItems: 'center',
     justifyContent: 'center',
   },
   errorText: {
-    marginTop: 10,
-    marginBottom: 15,
-    color: '#e53935',
+    marginTop: 12,
+    marginBottom: 20,
     fontSize: 16,
+    color: theme.colors.error,
     textAlign: 'center',
   },
   retryButton: {
     backgroundColor: theme.colors.primary,
     paddingVertical: 10,
     paddingHorizontal: 20,
-    borderRadius: 8,
+    borderRadius: 25,
+    marginTop: 10,
   },
   retryButtonText: {
-    color: '#fff',
+    color: 'white',
     fontWeight: '600',
   },
-  noJobsContainer: {
-    padding: 30,
+  emptyContainer: {
+    padding: 40,
     alignItems: 'center',
+    justifyContent: 'center',
   },
-  noJobsText: {
-    marginTop: 10,
-    marginBottom: 15,
-    color: '#666',
+  emptyText: {
+    marginTop: 12,
+    marginBottom: 20,
     fontSize: 16,
+    color: theme.colors.text,
     textAlign: 'center',
   },
 });

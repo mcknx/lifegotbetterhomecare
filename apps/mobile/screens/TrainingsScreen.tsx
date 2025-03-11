@@ -142,7 +142,7 @@ const TrainingsScreen: React.FC = () => {
     };
   }, []);
 
-  // Request notification permissions
+  // Request notification permissions with better explanation
   useEffect(() => {
     const requestPermissions = async () => {
       try {
@@ -150,13 +150,41 @@ const TrainingsScreen: React.FC = () => {
         let finalStatus = existingStatus;
         
         if (existingStatus !== 'granted') {
-          const { status } = await Notifications.requestPermissionsAsync();
-          finalStatus = status;
-        }
-        
-        if (finalStatus === 'granted') {
-          // We're using local notifications only, so we don't need to fetch an Expo push token
-          // This removes the error message about invalid project ID
+          // Show explanation before requesting permission
+          Alert.alert(
+            'Training Notifications',
+            'Would you like to receive notifications about training updates and new classes? This helps you stay informed about training opportunities.',
+            [
+              { 
+                text: 'Not Now', 
+                style: 'cancel'
+              },
+              {
+                text: 'Allow Notifications',
+                onPress: async () => {
+                  const { status } = await Notifications.requestPermissionsAsync();
+                  finalStatus = status;
+                  
+                  if (finalStatus === 'granted') {
+                    setNotificationsEnabled(true);
+                    // Thank the user
+                    Alert.alert(
+                      'Notifications Enabled',
+                      'You will now receive updates about training programs. You can manage notifications in your device settings at any time.'
+                    );
+                  } else {
+                    // Respect user's choice
+                    Alert.alert(
+                      'Notifications Disabled',
+                      'You won\'t receive training updates. You can enable them in your device settings at any time.'
+                    );
+                  }
+                }
+              }
+            ]
+          );
+        } else {
+          // Already granted
           setNotificationsEnabled(true);
         }
       } catch (error) {
@@ -167,7 +195,7 @@ const TrainingsScreen: React.FC = () => {
     requestPermissions();
   }, []);
 
-  // Toggle notification for a specific training
+  // Toggle notification for a specific training with improved explanation
   const toggleTrainingNotification = async (training: Training, value: boolean) => {
     try {
       const newSubscriptions = { ...subscriptions };
@@ -175,38 +203,71 @@ const TrainingsScreen: React.FC = () => {
       setSubscriptions(newSubscriptions);
       
       if (value) {
-        // Request permission for local notifications
-        const { status } = await Notifications.getPermissionsAsync();
-        
-        if (status !== 'granted') {
-          const { status: newStatus } = await Notifications.requestPermissionsAsync();
-          
-          if (newStatus !== 'granted') {
-            Alert.alert(
-              'Permission Required',
-              'Please enable notifications in your device settings to receive training updates.',
-              [
-                { text: 'Cancel', style: 'cancel' },
-                { 
-                  text: 'Settings', 
-                  onPress: () => {
-                    if (Platform.OS === 'ios') {
-                      Linking.openURL('app-settings:');
-                    } else {
-                      Linking.openSettings();
-                    }
+        // If notifications aren't enabled yet, request permission
+        if (!notificationsEnabled) {
+          // Show explanation before requesting permission
+          Alert.alert(
+            'Training Notifications',
+            `To receive updates about the ${training.title} training, we need permission to send notifications.`,
+            [
+              { 
+                text: 'Not Now', 
+                style: 'cancel'
+              },
+              {
+                text: 'Allow Notifications',
+                onPress: async () => {
+                  const { status } = await Notifications.requestPermissionsAsync();
+                  
+                  if (status === 'granted') {
+                    setNotificationsEnabled(true);
+                    
+                    // Show an immediate confirmation
+                    await Notifications.presentNotificationAsync({
+                      title: `${training.title} Update`,
+                      body: `You're now subscribed to updates for ${training.title}. We'll notify you about new sessions and changes.`,
+                      data: { trainingId: training.id },
+                    });
+                    
+                    // Show confirmation
+                    Alert.alert(
+                      'Notification Enabled',
+                      `You will receive updates about the ${training.title} training.`
+                    );
+                  } else {
+                    // Respect user's choice and provide guidance
+                    newSubscriptions[training.id] = false;
+                    setSubscriptions(newSubscriptions);
+                    
+                    Alert.alert(
+                      'Notifications Access Required',
+                      'Please enable notifications in your device settings to receive training updates.',
+                      [
+                        { text: 'Not Now', style: 'cancel' },
+                        { 
+                          text: 'Open Settings', 
+                          onPress: () => {
+                            if (Platform.OS === 'ios') {
+                              Linking.openURL('app-settings:');
+                            } else {
+                              Linking.openSettings();
+                            }
+                          }
+                        }
+                      ]
+                    );
                   }
                 }
-              ]
-            );
-            return;
-          }
+              }
+            ]
+          );
+          return;
         }
         
-        // Show an immediate notification as a demonstration
+        // If permission is already granted, just show confirmation
         await Notifications.presentNotificationAsync({
           title: `${training.title} Update`,
-          body: `New ${training.title} session available. Check the class schedule!`,
+          body: `You're now subscribed to updates for ${training.title}. We'll notify you about new sessions and changes.`,
           data: { trainingId: training.id },
         });
         
