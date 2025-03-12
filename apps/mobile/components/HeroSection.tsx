@@ -44,7 +44,7 @@ export function HeroSection({ onContactPress }: HeroSectionProps) {
       
       <View style={styles.content}>
         <Text style={styles.title}>Life Got Better</Text>
-        <Text style={styles.subtitle}>Home Health Care</Text>
+        <Text style={styles.subtitle}>Home Care</Text>
         
         <Text style={styles.description}>
           Experience compassionate, top-quality care tailored to your loved one's needs. 

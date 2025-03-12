@@ -29,7 +29,7 @@ const NavigationBar = ({ activeSection, onSectionChange }: NavigationProps) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.logo}>Life Got Better Homecare</Text>
+      <Text style={styles.logo}>Life Got Better Home Care</Text>
       
       <TouchableOpacity 
         onPress={() => setMenuVisible(true)}

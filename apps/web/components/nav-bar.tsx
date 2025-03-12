@@ -100,13 +100,13 @@ export function NavBar() {
           <Link 
             href="/" 
             className="flex items-center"
-            aria-label="Life Got Better Homecare"
+            aria-label="Life Got Better Home Care"
           >
             <span className={cn(
               "md:text-md xl:text-2xl font-bold",
               scrolled ? "text-blue-600" : "text-white"
             )}>
-              Life Got Better Homecare
+              Life Got Better Home Care
             </span>
           </Link>
 
