@@ -19,6 +19,9 @@ import TrainingsScreen from './screens/TrainingsScreen';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import TermsOfService from './components/TermsOfService';
 
+// Components
+import ResponsiveContainer from './components/ResponsiveContainer';
+
 // Theme
 import { theme } from './theme';
 import { styles } from './AppStyles';
@@ -215,67 +218,66 @@ export default function App() {
   };
 
   return (
-    <SafeAreaProvider
-      style={{ flex: 1 }}
-      initialSafeAreaInsets={{ top: 0, right: 0, bottom: 34, left: 0 }} // Default insets for iPhone with home indicator
-    >
-      <NavigationContainer>
-        <Stack.Navigator
-          screenOptions={{
-            headerStyle: {
-              backgroundColor: theme.colors.white,
-            },
-            headerTintColor: theme.colors.primary,
-            headerTitleStyle: {
-              fontWeight: '600',
-            },
-          }}
-        >
-          <Stack.Screen
-            name="MainTabs"
-            component={TabNavigator}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="PrivacyPolicy"
-            component={PrivacyPolicy}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="TermsOfService"
-            component={TermsOfService}
-            options={{ headerShown: false }}
-          />
-        </Stack.Navigator>
-        <StatusBar style="auto" />
+    <SafeAreaProvider>
+      <ResponsiveContainer showDeviceFrame={true} phoneModel="standard">
+        <NavigationContainer>
+          <Stack.Navigator
+            screenOptions={{
+              headerStyle: {
+                backgroundColor: theme.colors.white,
+              },
+              headerTintColor: theme.colors.primary,
+              headerTitleStyle: {
+                fontWeight: '600',
+              },
+            }}
+          >
+            <Stack.Screen
+              name="MainTabs"
+              component={TabNavigator}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="PrivacyPolicy"
+              component={PrivacyPolicy}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="TermsOfService"
+              component={TermsOfService}
+              options={{ headerShown: false }}
+            />
+          </Stack.Navigator>
+          <StatusBar style="auto" />
 
-        {/* Native functionality demo buttons - floating at bottom right */}
-        <View style={styles.nativeFeaturesContainer}>
-          {/* <TouchableOpacity 
-            style={styles.featureButton} 
-            onPress={() => saveThemePreference(userThemePreference === 'default' ? 'dark' : 'default')}
-          >
-            <Ionicons name="color-palette-outline" size={20} color="#fff" />
-            <Text style={styles.buttonText}>Theme: {userThemePreference}</Text>
-          </TouchableOpacity> */}
-          
-          {/* <TouchableOpacity 
-            style={styles.featureButton} 
-            onPress={requestLocationPermission}
-          >
-            <Ionicons name="location-outline" size={20} color="#fff" />
-            <Text style={styles.buttonText}>{locationPermission ? 'Location Enabled' : 'Enable Location'}</Text>
-          </TouchableOpacity> */}
-          
-          {/* <TouchableOpacity 
-            style={styles.featureButton} 
-            onPress={shareAppInfo}
-          >
-            <Ionicons name="share-social-outline" size={20} color="#fff" />
-            <Text style={styles.buttonText}>Share App</Text>
-          </TouchableOpacity> */}
-        </View>
-      </NavigationContainer>
+          {/* Native Features Buttons */}
+          <View style={styles.nativeFeaturesContainer}>
+            {/* <TouchableOpacity 
+              style={styles.featureButton} 
+              onPress={() => saveThemePreference(userThemePreference === 'default' ? 'dark' : 'default')}
+            >
+              <Ionicons name="color-palette-outline" size={20} color="#fff" />
+              <Text style={styles.buttonText}>Theme: {userThemePreference}</Text>
+            </TouchableOpacity> */}
+            
+            {/* <TouchableOpacity 
+              style={styles.featureButton} 
+              onPress={requestLocationPermission}
+            >
+              <Ionicons name="location-outline" size={20} color="#fff" />
+              <Text style={styles.buttonText}>{locationPermission ? 'Location Enabled' : 'Enable Location'}</Text>
+            </TouchableOpacity> */}
+            
+            {/* <TouchableOpacity 
+              style={styles.featureButton} 
+              onPress={shareAppInfo}
+            >
+              <Ionicons name="share-social-outline" size={20} color="#fff" />
+              <Text style={styles.buttonText}>Share App</Text>
+            </TouchableOpacity> */}
+          </View>
+        </NavigationContainer>
+      </ResponsiveContainer>
     </SafeAreaProvider>
   );
 }
