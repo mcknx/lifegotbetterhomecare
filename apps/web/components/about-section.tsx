@@ -60,7 +60,7 @@ export function AboutSection() {
             >
               <div className="relative">
                 <Image
-                  src="https://media.gettyimages.com/id/1354179181/photo/shot-of-an-attractive-young-nurse-bonding-with-her-senior-patient-outside.jpg?s=1024x1024&w=gi&k=20&c=YuKQQ7xMgFv0jFA4Uh9T2xoq6Ubm8yZkfP6qnuU1RcI="
+                  src="/p2.png"
                   alt="Shot of an attractive young nurse bonding with her senior patient outside"
                   width={600}
                   height={400}
