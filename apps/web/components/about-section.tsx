@@ -9,7 +9,7 @@ export function AboutSection() {
     <section id="about" className="py-20 bg-white">
       <div className="container mx-auto px-4">
 
-        {/* About Us Section */}
+        {/* About Us Section asd*/}
         <div className="max-w-7xl mx-auto mb-20">
           <div className="grid md:grid-cols-2 gap-16 items-center">
             <motion.div
