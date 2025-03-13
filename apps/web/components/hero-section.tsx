@@ -37,7 +37,7 @@ export function HeroSection() {
           Life Got Better 
 
             <span className="block text-3xl sm:text-4xl lg:text-5xl text-[#F7C6C7] mt-2">
-            Home Care
+            Homecare
             </span>
           </h1>
 

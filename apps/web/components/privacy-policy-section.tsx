@@ -9,7 +9,7 @@ const PrivacyPolicySection = () => {
           <div>
             <h3 className="text-xl font-semibold mb-3 text-gray-700">Introduction</h3>
             <p className="mb-4">
-              Life Got Better Home Care ("we," "our," or "us") is committed to protecting your privacy. 
+              Life Got Better Homecare ("we," "our," or "us") is committed to protecting your privacy. 
               This Privacy Policy explains how we collect, use, disclose, and safeguard your information 
               when you use our website and mobile application.
             </p>

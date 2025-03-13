@@ -43,8 +43,7 @@ export function HeroSection({ onContactPress }: HeroSectionProps) {
       <View style={styles.overlay} />
       
       <View style={styles.content}>
-        <Text style={styles.title}>Life Got Better</Text>
-        <Text style={styles.subtitle}>Home Care</Text>
+        <Text style={styles.title}>Life Got Better Homecare</Text>
         
         <Text style={styles.description}>
           Experience compassionate, top-quality care tailored to your loved one's needs. 
@@ -92,15 +91,9 @@ const styles = StyleSheet.create({
     zIndex: 2,
   },
   title: {
-    fontSize: 28,
+    fontSize: 30,
     fontWeight: 'bold',
-    color: '#fff',
-    textAlign: 'center',
-    marginBottom: 8,
-  },
-  subtitle: {
-    fontSize: 24,
-    color: '#93c5fd',
+    color: '#F7C6C7',
     textAlign: 'center',
     marginBottom: 24,
   },
@@ -112,7 +105,7 @@ const styles = StyleSheet.create({
     lineHeight: 24,
   },
   button: {
-    backgroundColor: '#2563eb',
+    backgroundColor: '#9B59B6',
     paddingVertical: 12,
     paddingHorizontal: 24,
     borderRadius: 8,
