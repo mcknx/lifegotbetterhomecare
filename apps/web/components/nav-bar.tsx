@@ -37,9 +37,9 @@ const NavLink = ({
     onClick={(e) => onClick(e, id)}
     className={cn(
       "transition-colors duration-200",
-      "hover:text-blue-600",
-      isScrolled ? "text-gray-700" : "text-white",
-      "focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2",
+      "hover:text-[#9B59B6]",
+      isScrolled ? "text-[#3E3E3E]" : "text-white",
+      "focus:outline-none focus:ring-2 focus:ring-[#9B59B6] focus:ring-offset-2",
       "rounded-md px-3 py-2"
     )}
   >
@@ -104,7 +104,7 @@ export function NavBar() {
           >
             <span className={cn(
               "md:text-md xl:text-2xl font-bold",
-              scrolled ? "text-blue-600" : "text-white"
+              scrolled ? "text-[#9B59B6]" : "text-white"
             )}>
               Life Got Better Home Care
             </span>
@@ -122,7 +122,7 @@ export function NavBar() {
             ))}
 
             <Button 
-              className="bg-blue-600 hover:bg-blue-700 transition-colors ml-4"
+              className="bg-[#9B59B6] hover:bg-[#5D3F6A] transition-colors ml-4"
               aria-label="Call us"
             >
               <Phone className="w-4 h-4 mr-2" />
@@ -134,8 +134,8 @@ export function NavBar() {
           <button
             className={cn(
               "lg:hidden p-2 rounded-md",
-              "focus:outline-none focus:ring-2 focus:ring-blue-600",
-              scrolled ? "text-blue-900" : "text-white"
+              "focus:outline-none focus:ring-2 focus:ring-[#9B59B6]",
+              scrolled ? "text-[#3E3E3E]" : "text-white"
             )}
             onClick={() => setIsOpen(!isOpen)}
             aria-expanded={isOpen}
@@ -165,10 +165,10 @@ export function NavBar() {
                   onClick={(e) => handleNavClick(e, item.id)}
                   className={cn(
                     "block px-4 py-3 rounded-md",
-                    "text-gray-700 hover:text-blue-600",
-                    "hover:bg-blue-50 transition-colors",
-                    "focus:outline-none focus:ring-2 focus:ring-blue-600",
-                    activeSection === item.id && "bg-blue-50 text-blue-600"
+                    "text-[#3E3E3E] hover:text-[#9B59B6]",
+                    "hover:bg-[#F7C6C7]/10 transition-colors",
+                    "focus:outline-none focus:ring-2 focus:ring-[#9B59B6]",
+                    activeSection === item.id && "bg-[#F7C6C7]/20 text-[#9B59B6]"
                   )}
                   role="menuitem"
                 >
@@ -176,7 +176,7 @@ export function NavBar() {
                 </a>
               ))}
               <div className="pt-2">
-                <Button className="w-full bg-blue-600 hover:bg-blue-700 transition-colors">
+                <Button className="w-full bg-[#9B59B6] hover:bg-[#5D3F6A] transition-colors">
                   <Phone className="w-4 h-4 mr-2" />
                   1414-240-6913
                 </Button>

@@ -71,21 +71,21 @@ export function ContactForm() {
   }
 
   return (
-    <section id="contact" className="py-16 bg-gradient-to-b from-white to-[#EBF3FA]">
+    <section id="contact" className="py-16 bg-gradient-to-b from-white to-[#F7C6C7]/30">
       <div className="container mx-auto px-4">
         <div className="grid md:grid-cols-2 gap-12 items-start max-w-5xl mx-auto">
           {/* Left side - Form */}
           <div className="bg-white p-8 rounded-2xl shadow-md border border-gray-100">
-            <h2 className="text-2xl font-bold text-blue-600 mb-3">
+            <h2 className="text-2xl font-bold text-[#9B59B6] mb-3">
               Contact Us About Our Home Care
             </h2>
-            <p className="text-gray-600 text-sm mb-6">
-              Call <a href="tel:1414-240-6913" className="text-blue-600 hover:underline font-medium">1414-240-6913</a> or fill out the form below.
+            <p className="text-[#3E3E3E]/80 text-sm mb-6">
+              Call <a href="tel:1414-240-6913" className="text-[#9B59B6] hover:underline font-medium">1414-240-6913</a> or fill out the form below.
             </p>
 
             <form onSubmit={handleSubmit} className="space-y-5">
               <div className="space-y-3">
-                <p className="text-sm font-medium text-gray-700">I&apos;m interested in:</p>
+                <p className="text-sm font-medium text-[#3E3E3E]">I&apos;m interested in:</p>
                 <div className="flex gap-4">
                   <label className="flex items-center space-x-2 text-sm">
                     <input 
@@ -94,7 +94,7 @@ export function ContactForm() {
                       value="care" 
                       checked={serviceType === 'care'}
                       onChange={(e) => setServiceType(e.target.value)}
-                      className="text-blue-600 focus:ring-blue-600" 
+                      className="text-[#9B59B6] focus:ring-[#9B59B6]" 
                     />
                     <span>Home Care Services</span>
                   </label>
@@ -105,7 +105,7 @@ export function ContactForm() {
                       value="employment"
                       checked={serviceType === 'employment'}
                       onChange={(e) => setServiceType(e.target.value)}
-                      className="text-blue-600 focus:ring-blue-600" 
+                      className="text-[#9B59B6] focus:ring-[#9B59B6]" 
                     />
                     <span>Employment</span>
                   </label>
@@ -121,7 +121,7 @@ export function ContactForm() {
                         name="user_name"
                         placeholder="Name*"
                         required 
-                        className="w-full p-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-600 focus:border-blue-600"
+                        className="w-full p-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#9B59B6] focus:border-[#9B59B6]"
                       />
                     </div>
                     <div>
@@ -130,7 +130,7 @@ export function ContactForm() {
                         name="user_email"
                         placeholder="Email*"
                         required 
-                        className="w-full p-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-600 focus:border-blue-600"
+                        className="w-full p-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#9B59B6] focus:border-[#9B59B6]"
                       />
                     </div>
                   </div>
@@ -142,7 +142,7 @@ export function ContactForm() {
                         name="user_phone"
                         placeholder="Phone*"
                         required 
-                        className="w-full p-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-600 focus:border-blue-600"
+                        className="w-full p-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#9B59B6] focus:border-[#9B59B6]"
                       />
                     </div>
                     <div>
@@ -151,7 +151,7 @@ export function ContactForm() {
                         name="zip_code"
                         placeholder="Zip Code*"
                         required 
-                        className="w-full p-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-600 focus:border-blue-600"
+                        className="w-full p-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#9B59B6] focus:border-[#9B59B6]"
                       />
                     </div>
                   </div>
@@ -159,7 +159,7 @@ export function ContactForm() {
                   <div>
                     <select 
                       name="care_recipient" 
-                      className="w-full p-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-600 focus:border-blue-600 text-gray-600"
+                      className="w-full p-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#9B59B6] focus:border-[#9B59B6] text-[#3E3E3E]/80"
                       required
                     >
                       <option value="">Who needs care?*</option>
@@ -173,7 +173,7 @@ export function ContactForm() {
                   <div>
                     <select 
                       name="referral_source"
-                      className="w-full p-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-600 focus:border-blue-600 text-gray-600"
+                      className="w-full p-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#9B59B6] focus:border-[#9B59B6] text-[#3E3E3E]/80"
                       required
                     >
                       <option value="">How did you hear about us?*</option>
@@ -193,7 +193,7 @@ export function ContactForm() {
                         name="user_name"
                         placeholder="Full Name*"
                         required 
-                        className="w-full p-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-600 focus:border-blue-600"
+                        className="w-full p-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#9B59B6] focus:border-[#9B59B6]"
                       />
                     </div>
                     <div>
@@ -202,7 +202,7 @@ export function ContactForm() {
                         name="user_email"
                         placeholder="Email*"
                         required 
-                        className="w-full p-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-600 focus:border-blue-600"
+                        className="w-full p-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#9B59B6] focus:border-[#9B59B6]"
                       />
                     </div>
                   </div>
@@ -214,13 +214,13 @@ export function ContactForm() {
                         name="user_phone"
                         placeholder="Phone*"
                         required 
-                        className="w-full p-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-600 focus:border-blue-600"
+                        className="w-full p-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#9B59B6] focus:border-[#9B59B6]"
                       />
                     </div>
                     <div>
                       <select 
                         name="position_type"
-                        className="w-full p-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-600 focus:border-blue-600 text-gray-600"
+                        className="w-full p-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#9B59B6] focus:border-[#9B59B6] text-[#3E3E3E]/80"
                         required
                       >
                         <option value="">Position Interested In*</option>
@@ -235,7 +235,7 @@ export function ContactForm() {
                   <div>
                     <select 
                       name="experience_level"
-                      className="w-full p-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-600 focus:border-blue-600 text-gray-600"
+                      className="w-full p-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#9B59B6] focus:border-[#9B59B6] text-[#3E3E3E]/80"
                       required
                     >
                       <option value="">Years of Experience*</option>
@@ -249,7 +249,7 @@ export function ContactForm() {
                   <div>
                     <select 
                       name="availability"
-                      className="w-full p-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-600 focus:border-blue-600 text-gray-600"
+                      className="w-full p-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#9B59B6] focus:border-[#9B59B6] text-[#3E3E3E]/80"
                       required
                     >
                       <option value="">Availability*</option>
@@ -263,7 +263,7 @@ export function ContactForm() {
                     <textarea 
                       name="additional_info"
                       placeholder="Additional Information (Optional)"
-                      className="w-full p-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-600 focus:border-blue-600 min-h-[100px]"
+                      className="w-full p-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#9B59B6] focus:border-[#9B59B6] min-h-[100px]"
                     />
                   </div>
                 </>
@@ -272,7 +272,7 @@ export function ContactForm() {
               <button 
                 type="submit" 
                 disabled={isSubmitting}
-                className={`w-full bg-blue-600 hover:bg-blue-500 text-white py-2.5 px-4 rounded-lg transition-colors text-sm font-medium ${
+                className={`w-full bg-[#9B59B6] hover:bg-[#5D3F6A] text-white py-2.5 px-4 rounded-lg transition-colors text-sm font-medium ${
                   isSubmitting ? 'opacity-50 cursor-not-allowed' : ''
                 }`}
               >
@@ -287,7 +287,7 @@ export function ContactForm() {
                 <p className="text-red-600 text-sm">There was an error sending your message. Please try again.</p>
               )}
 
-              <p className="text-xs text-gray-500 leading-relaxed">
+              <p className="text-xs text-[#3E3E3E]/70 leading-relaxed">
                 By submitting this form, I agree to be contacted via call, email and text. 
                 Message and data rates may apply. Reply &apos;stop&apos; or click unsubscribe to opt out.
               </p>
@@ -301,7 +301,7 @@ export function ContactForm() {
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
-                className="text-sm font-medium text-blue-600 mb-2"
+                className="text-sm font-medium text-[#9B59B6] mb-2"
               >
                 WHY CHOOSE US
               </motion.p>
@@ -310,7 +310,7 @@ export function ContactForm() {
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
-                className="text-3xl font-bold text-blue-600 mb-4"
+                className="text-3xl font-bold text-[#9B59B6] mb-4"
               >
                 Careers.
                 <span className="block">We&apos;re hiring!</span>
@@ -320,7 +320,7 @@ export function ContactForm() {
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
-                className="text-gray-600 text-sm"
+                className="text-[#3E3E3E]/80 text-sm"
               >
                 Because our clients&apos; needs don&apos;t always follow traditional business hours, 
                 we offer unique flexibility in regards to working hours.
@@ -338,13 +338,13 @@ export function ContactForm() {
                   className="flex gap-4 items-start"
                 >
                   <div className="flex-shrink-0">
-                    <div className="w-10 h-10 rounded-lg bg-blue-600/10 flex items-center justify-center">
-                      <benefit.icon className="w-5 h-5 text-blue-600" />
+                    <div className="w-10 h-10 rounded-lg bg-[#9B59B6]/10 flex items-center justify-center">
+                      <benefit.icon className="w-5 h-5 text-[#9B59B6]" />
                     </div>
                   </div>
                   <div>
-                    <h3 className="font-medium text-gray-900 mb-1">{benefit.title}</h3>
-                    <p className="text-sm text-gray-600">{benefit.description}</p>
+                    <h3 className="font-medium text-[#3E3E3E] mb-1">{benefit.title}</h3>
+                    <p className="text-sm text-[#3E3E3E]/80">{benefit.description}</p>
                   </div>
                 </motion.div>
               ))}

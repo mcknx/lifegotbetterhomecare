@@ -19,8 +19,8 @@ export function AboutSection() {
               className="space-y-8"
             >
               <div className="space-y-6">
-                <h3 className="text-3xl font-bold text-gray-900">About Us</h3>
-                <div className="prose prose-lg text-gray-600">
+                <h3 className="text-3xl font-bold text-[#3E3E3E]">About Us</h3>
+                <div className="prose prose-lg text-[#3E3E3E]/80">
                   <p>
                     Life Got Better Staffing Services LLC, established in 2017 by Marlon C. Hood II, 
                     is dedicated staffing company that specializes in-connecting skilled medical 
@@ -35,16 +35,16 @@ export function AboutSection() {
                 </div>
               </div>
 
-              <div className="border-l-4 border-blue-600 pl-6 space-y-4">
-                <h4 className="text-2xl font-bold text-gray-900">Our Mission</h4>
-                <p className="text-gray-600">
+              <div className="border-l-4 border-[#9B59B6] pl-6 space-y-4">
+                <h4 className="text-2xl font-bold text-[#3E3E3E]">Our Mission</h4>
+                <p className="text-[#3E3E3E]/80">
                   Our mission at LGB Staffing is to forge connections between dedicated nurses 
                   and caregivers with healthcare facilities in need of vital clinical support. 
                   By providing flexible schedules and daily pay for nurses, we strive to ensure 
                   consistent coverage for facilities, ultimately guaranteeing the delivery of 
                   topnotch care to the individuals they serve.
                 </p>
-                <p className="text-gray-600">
+                <p className="text-[#3E3E3E]/80">
                   Our commitment lies in creating a seamless bridge between healthcare professionals 
                   and the facilities that rely on them, fostering a culture of reliability and 
                   excellence in patient care.
@@ -68,8 +68,8 @@ export function AboutSection() {
                 />
                 <div className="absolute -bottom-6 -right-6 bg-white rounded-xl shadow-lg p-6">
                   <div className="flex items-baseline gap-4">
-                    <span className="text-5xl font-bold text-blue-600">200+</span>
-                    <span className="text-gray-600">Healthcare<br />Professionals</span>
+                    <span className="text-5xl font-bold text-[#9B59B6]">200+</span>
+                    <span className="text-[#3E3E3E]/80">Healthcare<br />Professionals</span>
                   </div>
                 </div>
               </div>

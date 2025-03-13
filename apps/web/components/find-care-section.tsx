@@ -34,7 +34,7 @@ export function FindCareSection() {
   }
 
   return (
-    <div className="relative py-20 bg-[#f8fafc]">
+    <div className="relative py-20 bg-[#F7C6C7]/10">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           {/* Left side - Image */}
@@ -61,12 +61,12 @@ export function FindCareSection() {
               className="absolute -bottom-6 -right-6 bg-white rounded-2xl shadow-xl p-6 max-w-[300px]"
             >
               <div className="flex items-center gap-4">
-                <div className="bg-blue-600 p-3 rounded-full">
+                <div className="bg-[#9B59B6] p-3 rounded-full">
                   <Star className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-gray-900">Trusted Care Provider</h3>
-                  <p className="text-gray-600">Over 1,000 families served with 5-star ratings</p>
+                  <h3 className="font-semibold text-[#3E3E3E]">Trusted Care Provider</h3>
+                  <p className="text-[#3E3E3E]/80">Over 1,000 families served with 5-star ratings</p>
                 </div>
               </div>
             </motion.div>
@@ -79,13 +79,13 @@ export function FindCareSection() {
             viewport={{ once: true }}
             className="space-y-6"
           >
-            <h2 className="text-4xl md:text-5xl font-serif text-[#2563EB] leading-tight">
+            <h2 className="text-4xl md:text-5xl font-serif text-[#9B59B6] leading-tight">
               Compassionate <span className="italic">Home Care</span>.
               <br />
               For Your <span className="italic">Loved Ones</span>.
             </h2>
 
-            <p className="text-gray-700 text-lg">
+            <p className="text-[#3E3E3E] text-lg">
               Experience professional, personalized care that helps seniors live independently and families find peace of mind.
             </p>
 
@@ -95,16 +95,16 @@ export function FindCareSection() {
                 <button
                   onClick={() => setActiveTab('care')}
                   className={`pb-2 ${activeTab === 'care' 
-                    ? 'border-b-2 border-blue-600 text-blue-600 font-medium' 
-                    : 'text-gray-500'}`}
+                    ? 'border-b-2 border-[#9B59B6] text-[#9B59B6] font-medium' 
+                    : 'text-[#3E3E3E]/70'}`}
                 >
                   Find Care
                 </button>
                 <button
                   onClick={() => setActiveTab('jobs')}
                   className={`pb-2 ${activeTab === 'jobs' 
-                    ? 'border-b-2 border-blue-600 text-blue-600 font-medium' 
-                    : 'text-gray-500'}`}
+                    ? 'border-b-2 border-[#9B59B6] text-[#9B59B6] font-medium' 
+                    : 'text-[#3E3E3E]/70'}`}
                 >
                   Find Jobs
                 </button>
@@ -125,7 +125,7 @@ export function FindCareSection() {
                 <div className="flex flex-col sm:flex-row gap-4">
                   <Button 
                     size="lg"
-                    className="bg-blue-600 hover:bg-blue-500 text-white"
+                    className="bg-[#9B59B6] hover:bg-[#5D3F6A] text-white"
                     onClick={handleScheduleConsultation}
                   >
                     Schedule a Free Consultation
@@ -133,7 +133,7 @@ export function FindCareSection() {
                   <Button 
                     size="lg"
                     variant="outline"
-                    className="border-2 border-blue-600 text-blue-600 hover:bg-blue-600/10"
+                    className="border-2 border-[#9B59B6] text-[#9B59B6] hover:bg-[#9B59B6]/10"
                     onClick={() => router.push('#services')}
                   >
                     Learn About Our Services
@@ -144,7 +144,7 @@ export function FindCareSection() {
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button 
                   size="lg"
-                  className="bg-blue-600 hover:bg-blue-500 text-white"
+                  className="bg-[#9B59B6] hover:bg-[#5D3F6A] text-white"
                   onClick={handleViewPositions}
                 >
                   View Open Positions
@@ -152,7 +152,7 @@ export function FindCareSection() {
                 <Button 
                   size="lg"
                   variant="outline"
-                  className="border-2 border-blue-600 text-blue-600 hover:bg-blue-600/10"
+                  className="border-2 border-[#9B59B6] text-[#9B59B6] hover:bg-[#9B59B6]/10"
                   onClick={() => router.push('#contact')}
                 >
                   Learn About Careers

@@ -48,7 +48,7 @@ export function BenefitsSection() {
           viewport={{ once: true }}
           className="text-center max-w-3xl mx-auto mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-serif text-gray-800 mb-6">
+          <h2 className="text-4xl md:text-5xl font-serif text-[#3E3E3E] mb-6">
             What personalized care can look like
           </h2>
         </motion.div>
@@ -63,10 +63,10 @@ export function BenefitsSection() {
               transition={{ delay: index * 0.1 }}
               className="flex flex-col items-center text-center"
             >
-              <div className="w-16 h-16 bg-blue-600/10 rounded-full flex items-center justify-center mb-3">
-                <service.icon className="w-8 h-8 text-blue-600" />
+              <div className="w-16 h-16 bg-[#9B59B6]/10 rounded-full flex items-center justify-center mb-3">
+                <service.icon className="w-8 h-8 text-[#9B59B6]" />
               </div>
-              <h3 className="text-sm text-blue-600 font-medium">
+              <h3 className="text-sm text-[#9B59B6] font-medium">
                 {service.title}
               </h3>
             </motion.div>

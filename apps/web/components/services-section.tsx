@@ -65,7 +65,7 @@ export function ServicesSection() {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className="text-blue-600 font-medium mb-4"
+            className="text-[#9B59B6] font-medium mb-4"
           >
             EXPERTISE
           </motion.p>
@@ -73,7 +73,7 @@ export function ServicesSection() {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className="text-3xl sm:text-4xl font-bold text-gray-900 mb-6"
+            className="text-3xl sm:text-4xl font-bold text-[#3E3E3E] mb-6"
           >
             Commitment to your needs
           </motion.h2>
@@ -81,7 +81,7 @@ export function ServicesSection() {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className="text-lg text-gray-600"
+            className="text-lg text-[#3E3E3E]/80"
           >
             A specialist caregiver is available for any need. We are available in 150+ locations
             with modern facilities and experienced caregivers.
@@ -99,13 +99,13 @@ export function ServicesSection() {
               className="flex gap-4"
             >
               <div className="flex-shrink-0">
-                <div className="w-12 h-12 rounded-full bg-blue-600/10 flex items-center justify-center">
-                  <service.icon className="w-6 h-6 text-blue-600" />
+                <div className="w-12 h-12 rounded-full bg-[#9B59B6]/10 flex items-center justify-center">
+                  <service.icon className="w-6 h-6 text-[#9B59B6]" />
                 </div>
               </div>
               <div>
-                <h3 className="font-semibold text-gray-900 mb-2">{service.title}</h3>
-                <p className="text-sm text-gray-600">{service.description}</p>
+                <h3 className="font-semibold text-[#3E3E3E] mb-2">{service.title}</h3>
+                <p className="text-sm text-[#3E3E3E]/80">{service.description}</p>
               </div>
             </motion.div>
           ))}
@@ -117,13 +117,13 @@ export function ServicesSection() {
           viewport={{ once: true }}
           className="mt-12 text-center"
         >
-          <div className="inline-flex items-center gap-3 bg-blue-50 px-6 py-3 rounded-full">
-            <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
-              <Phone className="w-5 h-5 text-blue-600" />
+          <div className="inline-flex items-center gap-3 bg-[#F7C6C7]/20 px-6 py-3 rounded-full">
+            <div className="w-10 h-10 rounded-full bg-[#F7C6C7]/50 flex items-center justify-center">
+              <Phone className="w-5 h-5 text-[#9B59B6]" />
             </div>
             <div className="text-left">
-              <p className="text-sm text-gray-600">Expert Caregivers</p>
-              <p className="font-semibold text-gray-900">250+</p>
+              <p className="text-sm text-[#3E3E3E]/70">Expert Caregivers</p>
+              <p className="font-semibold text-[#3E3E3E]">250+</p>
             </div>
           </div>
         </motion.div>
