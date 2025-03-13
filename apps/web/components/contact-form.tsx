@@ -80,7 +80,7 @@ export function ContactForm() {
               Contact Us About Our Home Care
             </h2>
             <p className="text-[#3E3E3E]/80 text-sm mb-6">
-              Call <a href="tel:1414-240-6913" className="text-[#9B59B6] hover:underline font-medium">1414-240-6913</a> or fill out the form below.
+              Call <a href="tel:(414) 240-6913" className="text-[#9B59B6] hover:underline font-medium">(414) 240-6913</a> or fill out the form below.
             </p>
 
             <form onSubmit={handleSubmit} className="space-y-5">

@@ -482,7 +482,7 @@ export function ContactSection({ jobData }: ContactSectionProps) {
           <View style={styles.formContainer}>
             <Text style={styles.title}>Get Personalized Care Support</Text>
             <Text style={styles.subtitle}>
-              Call <Text style={styles.phoneLink}>1414-240-6913</Text> or fill out the form below.
+              Call <Text style={styles.phoneLink}>(414) 240-6913</Text> or fill out the form below.
             </Text>
 
             {/* Service Type Selection */}

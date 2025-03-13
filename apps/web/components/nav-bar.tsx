@@ -126,7 +126,7 @@ export function NavBar() {
               aria-label="Call us"
             >
               <Phone className="w-4 h-4 mr-2" />
-              1414-240-6913
+              (414) 240-6913
             </Button>
           </div>
 
@@ -178,7 +178,7 @@ export function NavBar() {
               <div className="pt-2">
                 <Button className="w-full bg-[#9B59B6] hover:bg-[#5D3F6A] transition-colors">
                   <Phone className="w-4 h-4 mr-2" />
-                  1414-240-6913
+                  (414) 240-6913
                 </Button>
               </div>
             </div>

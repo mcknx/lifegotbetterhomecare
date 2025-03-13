@@ -1,13 +1,14 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Linking, Dimensions } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { MaterialIcons } from '@expo/vector-icons';
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
   const navigation = useNavigation();
 
   const openPhone = () => {
-    Linking.openURL('tel:1414-240-6913');
+    Linking.openURL('tel:(414) 240-6913');
   };
 
   const openEmail = () => {
@@ -41,8 +42,9 @@ export function Footer() {
           <Text style={styles.text}>Suite 208</Text>
           <Text style={styles.text}>Milwaukee, WI 53210</Text>
           
-          <TouchableOpacity onPress={openPhone}>
-            <Text style={styles.link}>1414-240-6913</Text>
+          <TouchableOpacity onPress={openPhone} style={styles.contactItem}>
+            <MaterialIcons name="phone" size={20} color="#9B59B6" />
+            <Text style={styles.link}>(414) 240-6913</Text>
           </TouchableOpacity>
           
           <TouchableOpacity onPress={openEmail}>
@@ -129,5 +131,10 @@ const styles = StyleSheet.create({
     color: '#D1D5DB',
     fontSize: 12,
     textAlign: 'center',
+  },
+  contactItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
   },
 }); 
