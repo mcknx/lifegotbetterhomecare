@@ -60,7 +60,7 @@ export function AboutSection() {
             >
               <div className="relative">
                 <Image
-                  src="/p2.png"
+                  src="/p2-pink.png"
                   alt="Shot of an attractive young nurse bonding with her senior patient outside"
                   width={600}
                   height={400}

@@ -45,7 +45,7 @@ export function FindCareSection() {
             className="relative"
           >
             <Image 
-              src="/p1.png"
+              src="/p1-pink.png"
               alt="Senior woman receiving care at home"
               width={500}
               height={300}
