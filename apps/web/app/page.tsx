@@ -6,7 +6,6 @@ import { BenefitsSection } from "@/components/benefits-section"
 import { Footer } from "@/components/footer"
 import { FindCareSection } from "@/components/find-care-section"
 import { AboutSection } from "@/components/about-section"
-import { JobsSection } from "@/components/jobs-section"
 
 export default function Home() {
   return (
@@ -26,9 +25,6 @@ export default function Home() {
       </div>
       <div id="services">
         <ServicesSection />
-      </div>
-      <div id="jobs">
-        <JobsSection />
       </div>
       <div id="contact">
         <ContactForm />
