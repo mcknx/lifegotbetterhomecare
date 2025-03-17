@@ -8,22 +8,22 @@ export function ServicesSection() {
     {
       icon: Utensils,
       title: "Meal Preparation",
-      description: "Our caregivers provide daily meal preparation and serving for clients who are unable to cook. We ensure your loved ones receive proper nutrition while adhering to their dietary needs."
+      description: "Our care professionals provide daily meal preparation and serving for clients who are unable to cook. We ensure your loved ones receive proper nutrition while adhering to their dietary needs."
     },
     {
       icon: Stethoscope,
       title: "After Surgery Care / Post-Operative Care at Home",
-      description: "Returning home after a hospital stay can be challenging, especially for seniors. Our caregivers are here to support a smooth transition by monitoring health conditions and providing medication reminders to reduce the risk of setbacks."
+      description: "Returning home after a hospital stay can be challenging, especially for seniors. Our care professionals are here to support a smooth transition by monitoring health conditions and providing medication reminders to reduce the risk of setbacks."
     },
     {
       icon: Coffee,
       title: "Respite Care",
-      description: "Our caregivers offer respite care services, giving family caregivers the opportunity to take a well-deserved break. We provide exceptional care for your loved ones during scheduled visits, ensuring peace of mind while the family caregiver takes time off."
+      description: "Our care team offers respite care services, giving family care providers the opportunity to take a well-deserved break. We provide exceptional care for your loved ones during scheduled visits, ensuring peace of mind while the family care provider takes time off."
     },
     {
       icon: Car,
       title: "Errands and Senior Transportation",
-      description: "Our caregivers assist individuals who are unable to drive by offering transportation and handling their errands."
+      description: "Our care professionals assist individuals who are unable to drive by offering transportation and handling their errands."
     },
     {
       icon: Home,
@@ -38,17 +38,17 @@ export function ServicesSection() {
     {
       icon: Heart,
       title: "Companion Care",
-      description: "Seniors and adults with disabilities need not only quality care but also meaningful companionship. Our caregivers provide friendship and engage your loved ones in conversations and enjoyable activities to brighten their day."
+      description: "Seniors and adults with disabilities need not only quality care but also meaningful companionship. Our care professionals provide friendship and engage your loved ones in conversations and enjoyable activities to brighten their day."
     },
     {
       icon: AlertTriangle,
       title: "Elderly Fall Prevention",
-      description: "Our caregivers ensure the safety of your elderly loved ones at home by taking precautions to minimize fall risks. This includes maintaining a clutter-free environment and assisting them with moving safely around the house."
+      description: "Our care professionals ensure the safety of your elderly loved ones at home by taking precautions to minimize fall risks. This includes maintaining a clutter-free environment and assisting them with moving safely around the house."
     },
     {
       icon: Shield,
       title: "Personal Care and Grooming",
-      description: "Seniors and adults with disabilities may face challenges with personal tasks due to cognitive or physical limitations. Our caregivers provide assistance with all personal care activities, including restroom use, dressing, oral hygiene, bathing, and more."
+      description: "Seniors and adults with disabilities may face challenges with personal tasks due to cognitive or physical limitations. Our care professionals provide assistance with all personal care activities, including restroom use, dressing, oral hygiene, bathing, and more."
     }
   ]
 
@@ -83,8 +83,8 @@ export function ServicesSection() {
             viewport={{ once: true }}
             className="text-lg text-[#3E3E3E]/80"
           >
-            A specialist caregiver is available for any need. We are available in 150+ locations
-            with modern facilities and experienced caregivers.
+            A specialist care provider is available for any need. We are available in 150+ locations
+            with modern facilities and experienced care professionals.
           </motion.p>
         </motion.div>
 
@@ -122,7 +122,7 @@ export function ServicesSection() {
               <Phone className="w-5 h-5 text-[#9B59B6]" />
             </div>
             <div className="text-left">
-              <p className="text-sm text-[#3E3E3E]/70">Expert Caregivers</p>
+              <p className="text-sm text-[#3E3E3E]/70">Expert Care Professionals</p>
               <p className="font-semibold text-[#3E3E3E]">250+</p>
             </div>
           </div>

@@ -223,8 +223,8 @@ export function ContactForm() {
                         className="w-full p-2.5 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#9B59B6] focus:border-[#9B59B6] text-[#3E3E3E]/80"
                         required
                       >
-                        <option value="">Position Interested In*</option>
-                        <option value="caregiver">Caregiver</option>
+                        <option value="">Select Position*</option>
+                        <option value="care provider">Care Provider</option>
                         <option value="nurse">Nurse</option>
                         <option value="coordinator">Care Coordinator</option>
                         <option value="other">Other</option>

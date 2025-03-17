@@ -91,7 +91,7 @@ export function ContactSection({ jobData }: ContactSectionProps) {
         // Show explanation dialog
         Alert.alert(
           'Location Permission',
-          'We need your location to help match you with caregivers in your area. This helps us provide more personalized service. Your location is only used within the app and never shared with third parties.',
+          'We need your location to help match you with care providers in your area. This helps us provide more personalized service. Your location is only used within the app and never shared with third parties.',
           [
             { 
               text: 'Cancel', 
@@ -108,7 +108,7 @@ export function ContactSection({ jobData }: ContactSectionProps) {
                 if (newStatus !== 'granted') {
                   Alert.alert(
                     'Location Permission Denied',
-                    'You can still use the app, but we won\'t be able to suggest caregivers in your specific area. You can provide your zip code manually or enable location permission in your device settings later.',
+                    'You can still use the app, but we won\'t be able to suggest care providers in your specific area. You can provide your zip code manually or enable location permission in your device settings later.',
                     [
                       { text: 'OK', style: 'cancel' },
                       { 
@@ -209,7 +209,7 @@ export function ContactSection({ jobData }: ContactSectionProps) {
 
   // Dropdown options
   const positions = [
-    'Caregiver',
+    'Care Provider',
     'Nurse',
     'Care Coordinator',
     'Other'
@@ -295,7 +295,7 @@ export function ContactSection({ jobData }: ContactSectionProps) {
       if (serviceType === 'care' && !formData.location) {
         Alert.alert(
           'Location Missing',
-          'Adding your location helps us match you with nearby caregivers. Would you like to add your location now?',
+          'Adding your location helps us match you with nearby care providers. Would you like to add your location now?',
           [
             {
               text: 'Add Location',
@@ -504,7 +504,7 @@ export function ContactSection({ jobData }: ContactSectionProps) {
                       setTimeout(() => {
                         Alert.alert(
                           'Location Helps Us Serve You Better',
-                          'For home care services, sharing your location helps us connect you with caregivers in your area. Would you like to add your location?',
+                          'For home care services, sharing your location helps us connect you with care providers in your area. Would you like to add your location?',
                           [
                             { text: 'Add Location', onPress: requestLocation },
                             { text: 'Later', style: 'cancel' }
@@ -609,7 +609,7 @@ export function ContactSection({ jobData }: ContactSectionProps) {
                 </View>
                 {serviceType === 'care' && !formData.location && (
                   <Text style={styles.locationHelper}>
-                    Adding your precise location helps us match you with nearby caregivers
+                    Adding your precise location helps us match you with nearby care professionals
                   </Text>
                 )}
                 {formData.location && (

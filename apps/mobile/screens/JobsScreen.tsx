@@ -57,7 +57,7 @@ const JobsScreen: React.FC = () => {
   const [selectedLocation, setSelectedLocation] = useState('');
 
   // Categories for filtering
-  const categories = ['CNA', 'RN', 'CBRF', 'Caregiver'];
+  const categories = ['CNA', 'RN', 'CBRF', 'Care Provider'];
   
   // Locations for filtering
   const locations = ['Milwaukee, Wisconsin', 'Racine, Wisconsin', 'Dane County, Wisconsin'];

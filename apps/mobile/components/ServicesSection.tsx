@@ -8,7 +8,7 @@ export function ServicesSection() {
     {
       icon: 'coffee',
       title: "Meal Preparation",
-      description: "Our caregivers provide daily meal preparation and serving for clients who are unable to cook."
+      description: "Our care professionals provide daily meal preparation and serving for clients who are unable to cook."
     },
     {
       icon: 'activity',
@@ -18,7 +18,7 @@ export function ServicesSection() {
     {
       icon: 'users',
       title: "Respite Care",
-      description: "Giving family caregivers a break while providing exceptional care for your loved ones."
+      description: "Giving family care providers a break while providing exceptional care for your loved ones."
     },
     {
       icon: 'map-pin',
@@ -38,12 +38,12 @@ export function ServicesSection() {
     {
       icon: 'smile',
       title: "Companion Care",
-      description: "Our caregivers provide friendship and engage your loved ones in conversations and enjoyable activities."
+      description: "Our care professionals provide friendship and engage your loved ones in conversations and enjoyable activities."
     },
     {
       icon: 'shield',
       title: "Elderly Fall Prevention",
-      description: "Our caregivers ensure safety by taking precautions to minimize fall risks and maintaining a clutter-free environment."
+      description: "Our care professionals ensure safety by taking precautions to minimize fall risks and maintaining a clutter-free environment."
     },
     {
       icon: 'user',
@@ -69,7 +69,7 @@ export function ServicesSection() {
         <Text style={styles.subtitle}>EXPERTISE</Text>
         <Text style={styles.title}>Commitment to your needs</Text>
         <Text style={styles.description}>
-          A specialist caregiver is available for any need. We are available in 150+ locations.
+          A specialist care provider is available for any need. We are available in 150+ locations.
         </Text>
       </View>
 
@@ -121,7 +121,7 @@ export function ServicesSection() {
             <Feather name="phone" size={20} color="#2563eb" />
           </View>
           <View>
-            <Text style={styles.statsLabel}>Expert Caregivers</Text>
+            <Text style={styles.statsLabel}>Expert Care Professionals</Text>
             <Text style={styles.statsNumber}>250+</Text>
           </View>
         </View>

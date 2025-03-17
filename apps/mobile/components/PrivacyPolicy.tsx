@@ -34,7 +34,7 @@ export const PrivacyPolicy = () => {
           We may collect several types of information from and about users of our application, including:
         </Text>
         <Text style={styles.bulletPoint}>• Personal information such as name, email address, phone number, and postal code</Text>
-        <Text style={styles.bulletPoint}>• Location information (with your permission) to help connect you with nearby caregivers</Text>
+        <Text style={styles.bulletPoint}>• Location information (with your permission) to help connect you with nearby care providers</Text>
         <Text style={styles.bulletPoint}>• Information about your device and internet connection</Text>
         
         <Text style={styles.sectionTitle}>How We Use Your Information</Text>
@@ -42,7 +42,7 @@ export const PrivacyPolicy = () => {
           We use the information we collect to:
         </Text>
         <Text style={styles.bulletPoint}>• Provide, maintain, and improve our services</Text>
-        <Text style={styles.bulletPoint}>• Process job applications and connect caregivers with those needing care</Text>
+        <Text style={styles.bulletPoint}>• Process job applications and connect care providers with those needing care</Text>
         <Text style={styles.bulletPoint}>• Send notifications about training programs or service updates (with your permission)</Text>
         <Text style={styles.bulletPoint}>• Respond to your inquiries and provide customer support</Text>
         
@@ -57,7 +57,7 @@ export const PrivacyPolicy = () => {
           We do not sell your personal information. We may share your information with:
         </Text>
         <Text style={styles.bulletPoint}>• Service providers who help us deliver our services</Text>
-        <Text style={styles.bulletPoint}>• Caregivers when you request care services (with your consent)</Text>
+        <Text style={styles.bulletPoint}>• Care providers when you request care services (with your consent)</Text>
         <Text style={styles.bulletPoint}>• Legal authorities when required by law</Text>
         
         <Text style={styles.sectionTitle}>Data Security</Text>

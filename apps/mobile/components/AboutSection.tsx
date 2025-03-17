@@ -37,7 +37,7 @@ export function AboutSection() {
           <Text style={styles.heading}>Our Mission</Text>
           <Text style={styles.text}>
             Our mission at LGB Staffing is to forge connections between dedicated nurses 
-            and caregivers with healthcare facilities in need of vital clinical support. 
+            with healthcare facilities in need of vital clinical support. 
             By providing flexible schedules and daily pay for nurses, we strive to ensure 
             consistent coverage for facilities.
           </Text>

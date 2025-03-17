@@ -34,7 +34,7 @@ export const HomeScreen: React.FC = () => {
       if (status !== 'granted') {
         Alert.alert(
           'Permission Denied',
-          'We need location permissions to find caregivers near you.',
+          'We need location permissions to find care providers near you.',
           [{ text: 'OK' }]
         );
         return;
