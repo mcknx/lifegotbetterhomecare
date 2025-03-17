@@ -25,8 +25,6 @@ const NAV_ITEMS: NavItem[] = [
 const UTILITY_NAV_ITEMS = [
   { href: "#find-care", label: "FIND A LOCATION", id: "find-care" },
   { href: "#contact", label: "REFER A PATIENT", id: "contact" },
-  { href: "#contact", label: "VOLUNTEER", id: "contact" },
-  { href: "#contact", label: "DONATE TO OUR FOUNDATION", id: "contact" },
   { href: "#contact", label: "CONTACT", id: "contact" },
 ]
 
