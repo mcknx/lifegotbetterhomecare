@@ -67,7 +67,7 @@ export function HeroSection() {
   }
   
   return (
-    <div className="relative min-h-screen w-full flex items-center overflow-hidden">
+    <div className="relative min-h-[88vh] w-full flex items-center overflow-hidden">
       {/* Decorative circles */}
       <div className="absolute top-1/4 right-10 w-64 h-64 bg-primary/10 rounded-full z-0"></div>
       <div className="absolute bottom-10 left-10 w-48 h-48 bg-primary/5 rounded-full z-0"></div>
@@ -100,7 +100,7 @@ export function HeroSection() {
       </div>
       
       {/* Content */}
-      <div className="relative z-10 w-full min-h-screen flex items-center">
+      <div className="relative z-10 w-full min-h-[80vh] flex items-center">
         <div className="container mx-auto px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-8">
           <div className="col-span-1 hidden lg:block">
             {/* Empty left column to push content to the right on desktop */}
@@ -141,7 +141,7 @@ export function HeroSection() {
         </div>
       </div>
       
-      {/* Controls */}
+      {/* Controls - positioned at bottom of the container */}
       <div className="absolute bottom-8 left-0 right-0 z-20 flex justify-center items-center space-x-3">
         {slides.map((_, index) => (
           <button

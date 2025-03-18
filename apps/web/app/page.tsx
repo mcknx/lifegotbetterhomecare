@@ -12,7 +12,7 @@ export default function Home() {
   return (
     <>
       <ServicesExpandedSection />
-      <main>
+      <main className="overflow-hidden">
         <NavBar />
         <div id="home">
           <HeroSection />
