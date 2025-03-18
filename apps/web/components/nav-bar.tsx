@@ -175,11 +175,22 @@ export function NavBar() {
         <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full -translate-y-1/2 translate-x-1/4"></div>
         <div className="container mx-auto px-6 flex justify-between items-center relative z-10">
           {/* Logo */}
-          <Link href="#home" className="flex-shrink-0 z-50">
-            <h1 className="text-2xl font-bold text-primary">
-              Life Got <span className="text-secondary">Better</span>
-              <span className="block text-sm text-slate-600 font-medium">Homecare</span>
-            </h1>
+          <Link href="#home" className="flex-shrink-0 z-50 flex items-center gap-3">
+            <div className="relative w-16 h-16">
+              <Image 
+                src="/LGBH_logo.png" 
+                alt="Life Got Better Homecare Logo" 
+                fill
+                className="object-contain"
+              />
+            </div>
+            <div>
+              <div className="text-xs text-primary mb-0.5 font-medium">Welcome to</div>
+              <h1 className="text-2xl font-bold text-primary">
+                Life Got <span className="text-secondary">Better</span>
+                <span className="block text-sm text-slate-600 font-medium">Homecare</span>
+              </h1>
+            </div>
           </Link>
 
           {/* Desktop Navigation */}
@@ -239,6 +250,17 @@ export function NavBar() {
                 className="fixed inset-0 z-40 bg-white"
               >
                 <div className="flex flex-col h-full pt-20 pb-6 px-6 overflow-y-auto">
+                  <div className="flex justify-center mb-6">
+                    <div className="relative w-20 h-20">
+                      <Image 
+                        src="/LGBH_logo.png" 
+                        alt="Life Got Better Homecare Logo" 
+                        fill
+                        className="object-contain"
+                      />
+                    </div>
+                  </div>
+                  
                   <div>
                     {navLinks.map((link) => (
                       <div key={link.name} className="border-b border-slate-100">

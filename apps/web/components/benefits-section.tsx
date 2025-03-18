@@ -1,46 +1,32 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Shield, Heart, Home, Car, Utensils, ClipboardList, Stethoscope } from 'lucide-react'
+import { UserPlus, Compass, Briefcase } from 'lucide-react'
 
 export function BenefitsSection() {
-  const services = [
+  const actions = [
     {
-      icon: Shield,
-      title: "Personal Care",
+      icon: UserPlus,
+      title: "Refer a Patient",
+      description: "Help someone get the care they deserve",
+      href: "#contact"
     },
     {
-      icon: Heart,
-      title: "Memory Care",
+      icon: Compass,
+      title: "Explore Services",
+      description: "Discover our comprehensive care solutions",
+      href: "#services"
     },
     {
-      icon: Home,
-      title: "Hospice Support",
-    },
-    {
-      icon: Car,
-      title: "Mobility Assistance",
-    },
-    {
-      icon: Utensils,
-      title: "Meal Prep",
-    },
-    {
-      icon: Car,
-      title: "Transportation",
-    },
-    {
-      icon: ClipboardList,
-      title: "Housekeeping",
-    },
-    {
-      icon: Stethoscope,
-      title: "Medication Reminders",
+      icon: Briefcase,
+      title: "Find a Job",
+      description: "Join our team of care professionals",
+      href: "#contact"
     }
   ]
 
   return (
-    <div className="py-16 relative bg-white">
+    <div className="py-24 relative bg-white">
       {/* Solid background that covers the video */}
       <div className="absolute inset-0 bg-gradient-to-b from-white to-slate-50 z-[1]"></div>
       
@@ -56,27 +42,31 @@ export function BenefitsSection() {
           className="text-center max-w-3xl mx-auto mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-serif text-[#3E3E3E] mb-6">
-            What personalized care can look like
+            How can we help you?
           </h2>
         </motion.div>
 
-        <div className="flex flex-wrap justify-center gap-8 md:gap-16">
-          {services.map((service, index) => (
-            <motion.div
+        <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+          {actions.map((action, index) => (
+            <motion.a
+              href={action.href}
               key={index}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className="flex flex-col items-center text-center"
+              className="flex flex-col items-center text-center p-8 rounded-2xl bg-white hover:bg-slate-50 transition-colors border border-slate-100 shadow-sm hover:shadow-md group"
             >
-              <div className="w-16 h-16 bg-[#9B59B6]/10 rounded-full flex items-center justify-center mb-3">
-                <service.icon className="w-8 h-8 text-[#9B59B6]" />
+              <div className="w-20 h-20 bg-[#9B59B6]/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-[#9B59B6]/20 transition-colors">
+                <action.icon className="w-10 h-10 text-[#9B59B6]" />
               </div>
-              <h3 className="text-sm text-[#9B59B6] font-medium">
-                {service.title}
+              <h3 className="text-xl font-medium text-[#3E3E3E] mb-3">
+                {action.title}
               </h3>
-            </motion.div>
+              <p className="text-slate-600 text-sm">
+                {action.description}
+              </p>
+            </motion.a>
           ))}
         </div>
       </div>

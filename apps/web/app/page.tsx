@@ -21,14 +21,14 @@ export default function Home() {
         <div id="benefits">
           <BenefitsSection />
         </div>
+        <div id="personalized-care">
+          <PersonalizedCareSection />
+        </div>
         <div id="find-care">
           <FindCareSection />
         </div>
         <div id="about">
           <AboutSection />
-        </div>
-        <div id="personalized-care">
-          <PersonalizedCareSection />
         </div>
         <div id="services">
           <ServicesSection />
