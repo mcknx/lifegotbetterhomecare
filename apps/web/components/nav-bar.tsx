@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Menu, Phone, X, Search } from 'lucide-react'
+import { Menu, Phone, X, Search, ChevronDown, MapPin, Mail } from 'lucide-react'
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { cn } from "@/lib/utils"
@@ -62,171 +62,257 @@ const UtilityNavLink = ({
 )
 
 export function NavBar() {
-  const [isOpen, setIsOpen] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
-  const [activeSection, setActiveSection] = useState("home")
+  const [isScrolled, setIsScrolled] = useState(false)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 0)
-
-      // Update active section based on scroll position
-      const sections = NAV_ITEMS.map(item => document.getElementById(item.id))
-      const scrollPosition = window.scrollY + 100
-
-      sections.forEach((section) => {
-        if (!section) return
-        const sectionTop = section.offsetTop
-        const sectionBottom = sectionTop + section.offsetHeight
-
-        if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
-          setActiveSection(section.id)
-        }
-      })
+      if (window.scrollY > 10) {
+        setIsScrolled(true)
+      } else {
+        setIsScrolled(false)
+      }
     }
 
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, sectionId: string) => {
-    e.preventDefault()
-    const element = document.getElementById(sectionId)
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' })
-      setIsOpen(false)
-      setActiveSection(sectionId)
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen)
+  }
+
+  const closeMobileMenu = () => {
+    setIsMobileMenuOpen(false)
+  }
+
+  const toggleDropdown = (dropdown: string) => {
+    if (activeDropdown === dropdown) {
+      setActiveDropdown(null)
+    } else {
+      setActiveDropdown(dropdown)
     }
   }
 
+  const navLinks = [
+    { name: 'Home', href: '#home' },
+    { 
+      name: 'Services', 
+      href: '#services',
+      dropdown: [
+        { name: 'Personal Care', href: '#services' },
+        { name: 'Companion Care', href: '#services' },
+        { name: 'Respite Care', href: '#services' },
+        { name: 'Meal Preparation', href: '#services' },
+        { name: 'Light Housekeeping', href: '#services' },
+        { name: 'Transportation', href: '#services' },
+      ]
+    },
+    { name: 'About Us', href: '#about' },
+    { name: 'Resources', href: '#resources' },
+    { name: 'Contact', href: '#contact' },
+  ]
+
   return (
-    <nav
-      className="fixed top-0 left-0 right-0 z-50 bg-white shadow-sm"
-      role="navigation"
-      aria-label="Main navigation"
-    >
-      {/* Utility Navigation */}
-      <div className="border-b border-gray-100 hidden md:block">
-        <div className="container mx-auto flex justify-end">
-          <div className="flex items-center">
-            {UTILITY_NAV_ITEMS.map((item) => (
-              <UtilityNavLink
-                key={item.id + "-utility"}
-                {...item}
-                onClick={handleNavClick}
-              />
-            ))}
+    <>
+      {/* Top Info Bar */}
+      <div className="bg-primary text-white py-2.5 hidden md:block">
+        <div className="container mx-auto px-6 flex justify-between items-center">
+          <div className="flex items-center space-x-6 text-sm">
+            <a href="tel:+15174209812" className="flex items-center gap-2 hover:text-white/90 transition-colors">
+              <Phone className="w-4 h-4" />
+              <span>(517) 420-9812</span>
+            </a>
+            <a href="mailto:lifegotbetterhomecare@gmail.com" className="flex items-center gap-2 hover:text-white/90 transition-colors">
+              <Mail className="w-4 h-4" />
+              <span>lifegotbetterhomecare@gmail.com</span>
+            </a>
+          </div>
+          <div className="flex items-center space-x-6 text-sm">
+            <div className="flex items-center gap-2">
+              <MapPin className="w-4 h-4" />
+              <span>3401 E Saginaw St, Lansing, MI 48912</span>
+            </div>
           </div>
         </div>
       </div>
 
       {/* Main Navigation */}
-      <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-20">
+      <header 
+        className={`sticky top-0 z-50 w-full transition-all duration-300 ${
+          isScrolled ? 'bg-white shadow-md py-3' : 'bg-white/95 py-4'
+        }`}
+      >
+        <div className="container mx-auto px-6 flex justify-between items-center">
           {/* Logo */}
-          <Link 
-            href="/" 
-            className="flex items-center"
-            aria-label="Life Got Better Homecare"
-          >
-            <div className="relative w-[240px] h-[60px] flex items-center">
-              <span className="text-xl font-bold text-[#9B59B6]">
-                Life Got Better
-                <span className="block text-lg text-[#333]">Homecare</span>
-              </span>
-            </div>
-            {/* <span className="text-[#777] text-sm ml-1 hidden xl:inline-block">We care where you are.</span> */}
+          <Link href="#home" className="flex-shrink-0 z-50">
+            <h1 className="text-2xl font-bold text-primary">
+              Life Got <span className="text-secondary">Better</span>
+              <span className="block text-sm text-slate-600 font-medium">Homecare</span>
+            </h1>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center">
-            <div className="flex items-center">
-              {NAV_ITEMS.map((item) => (
-                <NavLink
-                  key={item.id}
-                  {...item}
-                  onClick={handleNavClick}
-                />
-              ))}
-            </div>
-
-            <div className="ml-6 flex items-center">
-              <Button 
-                variant="ghost"
-                size="icon"
-                className="text-[#333] hover:text-[#9B59B6] hover:bg-transparent"
-                aria-label="Search"
-              >
-                <Search className="w-5 h-5" />
-              </Button>
-            </div>
-          </div>
+          <nav className="hidden lg:flex items-center space-x-1">
+            {navLinks.map((link) => (
+              <div key={link.name} className="relative group">
+                {link.dropdown ? (
+                  <div>
+                    <button
+                      onClick={() => toggleDropdown(link.name)}
+                      className="text-slate-700 font-medium px-4 py-2 rounded-lg flex items-center gap-1 hover:bg-slate-100 transition-colors focus-visible"
+                    >
+                      {link.name}
+                      <ChevronDown className="w-4 h-4" />
+                    </button>
+                    <AnimatePresence>
+                      {(activeDropdown === link.name || 
+                      // Show on hover for desktop
+                      (typeof window !== 'undefined' && window.innerWidth >= 1024)) && (
+                        <motion.div
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: 10 }}
+                          transition={{ duration: 0.2 }}
+                          className="absolute mt-2 w-60 bg-white rounded-lg shadow-lg border border-slate-200 overflow-hidden z-50 py-2 group-hover:block"
+                        >
+                          {link.dropdown.map((item) => (
+                            <Link
+                              key={item.name}
+                              href={item.href}
+                              className="block px-4 py-2.5 text-slate-700 hover:bg-slate-50 hover:text-primary transition-colors text-[15px]"
+                              onClick={closeMobileMenu}
+                            >
+                              {item.name}
+                            </Link>
+                          ))}
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                ) : (
+                  <Link
+                    href={link.href}
+                    className="text-slate-700 font-medium px-4 py-2 rounded-lg hover:bg-slate-100 transition-colors focus-visible block"
+                  >
+                    {link.name}
+                  </Link>
+                )}
+              </div>
+            ))}
+            <a
+              href="#find-care"
+              className="bg-primary hover:bg-primary/90 text-white ml-4 px-6 py-2.5 rounded-lg font-medium transition-colors shadow-sm hover:shadow focus-visible"
+            >
+              Find Care
+            </a>
+          </nav>
 
           {/* Mobile Menu Button */}
           <button
-            className="lg:hidden p-2 rounded-md text-[#333]"
-            onClick={() => setIsOpen(!isOpen)}
-            aria-expanded={isOpen}
-            aria-label="Toggle menu"
+            onClick={toggleMobileMenu}
+            className="lg:hidden flex items-center text-slate-700 focus:outline-none focus-visible z-50"
+            aria-label="Toggle mobile menu"
           >
-            {isOpen ? <X /> : <Menu />}
+            {isMobileMenuOpen ? (
+              <X className="w-6 h-6" />
+            ) : (
+              <Menu className="w-6 h-6" />
+            )}
           </button>
-        </div>
-      </div>
 
-      {/* Mobile Navigation */}
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.2 }}
-            className="lg:hidden bg-white border-t"
-            role="menu"
-          >
-            <div className="container mx-auto px-4 py-4 space-y-2">
-              {NAV_ITEMS.map((item) => (
-                <a
-                  key={item.id}
-                  href={item.href}
-                  onClick={(e) => handleNavClick(e, item.id)}
-                  className={cn(
-                    "block px-4 py-3 rounded-md",
-                    "text-[#3E3E3E] hover:text-[#9B59B6]",
-                    "hover:bg-[#F7C6C7]/10 transition-colors",
-                    "focus:outline-none focus:ring-2 focus:ring-[#9B59B6]",
-                    activeSection === item.id && "bg-[#F7C6C7]/20 text-[#9B59B6]"
-                  )}
-                  role="menuitem"
-                >
-                  {item.label}
-                </a>
-              ))}
-              <div className="pt-2 border-t mt-4">
-                {UTILITY_NAV_ITEMS.map((item) => (
-                  <a
-                    key={item.id + "-mobile"}
-                    href={item.href}
-                    onClick={(e) => handleNavClick(e, item.id)}
-                    className="block px-4 py-2 text-sm text-[#3E3E3E] hover:text-[#9B59B6]"
-                    role="menuitem"
-                  >
-                    {item.label}
-                  </a>
-                ))}
-              </div>
-              <div className="pt-2">
-                <Button className="w-full bg-[#9B59B6] hover:bg-[#5D3F6A] transition-colors">
-                  <Phone className="w-4 h-4 mr-2" />
-                  (414) 240-6913
-                </Button>
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </nav>
+          {/* Mobile Menu */}
+          <AnimatePresence>
+            {isMobileMenuOpen && (
+              <motion.div
+                initial={{ opacity: 0, x: '100%' }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: '100%' }}
+                transition={{ duration: 0.3 }}
+                className="fixed inset-0 z-40 bg-white"
+              >
+                <div className="flex flex-col h-full pt-20 pb-6 px-6 overflow-y-auto">
+                  <div>
+                    {navLinks.map((link) => (
+                      <div key={link.name} className="border-b border-slate-100">
+                        {link.dropdown ? (
+                          <div>
+                            <button
+                              onClick={() => toggleDropdown(link.name)}
+                              className="flex justify-between items-center w-full py-4 text-lg font-medium text-slate-700"
+                            >
+                              {link.name}
+                              <ChevronDown 
+                                className={`w-5 h-5 transition-transform ${
+                                  activeDropdown === link.name ? 'rotate-180' : ''
+                                }`} 
+                              />
+                            </button>
+                            <AnimatePresence>
+                              {activeDropdown === link.name && (
+                                <motion.div
+                                  initial={{ height: 0 }}
+                                  animate={{ height: 'auto' }}
+                                  exit={{ height: 0 }}
+                                  transition={{ duration: 0.3 }}
+                                  className="overflow-hidden pl-4 pb-2"
+                                >
+                                  {link.dropdown.map((item) => (
+                                    <Link
+                                      key={item.name}
+                                      href={item.href}
+                                      className="block py-3 text-slate-600 hover:text-primary"
+                                      onClick={closeMobileMenu}
+                                    >
+                                      {item.name}
+                                    </Link>
+                                  ))}
+                                </motion.div>
+                              )}
+                            </AnimatePresence>
+                          </div>
+                        ) : (
+                          <Link
+                            href={link.href}
+                            className="block py-4 text-lg font-medium text-slate-700 hover:text-primary"
+                            onClick={closeMobileMenu}
+                          >
+                            {link.name}
+                          </Link>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                  
+                  <div className="mt-8">
+                    <a
+                      href="#find-care"
+                      onClick={closeMobileMenu}
+                      className="block w-full bg-primary hover:bg-primary/90 text-white text-center px-6 py-3 rounded-lg font-medium text-lg"
+                    >
+                      Find Care
+                    </a>
+                    
+                    <div className="mt-8 space-y-4">
+                      <p className="text-center text-slate-500">Contact Us</p>
+                      <a href="tel:+15174209812" className="flex items-center justify-center gap-2 text-primary">
+                        <Phone className="w-5 h-5" />
+                        <span>(517) 420-9812</span>
+                      </a>
+                      <a href="mailto:lifegotbetterhomecare@gmail.com" className="flex items-center justify-center gap-2 text-primary text-sm text-center">
+                        <Mail className="w-5 h-5 flex-shrink-0" />
+                        <span>lifegotbetterhomecare@gmail.com</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+      </header>
+    </>
   )
 }
 
