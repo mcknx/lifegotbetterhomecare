@@ -28,29 +28,27 @@ export function ServicesExpandedSection() {
     {
       title: "HOME CARE SERVICES",
       services: [
-        { name: "Personal Care", href: "#services", description: "Expert care by highly skilled professionals" },
-        { name: "Home Health Aides", href: "#services", description: "Care and support for daily activities" },
-        { name: "Senior Care", href: "#services", description: "Keeping seniors safe and engaged at home" },
-        { name: "Pediatric Care", href: "#services", description: "Supporting children with special needs" },
-        { name: "24/7 & Live-in Care", href: "#services", description: "Around-the-clock home care for families" },
+        { name: "Personal Care", href: "/services", description: "Expert care by highly skilled professionals" },
+        { name: "Home Health Aides", href: "/services", description: "Care and support for daily activities" },
+        { name: "Senior Care", href: "/services", description: "Keeping seniors safe and engaged at home" },
+        { name: "Pediatric Care", href: "/services", description: "Supporting children with special needs" },
+        { name: "24/7 & Live-in Care", href: "/services", description: "Around-the-clock home care for families" },
       ]
     },
     {
       title: "HOME MEDICAL CARE",
       services: [
-        { name: "Chronic Disease Management", href: "#services", description: "Specialized medical care at home" },
-        { name: "Alzheimer's & Dementia Care", href: "#services", description: "Specialized memory support" },
-        { name: "Post-Operative Care", href: "#services", description: "Recovery support after hospital stays" },
-        { name: "Medication Management", href: "#services", description: "Ensuring proper medication adherence" }
+        { name: "Chronic Disease Management", href: "/services", description: "Specialized medical care at home" },
+        { name: "Alzheimer's & Dementia Care", href: "/services", description: "Specialized memory support" },
+        { name: "Post-Operative Care", href: "/services", description: "Recovery support after hospital stays" },
       ]
     },
     {
       title: "SPECIALTY SERVICES",
       services: [
-        { name: "Respite Care", href: "#services", description: "Relief for family caregivers" },
-        { name: "Fall Prevention", href: "#services", description: "Safety measures for elderly clients" },
-        { name: "Meal Preparation", href: "#services", description: "Nutritious meals for special diets" },
-        { name: "Transportation", href: "#services", description: "Safe transport to appointments" }
+        { name: "Fall Prevention", href: "/services", description: "Safety measures for elderly clients" },
+        { name: "Meal Preparation", href: "/services", description: "Nutritious meals for special diets" },
+        { name: "Transportation", href: "/services", description: "Safe transport to appointments" }
       ]
     }
   ]
@@ -109,7 +107,7 @@ export function ServicesExpandedSection() {
           
           {/* The services panel */}
           <motion.div 
-            className="services-panel relative z-50 w-full bg-white shadow-lg border-b border-slate-200 overflow-y-auto"
+            className="services-panel relative z-50 w-full bg-white shadow-lg border-b border-slate-200 overflow-y-auto mt-16 md:mt-20"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
@@ -152,7 +150,7 @@ export function ServicesExpandedSection() {
                     </ul>
                     {idx === 0 && (
                       <Link 
-                        href="#services" 
+                        href="/services" 
                         className="inline-flex items-center gap-1 mt-4 text-primary font-medium hover:underline"
                         onClick={closeServicesPanel}
                       >

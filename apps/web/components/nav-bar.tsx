@@ -102,42 +102,42 @@ export function NavBar() {
     {
       title: "HOME CARE SERVICES",
       services: [
-        { name: "Personal Care", href: "#services", description: "Expert care by highly skilled professionals" },
-        { name: "Home Health Aides", href: "#services", description: "Care and support for daily activities" },
-        { name: "Senior Care", href: "#services", description: "Keeping seniors safe and engaged at home" },
-        { name: "Pediatric Care", href: "#services", description: "Supporting children with special needs" },
-        { name: "24/7 & Live-in Care", href: "#services", description: "Around-the-clock home care for families" },
+        { name: "Personal Care", href: "/services", description: "Expert care by highly skilled professionals" },
+        { name: "Home Health Aides", href: "/services", description: "Care and support for daily activities" },
+        { name: "Senior Care", href: "/services", description: "Keeping seniors safe and engaged at home" },
+        { name: "Pediatric Care", href: "/services", description: "Supporting children with special needs" },
+        { name: "24/7 & Live-in Care", href: "/services", description: "Around-the-clock home care for families" },
       ]
     },
     {
       title: "HOME MEDICAL CARE",
       services: [
-        { name: "Chronic Disease Management", href: "#services", description: "Specialized medical care at home" },
-        { name: "Alzheimer's & Dementia Care", href: "#services", description: "Specialized memory support" },
-        { name: "Post-Operative Care", href: "#services", description: "Recovery support after hospital stays" },
-        { name: "Medication Management", href: "#services", description: "Ensuring proper medication adherence" }
+        { name: "Chronic Disease Management", href: "/services", description: "Specialized medical care at home" },
+        { name: "Alzheimer's & Dementia Care", href: "/services", description: "Specialized memory support" },
+        { name: "Post-Operative Care", href: "/services", description: "Recovery support after hospital stays" },
+        { name: "Medication Management", href: "/services", description: "Ensuring proper medication adherence" }
       ]
     },
     {
       title: "SPECIALTY SERVICES",
       services: [
-        { name: "Respite Care", href: "#services", description: "Relief for family caregivers" },
-        { name: "Fall Prevention", href: "#services", description: "Safety measures for elderly clients" },
-        { name: "Meal Preparation", href: "#services", description: "Nutritious meals for special diets" },
-        { name: "Transportation", href: "#services", description: "Safe transport to appointments" }
+        { name: "Respite Care", href: "/services", description: "Relief for family caregivers" },
+        { name: "Fall Prevention", href: "/services", description: "Safety measures for elderly clients" },
+        { name: "Meal Preparation", href: "/services", description: "Nutritious meals for special diets" },
+        { name: "Transportation", href: "/services", description: "Safe transport to appointments" }
       ]
     }
   ]
 
   const navLinks = [
-    { name: 'Home', href: '#home' },
+    { name: 'Home', href: '/' },
     { 
       name: 'Services', 
       href: '#services',
       hasPanel: true
     },
-    { name: 'About Us', href: '#about' },
-    { name: 'Resources', href: '#resources' },
+    { name: 'About Us', href: '/about' },
+    // { name: 'Resources', href: '#resources' },
     { name: 'Contact', href: '#contact' },
   ]
 
@@ -254,32 +254,57 @@ export function NavBar() {
                     </div>
                   </div>
                   
-                  <div>
+                  <nav className="flex flex-col space-y-4 mt-8">
                     {navLinks.map((link) => (
-                      <div key={link.name} className="border-b border-slate-100">
+                      <div key={link.name} className="w-full">
                         {link.hasPanel ? (
                           <button
-                            onClick={() => {
-                              closeMobileMenu();
-                              toggleServicesPanel();
-                            }}
-                            className="services-trigger flex justify-between items-center w-full py-4 text-lg font-medium text-slate-700"
+                            onClick={() => toggleDropdown('services')}
+                            className="flex items-center justify-between w-full p-4 text-lg font-medium text-slate-800 hover:bg-slate-50 rounded-lg"
                           >
-                            {link.name}
-                            <ChevronDown className="w-5 h-5" />
+                            <span>{link.name}</span>
+                            <ChevronDown 
+                              className={`w-5 h-5 transition-transform duration-200 ${
+                                activeDropdown === 'services' ? 'rotate-180' : ''
+                              }`} 
+                            />
                           </button>
                         ) : (
                           <Link
                             href={link.href}
-                            className="block py-4 text-lg font-medium text-slate-700 hover:text-primary"
+                            className="block p-4 text-lg font-medium text-slate-800 hover:bg-slate-50 rounded-lg"
                             onClick={closeMobileMenu}
                           >
                             {link.name}
                           </Link>
                         )}
+                        
+                        {/* Services dropdown content */}
+                        {link.hasPanel && activeDropdown === 'services' && (
+                          <div className="pl-4 pr-2 pb-2">
+                            {serviceCategories.map((category, idx) => (
+                              <div key={idx} className="mb-4">
+                                <h4 className="text-xs font-medium text-primary mb-2 ml-4">{category.title}</h4>
+                                <ul className="space-y-1">
+                                  {category.services.map((service, serviceIdx) => (
+                                    <li key={serviceIdx}>
+                                      <Link 
+                                        href="/services"
+                                        className="block pl-4 pr-2 py-2 text-sm text-slate-700 hover:bg-slate-50 rounded-lg"
+                                        onClick={closeMobileMenu}
+                                      >
+                                        {service.name}
+                                      </Link>
+                                    </li>
+                                  ))}
+                                </ul>
+                              </div>
+                            ))}
+                          </div>
+                        )}
                       </div>
                     ))}
-                  </div>
+                  </nav>
                   
                   <div className="mt-8">
                     <a

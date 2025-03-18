@@ -1,7 +1,8 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { UserPlus, Compass, Briefcase } from 'lucide-react'
+import { UserPlus, Compass, Briefcase, ArrowRight } from 'lucide-react'
+import Link from 'next/link'
 
 export function BenefitsSection() {
   const actions = [
@@ -69,6 +70,17 @@ export function BenefitsSection() {
             </motion.a>
           ))}
         </div>
+
+        <p className="text-lg text-slate-600 mb-8 max-w-3xl">
+          Our compassionate care professionals are here to support you and your loved ones with personalized home care that prioritizes dignity, comfort, and well-being.
+        </p>
+        
+        <Link 
+          href="/about" 
+          className="inline-flex items-center gap-2 text-primary font-medium hover:underline"
+        >
+          Learn more about us <ArrowRight className="w-4 h-4" />
+        </Link>
       </div>
     </div>
   )

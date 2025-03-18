@@ -55,7 +55,7 @@ export function AboutSection() {
                 Contact Us Today
               </Link>
               <Link 
-                href="#services" 
+                href="/services" 
                 className="inline-flex items-center justify-center gap-2 bg-white border-2 border-primary hover:bg-primary/5 text-primary px-6 py-3 rounded-lg font-medium text-lg transition-all"
               >
                 Our Services
