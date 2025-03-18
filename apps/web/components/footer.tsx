@@ -59,16 +59,16 @@ export function Footer() {
                   Companion Care
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <Link href="#" className="hover:text-[#F7C6C7] transition-colors">
                   Respite Care
                 </Link>
-              </li>
-              <li>
+              </li> */}
+              {/* <li>
                 <Link href="#" className="hover:text-[#F7C6C7] transition-colors">
                   Medication Management
                 </Link>
-              </li>
+              </li> */}
             </ul>
           </div>
 
@@ -84,11 +84,6 @@ export function Footer() {
               <li>
                 <Link href="#careers" className="hover:text-[#F7C6C7] transition-colors">
                   Careers
-                </Link>
-              </li>
-              <li>
-                <Link href="#" className="hover:text-[#F7C6C7] transition-colors">
-                  News & Media
                 </Link>
               </li>
               <li>
