@@ -2,10 +2,11 @@
 
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Menu, Phone, X, Search, ChevronDown, MapPin, Mail } from 'lucide-react'
+import { Menu, Phone, X, Search, ChevronDown, MapPin, Mail, ArrowRight } from 'lucide-react'
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { cn } from "@/lib/utils"
+import { useServicesPanel } from "@/lib/services-panel-context"
 import Image from "next/image"
 
 type NavItem = {
@@ -65,6 +66,7 @@ export function NavBar() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
+  const { toggleServicesPanel, openServicesPanel, closeServicesPanel } = useServicesPanel()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -95,19 +97,44 @@ export function NavBar() {
     }
   }
 
+  // Services dropdown content
+  const serviceCategories = [
+    {
+      title: "HOME CARE SERVICES",
+      services: [
+        { name: "Personal Care", href: "#services", description: "Expert care by highly skilled professionals" },
+        { name: "Home Health Aides", href: "#services", description: "Care and support for daily activities" },
+        { name: "Senior Care", href: "#services", description: "Keeping seniors safe and engaged at home" },
+        { name: "Pediatric Care", href: "#services", description: "Supporting children with special needs" },
+        { name: "24/7 & Live-in Care", href: "#services", description: "Around-the-clock home care for families" },
+      ]
+    },
+    {
+      title: "HOME MEDICAL CARE",
+      services: [
+        { name: "Chronic Disease Management", href: "#services", description: "Specialized medical care at home" },
+        { name: "Alzheimer's & Dementia Care", href: "#services", description: "Specialized memory support" },
+        { name: "Post-Operative Care", href: "#services", description: "Recovery support after hospital stays" },
+        { name: "Medication Management", href: "#services", description: "Ensuring proper medication adherence" }
+      ]
+    },
+    {
+      title: "SPECIALTY SERVICES",
+      services: [
+        { name: "Respite Care", href: "#services", description: "Relief for family caregivers" },
+        { name: "Fall Prevention", href: "#services", description: "Safety measures for elderly clients" },
+        { name: "Meal Preparation", href: "#services", description: "Nutritious meals for special diets" },
+        { name: "Transportation", href: "#services", description: "Safe transport to appointments" }
+      ]
+    }
+  ]
+
   const navLinks = [
     { name: 'Home', href: '#home' },
     { 
       name: 'Services', 
       href: '#services',
-      dropdown: [
-        { name: 'Personal Care', href: '#services' },
-        { name: 'Companion Care', href: '#services' },
-        { name: 'Respite Care', href: '#services' },
-        { name: 'Meal Preparation', href: '#services' },
-        { name: 'Light Housekeeping', href: '#services' },
-        { name: 'Transportation', href: '#services' },
-      ]
+      hasPanel: true
     },
     { name: 'About Us', href: '#about' },
     { name: 'Resources', href: '#resources' },
@@ -120,9 +147,9 @@ export function NavBar() {
       <div className="bg-primary text-white py-2.5 hidden md:block">
         <div className="container mx-auto px-6 flex justify-between items-center">
           <div className="flex items-center space-x-6 text-sm">
-            <a href="tel:+15174209812" className="flex items-center gap-2 hover:text-white/90 transition-colors">
+            <a href="tel:(414)240-6913" className="flex items-center gap-2 hover:text-white/90 transition-colors">
               <Phone className="w-4 h-4" />
-              <span>(517) 420-9812</span>
+              <span>(414) 240-6913</span>
             </a>
             <a href="mailto:lifegotbetterhomecare@gmail.com" className="flex items-center gap-2 hover:text-white/90 transition-colors">
               <Mail className="w-4 h-4" />
@@ -132,7 +159,7 @@ export function NavBar() {
           <div className="flex items-center space-x-6 text-sm">
             <div className="flex items-center gap-2">
               <MapPin className="w-4 h-4" />
-              <span>3401 E Saginaw St, Lansing, MI 48912</span>
+              <span>6001 W Center St, Suite 208, Milwaukee, WI 53210</span>
             </div>
           </div>
         </div>
@@ -156,41 +183,18 @@ export function NavBar() {
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-1">
             {navLinks.map((link) => (
-              <div key={link.name} className="relative group">
-                {link.dropdown ? (
-                  <div>
-                    <button
-                      onClick={() => toggleDropdown(link.name)}
-                      className="text-slate-700 font-medium px-4 py-2 rounded-lg flex items-center gap-1 hover:bg-slate-100 transition-colors focus-visible"
-                    >
-                      {link.name}
-                      <ChevronDown className="w-4 h-4" />
-                    </button>
-                    <AnimatePresence>
-                      {(activeDropdown === link.name || 
-                      // Show on hover for desktop
-                      (typeof window !== 'undefined' && window.innerWidth >= 1024)) && (
-                        <motion.div
-                          initial={{ opacity: 0, y: 10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          exit={{ opacity: 0, y: 10 }}
-                          transition={{ duration: 0.2 }}
-                          className="absolute mt-2 w-60 bg-white rounded-lg shadow-lg border border-slate-200 overflow-hidden z-50 py-2 group-hover:block"
-                        >
-                          {link.dropdown.map((item) => (
-                            <Link
-                              key={item.name}
-                              href={item.href}
-                              className="block px-4 py-2.5 text-slate-700 hover:bg-slate-50 hover:text-primary transition-colors text-[15px]"
-                              onClick={closeMobileMenu}
-                            >
-                              {item.name}
-                            </Link>
-                          ))}
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
+              <div 
+                key={link.name} 
+                className="relative group"
+              >
+                {link.hasPanel ? (
+                  <button
+                    onClick={toggleServicesPanel}
+                    className="services-trigger text-slate-700 font-medium px-4 py-2 rounded-lg flex items-center gap-1 hover:bg-slate-100 transition-colors focus-visible"
+                  >
+                    {link.name}
+                    <ChevronDown className="w-4 h-4 transition-transform duration-200" />
+                  </button>
                 ) : (
                   <Link
                     href={link.href}
@@ -236,42 +240,17 @@ export function NavBar() {
                   <div>
                     {navLinks.map((link) => (
                       <div key={link.name} className="border-b border-slate-100">
-                        {link.dropdown ? (
-                          <div>
-                            <button
-                              onClick={() => toggleDropdown(link.name)}
-                              className="flex justify-between items-center w-full py-4 text-lg font-medium text-slate-700"
-                            >
-                              {link.name}
-                              <ChevronDown 
-                                className={`w-5 h-5 transition-transform ${
-                                  activeDropdown === link.name ? 'rotate-180' : ''
-                                }`} 
-                              />
-                            </button>
-                            <AnimatePresence>
-                              {activeDropdown === link.name && (
-                                <motion.div
-                                  initial={{ height: 0 }}
-                                  animate={{ height: 'auto' }}
-                                  exit={{ height: 0 }}
-                                  transition={{ duration: 0.3 }}
-                                  className="overflow-hidden pl-4 pb-2"
-                                >
-                                  {link.dropdown.map((item) => (
-                                    <Link
-                                      key={item.name}
-                                      href={item.href}
-                                      className="block py-3 text-slate-600 hover:text-primary"
-                                      onClick={closeMobileMenu}
-                                    >
-                                      {item.name}
-                                    </Link>
-                                  ))}
-                                </motion.div>
-                              )}
-                            </AnimatePresence>
-                          </div>
+                        {link.hasPanel ? (
+                          <button
+                            onClick={() => {
+                              closeMobileMenu();
+                              toggleServicesPanel();
+                            }}
+                            className="services-trigger flex justify-between items-center w-full py-4 text-lg font-medium text-slate-700"
+                          >
+                            {link.name}
+                            <ChevronDown className="w-5 h-5" />
+                          </button>
                         ) : (
                           <Link
                             href={link.href}
@@ -296,9 +275,9 @@ export function NavBar() {
                     
                     <div className="mt-8 space-y-4">
                       <p className="text-center text-slate-500">Contact Us</p>
-                      <a href="tel:+15174209812" className="flex items-center justify-center gap-2 text-primary">
+                      <a href="tel:(414)240-6913" className="flex items-center justify-center gap-2 text-primary">
                         <Phone className="w-5 h-5" />
-                        <span>(517) 420-9812</span>
+                        <span>(414) 240-6913</span>
                       </a>
                       <a href="mailto:lifegotbetterhomecare@gmail.com" className="flex items-center justify-center gap-2 text-primary text-sm text-center">
                         <Mail className="w-5 h-5 flex-shrink-0" />
