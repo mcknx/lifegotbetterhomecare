@@ -35,7 +35,11 @@ export function FindCareSection() {
 
   return (
     <div className="relative py-24 bg-gradient-to-b from-white to-secondary/20">
-      <div className="container mx-auto px-6 lg:px-8">
+      {/* Decorative circles */}
+      <div className="absolute top-20 right-0 w-80 h-80 bg-primary/5 rounded-full translate-x-1/4"></div>
+      <div className="absolute bottom-10 left-10 w-40 h-40 bg-secondary/10 rounded-full"></div>
+      
+      <div className="container mx-auto px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16 items-center">
           {/* Left side - Image */}
           <motion.div

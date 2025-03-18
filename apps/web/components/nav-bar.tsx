@@ -144,8 +144,9 @@ export function NavBar() {
   return (
     <>
       {/* Top Info Bar */}
-      <div className="bg-primary text-white py-2.5 hidden md:block">
-        <div className="container mx-auto px-6 flex justify-between items-center">
+      <div className="bg-primary text-white py-2.5 hidden md:block relative">
+        <div className="absolute -top-5 left-10 w-16 h-16 bg-white/5 rounded-full"></div>
+        <div className="container mx-auto px-6 flex justify-between items-center relative z-10">
           <div className="flex items-center space-x-6 text-sm">
             <a href="tel:(414)240-6913" className="flex items-center gap-2 hover:text-white/90 transition-colors">
               <Phone className="w-4 h-4" />
@@ -169,9 +170,10 @@ export function NavBar() {
       <header 
         className={`sticky top-0 z-50 w-full transition-all duration-300 ${
           isScrolled ? 'bg-white shadow-md py-3' : 'bg-white/95 py-4'
-        }`}
+        } relative`}
       >
-        <div className="container mx-auto px-6 flex justify-between items-center">
+        <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full -translate-y-1/2 translate-x-1/4"></div>
+        <div className="container mx-auto px-6 flex justify-between items-center relative z-10">
           {/* Logo */}
           <Link href="#home" className="flex-shrink-0 z-50">
             <h1 className="text-2xl font-bold text-primary">

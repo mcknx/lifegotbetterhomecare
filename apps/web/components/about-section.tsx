@@ -8,7 +8,11 @@ import Link from "next/link"
 export function AboutSection() {
   return (
     <div className="relative py-24 bg-gradient-to-b from-white to-slate-50">
-      <div className="container mx-auto px-6 lg:px-8">
+      {/* Decorative circles */}
+      <div className="absolute top-10 right-10 w-64 h-64 bg-primary/5 rounded-full translate-x-1/3 -translate-y-1/4"></div>
+      <div className="absolute bottom-20 left-0 w-80 h-80 bg-secondary/5 rounded-full -translate-x-1/3 translate-y-1/4"></div>
+      
+      <div className="container mx-auto px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           {/* Left side - Content */}
           <motion.div

@@ -55,7 +55,11 @@ export function ServicesSection() {
 
   return (
     <div className="relative py-24 bg-white">
-      <div className="container mx-auto px-6 lg:px-8">
+      {/* Decorative circles */}
+      <div className="absolute top-0 left-0 w-72 h-72 bg-primary/5 rounded-full -translate-x-1/3"></div>
+      <div className="absolute bottom-0 right-0 w-60 h-60 bg-secondary/5 rounded-full translate-x-1/3 translate-y-1/3"></div>
+      
+      <div className="container mx-auto px-6 lg:px-8 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

@@ -40,8 +40,12 @@ export function BenefitsSection() {
   ]
 
   return (
-    <div className="py-16">
-      <div className="container mx-auto px-4">
+    <div className="py-16 relative">
+      {/* Decorative circles */}
+      <div className="absolute top-0 left-0 w-56 h-56 bg-primary/5 rounded-full -translate-x-1/4"></div>
+      <div className="absolute bottom-0 right-0 w-72 h-72 bg-primary/5 rounded-full translate-x-1/4 translate-y-1/4"></div>
+      
+      <div className="container mx-auto px-4 relative z-10">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

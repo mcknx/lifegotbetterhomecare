@@ -61,6 +61,10 @@ export function HeroSection() {
   
   return (
     <div className="relative min-h-[650px] w-full flex items-center overflow-hidden">
+      {/* Decorative circles */}
+      <div className="absolute top-1/4 right-10 w-64 h-64 bg-primary/10 rounded-full z-0"></div>
+      <div className="absolute bottom-10 left-10 w-48 h-48 bg-primary/5 rounded-full z-0"></div>
+      
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         {isClient && (
