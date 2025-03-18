@@ -184,18 +184,6 @@ export function NavBar() {
                 className="object-contain"
               />
             </div>
-            {/* <div>
-              <div className="text-xs text-primary mb-0.5 font-medium">Welcome to</div>
-              <Image 
-                src="/LGBH_logo.png" 
-                alt="Life Got Better Homecare Logo" 
-                fill
-                className="object-contain"
-              />
-              <h1 className="text-2xl font-bold text-primary">
-                Life Got Better Homecare!
-              </h1>
-            </div> */}
           </Link>
 
           {/* Desktop Navigation */}

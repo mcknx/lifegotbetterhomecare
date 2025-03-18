@@ -132,6 +132,27 @@ export function HeroSection() {
         </div>
       </div>
       
+      {/* Welcome Banner - Positioned just below the content and above the navigation dots */}
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 1 }}
+        className="absolute bottom-24 left-0 w-full z-20"
+      >
+        <div className="container mx-auto px-6">
+          <div className="bg-white/90 backdrop-blur-md px-8 py-4 rounded-full shadow-lg border-l-4 border-primary max-w-max mx-auto">
+            <div className="flex items-center gap-3">
+              <div className="flex flex-col items-center">
+                <span className="text-sm text-primary font-medium">Welcome to</span>
+                <h2 className="text-2xl md:text-3xl font-bold">
+                  <span className="text-primary">Life Got Better Homecare!</span>
+                </h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </motion.div>
+      
       {/* Controls - positioned at bottom of the container */}
       <div className="absolute bottom-8 left-0 right-0 z-20 flex justify-center items-center space-x-3">
         {slides.map((_, index) => (
