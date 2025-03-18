@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Utensils, Stethoscope, Coffee, Car, Home, ClipboardList, Heart, Shield, AlertTriangle, Phone, ChevronRight } from 'lucide-react'
+import { Utensils, Stethoscope, Coffee, Car, Home, ClipboardList, Heart, Shield, AlertTriangle, Phone, ChevronRight, ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 
 export function ServicesSection() {
@@ -100,25 +100,28 @@ export function ServicesSection() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mt-16 text-center"
+          className="mt-16 bg-gradient-to-r from-secondary/20 to-primary/10 p-8 rounded-2xl shadow-sm relative overflow-hidden"
         >
-          <div className="bg-secondary/20 p-8 rounded-2xl max-w-4xl mx-auto shadow-sm">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full -translate-y-1/2 translate-x-1/2 z-0"></div>
+          <div className="absolute bottom-0 left-0 w-48 h-48 bg-primary/5 rounded-full translate-y-1/3 -translate-x-1/3 z-0"></div>
+          
+          <div className="relative z-10">
             <div className="flex flex-col md:flex-row items-center justify-between gap-8">
               <div className="text-left">
                 <h3 className="text-2xl font-bold text-slate-800 mb-2">Need personalized care?</h3>
                 <p className="text-slate-600">Contact us today to discuss how we can help your loved ones.</p>
               </div>
-              <div className="flex flex-col sm:flex-row gap-4">
+              <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
                 <Link
                   href="#contact"
-                  className="group flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 text-white px-6 py-3 rounded-lg font-medium text-lg transition-all shadow-md hover:shadow-lg"
+                  className="inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 text-white px-6 py-3 rounded-lg font-medium text-lg transition-all shadow-md hover:shadow-lg"
                 >
                   Contact Us 
-                  <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Link>
                 <a
-                  href="tel:+15174209812"
-                  className="flex items-center justify-center gap-2 bg-white hover:bg-slate-50 text-primary border-2 border-primary px-6 py-3 rounded-lg font-medium text-lg transition-all"
+                  href="tel:(414)240-6913"
+                  className="inline-flex items-center justify-center gap-2 bg-white hover:bg-slate-50 text-primary border-2 border-primary px-6 py-3 rounded-lg font-medium text-lg transition-all"
                 >
                   <Phone className="w-5 h-5" />
                   Call Us
