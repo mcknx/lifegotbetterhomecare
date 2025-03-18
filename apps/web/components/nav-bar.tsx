@@ -176,7 +176,7 @@ export function NavBar() {
         <div className="container mx-auto px-6 flex justify-between items-center relative z-10">
           {/* Logo */}
           <Link href="#home" className="flex-shrink-0 z-50 flex items-center gap-3">
-            <div className="relative w-16 h-16">
+            <div className="relative w-[210px] h-[80px]">
               <Image 
                 src="/LGBH_logo.png" 
                 alt="Life Got Better Homecare Logo" 
@@ -184,13 +184,18 @@ export function NavBar() {
                 className="object-contain"
               />
             </div>
-            <div>
+            {/* <div>
               <div className="text-xs text-primary mb-0.5 font-medium">Welcome to</div>
+              <Image 
+                src="/LGBH_logo.png" 
+                alt="Life Got Better Homecare Logo" 
+                fill
+                className="object-contain"
+              />
               <h1 className="text-2xl font-bold text-primary">
-                Life Got <span className="text-secondary">Better</span>
-                <span className="block text-sm text-slate-600 font-medium">Homecare</span>
+                Life Got Better Homecare!
               </h1>
-            </div>
+            </div> */}
           </Link>
 
           {/* Desktop Navigation */}
