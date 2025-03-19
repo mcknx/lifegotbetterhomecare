@@ -21,7 +21,7 @@ export function Footer() {
             <div className="space-y-2">
               <p className="font-semibold text-white">Life Got Better, Inc.</p>
               <div className="flex items-start gap-2">
-                <MapPin className="w-5 h-5 mt-1 text-[#F7C6C7]" />
+                <MapPin className="w-5 h-5 mt-1 text-secondary" />
                 <div>
                   <p>6001 W Center St</p>
                   <p>Suite 208</p>
@@ -29,16 +29,16 @@ export function Footer() {
                 </div>
               </div>
               <div className="flex items-center gap-2">
-                <Phone className="w-4 h-4 text-[#F7C6C7]" />
+                <Phone className="w-4 h-4 text-secondary" />
                 <a 
                   href="tel:(414) 240-6913" 
-                  className="hover:text-[#F7C6C7] transition-colors"
+                  className="hover:text-secondary transition-colors"
                 >
                   (414) 240-6913
                 </a>
               </div>
               <div className="flex items-center gap-2">
-                <Mail className="w-5 h-5 text-[#F7C6C7]" />
+                <Mail className="w-5 h-5 text-secondary" />
                 <p>lifegotbetterhomecare@gmail.com</p>
               </div>
             </div>
@@ -49,17 +49,17 @@ export function Footer() {
             <h3 className="text-xl font-bold text-white mb-4">Our Services</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="#" className="hover:text-[#F7C6C7] transition-colors">
+                <Link href="#" className="hover:text-secondary transition-colors">
                   Personal Care
                 </Link>
               </li>
               <li>
-                <Link href="#" className="hover:text-[#F7C6C7] transition-colors">
+                <Link href="#" className="hover:text-secondary transition-colors">
                   Post-Operative Care
                 </Link>
               </li>
               <li>
-                <Link href="#" className="hover:text-[#F7C6C7] transition-colors">
+                <Link href="#" className="hover:text-secondary transition-colors">
                   Companion Care
                 </Link>
               </li>
@@ -81,22 +81,22 @@ export function Footer() {
             <h3 className="text-xl font-bold text-white mb-4">Company</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="#about" className="hover:text-[#F7C6C7] transition-colors">
+                <Link href="#about" className="hover:text-secondary transition-colors">
                   About Us
                 </Link>
               </li>
               <li>
-                <Link href="#careers" className="hover:text-[#F7C6C7] transition-colors">
+                <Link href="#careers" className="hover:text-secondary transition-colors">
                   Careers
                 </Link>
               </li>
               <li>
-                <Link href="/privacy" className="hover:text-[#F7C6C7] transition-colors">
+                <Link href="/privacy" className="hover:text-secondary transition-colors">
                   Privacy Policy
                 </Link>
               </li>
               <li>
-                <Link href="#contact" className="hover:text-[#F7C6C7] transition-colors">
+                <Link href="#contact" className="hover:text-secondary transition-colors">
                   Contact Us
                 </Link>
               </li>
@@ -136,13 +136,13 @@ export function Footer() {
               © {currentYear} Life Got Better, Inc. All Rights Reserved.
             </p>
             <div className="flex gap-6 text-sm">
-              <Link href="#" className="hover:text-[#F7C6C7] transition-colors">
+              <Link href="#" className="hover:text-secondary transition-colors">
                 Terms of Service
               </Link>
-              <Link href="/privacy" className="hover:text-[#F7C6C7] transition-colors">
+              <Link href="/privacy" className="hover:text-secondary transition-colors">
                 Privacy Policy
               </Link>
-              <Link href="#" className="hover:text-[#F7C6C7] transition-colors">
+              <Link href="#" className="hover:text-secondary transition-colors">
                 Accessibility
               </Link>
             </div>

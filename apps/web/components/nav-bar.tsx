@@ -39,7 +39,7 @@ const NavLink = ({
   <a
     href={href}
     onClick={(e) => onClick(e, id)}
-    className="text-[#333] hover:text-[#9B59B6] transition-colors px-4 py-2 text-3xl font-sans"
+    className="text-[#333] hover:text-primary transition-colors px-4 py-2 text-3xl font-sans"
   >
     {label}
   </a>
@@ -56,7 +56,7 @@ const UtilityNavLink = ({
   <a
     href={href}
     onClick={(e) => onClick(e, id)}
-    className="text-[#333] hover:text-[#9B59B6] transition-colors px-3 text-2xl font-sans"
+    className="text-[#333] hover:text-primary transition-colors px-3 text-2xl font-sans"
   >
     {label}
   </a>
