@@ -144,7 +144,7 @@ export function NavBar() {
   return (
     <>
       {/* Top Info Bar */}
-      <div className="bg-primary text-white py-2.5 hidden md:block relative">
+      <div className="bg-primary-dark text-white py-2.5 hidden md:block relative">
         <div className="absolute -top-5 left-10 w-16 h-16 bg-white/5 rounded-full"></div>
         <div className="container mx-auto px-6 flex justify-between items-center relative z-10">
           <div className="flex items-center space-x-6 text-sm">

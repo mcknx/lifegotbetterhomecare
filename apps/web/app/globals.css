@@ -99,4 +99,8 @@ body {
   .text-primary-dark {
     color: #4f2c5d;
   }
+  
+  .bg-primary-dark {
+    background-color: #4f2c5d;
+  }
 }
