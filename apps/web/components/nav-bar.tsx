@@ -39,7 +39,7 @@ const NavLink = ({
   <a
     href={href}
     onClick={(e) => onClick(e, id)}
-    className="text-foreground hover:text-primary transition-colors px-4 py-2 text-3xl font-sans"
+    className="text-foreground hover:text-primary-dark transition-colors px-4 py-2 text-3xl font-sans"
   >
     {label}
   </a>
@@ -56,7 +56,7 @@ const UtilityNavLink = ({
   <a
     href={href}
     onClick={(e) => onClick(e, id)}
-    className="text-foreground hover:text-primary transition-colors px-3 text-2xl font-sans"
+    className="text-foreground hover:text-primary-dark transition-colors px-3 text-2xl font-sans"
   >
     {label}
   </a>
@@ -186,7 +186,7 @@ export function NavBar() {
             </div>
             <div className="hidden md:flex flex-col">
               <span className="text-sm text-gray-800 font-medium">Welcome to</span>
-              <h2 className="text-3xl md:text-4xl lg:text-2xl max-[1550px]:text-4xl xl:text-5xl font-bold text-primary">Life Got Better Homecare!</h2>
+              <h2 className="text-3xl md:text-4xl lg:text-2xl max-[1550px]:text-4xl xl:text-5xl font-bold text-primary-dark">Life Got Better Homecare!</h2>
             </div>
           </Link>
 
@@ -288,7 +288,7 @@ export function NavBar() {
                           <div className="pl-4 pr-2 pb-2">
                             {serviceCategories.map((category, idx) => (
                               <div key={idx} className="mb-4">
-                                <h4 className="text-xs font-medium text-primary mb-2 ml-4">{category.title}</h4>
+                                <h4 className="text-xs font-medium text-primary-dark mb-2 ml-4">{category.title}</h4>
                                 <ul className="space-y-1">
                                   {category.services.map((service, serviceIdx) => (
                                     <li key={serviceIdx}>
@@ -321,11 +321,11 @@ export function NavBar() {
                     
                     <div className="mt-8 space-y-4">
                       <p className="text-center text-slate-500">Contact Us</p>
-                      <a href="tel:(414)240-6913" className="flex items-center justify-center gap-2 text-primary">
+                      <a href="tel:(414)240-6913" className="flex items-center justify-center gap-2 text-primary-dark">
                         <Phone className="w-5 h-5" />
                         <span>(414) 240-6913</span>
                       </a>
-                      <a href="mailto:lifegotbetterhomecare@gmail.com" className="flex items-center justify-center gap-2 text-primary text-sm text-center">
+                      <a href="mailto:lifegotbetterhomecare@gmail.com" className="flex items-center justify-center gap-2 text-primary-dark text-sm text-center">
                         <Mail className="w-5 h-5 flex-shrink-0" />
                         <span>lifegotbetterhomecare@gmail.com</span>
                       </a>

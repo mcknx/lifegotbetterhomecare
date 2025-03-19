@@ -95,4 +95,8 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+  
+  .text-primary-dark {
+    color: #4f2c5d;
+  }
 }

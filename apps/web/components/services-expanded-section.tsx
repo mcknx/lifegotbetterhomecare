@@ -128,7 +128,7 @@ export function ServicesExpandedSection() {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
                 {serviceCategories.map((category, idx) => (
                   <div key={idx} className="p-4 relative">
-                    <h3 className="text-sm font-medium text-primary mb-4">{category.title}</h3>
+                    <h3 className="text-sm font-medium text-primary-dark mb-4">{category.title}</h3>
                     <ul className="space-y-4">
                       {category.services.map((service, serviceIdx) => (
                         <li key={serviceIdx}>
@@ -137,7 +137,7 @@ export function ServicesExpandedSection() {
                             className="group block"
                             onClick={closeServicesPanel}
                           >
-                            <span className="block text-slate-800 font-medium text-base md:text-lg group-hover:text-primary transition-colors">
+                            <span className="block text-slate-800 font-medium text-base md:text-lg group-hover:text-primary-dark transition-colors">
                               {service.name}
                             </span>
                             <span className="text-sm text-slate-500 group-hover:text-slate-700 transition-colors">
@@ -150,7 +150,7 @@ export function ServicesExpandedSection() {
                     {idx === 0 && (
                       <Link 
                         href="/services" 
-                        className="inline-flex items-center gap-1 mt-4 text-primary font-medium hover:underline"
+                        className="inline-flex items-center gap-1 mt-4 text-primary-dark font-medium hover:underline"
                         onClick={closeServicesPanel}
                       >
                         View all services 

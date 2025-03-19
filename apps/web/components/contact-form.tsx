@@ -67,11 +67,11 @@ export function ContactForm() {
           className="max-w-5xl mx-auto"
         >
           <div className="text-center mb-12">
-            <span className="inline-block text-sm font-medium py-1 px-3 rounded-full bg-primary/10 text-primary mb-3">
+            <span className="inline-block text-sm font-medium py-1 px-3 rounded-full bg-primary/10 text-primary-dark mb-3">
               GET IN TOUCH
             </span>
             <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-4">
-              Ready to Experience <span className="text-primary">Better Care?</span>
+              Ready to Experience <span className="text-primary-dark">Better Care?</span>
             </h2>
             <p className="text-slate-600 max-w-2xl mx-auto">
               Contact us today to discuss your care needs or career opportunities. Our team is ready to provide the support and information you're looking for.
@@ -93,15 +93,15 @@ export function ContactForm() {
               <div className="flex items-start gap-4 mb-6">
                 <div className="flex-shrink-0">
                   <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
-                    <Mail className="w-5 h-5 text-primary" />
+                    <Mail className="w-5 h-5 text-primary-dark" />
                   </div>
                 </div>
                 <div>
-                  <h2 className="text-2xl font-bold text-primary mb-2">
+                  <h2 className="text-2xl font-bold text-primary-dark mb-2">
                     Contact Us About Our Home Care
                   </h2>
                   <p className="text-slate-600 text-sm">
-                    Call <a href="tel:(414) 240-6913" className="text-primary hover:underline font-medium">(414) 240-6913</a> or fill out the form below.
+                    Call <a href="tel:(414) 240-6913" className="text-primary-dark hover:underline font-medium">(414) 240-6913</a> or fill out the form below.
                   </p>
                 </div>
               </div>
@@ -122,7 +122,7 @@ export function ContactForm() {
                       <span className={`w-12 h-12 rounded-full flex items-center justify-center ${serviceType === 'care' ? 'bg-primary text-white' : 'bg-white text-slate-400 border border-slate-200'} transition-all group-hover:shadow-md`}>
                         <Heart className="w-5 h-5" />
                       </span>
-                      <span className={`ml-2 text-sm ${serviceType === 'care' ? 'font-medium text-primary' : 'text-slate-600'}`}>Home Care</span>
+                      <span className={`ml-2 text-sm ${serviceType === 'care' ? 'font-medium text-primary-dark' : 'text-slate-600'}`}>Home Care</span>
                     </label>
                     
                     <label className="relative flex items-center group cursor-pointer">
@@ -137,7 +137,7 @@ export function ContactForm() {
                       <span className={`w-12 h-12 rounded-full flex items-center justify-center ${serviceType === 'employment' ? 'bg-primary text-white' : 'bg-white text-slate-400 border border-slate-200'} transition-all group-hover:shadow-md`}>
                         <Users className="w-5 h-5" />
                       </span>
-                      <span className={`ml-2 text-sm ${serviceType === 'employment' ? 'font-medium text-primary' : 'text-slate-600'}`}>Employment</span>
+                      <span className={`ml-2 text-sm ${serviceType === 'employment' ? 'font-medium text-primary-dark' : 'text-slate-600'}`}>Employment</span>
                     </label>
                   </div>
                 </div>
@@ -382,7 +382,7 @@ export function ContactForm() {
               <div className="space-y-4">
                 <a href="tel:(414) 240-6913" className="flex items-center gap-3 p-3 hover:bg-slate-50 rounded-lg transition-colors">
                   <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                    <Phone className="w-5 h-5 text-primary" />
+                    <Phone className="w-5 h-5 text-primary-dark" />
                   </div>
                   <div>
                     <p className="text-sm text-slate-800 font-medium">(414) 240-6913</p>
@@ -392,7 +392,7 @@ export function ContactForm() {
                 
                 <a href="mailto:lifegotbetterhomecare@gmail.com" className="flex items-center gap-3 p-3 hover:bg-slate-50 rounded-lg transition-colors">
                   <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                    <Mail className="w-5 h-5 text-primary" />
+                    <Mail className="w-5 h-5 text-primary-dark" />
                   </div>
                   <div>
                     <p className="text-sm text-slate-800 font-medium">lifegotbetterhomecare@gmail.com</p>
@@ -402,7 +402,7 @@ export function ContactForm() {
                 
                 <div className="flex items-center gap-3 p-3 hover:bg-slate-50 rounded-lg transition-colors">
                   <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                    <MapPin className="w-5 h-5 text-primary" />
+                    <MapPin className="w-5 h-5 text-primary-dark" />
                   </div>
                   <div>
                     <p className="text-sm text-slate-800 font-medium">6001 W Center St, Suite 208</p>

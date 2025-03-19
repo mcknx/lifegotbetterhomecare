@@ -56,7 +56,7 @@ export function BenefitsSection() {
               className="flex flex-col items-center text-center p-8 rounded-2xl bg-white hover:bg-slate-50 transition-colors border border-slate-100 shadow-sm hover:shadow-md group"
             >
               <div className="w-20 h-20 bg-primary/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors">
-                <action.icon className="w-10 h-10 text-primary" />
+                <action.icon className="w-10 h-10 text-primary-dark" />
               </div>
               <h3 className="text-xl font-medium text-[#3E3E3E] mb-3">
                 {action.title}

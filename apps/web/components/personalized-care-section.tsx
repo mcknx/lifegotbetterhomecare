@@ -41,7 +41,7 @@ export function PersonalizedCareSection() {
             viewport={{ once: true }}
           >            
             <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-6">
-              Personalized Care, <span className="text-primary">Compassionate Support</span>
+              Personalized Care, <span className="text-primary-dark">Compassionate Support</span>
             </h2>
             
             <div className="space-y-6 text-slate-600">
@@ -49,7 +49,7 @@ export function PersonalizedCareSection() {
                 At Life Got Better Homecare, we understand that no two individuals are the same—that's why we provide personalized care designed around you. Whether it's personal care, post-operative support, or companionship, our compassionate caregivers tailor every service to fit your unique needs, preferences, and lifestyle.
               </p>
               
-              <p className="font-medium text-lg text-primary">
+              <p className="font-medium text-lg text-primary-dark">
                 Because care isn't one-size-fits-all—it's personal. Let us provide the support that feels like home.
               </p>
             </div>
@@ -66,7 +66,7 @@ export function PersonalizedCareSection() {
         >
           <div className="bg-white p-8 rounded-xl shadow-sm border border-slate-100 flex flex-col items-start">
             <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mb-5">
-              <UserCircle className="w-7 h-7 text-primary" />
+              <UserCircle className="w-7 h-7 text-primary-dark" />
             </div>
             <h3 className="text-xl font-semibold text-slate-800 mb-3">Individualized Approach</h3>
             <p className="text-slate-600">We create customized care plans tailored to your unique health needs, preferences, and lifestyle.</p>
@@ -74,7 +74,7 @@ export function PersonalizedCareSection() {
           
           <div className="bg-white p-8 rounded-xl shadow-sm border border-slate-100 flex flex-col items-start">
             <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mb-5">
-              <HeartHandshake className="w-7 h-7 text-primary" />
+              <HeartHandshake className="w-7 h-7 text-primary-dark" />
             </div>
             <h3 className="text-xl font-semibold text-slate-800 mb-3">Compassionate Caregivers</h3>
             <p className="text-slate-600">Our team delivers care with kindness, dignity, and respect, ensuring you feel comfortable and valued.</p>
@@ -82,7 +82,7 @@ export function PersonalizedCareSection() {
           
           <div className="bg-white p-8 rounded-xl shadow-sm border border-slate-100 flex flex-col items-start">
             <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mb-5">
-              <Sparkles className="w-7 h-7 text-primary" />
+              <Sparkles className="w-7 h-7 text-primary-dark" />
             </div>
             <h3 className="text-xl font-semibold text-slate-800 mb-3">Life-Enhancing Support</h3>
             <p className="text-slate-600">We go beyond basic care to provide services that improve your quality of life and promote independence.</p>
