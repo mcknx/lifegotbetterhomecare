@@ -9,25 +9,25 @@ body {
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 224 71% 4%;
+    --foreground: 285 34% 27%;  /* #4f2c5d deep purple for fonts */
     --card: 0 0% 100%;
-    --card-foreground: 224 71% 4%;
+    --card-foreground: 285 34% 27%;  /* #4f2c5d deep purple for fonts */
     --popover: 0 0% 100%;
-    --popover-foreground: 224 71% 4%;
-    --primary: 285 51% 27%;  /* #4f2c5d deeper purple */
+    --popover-foreground: 285 34% 27%;  /* #4f2c5d deep purple for fonts */
+    --primary: 283 59% 53%;  /* #9B59B6 lavender for theme */
     --primary-foreground: 0 0% 100%;
     --secondary: 342 83% 90%;  /* Soft pink (#F7C6C7) */
-    --secondary-foreground: 224 71% 4%;
+    --secondary-foreground: 285 34% 27%;  /* #4f2c5d deep purple for fonts */
     --muted: 220 14% 96%;
-    --muted-foreground: 220 8% 46%;
+    --muted-foreground: 285 34% 27%;  /* #4f2c5d deep purple for fonts */
     --accent: 327 73% 97%;
-    --accent-foreground: 285 51% 27%;
+    --accent-foreground: 283 59% 53%;  /* #9B59B6 lavender for theme */
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
     --border: 220 13% 91%;
     --input: 220 13% 91%;
-    --ring: 285 51% 27%;
-    --chart-1: 285 51% 27%;  /* #4f2c5d deeper purple */
+    --ring: 283 59% 53%;  /* #9B59B6 lavender for theme */
+    --chart-1: 283 59% 53%;  /* #9B59B6 lavender for theme */
     --chart-2: 342 83% 90%;  /* Soft pink */
     --chart-3: 197 37% 24%;
     --chart-4: 43 74% 66%;
@@ -41,7 +41,7 @@ body {
     --card-foreground: 210 20% 98%;
     --popover: 224 71% 4%;
     --popover-foreground: 210 20% 98%;
-    --primary: 285 51% 27%;  /* #4f2c5d deeper purple */
+    --primary: 283 59% 53%;  /* #9B59B6 lavender for theme */
     --primary-foreground: 210 20% 98%;
     --secondary: 215 27% 17%;
     --secondary-foreground: 210 20% 98%;
@@ -53,7 +53,7 @@ body {
     --destructive-foreground: 210 20% 98%;
     --border: 215 27% 17%;
     --input: 215 27% 17%;
-    --ring: 285 51% 27%;  /* #4f2c5d deeper purple */
+    --ring: 283 59% 53%;  /* #9B59B6 lavender for theme */
     --chart-1: 220 70% 50%;
     --chart-2: 160 60% 45%;
     --chart-3: 30 80% 55%;

@@ -129,7 +129,7 @@ export function Footer() {
       </div>
 
       {/* Bottom Bar */}
-      <div className="border-t border-[#9B59B6]/30 relative z-10">
+      <div className="border-t border-primary/30 relative z-10">
         <div className="container mx-auto px-4 py-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-sm" suppressHydrationWarning>

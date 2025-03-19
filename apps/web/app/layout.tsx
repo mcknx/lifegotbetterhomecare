@@ -29,6 +29,7 @@ export const metadata: Metadata = {
     statusBarStyle: 'default',
     title: 'Life Got Better Homecare',
   },
+  themeColor: '#9B59B6',
 };
 
 export default function RootLayout({
@@ -43,6 +44,7 @@ export default function RootLayout({
         <link rel="icon" type="image/png" sizes="16x16" href="/LGBH_logo.png" />
         <link rel="apple-touch-icon" sizes="180x180" href="/LGBH_logo.png" />
         <link rel="shortcut icon" href="/LGBH_logo.png" />
+        <meta name="theme-color" content="#9B59B6" />
       </head>
       <body className={`${montserrat.variable} font-sans antialiased overflow-x-hidden`}>
         <ServicesPanelProvider>

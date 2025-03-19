@@ -39,7 +39,7 @@ const NavLink = ({
   <a
     href={href}
     onClick={(e) => onClick(e, id)}
-    className="text-[#333] hover:text-primary transition-colors px-4 py-2 text-3xl font-sans"
+    className="text-foreground hover:text-primary transition-colors px-4 py-2 text-3xl font-sans"
   >
     {label}
   </a>
@@ -56,7 +56,7 @@ const UtilityNavLink = ({
   <a
     href={href}
     onClick={(e) => onClick(e, id)}
-    className="text-[#333] hover:text-primary transition-colors px-3 text-2xl font-sans"
+    className="text-foreground hover:text-primary transition-colors px-3 text-2xl font-sans"
   >
     {label}
   </a>
@@ -186,7 +186,7 @@ export function NavBar() {
             </div>
             <div className="hidden md:flex flex-col">
               <span className="text-sm text-gray-800 font-medium">Welcome to</span>
-              <h2 className="text-3xl md:text-4xl xl:text-5xl font-bold text-primary">Life Got Better Homecare!</h2>
+              <h2 className="text-3xl md:text-4xl lg:text-2xl max-[1550px]:text-4xl xl:text-5xl font-bold text-primary">Life Got Better Homecare!</h2>
             </div>
           </Link>
 
@@ -200,7 +200,7 @@ export function NavBar() {
                 {link.hasPanel ? (
                   <button
                     onClick={toggleServicesPanel}
-                    className="services-trigger text-slate-700 font-medium px-4 py-2 rounded-lg flex items-center gap-1 hover:bg-slate-100 transition-colors focus-visible"
+                    className="services-trigger text-foreground font-medium px-4 py-2 rounded-lg flex items-center gap-1 hover:bg-slate-100 transition-colors focus-visible"
                   >
                     {link.name}
                     <ChevronDown className="w-4 h-4 transition-transform duration-200" />
@@ -208,7 +208,7 @@ export function NavBar() {
                 ) : (
                   <Link
                     href={link.href}
-                    className="text-slate-700 font-medium px-4 py-2 rounded-lg hover:bg-slate-100 transition-colors focus-visible block"
+                    className="text-foreground font-medium px-4 py-2 rounded-lg hover:bg-slate-100 transition-colors focus-visible block"
                   >
                     {link.name}
                   </Link>
@@ -226,7 +226,7 @@ export function NavBar() {
           {/* Mobile Menu Button */}
           <button
             onClick={toggleMobileMenu}
-            className="lg:hidden flex items-center text-slate-700 focus:outline-none focus-visible z-50"
+            className="lg:hidden flex items-center text-foreground focus:outline-none focus-visible z-50"
             aria-label="Toggle mobile menu"
           >
             {isMobileMenuOpen ? (
