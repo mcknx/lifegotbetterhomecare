@@ -111,7 +111,7 @@ export function Footer() {
                 href="https://www.facebook.com/lifegotbetterstaffingservices/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-[#5D3F6A]/70 flex items-center justify-center hover:bg-[#9B59B6] transition-colors"
+                className="w-10 h-10 rounded-full bg-primary/70 flex items-center justify-center hover:bg-primary transition-colors"
               >
                 <Facebook className="w-5 h-5" />
               </a>
@@ -119,7 +119,7 @@ export function Footer() {
                 href="https://www.linkedin.com/company/life-got-better-staffing-services/about/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-[#5D3F6A]/70 flex items-center justify-center hover:bg-[#9B59B6] transition-colors"
+                className="w-10 h-10 rounded-full bg-primary/70 flex items-center justify-center hover:bg-primary transition-colors"
               >
                 <Linkedin className="w-5 h-5" />
               </a>

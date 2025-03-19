@@ -24,51 +24,14 @@ export function PersonalizedCareSection() {
           >
             <div className="relative rounded-2xl overflow-hidden shadow-xl h-[500px]">
               <Image
-                src="/images/elder-care.jpg"
-                alt="Compassionate caregiver with elderly client"
+                src="https://images.unsplash.com/photo-1576765608866-5b51046452be?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+                alt="Professional caregiver helping elderly patient at home"
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 50vw"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-primary/30 to-transparent mix-blend-multiply" />
             </div>
-            
-            {/* Feature cards */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.4 }}
-              className="absolute -bottom-6 -right-6 bg-white rounded-xl shadow-lg p-5 max-w-[260px] border border-slate-100"
-            >
-              <div className="flex items-center gap-4">
-                <div className="flex-shrink-0 bg-primary/10 p-3 rounded-full">
-                  <Heart className="w-6 h-6 text-primary" />
-                </div>
-                <div>
-                  <h3 className="font-semibold text-slate-800 text-[15px]">Compassion First</h3>
-                  <p className="text-slate-600 text-sm">Care delivered with empathy</p>
-                </div>
-              </div>
-            </motion.div>
-            
-            <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.5 }}
-              className="absolute -top-6 -left-6 bg-white rounded-xl shadow-lg p-5 max-w-[240px] border border-slate-100"
-            >
-              <div className="flex items-center gap-4">
-                <div className="flex-shrink-0 bg-primary/10 p-3 rounded-full">
-                  <UserCircle className="w-6 h-6 text-primary" />
-                </div>
-                <div>
-                  <h3 className="font-semibold text-slate-800 text-[15px]">Tailored Approach</h3>
-                  <p className="text-slate-600 text-sm">Care designed around you</p>
-                </div>
-              </div>
-            </motion.div>
           </motion.div>
           
           {/* Right side - Content */}
@@ -76,11 +39,7 @@ export function PersonalizedCareSection() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-          >
-            <span className="inline-block text-sm font-medium py-1 px-3 rounded-full bg-primary/10 text-primary mb-4">
-              OUR APPROACH
-            </span>
-            
+          >            
             <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-6">
               Personalized Care, <span className="text-primary">Compassionate Support</span>
             </h2>
@@ -94,21 +53,6 @@ export function PersonalizedCareSection() {
                 Because care isn't one-size-fits-all—it's personal. Let us provide the support that feels like home.
               </p>
             </div>
-            
-            {/* <div className="mt-8 flex flex-col sm:flex-row gap-4">
-              <Link 
-                href="#contact" 
-                className="inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 text-white px-6 py-3 rounded-lg font-medium text-lg transition-all shadow-md hover:shadow-lg"
-              >
-                Schedule a Consultation
-              </Link>
-              <Link 
-                href="#services" 
-                className="inline-flex items-center justify-center gap-2 bg-white border-2 border-primary hover:bg-primary/5 text-primary px-6 py-3 rounded-lg font-medium text-lg transition-all"
-              >
-                Learn More
-              </Link>
-            </div> */}
           </motion.div>
         </div>
         

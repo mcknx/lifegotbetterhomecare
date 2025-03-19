@@ -53,7 +53,7 @@ export function JobsSection() {
                 <div className="p-6">
                   <div className="flex justify-between items-start">
                     <h3 className="text-xl font-semibold mb-2 text-[#3E3E3E]">{job.title}</h3>
-                    <span className="inline-flex items-center rounded-full bg-[#F7C6C7]/30 px-2.5 py-0.5 text-xs font-medium text-[#5D3F6A]">
+                    <span className="inline-flex items-center rounded-full bg-secondary/30 px-2.5 py-0.5 text-xs font-medium text-primary">
                       {job.category}
                     </span>
                   </div>
@@ -63,7 +63,7 @@ export function JobsSection() {
                   <div className="mt-4">
                     <a
                       href={`/jobs/${job.id}`}
-                      className="inline-flex items-center justify-center rounded-md border border-transparent bg-[#9B59B6] px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-[#5D3F6A] focus:outline-none focus:ring-2 focus:ring-[#9B59B6] focus:ring-offset-2"
+                      className="inline-flex items-center justify-center rounded-md border border-transparent bg-primary px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-primary/80 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
                     >
                       View Details
                     </a>

@@ -39,7 +39,7 @@ const NavLink = ({
   <a
     href={href}
     onClick={(e) => onClick(e, id)}
-    className="text-[#333] hover:text-[#9B59B6] transition-colors px-4 py-2 text-2xl"
+    className="text-[#333] hover:text-[#9B59B6] transition-colors px-4 py-2 text-3xl font-sans"
   >
     {label}
   </a>
@@ -56,7 +56,7 @@ const UtilityNavLink = ({
   <a
     href={href}
     onClick={(e) => onClick(e, id)}
-    className="text-[#333] hover:text-[#9B59B6] transition-colors px-3 text-lg font-medium"
+    className="text-[#333] hover:text-[#9B59B6] transition-colors px-3 text-2xl font-sans"
   >
     {label}
   </a>
@@ -175,7 +175,7 @@ export function NavBar() {
         <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full -translate-y-1/2 translate-x-1/4"></div>
         <div className="container mx-auto px-6 flex justify-between items-center relative z-10">
           {/* Logo */}
-          <Link href="#home" className="flex-shrink-0 z-50 flex items-center gap-3">
+          <Link href="/" className="flex-shrink-0 z-50 flex items-center gap-3">
             <div className="relative w-[110px] h-[80px]">
               <Image 
                 src="/LGBH_logo_solo.png" 

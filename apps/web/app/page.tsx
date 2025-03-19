@@ -6,6 +6,7 @@ import { Footer } from "@/components/footer"
 import { FindCareSection } from "@/components/find-care-section"
 import { ServicesExpandedSection } from "@/components/services-expanded-section"
 import { PersonalizedCareSection } from "@/components/personalized-care-section"
+import { TestimonialsSection } from "@/components/testimonials-section"
 
 export default function Home() {
   return (
@@ -22,9 +23,12 @@ export default function Home() {
         <div id="personalized-care">
           <PersonalizedCareSection />
         </div>
-        <div id="find-care">
-          <FindCareSection />
+        <div id="testimonials">
+          <TestimonialsSection />
         </div>
+        {/* <div id="find-care">
+          <FindCareSection />
+        </div> */}
         <div id="contact">
           <ContactForm />
         </div>

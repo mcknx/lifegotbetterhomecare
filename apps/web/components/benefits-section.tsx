@@ -9,19 +9,16 @@ export function BenefitsSection() {
     {
       icon: UserPlus,
       title: "Refer a Patient",
-      description: "Help someone get the care they deserve",
       href: "#contact"
     },
     {
       icon: Compass,
-      title: "Explore Services",
-      description: "Discover our comprehensive care solutions",
+      title: "Our Services",
       href: "#services"
     },
     {
       icon: Briefcase,
       title: "Find a Job",
-      description: "Join our team of care professionals",
       href: "#contact"
     }
   ]
@@ -42,8 +39,8 @@ export function BenefitsSection() {
           viewport={{ once: true }}
           className="text-center max-w-3xl mx-auto mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-serif text-[#3E3E3E] mb-6">
-            How can we help you?
+          <h2 className="text-4xl md:text-5xl font-sans text-[#3E3E3E] mb-6">
+            How Can We Help You?
           </h2>
         </motion.div>
 
@@ -58,29 +55,16 @@ export function BenefitsSection() {
               transition={{ delay: index * 0.1 }}
               className="flex flex-col items-center text-center p-8 rounded-2xl bg-white hover:bg-slate-50 transition-colors border border-slate-100 shadow-sm hover:shadow-md group"
             >
-              <div className="w-20 h-20 bg-[#9B59B6]/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-[#9B59B6]/20 transition-colors">
-                <action.icon className="w-10 h-10 text-[#9B59B6]" />
+              <div className="w-20 h-20 bg-primary/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors">
+                <action.icon className="w-10 h-10 text-primary" />
               </div>
               <h3 className="text-xl font-medium text-[#3E3E3E] mb-3">
                 {action.title}
               </h3>
-              <p className="text-slate-600 text-sm">
-                {action.description}
-              </p>
             </motion.a>
           ))}
         </div>
-
-        <p className="text-lg text-slate-600 mb-8 max-w-3xl">
-          Our compassionate care professionals are here to support you and your loved ones with personalized home care that prioritizes dignity, comfort, and well-being.
-        </p>
         
-        <Link 
-          href="/about" 
-          className="inline-flex items-center gap-2 text-primary font-medium hover:underline"
-        >
-          Learn more about us <ArrowRight className="w-4 h-4" />
-        </Link>
       </div>
     </div>
   )

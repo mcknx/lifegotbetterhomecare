@@ -31,7 +31,6 @@ export function ServicesExpandedSection() {
         { name: "Personal Care", href: "/services", description: "Expert care by highly skilled professionals" },
         { name: "Home Health Aides", href: "/services", description: "Care and support for daily activities" },
         { name: "Senior Care", href: "/services", description: "Keeping seniors safe and engaged at home" },
-        { name: "Pediatric Care", href: "/services", description: "Supporting children with special needs" },
         { name: "24/7 & Live-in Care", href: "/services", description: "Around-the-clock home care for families" },
       ]
     },

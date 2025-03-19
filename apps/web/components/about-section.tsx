@@ -7,7 +7,7 @@ import Link from "next/link"
 
 export function AboutSection() {
   return (
-    <div className="relative py-24 bg-gradient-to-b from-white to-slate-50">
+    <div className="relative py-4 bg-gradient-to-b from-white to-slate-50">
       {/* Decorative circles */}
       <div className="absolute top-10 right-10 w-64 h-64 bg-primary/5 rounded-full translate-x-1/3 -translate-y-1/4"></div>
       <div className="absolute bottom-20 left-0 w-80 h-80 bg-secondary/5 rounded-full -translate-x-1/3 translate-y-1/4"></div>

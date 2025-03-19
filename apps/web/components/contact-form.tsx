@@ -12,24 +12,6 @@ export function ContactForm() {
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
   const [serviceType, setServiceType] = useState('care')
   
-  const benefits = [
-    {
-      icon: Heart,
-      title: "Make an Impact",
-      description: "Make a positive difference in the lives of others by providing compassionate care"
-    },
-    {
-      icon: Clock,
-      title: "Flexible Hours & Pay",
-      description: "Enjoy flexible hours, competitive pay, and training opportunities"
-    },
-    {
-      icon: Mail,
-      title: "Submit Your Resume",
-      description: "Send your resume to lifegotbetterhomecare@gmail.com to join a supportive team"
-    }
-  ]
-
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setIsSubmitting(true)
@@ -386,95 +368,48 @@ export function ContactForm() {
             </div>
           </motion.div>
 
-          {/* Right side - Career Content */}
+          {/* Right side - Contact Info */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             className="space-y-8"
           >
-            <div>
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="mb-6"
-              >
-                <span className="inline-block text-sm font-medium py-1 px-3 rounded-full bg-primary/10 text-primary mb-3">
-                  JOIN OUR TEAM
-                </span>
-                
-                <h2 className="text-3xl font-bold text-slate-800 mb-4">
-                  Careers. <span className="text-primary">We're hiring!</span>
-                </h2>
-                
-                <p className="text-slate-600">
-                  Because our clients' needs don't always follow traditional business hours, 
-                  we offer unique flexibility in regards to working hours.
-                </p>
-              </motion.div>
+            {/* Contact info card */}
+            <div className="bg-white p-5 rounded-xl shadow-md border border-slate-100 mb-8">
+              <h3 className="font-semibold text-slate-800 mb-4">Get in Touch</h3>
               
-              {/* Contact info cards */}
-              <div className="bg-white p-5 rounded-xl shadow-md border border-slate-100 mb-8">
-                <h3 className="font-semibold text-slate-800 mb-4">Get in Touch</h3>
+              <div className="space-y-4">
+                <a href="tel:(414) 240-6913" className="flex items-center gap-3 p-3 hover:bg-slate-50 rounded-lg transition-colors">
+                  <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <Phone className="w-5 h-5 text-primary" />
+                  </div>
+                  <div>
+                    <p className="text-sm text-slate-800 font-medium">(414) 240-6913</p>
+                    <p className="text-xs text-slate-500">Call us anytime</p>
+                  </div>
+                </a>
                 
-                <div className="space-y-4">
-                  <a href="tel:(414) 240-6913" className="flex items-center gap-3 p-3 hover:bg-slate-50 rounded-lg transition-colors">
-                    <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                      <Phone className="w-5 h-5 text-primary" />
-                    </div>
-                    <div>
-                      <p className="text-sm text-slate-800 font-medium">(414) 240-6913</p>
-                      <p className="text-xs text-slate-500">Call us anytime</p>
-                    </div>
-                  </a>
-                  
-                  <a href="mailto:lifegotbetterhomecare@gmail.com" className="flex items-center gap-3 p-3 hover:bg-slate-50 rounded-lg transition-colors">
-                    <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                      <Mail className="w-5 h-5 text-primary" />
-                    </div>
-                    <div>
-                      <p className="text-sm text-slate-800 font-medium">lifegotbetterhomecare@gmail.com</p>
-                      <p className="text-xs text-slate-500">Email us with questions</p>
-                    </div>
-                  </a>
-                  
-                  <div className="flex items-center gap-3 p-3 hover:bg-slate-50 rounded-lg transition-colors">
-                    <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                      <MapPin className="w-5 h-5 text-primary" />
-                    </div>
-                    <div>
-                      <p className="text-sm text-slate-800 font-medium">6001 W Center St, Suite 208</p>
-                      <p className="text-xs text-slate-500">Milwaukee, WI 53210</p>
-                    </div>
+                <a href="mailto:lifegotbetterhomecare@gmail.com" className="flex items-center gap-3 p-3 hover:bg-slate-50 rounded-lg transition-colors">
+                  <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <Mail className="w-5 h-5 text-primary" />
+                  </div>
+                  <div>
+                    <p className="text-sm text-slate-800 font-medium">lifegotbetterhomecare@gmail.com</p>
+                    <p className="text-xs text-slate-500">Email us with questions</p>
+                  </div>
+                </a>
+                
+                <div className="flex items-center gap-3 p-3 hover:bg-slate-50 rounded-lg transition-colors">
+                  <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <MapPin className="w-5 h-5 text-primary" />
+                  </div>
+                  <div>
+                    <p className="text-sm text-slate-800 font-medium">6001 W Center St, Suite 208</p>
+                    <p className="text-xs text-slate-500">Milwaukee, WI 53210</p>
                   </div>
                 </div>
               </div>
-            </div>
-
-            <div className="space-y-6">
-              <h3 className="font-semibold text-slate-800">Benefits of Working With Us</h3>
-              
-              {benefits.map((benefit, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  className="flex gap-4 items-start bg-white p-4 rounded-xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow"
-                >
-                  <div className="flex-shrink-0">
-                    <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
-                      <benefit.icon className="w-6 h-6 text-primary" />
-                    </div>
-                  </div>
-                  <div>
-                    <h3 className="font-medium text-slate-800 mb-1">{benefit.title}</h3>
-                    <p className="text-sm text-slate-600">{benefit.description}</p>
-                  </div>
-                </motion.div>
-              ))}
             </div>
           </motion.div>
         </div>
