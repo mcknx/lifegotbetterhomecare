@@ -7,23 +7,28 @@ import { cn } from "@/lib/utils"
 const testimonials = [
   {
     id: 1,
-    quote: "My therapist, Patty really helped me get back on my feet. Had many helpful suggestions and helped me succeed and get back to where I was before the stroke.",
-    author: "Former Patient, Sallisaw, OK"
+    quote: "Life Got Better Homecare has been a true blessing for our family. Their personal care workers go above and beyond to ensure my father's comfort and dignity. We feel reassured knowing he is in caring, professional hands. Thank you for making his days easier and brighter!",
+    author: "Sarah M., Daughter of a Client"
   },
   {
     id: 2,
-    quote: "The staff was always kind and understanding to me and my family. A grateful thank you to all who helped me.",
-    author: "Former Patient, Bingham Farms, MI"
+    quote: "The caregivers at Life Got Better Homecare treat my mother like their own family. They not only assist with daily tasks but also bring warmth and companionship into her life. The personalized care and genuine kindness they provide have made all the difference.",
+    author: "James R., Son of a Client"
   },
   {
     id: 3,
-    quote: "The best homecare agency I ever had. Very, very satisfied with the care provided.",
-    author: "Former Patient, Lafayette, LA"
+    quote: "After my surgery, I needed extra support at home, and Life Got Better Homecare was there every step of the way. My personal care worker was attentive, patient, and professional. Their assistance helped me recover faster and with peace of mind.",
+    author: "Maria L., Post-Op Client"
   },
   {
     id: 4,
-    quote: "No one can beat your nurses and therapists, they have manners and are nice.",
-    author: "Former Patient, Adrian, MI"
+    quote: "Working as a Personal Care Worker for Life Got Better Homecare has been the most fulfilling job. The company truly values both clients and employees, ensuring we have the resources to provide the best care possible. It's rewarding to be part of a team that changes lives every day.",
+    author: "Angela D., Personal Care Worker"
+  },
+  {
+    id: 5,
+    quote: "Finding the right home care service for my grandfather was overwhelming until we found Life Got Better Homecare. Their team was understanding, professional, and deeply compassionate. Knowing he is in safe and capable hands gives our family priceless peace of mind.",
+    author: "Michael S., Grandson of a Client"
   }
 ]
 

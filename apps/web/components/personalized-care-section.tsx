@@ -24,7 +24,7 @@ export function PersonalizedCareSection() {
           >
             <div className="relative rounded-2xl overflow-hidden shadow-xl h-[500px]">
               <Image
-                src="https://images.unsplash.com/photo-1576765608866-5b51046452be?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+                src="https://img.freepik.com/free-photo/male-social-worker-taking-care-old-woman_23-2149031318.jpg?t=st=1742404680~exp=1742408280~hmac=89adab7739821a0bd73f6ce960de48f0317150d09cb1d9ed5e726e845cf4ae18&w=2000"
                 alt="Professional caregiver helping elderly patient at home"
                 fill
                 className="object-cover"

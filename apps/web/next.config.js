@@ -9,7 +9,7 @@ const nextConfig = {
         pathname: '/**',
       },
     ],
-    domains: ['images.unsplash.com'],
+    domains: ['images.unsplash.com', 'img.freepik.com'],
   },
   eslint: {
     // Warning: This allows production builds to successfully complete even if

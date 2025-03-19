@@ -3,7 +3,6 @@
 import { motion } from "framer-motion"
 import { Heart, Award, Clock, Users } from 'lucide-react'
 import Image from "next/image"
-import Link from "next/link"
 
 export function AboutSection() {
   return (
@@ -46,24 +45,9 @@ export function AboutSection() {
                 Because with the right care, Life Truly Gets Better.
               </p>
             </div>
-            
-            <div className="mt-8 flex flex-col sm:flex-row gap-4">
-              <Link 
-                href="#contact" 
-                className="inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 text-white px-6 py-3 rounded-lg font-medium text-lg transition-all shadow-md hover:shadow-lg"
-              >
-                Contact Us Today
-              </Link>
-              <Link 
-                href="/services" 
-                className="inline-flex items-center justify-center gap-2 bg-white border-2 border-primary hover:bg-primary/5 text-primary px-6 py-3 rounded-lg font-medium text-lg transition-all"
-              >
-                Our Services
-              </Link>
-            </div>
           </motion.div>
           
-          {/* Right side - Image and stats */}
+          {/* Right side - Image */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -82,43 +66,6 @@ export function AboutSection() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-primary/40 to-transparent mix-blend-multiply" />
             </div>
-            
-            {/* Floating stats cards */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.4 }}
-              className="absolute -bottom-6 -left-6 bg-white rounded-xl shadow-lg p-5 max-w-[260px] border border-slate-100"
-            >
-              <div className="flex items-center gap-4">
-                <div className="flex-shrink-0 bg-primary/10 p-3 rounded-full">
-                  <Heart className="w-6 h-6 text-primary" />
-                </div>
-                <div>
-                  <h3 className="font-semibold text-slate-800 text-[15px]">Compassionate Care</h3>
-                  <p className="text-slate-600 text-sm">Enhancing quality of life since 2019</p>
-                </div>
-              </div>
-            </motion.div>
-            
-            <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.5 }}
-              className="absolute -top-6 -right-6 bg-white rounded-xl shadow-lg p-5 max-w-[240px] border border-slate-100"
-            >
-              <div className="flex items-center gap-4">
-                <div className="flex-shrink-0 bg-primary/10 p-3 rounded-full">
-                  <Users className="w-6 h-6 text-primary" />
-                </div>
-                <div>
-                  <h3 className="font-semibold text-slate-800 text-[15px]">Trained Professionals</h3>
-                  <p className="text-slate-600 text-sm">Experienced, dedicated caregivers</p>
-                </div>
-              </div>
-            </motion.div>
           </motion.div>
         </div>
         
