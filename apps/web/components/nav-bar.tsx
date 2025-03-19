@@ -39,7 +39,7 @@ const NavLink = ({
   <a
     href={href}
     onClick={(e) => onClick(e, id)}
-    className="text-[#333] hover:text-[#9B59B6] transition-colors px-4 py-2 text-lg"
+    className="text-[#333] hover:text-[#9B59B6] transition-colors px-4 py-2 text-2xl"
   >
     {label}
   </a>
@@ -56,7 +56,7 @@ const UtilityNavLink = ({
   <a
     href={href}
     onClick={(e) => onClick(e, id)}
-    className="text-[#333] hover:text-[#9B59B6] transition-colors px-3 text-xs font-medium"
+    className="text-[#333] hover:text-[#9B59B6] transition-colors px-3 text-lg font-medium"
   >
     {label}
   </a>
@@ -176,13 +176,17 @@ export function NavBar() {
         <div className="container mx-auto px-6 flex justify-between items-center relative z-10">
           {/* Logo */}
           <Link href="#home" className="flex-shrink-0 z-50 flex items-center gap-3">
-            <div className="relative w-[210px] h-[80px]">
+            <div className="relative w-[110px] h-[80px]">
               <Image 
-                src="/LGBH_logo.png" 
+                src="/LGBH_logo_solo.png" 
                 alt="Life Got Better Homecare Logo" 
                 fill
                 className="object-contain"
               />
+            </div>
+            <div className="hidden md:flex flex-col">
+              <span className="text-sm text-gray-800 font-medium">Welcome to</span>
+              <h2 className="text-3xl md:text-4xl xl:text-5xl font-bold text-primary">Life Got Better Homecare!</h2>
             </div>
           </Link>
 
@@ -246,7 +250,7 @@ export function NavBar() {
                   <div className="flex justify-center mb-6">
                     <div className="relative w-20 h-20">
                       <Image 
-                        src="/LGBH_logo.png" 
+                        src="/LGBH_logo_solo.png" 
                         alt="Life Got Better Homecare Logo" 
                         fill
                         className="object-contain"
