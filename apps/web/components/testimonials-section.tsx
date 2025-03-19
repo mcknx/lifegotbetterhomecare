@@ -1,7 +1,7 @@
 'use client'
 
-import { useState } from 'react'
-import { motion } from 'framer-motion'
+import { useState, useEffect } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { cn } from "@/lib/utils"
 
 const testimonials = [
@@ -34,43 +34,86 @@ const testimonials = [
 
 export function TestimonialsSection() {
   const [activeIndex, setActiveIndex] = useState(0)
+  const [direction, setDirection] = useState(1) // 1 for right, -1 for left
+  
+  // Auto-rotate carousel
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setDirection(1)
+      setActiveIndex((prevIndex) => (prevIndex + 1) % testimonials.length)
+    }, 6000) // Change testimonial every 6 seconds
+    
+    return () => clearInterval(interval) // Clean up interval on unmount
+  }, [])
+  
+  const handlePrev = () => {
+    setDirection(-1)
+    setActiveIndex((prevIndex) => (prevIndex - 1 + testimonials.length) % testimonials.length)
+  }
+  
+  const handleNext = () => {
+    setDirection(1)
+    setActiveIndex((prevIndex) => (prevIndex + 1) % testimonials.length)
+  }
+  
+  const handleDotClick = (index: number) => {
+    setDirection(index > activeIndex ? 1 : -1)
+    setActiveIndex(index)
+  }
+  
+  const variants = {
+    enter: (direction: number) => ({
+      x: direction > 0 ? '100%' : '-100%',
+      opacity: 0
+    }),
+    center: {
+      x: 0,
+      opacity: 1
+    },
+    exit: (direction: number) => ({
+      x: direction > 0 ? '-100%' : '100%',
+      opacity: 0
+    })
+  }
   
   return (
     <div className="py-20 bg-primary/20">
       <div className="container mx-auto px-4 max-w-5xl">
         <div className="relative py-12">
           {/* Testimonials */}
-          <div className="min-h-[200px] flex items-center justify-center">
-            {testimonials.map((testimonial, idx) => (
+          <div className="h-[280px] md:h-[250px] relative overflow-hidden">
+            <AnimatePresence custom={direction} mode="wait">
               <motion.div
-                key={testimonial.id}
-                initial={{ opacity: 0 }}
-                animate={{ 
-                  opacity: idx === activeIndex ? 1 : 0,
-                  display: idx === activeIndex ? 'block' : 'none'
-                }}
-                transition={{ duration: 0.5 }}
-                className="text-center max-w-3xl mx-auto px-4 relative"
+                key={activeIndex}
+                custom={direction}
+                variants={variants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                transition={{ duration: 0.5, ease: "easeInOut" }}
+                className="absolute inset-0 flex items-center justify-center"
               >
-                {/* Left Quote */}
-                <span className="absolute -left-8 -top-8 text-white text-8xl font-serif opacity-70">
-                  &ldquo;
-                </span>
-                
-                <h3 className="text-2xl md:text-3xl font-light mb-6 text-[#333] leading-relaxed">
-                  {testimonial.quote}
-                </h3>
-                
-                {/* Right Quote */}
-                <span className="absolute -right-8 -bottom-2 text-white text-8xl font-serif opacity-70">
-                  &rdquo;
-                </span>
-                
-                <p className="text-lg text-[#555] font-medium">
-                  {testimonial.author}
-                </p>
+                <div className="text-center max-w-3xl mx-auto px-4 relative">
+                  {/* Left Quote */}
+                  <span className="absolute -left-8 -top-8 text-white text-8xl font-serif opacity-70">
+                    &ldquo;
+                  </span>
+                  
+                  <h3 className="text-2xl md:text-3xl font-light mb-6 text-[#333] leading-relaxed">
+                    {testimonials[activeIndex].quote}
+                  </h3>
+                  
+                  {/* Right Quote */}
+                  <span className="absolute -right-8 -bottom-2 text-white text-8xl font-serif opacity-70">
+                    &rdquo;
+                  </span>
+                  
+                  <p className="text-lg text-[#555] font-medium">
+                    {testimonials[activeIndex].author}
+                  </p>
+                </div>
               </motion.div>
-            ))}
+            </AnimatePresence>
           </div>
           
           {/* Navigation Dots */}
@@ -78,7 +121,7 @@ export function TestimonialsSection() {
             {testimonials.map((_, idx) => (
               <button
                 key={idx}
-                onClick={() => setActiveIndex(idx)}
+                onClick={() => handleDotClick(idx)}
                 className={cn(
                   "w-3 h-3 rounded-full transition-colors",
                   idx === activeIndex ? "bg-white" : "bg-white/50"
