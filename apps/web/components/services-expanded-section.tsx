@@ -26,7 +26,7 @@ export function ServicesExpandedSection() {
   // Service categories data (same as in nav-bar)
   const serviceCategories: ServiceCategory[] = [
     {
-      title: "HOME CARE SERVICES",
+      title: "HOMECARE SERVICES",
       services: [
         { name: "Personal Care", href: "/services", description: "Expert care by highly skilled professionals" },
         { name: "Home Health Aides", href: "/services", description: "Care and support for daily activities" },

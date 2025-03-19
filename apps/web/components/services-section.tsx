@@ -54,7 +54,7 @@ export function ServicesSection() {
   ]
 
   return (
-    <div className="relative py-24 bg-white">
+    <div id="homecare-services" className="relative py-24 bg-white">
       {/* Decorative circles */}
       <div className="absolute top-0 left-0 w-72 h-72 bg-primary/5 rounded-full -translate-x-1/3"></div>
       <div className="absolute bottom-0 right-0 w-60 h-60 bg-secondary/5 rounded-full translate-x-1/3 translate-y-1/3"></div>
@@ -66,11 +66,11 @@ export function ServicesSection() {
           viewport={{ once: true }}
           className="max-w-3xl mx-auto text-center mb-16"
         >
-          <span className="inline-block text-sm font-medium py-1 px-3 rounded-full bg-primary/10 text-primary mb-4">
-            OUR SERVICES
+          <span className="inline-block text-sm font-medium py-1 px-3 rounded-full bg-primary/10 text-primary-dark mb-4">
+            HOMECARE SERVICES
           </span>
           <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-6">
-            Compassionate Care Services
+            Compassionate <span className="text-primary-dark">Daily Care</span>
           </h2>
           <p className="text-lg text-slate-600">
             We offer a full range of personalized home care services to help your loved ones maintain their independence, dignity, and quality of life.
@@ -89,7 +89,7 @@ export function ServicesSection() {
             >
               <div className="flex-shrink-0 mt-1">
                 <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center shadow-sm group-hover:bg-primary/20 transition-colors">
-                  <service.icon className="w-7 h-7 text-primary" />
+                  <service.icon className="w-7 h-7 text-primary-dark" />
                 </div>
               </div>
               <div>
@@ -125,7 +125,7 @@ export function ServicesSection() {
                 </Link>
                 <a
                   href="tel:(414)240-6913"
-                  className="inline-flex items-center justify-center gap-2 bg-white hover:bg-slate-50 text-primary border-2 border-primary px-6 py-3 rounded-lg font-medium text-lg transition-all"
+                  className="inline-flex items-center justify-center gap-2 bg-white hover:bg-slate-50 text-primary-dark border-2 border-primary px-6 py-3 rounded-lg font-medium text-lg transition-all"
                 >
                   <Phone className="w-5 h-5" />
                   Call Us
