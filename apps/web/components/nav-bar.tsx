@@ -133,7 +133,7 @@ export function NavBar() {
     { name: 'Home', href: '/' },
     { 
       name: 'Services', 
-      href: '#services',
+      href: '/services',
       hasPanel: true
     },
     { name: 'About Us', href: '/about' },
@@ -198,13 +198,21 @@ export function NavBar() {
                 className="relative group"
               >
                 {link.hasPanel ? (
-                  <button
-                    onClick={toggleServicesPanel}
-                    className="services-trigger text-foreground font-medium px-4 py-2 rounded-lg flex items-center gap-1 hover:bg-slate-100 transition-colors focus-visible"
-                  >
-                    {link.name}
-                    <ChevronDown className="w-4 h-4 transition-transform duration-200" />
-                  </button>
+                  <div className="flex items-center">
+                    <Link
+                      href={link.href}
+                      className="text-foreground font-medium px-4 py-2 rounded-lg hover:bg-slate-100 transition-colors focus-visible"
+                    >
+                      {link.name}
+                    </Link>
+                    <button
+                      onClick={toggleServicesPanel}
+                      className="services-trigger p-2 rounded-lg hover:bg-slate-100 transition-colors focus-visible"
+                      aria-label="Toggle services menu"
+                    >
+                      <ChevronDown className="w-4 h-4 transition-transform duration-200" />
+                    </button>
+                  </div>
                 ) : (
                   <Link
                     href={link.href}
@@ -216,7 +224,7 @@ export function NavBar() {
               </div>
             ))}
             <a
-              href="#find-care"
+              href="#contact"
               className="bg-primary hover:bg-primary/90 text-white ml-4 px-6 py-2.5 rounded-lg font-medium transition-colors shadow-sm hover:shadow focus-visible"
             >
               Find Care
@@ -262,17 +270,26 @@ export function NavBar() {
                     {navLinks.map((link) => (
                       <div key={link.name} className="w-full">
                         {link.hasPanel ? (
-                          <button
-                            onClick={() => toggleDropdown('services')}
-                            className="flex items-center justify-between w-full p-4 text-lg font-medium text-slate-800 hover:bg-slate-50 rounded-lg"
-                          >
-                            <span>{link.name}</span>
-                            <ChevronDown 
-                              className={`w-5 h-5 transition-transform duration-200 ${
-                                activeDropdown === 'services' ? 'rotate-180' : ''
-                              }`} 
-                            />
-                          </button>
+                          <div className="flex items-center justify-between w-full">
+                            <Link
+                              href={link.href}
+                              className="flex-1 p-4 text-lg font-medium text-slate-800 hover:bg-slate-50 rounded-lg"
+                              onClick={closeMobileMenu}
+                            >
+                              {link.name}
+                            </Link>
+                            <button
+                              onClick={() => toggleDropdown('services')}
+                              className="p-4 text-lg font-medium text-slate-800 hover:bg-slate-50 rounded-lg"
+                              aria-label="Toggle services menu"
+                            >
+                              <ChevronDown 
+                                className={`w-5 h-5 transition-transform duration-200 ${
+                                  activeDropdown === 'services' ? 'rotate-180' : ''
+                                }`} 
+                              />
+                            </button>
+                          </div>
                         ) : (
                           <Link
                             href={link.href}

@@ -43,7 +43,7 @@ export function ServicesBanner() {
             OUR SERVICES
           </span>
           <h1 className="text-4xl md:text-5xl font-bold text-primary-dark mb-6">
-            Personalized CARE For You
+            Personalized Care For You
           </h1>
           <p className="text-lg text-slate-600">
             We provide tailored home care solutions designed to meet your unique needs, 
