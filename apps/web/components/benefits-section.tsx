@@ -9,7 +9,7 @@ export function BenefitsSection() {
     {
       icon: UserPlus,
       title: "Refer a Patient",
-      href: "#contact"
+      href: "/refer-patient"
     },
     {
       icon: Compass,

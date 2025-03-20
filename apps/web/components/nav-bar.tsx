@@ -137,7 +137,7 @@ export function NavBar() {
       hasPanel: true
     },
     { name: 'About Us', href: '/about' },
-    // { name: 'Resources', href: '#resources' },
+    { name: 'Refer a Patient', href: '/refer-patient' },
     { name: 'Contact', href: '#contact' },
   ]
 
