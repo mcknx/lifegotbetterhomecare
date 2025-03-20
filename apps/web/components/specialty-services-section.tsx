@@ -16,19 +16,14 @@ export function SpecialtyServicesSection() {
       description: "Comprehensive home safety assessments and interventions to reduce fall risks and ensure a secure living environment for elderly clients."
     },
     {
-      icon: Utensils,
-      title: "Meal Preparation",
-      description: "Nutritious meal planning and preparation that accommodates dietary restrictions and preferences, ensuring proper nutrition and enjoyable dining."
-    },
-    {
       icon: Car,
       title: "Transportation",
       description: "Safe, reliable transportation services for medical appointments, shopping, social activities, and other essential errands."
     },
     {
       icon: Home,
-      title: "Light Housekeeping",
-      description: "Assistance with maintaining a clean, healthy living environment including laundry, dishes, dusting, and other household tasks."
+      title: "24/7 & Live-in Care",
+      description: "Around-the-clock home care for families, providing continuous supervision and assistance for those with complex needs or requiring constant attention."
     }
   ]
 

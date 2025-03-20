@@ -17,11 +17,6 @@ export function ServicesSection() {
       description: "We provide assistance with all personal care activities, including restroom use, dressing, oral hygiene, bathing, and more."
     },
     {
-      icon: Stethoscope,
-      title: "Post-Operative Care",
-      description: "We support a smooth transition after hospital stays by monitoring health conditions and providing medication reminders."
-    },
-    {
       icon: Utensils,
       title: "Meal Preparation",
       description: "We provide daily meal preparation and serving for clients, ensuring proper nutrition while adhering to dietary needs."
@@ -32,11 +27,6 @@ export function ServicesSection() {
       description: "We help maintain a clean home by assisting with laundry, sweeping, dusting, and other light housekeeping tasks."
     },
     {
-      icon: Coffee,
-      title: "Respite Care",
-      description: "We provide exceptional care for your loved ones during scheduled visits, giving family caregivers a well-deserved break."
-    },
-    {
       icon: ClipboardList,
       title: "Care Management",
       description: "We assist in managing care by helping with scheduling, medication reminders, doctor visits, and providing respite care."
@@ -45,11 +35,6 @@ export function ServicesSection() {
       icon: Car,
       title: "Senior Transportation",
       description: "Our care professionals assist individuals who are unable to drive by offering transportation to appointments and errands."
-    },
-    {
-      icon: AlertTriangle,
-      title: "Fall Prevention",
-      description: "We ensure the safety of your elderly loved ones at home by minimizing fall risks and assisting with safe mobility."
     }
   ]
 
