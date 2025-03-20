@@ -32,3 +32,16 @@ Let's now go to the 3rd item for const trainings data, please take the data from
 
 Schedule here
 @https://docs.google.com/viewerng/viewer?url=https://lgbstaffing.com/wp-content/uploads/2025/02/CE-2025.pdf 
+
+
+--- google form
+https://docs.google.com/forms/d/e/1FAIpQLSdTMVHjSYU6wKBtWopuyribWX26ifqftY20UCvcp2tv2bMnyw/viewform?usp=pp_url&entry.2005620554=lgbh25-name&entry.1045781291=lgbh25-email@gmail.com&entry.1065046570=lgbh25-address&entry.1166974658=lgbh25-phone&entry.839337160=lgbh25-comments
+
+
+--- google form hack
+https://docs.google.com/forms/d/e/1FAIpQLSdTMVHjSYU6wKBtWopuyribWX26ifqftY20UCvcp2tv2bMnyw/formResponse
+entry.2005620554=lgbh25-name
+entry.1045781291=lgbh25-email@gmail.com
+entry.1065046570=lgbh25-address
+entry.1166974658=lgbh25-phone
+entry.839337160=lgbh25-comments

@@ -7,6 +7,7 @@ import { FindCareSection } from "@/components/find-care-section"
 import { ServicesExpandedSection } from "@/components/services-expanded-section"
 import { PersonalizedCareSection } from "@/components/personalized-care-section"
 import { TestimonialsSection } from "@/components/testimonials-section"
+import Link from "next/link"
 
 export default function Home() {
   return (
@@ -31,6 +32,13 @@ export default function Home() {
         </div> */}
         <div id="contact">
           <ContactForm />
+          {/* Alternative contact form option */}
+          <div className="text-center mt-8 mb-12">
+            <p className="text-gray-600 mb-2">Prefer a simpler form?</p>
+            <Link href="/contact-google" className="text-primary hover:text-primary-dark underline transition-colors">
+              Use our alternative contact form
+            </Link>
+          </div>
         </div>
         <Footer />
       </main>
