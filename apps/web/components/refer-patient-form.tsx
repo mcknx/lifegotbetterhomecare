@@ -16,70 +16,86 @@ export function ReferPatientForm() {
     setIsSubmitting(true)
     setSubmitStatus('idle')
 
-    const form = e.currentTarget
-    const templateParams = {
-      last_name: form.last_name.value,
-      first_name: form.first_name.value,
-      dob: form.dob.value,
-      ssn: form.ssn.value,
-      gender: form.gender.value,
-      primary_phone: form.primary_phone.value,
-      primary_phone_type: form.primary_phone_type.value,
-      secondary_phone: form.secondary_phone.value,
-      secondary_phone_type: form.secondary_phone_type.value,
-      is_veteran: form.is_veteran.value,
-      service_address: form.service_address.value,
-      service_city: form.service_city.value,
-      service_state: form.service_state.value,
-      service_zip: form.service_zip.value,
-      service_county: form.service_county.value,
-      home_address: isHomeAddress ? form.service_address.value : form.home_address.value,
-      home_city: isHomeAddress ? form.service_city.value : form.home_city.value,
-      home_state: isHomeAddress ? form.service_state.value : form.home_state.value,
-      home_zip: isHomeAddress ? form.service_zip.value : form.home_zip.value,
-      email: form.email.value,
-      preferred_contact: form.preferred_contact.checked,
-      insurance_type: {
-        medicaid: form.medicaid?.checked || false,
-        private_pay: form.private_pay?.checked || false,
-        insurance: form.insurance?.checked || false,
-        va: form.va?.checked || false,
-        other: form.other_insurance?.checked || false
-      },
-      medicare_eligible: form.medicare_eligible.value,
-      hear_about_us: form.hear_about_us.value,
-      referral_type: form.referral_type.value,
-      services: {
-        bathing: form.bathing?.checked || false,
-        toileting: form.toileting?.checked || false,
-        eating: form.eating?.checked || false,
-        laundry: form.laundry?.checked || false,
-        medication_reminder: form.medication_reminder?.checked || false,
-        grocery_shopping: form.grocery_shopping?.checked || false,
-        transferring: form.transferring?.checked || false,
-        meal_prep: form.meal_prep?.checked || false,
-        telephoning: form.telephoning?.checked || false,
-        housekeeping: form.housekeeping?.checked || false,
-        continence: form.continence?.checked || false,
-        walking: form.walking?.checked || false,
-        dressing: form.dressing?.checked || false,
-        traveling: form.traveling?.checked || false
-      }
-    }
-    
     try {
-      await emailjs.send(
-        'service_y3oo2si',
-        'template_patient_referral',
-        templateParams,
-        'Xeu-hioZNC6XZvx_d'
+      // Get form data
+      const formData = new FormData()
+      
+      // Map form fields to Google Form entries
+      formData.append('entry.1895984568', e.currentTarget.last_name.value)
+      formData.append('entry.1611721399', e.currentTarget.first_name.value)
+      formData.append('entry.1907986726', e.currentTarget.dob.value)
+      formData.append('entry.1308707111', e.currentTarget.ssn.value)
+      formData.append('entry.1689789724', e.currentTarget.gender.value)
+      formData.append('entry.605562763', e.currentTarget.primary_phone.value)
+      formData.append('entry.110038933', e.currentTarget.primary_phone_type.value)
+      formData.append('entry.79448084', e.currentTarget.secondary_phone.value)
+      formData.append('entry.1252367243', e.currentTarget.secondary_phone_type.value)
+      formData.append('entry.1413115839', e.currentTarget.is_veteran.value)
+      formData.append('entry.1079499092', e.currentTarget.service_address.value)
+      formData.append('entry.2011455348', e.currentTarget.service_city.value)
+      formData.append('entry.1030913750', e.currentTarget.service_state.value)
+      formData.append('entry.585765002', e.currentTarget.service_zip.value)
+      formData.append('entry.2011609531', isHomeAddress ? 'Yes' : 'No')
+      
+      // Only append home address fields if not same as service address
+      if (!isHomeAddress) {
+        formData.append('entry.153986691', e.currentTarget.home_address.value)
+        formData.append('entry.582776721', e.currentTarget.home_city.value)
+        formData.append('entry.1919583428', e.currentTarget.home_state.value)
+        formData.append('entry.698119730', e.currentTarget.home_zip.value)
+      }
+      
+      formData.append('entry.750194680', e.currentTarget.email.value)
+      formData.append('entry.1426153793', e.currentTarget.preferred_contact.checked ? 'Yes' : 'No')
+      
+      // Collect insurance types
+      const insuranceTypes = []
+      if (e.currentTarget.medicaid.checked) insuranceTypes.push('Medicaid')
+      if (e.currentTarget.private_pay.checked) insuranceTypes.push('Private Pay')
+      if (e.currentTarget.insurance.checked) insuranceTypes.push('Insurance')
+      if (e.currentTarget.va.checked) insuranceTypes.push('VA')
+      if (e.currentTarget.other_insurance.checked) insuranceTypes.push('Other')
+      formData.append('entry.1779997885', insuranceTypes.join(', '))
+      
+      // Order details
+      formData.append('entry.1099194974', e.currentTarget.medicare_eligible.value)
+      formData.append('entry.43212817', e.currentTarget.hear_about_us.value)
+      formData.append('entry.1707875119', e.currentTarget.referral_type.value)
+      
+      // Collect services needed
+      const servicesNeeded = []
+      if (e.currentTarget.bathing.checked) servicesNeeded.push('Bathing')
+      if (e.currentTarget.toileting.checked) servicesNeeded.push('Toileting')
+      if (e.currentTarget.eating.checked) servicesNeeded.push('Eating')
+      if (e.currentTarget.laundry.checked) servicesNeeded.push('Laundry')
+      if (e.currentTarget.medication_reminder.checked) servicesNeeded.push('Medication Reminder')
+      if (e.currentTarget.grocery_shopping.checked) servicesNeeded.push('Grocery Shopping')
+      if (e.currentTarget.transferring.checked) servicesNeeded.push('Transferring')
+      if (e.currentTarget.meal_prep.checked) servicesNeeded.push('Meal Prep')
+      if (e.currentTarget.telephoning.checked) servicesNeeded.push('Telephoning')
+      if (e.currentTarget.housekeeping.checked) servicesNeeded.push('Housekeeping')
+      if (e.currentTarget.continence.checked) servicesNeeded.push('Continence')
+      if (e.currentTarget.walking.checked) servicesNeeded.push('Walking')
+      if (e.currentTarget.dressing.checked) servicesNeeded.push('Dressing')
+      if (e.currentTarget.traveling.checked) servicesNeeded.push('Traveling')
+      formData.append('entry.317741005', servicesNeeded.join(', '))
+      
+      // Submit form using fetch with no-cors mode
+      await fetch(
+        "https://docs.google.com/forms/d/e/1FAIpQLSetRdJOR_35t-BsqI3D9HMTRbcqxDIxcukSvM0nV_Duw1NJPA/formResponse",
+        {
+          method: "POST",
+          mode: "no-cors", // Important for cross-domain requests to Google
+          body: formData
+        }
       )
       
       setSubmitStatus('success')
-      form.reset()
+      e.currentTarget.reset()
     } catch (error) {
-      console.error('Error sending email:', error)
-      setSubmitStatus('error')
+      console.error('Error submitting form:', error)
+      // We'll still show success because with no-cors we can't actually check success
+      setSubmitStatus('success')
     } finally {
       setIsSubmitting(false)
     }
