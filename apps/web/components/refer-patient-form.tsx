@@ -129,7 +129,7 @@ export function ReferPatientForm() {
             </div>
           </div>
 
-          <form className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-6">
             {/* Client Demographics */}
             <div className="space-y-4">
               <h2 className="text-xl font-semibold text-slate-800 mb-4">Client Demographics</h2>

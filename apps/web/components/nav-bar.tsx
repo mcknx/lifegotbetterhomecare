@@ -130,7 +130,7 @@ export function NavBar() {
   ]
 
   const navLinks = [
-    { name: 'Home', href: '/' },
+    // { name: 'Home', href: '/' },
     { 
       name: 'Services', 
       href: '/services',
@@ -205,13 +205,13 @@ export function NavBar() {
                     >
                       {link.name}
                     </Link>
-                    <button
+                    {/* <button
                       onClick={toggleServicesPanel}
                       className="services-trigger p-2 rounded-lg hover:bg-slate-100 transition-colors focus-visible"
                       aria-label="Toggle services menu"
                     >
                       <ChevronDown className="w-4 h-4 transition-transform duration-200" />
-                    </button>
+                    </button> */}
                   </div>
                 ) : (
                   <Link
@@ -278,7 +278,7 @@ export function NavBar() {
                             >
                               {link.name}
                             </Link>
-                            <button
+                            {/* <button
                               onClick={() => toggleDropdown('services')}
                               className="p-4 text-lg font-medium text-slate-800 hover:bg-slate-50 rounded-lg"
                               aria-label="Toggle services menu"
@@ -288,7 +288,7 @@ export function NavBar() {
                                   activeDropdown === 'services' ? 'rotate-180' : ''
                                 }`} 
                               />
-                            </button>
+                            </button> */}
                           </div>
                         ) : (
                           <Link
