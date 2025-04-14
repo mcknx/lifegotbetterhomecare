@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { Facebook, Linkedin, Phone, Mail, MapPin } from 'lucide-react'
+import { Facebook, Phone, Mail, MapPin, Instagram } from 'lucide-react'
 
 export function Footer() {
   const currentYear = new Date().getFullYear()
@@ -17,7 +17,7 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Company Info */}
           <div className="space-y-4">
-            <h3 className="text-xl font-bold text-white mb-4">Global Headquarters</h3>
+            <h3 className="text-xl font-bold text-white mb-4">Main Office</h3>
             <div className="space-y-2">
               <p className="font-semibold text-white">Life Got Better, Inc.</p>
               <div className="flex items-start gap-2">
@@ -49,17 +49,17 @@ export function Footer() {
             <h3 className="text-xl font-bold text-white mb-4">Our Services</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="#" className="hover:text-secondary transition-colors">
+                <Link href="/services" className="hover:text-secondary transition-colors">
                   Personal Care
                 </Link>
               </li>
               <li>
-                <Link href="#" className="hover:text-secondary transition-colors">
+                <Link href="/services" className="hover:text-secondary transition-colors">
                   Post-Operative Care
                 </Link>
               </li>
               <li>
-                <Link href="#" className="hover:text-secondary transition-colors">
+                <Link href="/services" className="hover:text-secondary transition-colors">
                   Companion Care
                 </Link>
               </li>
@@ -81,12 +81,12 @@ export function Footer() {
             <h3 className="text-xl font-bold text-white mb-4">Company</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="#about" className="hover:text-secondary transition-colors">
+                <Link href="/about" className="hover:text-secondary transition-colors">
                   About Us
                 </Link>
               </li>
               <li>
-                <Link href="#careers" className="hover:text-secondary transition-colors">
+                <Link href="/careers" className="hover:text-secondary transition-colors">
                   Careers
                 </Link>
               </li>
@@ -96,7 +96,7 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="#contact" className="hover:text-secondary transition-colors">
+                <Link href="/" className="hover:text-secondary transition-colors">
                   Contact Us
                 </Link>
               </li>
@@ -116,12 +116,12 @@ export function Footer() {
                 <Facebook className="w-5 h-5" />
               </a>
               <a
-                href="https://www.linkedin.com/company/life-got-better-staffing-services/about/"
+                href="#"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full bg-primary/70 flex items-center justify-center hover:bg-primary transition-colors"
               >
-                <Linkedin className="w-5 h-5" />
+                <Instagram className="w-5 h-5" />
               </a>
             </div>
           </div>
