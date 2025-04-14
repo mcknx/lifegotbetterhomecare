@@ -1,8 +1,6 @@
-import { NavBar } from "@/components/nav-bar"
 import { HeroSection } from "@/components/hero-section"
 import { ContactForm } from "@/components/contact-form"
 import { BenefitsSection } from "@/components/benefits-section"
-import { Footer } from "@/components/footer"
 import { FindCareSection } from "@/components/find-care-section"
 import { ServicesExpandedSection } from "@/components/services-expanded-section"
 import { PersonalizedCareSection } from "@/components/personalized-care-section"
@@ -14,7 +12,6 @@ export default function Home() {
     <>
       <ServicesExpandedSection />
       <main className="overflow-hidden">
-        <NavBar />
         <div id="home">
           <HeroSection />
         </div>
@@ -40,7 +37,6 @@ export default function Home() {
             </Link>
           </div> */}
         </div>
-        <Footer />
       </main>
     </>
   )

@@ -1,6 +1,4 @@
 import { ContactForm } from "@/components/contact-form"
-import { Footer } from "@/components/footer"
-import { NavBar } from "@/components/nav-bar"
 import { ReferPatientForm } from "@/components/refer-patient-form"
 import { Metadata } from "next"
 
@@ -12,14 +10,12 @@ export const metadata: Metadata = {
 export default function ReferPatientPage() {
   return (
     <main>
-      <NavBar />
       <div className="pt-24 md:pt-28">
         <ReferPatientForm />
       </div>
       <div id="contact">
         <ContactForm />
       </div>
-      <Footer />
     </main>
   )
 } 

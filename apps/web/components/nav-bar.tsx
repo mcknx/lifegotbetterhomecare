@@ -186,7 +186,7 @@ export function NavBar() {
             </div>
             <div className="hidden md:flex flex-col">
               <span className="text-sm text-gray-800 font-medium">Welcome to</span>
-              <h2 className="text-3xl md:text-4xl lg:text-2xl max-[1550px]:text-4xl xl:text-5xl font-bold text-primary-dark">Life Got Better Homecare!</h2>
+              <h2 className="text-3xl md:text-4xl lg:text-2xl max-[1550px]:text-4xl xl:text-5xl font-bold text-primary-dark">Life Got Better Homecare</h2>
             </div>
           </Link>
 

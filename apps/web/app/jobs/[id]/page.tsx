@@ -1,8 +1,6 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { NavBar } from '@/components/nav-bar';
-import { Footer } from '@/components/footer';
 import { Job } from '@/types/job';
 import Link from 'next/link';
 
@@ -36,7 +34,6 @@ export default function JobDetailPage({ params }: { params: { id: string } }) {
 
   return (
     <>
-      <NavBar />
       <main className="bg-gray-50 min-h-screen py-12">
         <div className="container mx-auto px-4">
           {loading ? (
@@ -103,7 +100,6 @@ export default function JobDetailPage({ params }: { params: { id: string } }) {
           )}
         </div>
       </main>
-      <Footer />
     </>
   );
 } 

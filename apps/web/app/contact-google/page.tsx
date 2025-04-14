@@ -1,7 +1,4 @@
 "use client"
-
-import { NavBar } from "@/components/nav-bar"
-import { Footer } from "@/components/footer"
 import { ArrowLeft } from "lucide-react"
 import Link from "next/link"
 import { useState } from "react"
@@ -42,8 +39,6 @@ export default function ContactGoogleFormPage() {
   return (
     <>
       <main className="min-h-screen bg-gray-50">
-        <NavBar />
-        
         <div className="container mx-auto px-4 py-12">
           <div className="max-w-2xl mx-auto">
             <div className="mb-6">
@@ -165,8 +160,6 @@ export default function ContactGoogleFormPage() {
             </div>
           </div>
         </div>
-        
-        <Footer />
       </main>
     </>
   )

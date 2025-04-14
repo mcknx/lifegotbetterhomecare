@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import "./globals.css";
 import { ServicesPanelProvider } from "@/lib/services-panel-context";
+import { NavBar } from "@/components/nav-bar";
+import { Footer } from "@/components/footer";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -48,7 +50,9 @@ export default function RootLayout({
       </head>
       <body className={`${montserrat.variable} font-sans antialiased overflow-x-hidden`}>
         <ServicesPanelProvider>
-          {children}
+          <NavBar />
+          <main>{children}</main>
+          <Footer />
         </ServicesPanelProvider>
       </body>
     </html>

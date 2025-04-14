@@ -14,12 +14,12 @@ export function BenefitsSection() {
     {
       icon: Compass,
       title: "Our Services",
-      href: "#services"
+      href: "/services"
     },
     {
       icon: Briefcase,
       title: "Find a Job",
-      href: "#contact"
+      href: "/careers"
     }
   ]
 

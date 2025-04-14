@@ -1,0 +1,41 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model jobs {
+  id               String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  title            String
+  reportsTo        String?
+  location         String
+  summary          String?   @db.Text
+  employmentType   String?
+  company          String?   @default("Life Got Better Homecare")
+  responsibilities Json?
+  qualifications   Json?
+  created_at       DateTime? @default(now()) @db.Timestamptz(6)
+  updatedAt        DateTime? @updatedAt @db.Timestamptz(6)
+}
+
+model trainings {
+  id                   String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  title                String
+  description          String
+  image                String
+  availability         String
+  duration             String
+  notification_channel String
+  price                String?
+  original_price       String?
+  class_hours          String?
+  additional_details   String?
+  schedule_url         String?
+  requirements         Json?
+  created_at           DateTime? @default(now()) @db.Timestamptz(6)
+}
