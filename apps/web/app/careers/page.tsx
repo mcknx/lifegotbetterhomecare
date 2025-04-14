@@ -40,11 +40,11 @@ export default async function CareersPage() {
                 </p>
               </CardContent>
               <CardFooter>
-                {/* Link to a future job details page */}
-                {/* <Link href={`/careers/${job.id}`} passHref>
-                  <Button>View Details</Button>
-                </Link> */}
-                <Button disabled>View Details (Coming Soon)</Button> 
+                {/* Link to the dynamic job details page */}
+                <Link href={`/careers/${job.id}`} passHref className="w-full">
+                  <Button className="w-full">View Details</Button>
+                </Link>
+                {/* <Button disabled>View Details (Coming Soon)</Button> */}
               </CardFooter>
             </Card>
           ))}

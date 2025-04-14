@@ -138,7 +138,8 @@ export function NavBar() {
     },
     { name: 'About Us', href: '/about' },
     { name: 'Refer a Patient', href: '/refer-patient' },
-    { name: 'Contact', href: '#contact' },
+    { name: 'Careers', href: '/careers' },
+    // { name: 'Contact', href: '#contact' },
   ]
 
   return (
