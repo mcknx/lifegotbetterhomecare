@@ -19,7 +19,7 @@ export function Footer() {
           <div className="space-y-4">
             <h3 className="text-xl font-bold text-white mb-4">Main Office</h3>
             <div className="space-y-2">
-              <p className="font-semibold text-white">Life Got Better Homecare, Inc.</p>
+              <p className="font-semibold text-white">Life Got Better Homecare</p>
               <div className="flex items-start gap-2">
                 <MapPin className="w-5 h-5 mt-1 text-secondary" />
                 <div>
@@ -133,7 +133,7 @@ export function Footer() {
         <div className="container mx-auto px-4 py-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-sm" suppressHydrationWarning>
-              © {currentYear} Life Got Better Homecare, Inc. All Rights Reserved.
+              © {currentYear} Life Got Better Homecare All Rights Reserved.
             </p>
             <div className="flex gap-6 text-sm">
               <Link href="#" className="hover:text-secondary transition-colors">
