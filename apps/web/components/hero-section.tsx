@@ -11,21 +11,21 @@ const slides = [
     title: "Professional Care You Can Trust",
     subtitle: "Caring for your loved ones with compassion and expertise.",
     buttonText: "Find Care Now",
-    buttonLink: "#find-care"
+    buttonLink: "#contact"
   },
   {
     id: 2,
     title: "Personalized Home Care",
     subtitle: "Tailored services to enhance quality of life for your family.",
     buttonText: "Our Services",
-    buttonLink: "#services"
+    buttonLink: "/services"
   },
   {
     id: 3,
     title: "Join Our Team",
     subtitle: "Make a difference in seniors' lives with a rewarding career.",
     buttonText: "Explore Jobs",
-    buttonLink: "#jobs"
+    buttonLink: "/careers"
   }
 ]
 
