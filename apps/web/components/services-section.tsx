@@ -94,30 +94,6 @@ export function ServicesSection() {
           <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full -translate-y-1/2 translate-x-1/2 z-0"></div>
           <div className="absolute bottom-0 left-0 w-48 h-48 bg-primary/5 rounded-full translate-y-1/3 -translate-x-1/3 z-0"></div>
           
-          <div className="relative z-10">
-            <div className="flex flex-col md:flex-row items-center justify-between gap-8">
-              <div className="text-left">
-                <h3 className="text-2xl font-bold text-slate-800 mb-2">Need personalized care?</h3>
-                <p className="text-slate-600">Contact us today to discuss how we can help your loved ones.</p>
-              </div>
-              <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-                <Link
-                  href="#contact"
-                  className="inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 text-white px-6 py-3 rounded-lg font-medium text-lg transition-all shadow-md hover:shadow-lg"
-                >
-                  Contact Us 
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </Link>
-                <a
-                  href="tel:(414)240-6913"
-                  className="inline-flex items-center justify-center gap-2 bg-white hover:bg-slate-50 text-primary-dark border-2 border-primary px-6 py-3 rounded-lg font-medium text-lg transition-all"
-                >
-                  <Phone className="w-5 h-5" />
-                  Call Us
-                </a>
-              </div>
-            </div>
-          </div>
         </motion.div>
       </div>
     </div>
