@@ -4,21 +4,28 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { createJob } from '@/lib/api';
 import Link from 'next/link';
+import { Job } from '@/types/job'; // Import Job type
 
 export default function NewJobPage() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [formData, setFormData] = useState({
+  // Updated state to match Job type structure
+  const [formData, setFormData] = useState<Partial<Omit<Job, 'id' | 'created_at' | 'updatedAt'>>> ({
     title: '',
     location: '',
-    description: '',
-    date: new Date().toISOString().split('T')[0],
-    type: 'Full-Time',
-    category: '',
+    company: '', 
+    employmentType: '', 
+    summary: '',
+    reportsTo: '',
+    qualifications: [], 
+    responsibilities: [], 
   });
+  // State for array fields as strings
+  const [qualificationsStr, setQualificationsStr] = useState('');
+  const [responsibilitiesStr, setResponsibilitiesStr] = useState('');
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
@@ -26,36 +33,56 @@ export default function NewJobPage() {
     }));
   };
 
+  const handleTextAreaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    if (name === 'qualifications') {
+      setQualificationsStr(value);
+    } else if (name === 'responsibilities') {
+      setResponsibilitiesStr(value);
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
 
-    // Simple validation
-    if (!formData.title || !formData.location || !formData.description || !formData.category) {
-      setError('Please fill in all required fields');
+    // Simple validation for essential fields
+    if (!formData.title || !formData.location || !formData.company) {
+      setError('Please fill in Job Title, Location, and Company fields');
       setLoading(false);
       return;
     }
 
     try {
-      // Format the date for display
-      const dateObj = new Date(formData.date);
-      const options: Intl.DateTimeFormatOptions = { month: 'long', day: 'numeric', year: 'numeric' };
-      const formattedDate = dateObj.toLocaleDateString('en-US', options);
+      const qualificationsArray = qualificationsStr.split('\n').filter(q => q.trim() !== '');
+      const responsibilitiesArray = responsibilitiesStr.split('\n').filter(r => r.trim() !== '');
+      const now = new Date().toISOString();
 
-      const newJob = await createJob({
-        ...formData,
-        date: formattedDate
-      });
+      // Construct payload matching Omit<Job, 'id'>
+      const payload: Omit<Job, 'id'> = {
+        title: formData.title || '',
+        location: formData.location || '',
+        company: formData.company || '', // Added company
+        employmentType: formData.employmentType || '', // Changed from type
+        summary: formData.summary || '', // Added summary
+        reportsTo: formData.reportsTo || '', // Added reportsTo
+        qualifications: qualificationsArray, // Use array
+        responsibilities: responsibilitiesArray, // Use array
+        created_at: now, // Add timestamp
+        updatedAt: now, // Add timestamp
+      };
+
+      console.log("Creating new job with payload:", payload);
+      const newJob = await createJob(payload);
 
       if (newJob) {
         router.push('/admin/jobs');
       } else {
-        throw new Error('Failed to create job');
+        throw new Error('API returned null, failed to create job');
       }
-    } catch (err) {
-      setError('Failed to create job');
+    } catch (err: any) {
+      setError(`Failed to create job: ${err.message || 'Unknown error'}`);
       console.error(err);
     } finally {
       setLoading(false);
@@ -83,7 +110,8 @@ export default function NewJobPage() {
       <div className="bg-white rounded-lg shadow p-6">
         <form onSubmit={handleSubmit}>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-            <div className="col-span-2">
+            {/* Title */}
+            <div className="col-span-2 md:col-span-1">
               <label htmlFor="title" className="block text-sm font-medium text-gray-700 mb-1">
                 Job Title *
               </label>
@@ -98,6 +126,23 @@ export default function NewJobPage() {
               />
             </div>
 
+            {/* Company */}
+             <div>
+              <label htmlFor="company" className="block text-sm font-medium text-gray-700 mb-1">
+                Company *
+              </label>
+              <input
+                type="text"
+                id="company"
+                name="company"
+                value={formData.company}
+                onChange={handleChange}
+                required
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+              />
+            </div>
+
+            {/* Location */}
             <div>
               <label htmlFor="location" className="block text-sm font-medium text-gray-700 mb-1">
                 Location *
@@ -113,70 +158,78 @@ export default function NewJobPage() {
               />
             </div>
 
+            {/* Employment Type */}
             <div>
-              <label htmlFor="category" className="block text-sm font-medium text-gray-700 mb-1">
-                Category *
-              </label>
-              <select
-                id="category"
-                name="category"
-                value={formData.category}
-                onChange={handleChange}
-                required
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-              >
-                <option value="">Select a category</option>
-                <option value="RN">RN</option>
-                <option value="CNA">CNA</option>
-                <option value="CBRF">CBRF</option>
-                <option value="LPN">LPN</option>
-                <option value="Other">Other</option>
-              </select>
-            </div>
-
-            <div>
-              <label htmlFor="date" className="block text-sm font-medium text-gray-700 mb-1">
-                Date
+              <label htmlFor="employmentType" className="block text-sm font-medium text-gray-700 mb-1">
+                Employment Type
               </label>
               <input
-                type="date"
-                id="date"
-                name="date"
-                value={formData.date}
+                type="text"
+                id="employmentType"
+                name="employmentType"
+                value={formData.employmentType}
+                onChange={handleChange}
+                placeholder="e.g., Full-Time / Part-Time"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+              />
+            </div>
+
+             {/* Reports To */}
+             <div>
+              <label htmlFor="reportsTo" className="block text-sm font-medium text-gray-700 mb-1">
+                Reports To
+              </label>
+              <input
+                type="text"
+                id="reportsTo"
+                name="reportsTo"
+                value={formData.reportsTo}
                 onChange={handleChange}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
               />
             </div>
 
-            <div>
-              <label htmlFor="type" className="block text-sm font-medium text-gray-700 mb-1">
-                Employment Type
-              </label>
-              <select
-                id="type"
-                name="type"
-                value={formData.type}
-                onChange={handleChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-              >
-                <option value="Full-Time">Full-Time</option>
-                <option value="Part-Time">Part-Time</option>
-                <option value="Contract">Contract</option>
-                <option value="Temporary">Temporary</option>
-              </select>
-            </div>
-
+            {/* Summary */}
             <div className="col-span-2">
-              <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-1">
-                Description *
+              <label htmlFor="summary" className="block text-sm font-medium text-gray-700 mb-1">
+                Summary
               </label>
               <textarea
-                id="description"
-                name="description"
-                value={formData.description}
+                id="summary"
+                name="summary"
+                value={formData.summary}
                 onChange={handleChange}
-                required
+                rows={4}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+              ></textarea>
+            </div>
+
+             {/* Qualifications */}
+            <div className="col-span-2">
+              <label htmlFor="qualifications" className="block text-sm font-medium text-gray-700 mb-1">
+                Qualifications (one per line)
+              </label>
+              <textarea
+                id="qualifications"
+                name="qualifications"
+                value={qualificationsStr}
+                onChange={handleTextAreaChange}
                 rows={6}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+              ></textarea>
+            </div>
+
+            {/* Responsibilities */}
+            <div className="col-span-2">
+              <label htmlFor="responsibilities" className="block text-sm font-medium text-gray-700 mb-1">
+                Responsibilities (one per line)
+              </label>
+              <textarea
+                id="responsibilities"
+                name="responsibilities"
+                value={responsibilitiesStr}
+                onChange={handleTextAreaChange}
+                rows={8}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
               ></textarea>
             </div>
