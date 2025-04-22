@@ -4,27 +4,59 @@ import { useEffect, useState } from 'react';
 import { getAllJobs, deleteJob } from '@/lib/api';
 import { Job } from '@/types/job';
 import Link from 'next/link';
+import { supabase } from '@/lib/supabase';
 
 export default function JobsPage() {
   const [jobs, setJobs] = useState<Job[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    async function loadJobs() {
-      try {
-        const data = await getAllJobs();
-        console.log('Fetched jobs:', data);
-        setJobs(data);
-      } catch (err) {
-        setError('Failed to load jobs');
-        console.error(err);
-      } finally {
-        setLoading(false);
-      }
+  async function loadJobs() {
+    setLoading(true);
+    try {
+      const data = await getAllJobs();
+      console.log('Fetched initial jobs:', data);
+      setJobs(data);
+      setError(null);
+    } catch (err) {
+      setError('Failed to load jobs');
+      console.error(err);
+    } finally {
+      setLoading(false);
     }
+  }
 
+  useEffect(() => {
     loadJobs();
+
+    const channel = supabase
+      .channel('public:jobs')
+      .on(
+        'postgres_changes',
+        { event: '*', schema: 'public', table: 'jobs' },
+        (payload) => {
+          console.log('Realtime change received!', payload);
+          
+          if (payload.eventType === 'INSERT') {
+            setJobs(currentJobs => [...currentJobs, payload.new as Job]);
+          } else if (payload.eventType === 'UPDATE') {
+            setJobs(currentJobs => 
+              currentJobs.map(job => 
+                job.id === payload.old.id ? (payload.new as Job) : job
+              )
+            );
+          } else if (payload.eventType === 'DELETE') {
+            setJobs(currentJobs => 
+              currentJobs.filter(job => job.id !== payload.old.id)
+            );
+          }
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
   }, []);
 
   const handleDelete = async (id: string) => {
