@@ -11,7 +11,7 @@ export async function getAllJobs(): Promise<Job[]> {
   const { data, error } = await supabase
     .from(JOB_TABLE)
     .select('*')
-    .order('date', { ascending: false });
+    .order('created_at', { ascending: false });
 
   if (error) {
     console.error('Error fetching jobs:', error);
