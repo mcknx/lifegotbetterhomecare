@@ -14,6 +14,7 @@ export default function JobsPage() {
     async function loadJobs() {
       try {
         const data = await getAllJobs();
+        console.log('Fetched jobs:', data);
         setJobs(data);
       } catch (err) {
         setError('Failed to load jobs');
@@ -96,12 +97,12 @@ export default function JobsPage() {
                     <div className="text-sm text-gray-500">{job.location}</div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                      {job.category}
+                    <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
+                      {job.employmentType}
                     </span>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {job.date}
+                    {new Date(job.created_at).toLocaleDateString()}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                     <Link

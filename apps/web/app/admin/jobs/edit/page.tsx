@@ -1,66 +1,83 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useRouter } from 'next/navigation';
-import { getJobById, updateJob } from '@/lib/api';
+import { getJobById, updateJob, createJob } from '@/lib/api';
 import Link from 'next/link';
 import { Job } from '@/types/job';
 
-export default function EditJobPage() {
+// Helper to format date string
+const formatDateForDisplay = (dateString: string | undefined): string => {
+  if (!dateString) return '';
+  try {
+    return new Date(dateString).toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    });
+  } catch (e) {
+    console.error('Error formatting date:', e);
+    return dateString; // Return original if formatting fails
+  }
+};
+
+function EditJobFormContent() {
+  const { useSearchParams } = require('next/navigation');
   const router = useRouter();
-  const [id, setId] = useState<string | null>(null);
-  
+  const searchParams = useSearchParams();
+  const id = searchParams.get('id');
+
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
+  const [savingAsNew, setSavingAsNew] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<Partial<Job>>({
     title: '',
     location: '',
-    description: '',
-    date: '',
-    type: '',
-    category: '',
+    company: '',
+    employmentType: '',
+    summary: '',
+    qualifications: [],
+    responsibilities: [],
+    reportsTo: '',
   });
+  const [qualificationsStr, setQualificationsStr] = useState('');
+  const [responsibilitiesStr, setResponsibilitiesStr] = useState('');
+  const [displayDate, setDisplayDate] = useState('');
 
   useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    setId(urlParams.get('id'));
-  }, []);
-
-  useEffect(() => {
-    if (!id) {
-      setError('No job ID provided');
+    if (id) {
+      loadJob(id);
+    } else {
+      setError('No job ID provided in URL');
       setLoading(false);
-      return;
     }
-    
-    loadJob(id);
   }, [id]);
 
+  function populateForm(loadedJob: Job) {
+    setFormData({
+      title: loadedJob.title || '',
+      location: loadedJob.location || '',
+      company: loadedJob.company || '',
+      employmentType: loadedJob.employmentType || '',
+      summary: loadedJob.summary || '',
+      reportsTo: loadedJob.reportsTo || '',
+    });
+    setQualificationsStr(loadedJob.qualifications?.join('\n') || '');
+    setResponsibilitiesStr(loadedJob.responsibilities?.join('\n') || '');
+    setDisplayDate(formatDateForDisplay(loadedJob.created_at));
+  }
+
   async function loadJob(jobId: string) {
+    setLoading(true);
+    setError(null);
     try {
-      const job = await getJobById(jobId);
-      if (!job) {
+      const loadedJob = await getJobById(jobId);
+      if (!loadedJob) {
         setError('Job not found');
         return;
       }
-
-      // Convert date format for the input field
-      let dateForInput = '';
-      try {
-        const date = new Date(job.date);
-        if (!isNaN(date.getTime())) {
-          dateForInput = date.toISOString().split('T')[0];
-        }
-      } catch (e) {
-        console.error('Date parsing error:', e);
-        dateForInput = job.date;
-      }
-
-      setFormData({
-        ...job,
-        date: dateForInput
-      });
+      populateForm(loadedJob);
     } catch (err) {
       setError('Failed to load job');
       console.error(err);
@@ -77,48 +94,123 @@ export default function EditJobPage() {
     }));
   };
 
+  const handleTextAreaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    if (name === 'qualifications') {
+      setQualificationsStr(value);
+    } else if (name === 'responsibilities') {
+      setResponsibilitiesStr(value);
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!id) return;
-    
+    if (!id) {
+      setError('Cannot save job without an ID.');
+      return;
+    }
     setSaving(true);
     setError(null);
 
     try {
-      // Format the date for display if it's in the ISO format
-      let formattedDate = formData.date;
-      if (formData.date.includes('-')) {
-        const dateObj = new Date(formData.date);
-        const options: Intl.DateTimeFormatOptions = { month: 'long', day: 'numeric', year: 'numeric' };
-        formattedDate = dateObj.toLocaleDateString('en-US', options);
-      }
+      const qualificationsArray = qualificationsStr.split('\n').filter(q => q.trim() !== '');
+      const responsibilitiesArray = responsibilitiesStr.split('\n').filter(r => r.trim() !== '');
 
-      const updated = await updateJob(id, {
+      const payload: Partial<Job> = {
         ...formData,
-        date: formattedDate
-      });
+        qualifications: qualificationsArray,
+        responsibilities: responsibilitiesArray,
+      };
+
+      // Remove fields that shouldn't be sent or are handled separately
+      delete payload.created_at;
+      delete payload.updatedAt;
+      delete payload.id;
+
+      const updated = await updateJob(id, payload);
 
       if (updated) {
-        router.push('/admin/jobs');
+        router.push('/admin/jobs'); // Navigate back to the list on success
       } else {
-        throw new Error('Failed to update job');
+        throw new Error('API returned null, update likely failed');
       }
-    } catch (err) {
-      setError('Failed to update job');
+    } catch (err: any) {
+      setError(`Failed to update job: ${err.message || 'Unknown error'}`);
       console.error(err);
     } finally {
       setSaving(false);
     }
   };
 
+  // Handler for the "Save as New" button
+  const handleSaveAsNew = async () => {
+    if (!id) {
+      setError('Cannot copy job without an original ID loaded.');
+      return;
+    }
+    setSavingAsNew(true);
+    setError(null);
+
+    try {
+      const qualificationsArray = qualificationsStr.split('\n').filter(q => q.trim() !== '');
+      const responsibilitiesArray = responsibilitiesStr.split('\n').filter(r => r.trim() !== '');
+
+      // Prepare payload matching Omit<Job, 'id'>
+      const now = new Date().toISOString();
+      const payload: Omit<Job, 'id'> = {
+        title: formData.title || '',
+        location: formData.location || '',
+        company: formData.company || '',
+        employmentType: formData.employmentType || '',
+        summary: formData.summary || '',
+        reportsTo: formData.reportsTo || '',
+        qualifications: qualificationsArray,
+        responsibilities: responsibilitiesArray,
+        created_at: now, // Add current timestamp
+        updatedAt: now, // Add current timestamp
+      };
+
+      console.log("Saving as new job with payload:", payload);
+      const newJob = await createJob(payload);
+
+      if (newJob) {
+        console.log("Successfully created new job:", newJob);
+        router.push('/admin/jobs'); // Navigate back to the list on success
+      } else {
+        throw new Error('API returned null, saving as new failed');
+      }
+    } catch (err: any) {
+      setError(`Failed to save as new job: ${err.message || 'Unknown error'}`);
+      console.error(err);
+    } finally {
+      setSavingAsNew(false);
+    }
+  };
+
   if (loading) {
-    return <div className="text-center py-8">Loading...</div>;
+    return <div className="text-center py-8">Loading job details...</div>;
   }
 
+  // Error display if ID is missing or job failed to load initially
   if (error && !formData.title) {
-    return <div className="text-center py-8 text-red-500">{error}</div>;
+    return (
+      <div className="py-6">
+          <div className="flex justify-end mb-6">
+            <Link
+              href="/admin/jobs"
+              className="px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700"
+            >
+              Back to Jobs
+            </Link>
+          </div>
+          <div className="text-center py-8 text-red-500 bg-white rounded-lg shadow p-6">
+              {error}
+          </div>
+      </div>
+    );
   }
 
+  // Main form rendering
   return (
     <div className="py-6">
       <div className="flex justify-between items-center mb-6">
@@ -131,16 +223,18 @@ export default function EditJobPage() {
         </Link>
       </div>
 
-      {error && (
+      {/* Display submission errors */} 
+      {error && formData.title && (
         <div className="mb-4 bg-red-50 p-4 rounded-md">
-          <p className="text-red-600">{error}</p>
+          <p className="text-red-600">Error saving job: {error}</p>
         </div>
       )}
 
       <div className="bg-white rounded-lg shadow p-6">
         <form onSubmit={handleSubmit}>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-            <div className="col-span-2">
+             {/* Title */}
+            <div className="col-span-2 md:col-span-1">
               <label htmlFor="title" className="block text-sm font-medium text-gray-700 mb-1">
                 Job Title *
               </label>
@@ -155,6 +249,23 @@ export default function EditJobPage() {
               />
             </div>
 
+            {/* Company */}
+            <div>
+              <label htmlFor="company" className="block text-sm font-medium text-gray-700 mb-1">
+                Company *
+              </label>
+              <input
+                type="text"
+                id="company"
+                name="company"
+                value={formData.company}
+                onChange={handleChange}
+                required
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+              />
+            </div>
+
+            {/* Location */}
             <div>
               <label htmlFor="location" className="block text-sm font-medium text-gray-700 mb-1">
                 Location *
@@ -170,79 +281,110 @@ export default function EditJobPage() {
               />
             </div>
 
+            {/* Employment Type */}
             <div>
-              <label htmlFor="category" className="block text-sm font-medium text-gray-700 mb-1">
-                Category *
-              </label>
-              <select
-                id="category"
-                name="category"
-                value={formData.category}
-                onChange={handleChange}
-                required
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-              >
-                <option value="">Select a category</option>
-                <option value="RN">RN</option>
-                <option value="CNA">CNA</option>
-                <option value="CBRF">CBRF</option>
-                <option value="LPN">LPN</option>
-                <option value="Other">Other</option>
-              </select>
-            </div>
-
-            <div>
-              <label htmlFor="date" className="block text-sm font-medium text-gray-700 mb-1">
-                Date
+              <label htmlFor="employmentType" className="block text-sm font-medium text-gray-700 mb-1">
+                Employment Type
               </label>
               <input
-                type="date"
-                id="date"
-                name="date"
-                value={formData.date}
+                type="text"
+                id="employmentType"
+                name="employmentType"
+                value={formData.employmentType}
+                onChange={handleChange}
+                placeholder="e.g., Full-Time / Part-Time"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+              />
+            </div>
+
+            {/* Reports To */}
+            <div>
+              <label htmlFor="reportsTo" className="block text-sm font-medium text-gray-700 mb-1">
+                Reports To
+              </label>
+              <input
+                type="text"
+                id="reportsTo"
+                name="reportsTo"
+                value={formData.reportsTo}
                 onChange={handleChange}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
               />
             </div>
 
-            <div>
-              <label htmlFor="type" className="block text-sm font-medium text-gray-700 mb-1">
-                Employment Type
+             {/* Date Created (Read Only) */}
+             <div>
+              <label htmlFor="created_at_display" className="block text-sm font-medium text-gray-700 mb-1">
+                Date Created
               </label>
-              <select
-                id="type"
-                name="type"
-                value={formData.type}
-                onChange={handleChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-              >
-                <option value="Full-Time">Full-Time</option>
-                <option value="Part-Time">Part-Time</option>
-                <option value="Contract">Contract</option>
-                <option value="Temporary">Temporary</option>
-              </select>
+              <input
+                type="text"
+                id="created_at_display"
+                name="created_at_display"
+                value={displayDate}
+                readOnly
+                className="w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-100 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+              />
             </div>
 
+            {/* Summary */}
             <div className="col-span-2">
-              <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-1">
-                Description *
+              <label htmlFor="summary" className="block text-sm font-medium text-gray-700 mb-1">
+                Summary
               </label>
               <textarea
-                id="description"
-                name="description"
-                value={formData.description}
+                id="summary"
+                name="summary"
+                value={formData.summary}
                 onChange={handleChange}
-                required
+                rows={4}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+              ></textarea>
+            </div>
+
+             {/* Qualifications */}
+            <div className="col-span-2">
+              <label htmlFor="qualifications" className="block text-sm font-medium text-gray-700 mb-1">
+                Qualifications (one per line)
+              </label>
+              <textarea
+                id="qualifications"
+                name="qualifications"
+                value={qualificationsStr}
+                onChange={handleTextAreaChange}
                 rows={6}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+              ></textarea>
+            </div>
+
+            {/* Responsibilities */}
+            <div className="col-span-2">
+              <label htmlFor="responsibilities" className="block text-sm font-medium text-gray-700 mb-1">
+                Responsibilities (one per line)
+              </label>
+              <textarea
+                id="responsibilities"
+                name="responsibilities"
+                value={responsibilitiesStr}
+                onChange={handleTextAreaChange}
+                rows={8}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
               ></textarea>
             </div>
           </div>
 
-          <div className="mt-6 flex justify-end">
+          <div className="mt-6 flex justify-end space-x-3">
+            <button
+              type="button" // Important: type="button" to prevent form submission
+              onClick={handleSaveAsNew}
+              disabled={saving || savingAsNew || loading}
+              className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 disabled:bg-green-300"
+            >
+              {savingAsNew ? 'Saving Copy...' : 'Save as New'}
+            </button>
             <button
               type="submit"
-              disabled={saving}
+              disabled={saving || savingAsNew || loading}
               className="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 disabled:bg-indigo-300"
             >
               {saving ? 'Saving...' : 'Update Job'}
@@ -251,5 +393,14 @@ export default function EditJobPage() {
         </form>
       </div>
     </div>
+  );
+}
+
+// Wrap the main component in Suspense to handle useSearchParams
+export default function EditJobPage() {
+  return (
+    <Suspense fallback={<div className="text-center py-8">Loading...</div>}>
+      <EditJobFormContent />
+    </Suspense>
   );
 } 
