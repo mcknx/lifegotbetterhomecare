@@ -42,6 +42,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <head>
+        <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="icon" type="image/png" sizes="32x32" href="/LGBH_logo_solo.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/LGBH_logo_solo.png" />
         <link rel="apple-touch-icon" sizes="180x180" href="/LGBH_logo_solo.png" />
