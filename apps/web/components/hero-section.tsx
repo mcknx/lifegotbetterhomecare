@@ -91,18 +91,15 @@ export function HeroSection() {
       </div>
       
       {/* Content */}
-      <div className="relative z-10 w-full min-h-[75vh] flex items-center">
+      <div className="relative z-10 w-full min-h-[75vh] flex items-end pb-16">
         <div className="container mx-auto px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <div className="col-span-1 hidden lg:block">
-            {/* Empty left column to push content to the right on desktop */}
-          </div>
           <motion.div
             key={activeSlide}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.7, delay: 0.3 }}
-            className="col-span-1 bg-white/95 backdrop-blur-md p-8 md:p-12 text-primary-dark rounded-xl shadow-lg max-w-xl lg:ml-auto border border-white/20"
+            className="col-span-1 bg-white/85 backdrop-blur-md p-8 md:p-12 text-primary-dark rounded-xl shadow-lg max-w-xl border border-white/20"
           >
             <span className="inline-block text-sm font-medium py-1 px-3 rounded-full bg-primary/10 text-primary-dark mb-6">
               Quality Home Care Services
@@ -129,6 +126,9 @@ export function HeroSection() {
               </Link>
             </div>
           </motion.div>
+          <div className="col-span-1 hidden lg:block">
+            {/* Empty right column */}
+          </div>
         </div>
       </div>
       
