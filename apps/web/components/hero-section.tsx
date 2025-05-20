@@ -84,7 +84,7 @@ export function HeroSection() {
               muted
               loop
               playsInline
-              src="/videos/nurse-patient.mp4"
+              src="/videos/nurse-talking-to-an-older-patient.mp4"
             />
           </div>
         )}
