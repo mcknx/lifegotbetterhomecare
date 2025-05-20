@@ -12,24 +12,24 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "Life Got Better Homecare | Professional Home Care Services",
+  title: "Welcome to Life Got Better Homecare!",
   description: "Experience professional, personalized care that helps seniors live independently and enables true peace of mind for their families.",
   keywords: "home care, elderly care, senior care, personal care, companion care, respite care, post-operative care",
   icons: {
     icon: [
-      { url: '/LGBH_logo.png', sizes: '32x32', type: 'image/png' },
-      { url: '/LGBH_logo.png', sizes: '16x16', type: 'image/png' },
+      { url: '/LGBH_logo_solo.png', sizes: '32x32', type: 'image/png' },
+      { url: '/LGBH_logo_solo.png', sizes: '16x16', type: 'image/png' },
     ],
     apple: [
-      { url: '/LGBH_logo.png', sizes: '180x180', type: 'image/png' },
+      { url: '/LGBH_logo_solo.png', sizes: '180x180', type: 'image/png' },
     ],
-    shortcut: [{ url: '/LGBH_logo.png' }],
+    shortcut: [{ url: '/LGBH_logo_solo.png' }],
   },
   manifest: '/manifest.json',
   appleWebApp: {
     capable: true,
     statusBarStyle: 'default',
-    title: 'Life Got Better Homecare',
+    title: 'Welcome to Life Got Better Homecare!',
   },
   themeColor: '#9B59B6',
 };
@@ -42,10 +42,10 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <head>
-        <link rel="icon" type="image/png" sizes="32x32" href="/LGBH_logo.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/LGBH_logo.png" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/LGBH_logo.png" />
-        <link rel="shortcut icon" href="/LGBH_logo.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/LGBH_logo_solo.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/LGBH_logo_solo.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/LGBH_logo_solo.png" />
+        <link rel="shortcut icon" href="/LGBH_logo_solo.png" />
         <meta name="theme-color" content="#9B59B6" />
       </head>
       <body className={`${montserrat.variable} font-sans antialiased overflow-x-hidden`}>
