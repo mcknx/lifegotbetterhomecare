@@ -76,7 +76,7 @@ export function HeroSection() {
       <div className="absolute inset-0 z-[-1]">
         {isClient && (
           <div className="absolute inset-0 w-full h-full">
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-black/30 to-primary/80 z-10" />
+            {/* <div className="absolute inset-0 bg-gradient-to-r from-transparent via-black/30 to-primary/80 z-10" /> */}
             <video 
               ref={videoRef}
               className="absolute inset-0 w-full h-full object-cover"
