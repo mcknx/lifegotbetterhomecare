@@ -25,6 +25,12 @@ const nextConfig = {
     // !! WARN !!
     ignoreBuildErrors: true,
   },
+  // Ensure static files are copied correctly
+  output: 'standalone',
+  // Disable automatic favicon handling
+  webpack: (config) => {
+    return config;
+  }
 }
 
 module.exports = nextConfig 

@@ -42,13 +42,25 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <head>
+        <link rel="icon" type="image/png" href="/LGBH_logo_solo.png" />
         <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/LGBH_logo_solo.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/LGBH_logo_solo.png" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/LGBH_logo_solo.png" />
-        <link rel="shortcut icon" href="/LGBH_logo_solo.png" />
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#9B59B6" />
+        {/* Force favicon reload for production */}
+        <link 
+          rel="icon"
+          href={`/LGBH_logo_solo.png?v=${new Date().getTime()}`}
+          type="image/png"
+        />
+        {/* Add additional tags to ensure favicon loads in production */}
+        <div
+          dangerouslySetInnerHTML={{
+            __html: `
+              <!-- Force favicon reload -->
+              <link rel="shortcut icon" href="/LGBH_logo_solo.png" />
+            `,
+          }}
+        />
       </head>
       <body className={`${montserrat.variable} font-sans antialiased overflow-x-hidden`}>
         <ServicesPanelProvider>
