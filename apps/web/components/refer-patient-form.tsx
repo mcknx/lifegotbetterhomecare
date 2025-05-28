@@ -102,46 +102,47 @@ export function ReferPatientForm() {
   }
 
   return (
-    <section className="py-20 bg-gradient-to-b from-white to-[#F7C6C7]/30 relative">
-      <div className="absolute top-20 right-0 w-64 h-64 bg-primary/5 rounded-full -translate-y-1/3 translate-x-1/4 z-0"></div>
-      <div className="absolute bottom-20 left-0 w-48 h-48 bg-primary/5 rounded-full translate-y-1/3 -translate-x-1/4 z-0"></div>
+    <section className="py-16 sm:py-20 lg:py-24 bg-gradient-to-b from-white to-[#F7C6C7]/30 relative">
+      {/* Decorative circles - hidden on mobile */}
+      <div className="absolute top-20 right-0 w-64 h-64 bg-primary/5 rounded-full -translate-y-1/3 translate-x-1/4 z-0 hidden md:block"></div>
+      <div className="absolute bottom-20 left-0 w-48 h-48 bg-primary/5 rounded-full translate-y-1/3 -translate-x-1/4 z-0 hidden md:block"></div>
       
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="max-w-4xl mx-auto bg-white p-8 rounded-2xl shadow-lg border border-gray-100"
+          className="max-w-4xl mx-auto bg-white p-4 sm:p-6 lg:p-8 rounded-2xl shadow-lg border border-gray-100"
         >
-          <div className="flex items-start gap-4 mb-8">
+          <div className="flex flex-col sm:flex-row items-start gap-4 mb-6 sm:mb-8">
             <div className="flex-shrink-0">
               <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
                 <Heart className="w-6 h-6 text-primary-dark" />
               </div>
             </div>
             <div>
-              <h1 className="text-3xl font-bold text-primary-dark mb-2">
+              <h1 className="text-2xl sm:text-3xl font-bold text-primary-dark mb-2 leading-tight">
                 Refer a Patient
               </h1>
-              <p className="text-slate-600">
+              <p className="text-sm sm:text-base text-slate-600">
                 We're ready to help. Use the form below to refer a patient for services.
               </p>
             </div>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-6 sm:space-y-8">
             {/* Client Demographics */}
             <div className="space-y-4">
-              <h2 className="text-xl font-semibold text-slate-800 mb-4">Client Demographics</h2>
+              <h2 className="text-lg sm:text-xl font-semibold text-slate-800 mb-4">Client Demographics</h2>
               
-              <div className="grid md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="relative">
                   <input 
                     type="text" 
                     name="last_name"
                     placeholder="Last Name*"
                     required 
-                    className="w-full p-3 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all placeholder:text-slate-400"
+                    className="w-full p-4 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all placeholder:text-slate-400 min-h-[48px] touch-manipulation"
                   />
                 </div>
                 <div className="relative">
@@ -150,19 +151,19 @@ export function ReferPatientForm() {
                     name="first_name"
                     placeholder="First Name*"
                     required 
-                    className="w-full p-3 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all placeholder:text-slate-400"
+                    className="w-full p-4 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all placeholder:text-slate-400 min-h-[48px] touch-manipulation"
                   />
                 </div>
               </div>
 
-              <div className="grid md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="relative">
                   <input 
                     type="date" 
                     name="dob"
                     placeholder="DOB*"
                     required 
-                    className="w-full p-3 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all placeholder:text-slate-400"
+                    className="w-full p-4 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all placeholder:text-slate-400 min-h-[48px] touch-manipulation"
                   />
                 </div>
                 <div className="relative">
@@ -171,43 +172,43 @@ export function ReferPatientForm() {
                     name="ssn"
                     placeholder="SSN"
                     pattern="\d{3}-?\d{2}-?\d{4}"
-                    className="w-full p-3 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all placeholder:text-slate-400"
+                    className="w-full p-4 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all placeholder:text-slate-400 min-h-[48px] touch-manipulation"
                   />
                 </div>
               </div>
 
-              <div className="space-y-2">
+              <div className="space-y-3">
                 <label className="text-sm font-medium text-slate-700">Gender*</label>
-                <div className="flex gap-4">
-                  <label className="flex items-center gap-2">
-                    <input type="radio" name="gender" value="male" required className="text-primary focus:ring-primary" />
+                <div className="flex flex-wrap gap-4 sm:gap-6">
+                  <label className="flex items-center gap-2 min-h-[44px] min-w-[44px] touch-manipulation">
+                    <input type="radio" name="gender" value="male" required className="text-primary focus:ring-primary w-4 h-4" />
                     <span className="text-sm text-slate-600">Male</span>
                   </label>
-                  <label className="flex items-center gap-2">
-                    <input type="radio" name="gender" value="female" required className="text-primary focus:ring-primary" />
+                  <label className="flex items-center gap-2 min-h-[44px] min-w-[44px] touch-manipulation">
+                    <input type="radio" name="gender" value="female" required className="text-primary focus:ring-primary w-4 h-4" />
                     <span className="text-sm text-slate-600">Female</span>
                   </label>
-                  <label className="flex items-center gap-2">
-                    <input type="radio" name="gender" value="other" required className="text-primary focus:ring-primary" />
+                  <label className="flex items-center gap-2 min-h-[44px] min-w-[44px] touch-manipulation">
+                    <input type="radio" name="gender" value="other" required className="text-primary focus:ring-primary w-4 h-4" />
                     <span className="text-sm text-slate-600">Other</span>
                   </label>
                 </div>
               </div>
 
-              <div className="grid md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <div className="flex gap-4 mb-2">
+                  <div className="flex flex-col sm:flex-row gap-2 sm:gap-4">
                     <input 
                       type="tel" 
                       name="primary_phone"
                       placeholder="Primary Phone*"
                       required 
-                      className="flex-1 p-3 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all placeholder:text-slate-400"
+                      className="flex-1 p-4 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all placeholder:text-slate-400 min-h-[48px] touch-manipulation"
                     />
                     <select 
                       name="primary_phone_type"
                       required
-                      className="w-32 p-3 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-slate-600"
+                      className="w-full sm:w-32 p-4 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-slate-600 min-h-[48px] touch-manipulation"
                     >
                       <option value="landline">Landline</option>
                       <option value="cell">Cell</option>
@@ -215,16 +216,16 @@ export function ReferPatientForm() {
                   </div>
                 </div>
                 <div>
-                  <div className="flex gap-4 mb-2">
+                  <div className="flex flex-col sm:flex-row gap-2 sm:gap-4">
                     <input 
                       type="tel" 
                       name="secondary_phone"
                       placeholder="Secondary Phone"
-                      className="flex-1 p-3 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all placeholder:text-slate-400"
+                      className="flex-1 p-4 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all placeholder:text-slate-400 min-h-[48px] touch-manipulation"
                     />
                     <select 
                       name="secondary_phone_type"
-                      className="w-32 p-3 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-slate-600"
+                      className="w-full sm:w-32 p-4 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-slate-600 min-h-[48px] touch-manipulation"
                     >
                       <option value="landline">Landline</option>
                       <option value="cell">Cell</option>
@@ -233,15 +234,15 @@ export function ReferPatientForm() {
                 </div>
               </div>
 
-              <div className="space-y-2">
+              <div className="space-y-3">
                 <label className="text-sm font-medium text-slate-700">Are you a Veteran?</label>
-                <div className="flex gap-4">
-                  <label className="flex items-center gap-2">
-                    <input type="radio" name="is_veteran" value="yes" className="text-primary focus:ring-primary" />
+                <div className="flex flex-wrap gap-4 sm:gap-6">
+                  <label className="flex items-center gap-2 min-h-[44px] min-w-[44px] touch-manipulation">
+                    <input type="radio" name="is_veteran" value="yes" className="text-primary focus:ring-primary w-4 h-4" />
                     <span className="text-sm text-slate-600">Yes</span>
                   </label>
-                  <label className="flex items-center gap-2">
-                    <input type="radio" name="is_veteran" value="no" className="text-primary focus:ring-primary" />
+                  <label className="flex items-center gap-2 min-h-[44px] min-w-[44px] touch-manipulation">
+                    <input type="radio" name="is_veteran" value="no" className="text-primary focus:ring-primary w-4 h-4" />
                     <span className="text-sm text-slate-600">No</span>
                   </label>
                 </div>
@@ -254,48 +255,48 @@ export function ReferPatientForm() {
                     name="service_address"
                     placeholder="Service Address*"
                     required 
-                    className="w-full p-3 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all placeholder:text-slate-400"
+                    className="w-full p-4 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all placeholder:text-slate-400 min-h-[48px] touch-manipulation"
                   />
                 </div>
-                <div className="grid md:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                   <input 
                     type="text" 
                     name="service_city"
                     placeholder="City*"
                     required 
-                    className="w-full p-3 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all placeholder:text-slate-400"
+                    className="w-full p-4 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all placeholder:text-slate-400 min-h-[48px] touch-manipulation"
                   />
                   <input 
                     type="text" 
                     name="service_state"
                     placeholder="State*"
                     required 
-                    className="w-full p-3 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all placeholder:text-slate-400"
+                    className="w-full p-4 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all placeholder:text-slate-400 min-h-[48px] touch-manipulation"
                   />
                   <input 
                     type="text" 
                     name="service_zip"
                     placeholder="ZIP*"
                     required 
-                    className="w-full p-3 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all placeholder:text-slate-400"
+                    className="w-full p-4 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all placeholder:text-slate-400 min-h-[48px] touch-manipulation"
                   />
                 </div>
                 <input 
                   type="text" 
                   name="service_county"
                   placeholder="County"
-                  className="w-full p-3 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all placeholder:text-slate-400"
+                  className="w-full p-4 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all placeholder:text-slate-400 min-h-[48px] touch-manipulation"
                 />
               </div>
 
-              <div className="space-y-2">
-                <label className="flex items-center gap-2">
+              <div className="space-y-3">
+                <label className="flex items-center gap-3 min-h-[44px] touch-manipulation">
                   <input 
                     type="checkbox" 
                     name="same_address"
                     checked={isHomeAddress}
                     onChange={(e) => setIsHomeAddress(e.target.checked)}
-                    className="text-primary focus:ring-primary rounded"
+                    className="text-primary focus:ring-primary rounded w-4 h-4"
                   />
                   <span className="text-sm text-slate-600">Service Address Is Home Address?</span>
                 </label>
@@ -307,43 +308,43 @@ export function ReferPatientForm() {
                     type="text" 
                     name="home_address"
                     placeholder="Home Address"
-                    className="w-full p-3 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all placeholder:text-slate-400"
+                    className="w-full p-4 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all placeholder:text-slate-400 min-h-[48px] touch-manipulation"
                   />
-                  <div className="grid md:grid-cols-3 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                     <input 
                       type="text" 
                       name="home_city"
                       placeholder="City"
-                      className="w-full p-3 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all placeholder:text-slate-400"
+                      className="w-full p-4 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all placeholder:text-slate-400 min-h-[48px] touch-manipulation"
                     />
                     <input 
                       type="text" 
                       name="home_state"
                       placeholder="State"
-                      className="w-full p-3 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all placeholder:text-slate-400"
+                      className="w-full p-4 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all placeholder:text-slate-400 min-h-[48px] touch-manipulation"
                     />
                     <input 
                       type="text" 
                       name="home_zip"
                       placeholder="ZIP"
-                      className="w-full p-3 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all placeholder:text-slate-400"
+                      className="w-full p-4 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all placeholder:text-slate-400 min-h-[48px] touch-manipulation"
                     />
                   </div>
                 </div>
               )}
 
-              <div className="space-y-2">
+              <div className="space-y-3">
                 <input 
                   type="email" 
                   name="email"
                   placeholder="E-mail Address"
-                  className="w-full p-3 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all placeholder:text-slate-400"
+                  className="w-full p-4 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all placeholder:text-slate-400 min-h-[48px] touch-manipulation break-all"
                 />
-                <label className="flex items-center gap-2">
+                <label className="flex items-center gap-3 min-h-[44px] touch-manipulation">
                   <input 
                     type="checkbox" 
                     name="preferred_contact"
-                    className="text-primary focus:ring-primary rounded"
+                    className="text-primary focus:ring-primary rounded w-4 h-4"
                   />
                   <span className="text-sm text-slate-600">Contact me through my preferred contact?</span>
                 </label>
@@ -352,27 +353,27 @@ export function ReferPatientForm() {
 
             {/* Insurance */}
             <div className="space-y-4">
-              <h2 className="text-xl font-semibold text-slate-800 mb-4">Insurance</h2>
+              <h2 className="text-lg sm:text-xl font-semibold text-slate-800 mb-4">Insurance</h2>
               
-              <div className="flex flex-wrap gap-6">
-                <label className="flex items-center gap-2">
-                  <input type="checkbox" name="medicaid" className="text-primary focus:ring-primary rounded" />
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <label className="flex items-center gap-3 min-h-[44px] touch-manipulation">
+                  <input type="checkbox" name="medicaid" className="text-primary focus:ring-primary rounded w-4 h-4" />
                   <span className="text-sm text-slate-600">Medicaid</span>
                 </label>
-                <label className="flex items-center gap-2">
-                  <input type="checkbox" name="private_pay" className="text-primary focus:ring-primary rounded" />
+                <label className="flex items-center gap-3 min-h-[44px] touch-manipulation">
+                  <input type="checkbox" name="private_pay" className="text-primary focus:ring-primary rounded w-4 h-4" />
                   <span className="text-sm text-slate-600">Private Pay</span>
                 </label>
-                <label className="flex items-center gap-2">
-                  <input type="checkbox" name="insurance" className="text-primary focus:ring-primary rounded" />
+                <label className="flex items-center gap-3 min-h-[44px] touch-manipulation">
+                  <input type="checkbox" name="insurance" className="text-primary focus:ring-primary rounded w-4 h-4" />
                   <span className="text-sm text-slate-600">Insurance</span>
                 </label>
-                <label className="flex items-center gap-2">
-                  <input type="checkbox" name="va" className="text-primary focus:ring-primary rounded" />
+                <label className="flex items-center gap-3 min-h-[44px] touch-manipulation">
+                  <input type="checkbox" name="va" className="text-primary focus:ring-primary rounded w-4 h-4" />
                   <span className="text-sm text-slate-600">VA</span>
                 </label>
-                <label className="flex items-center gap-2">
-                  <input type="checkbox" name="other_insurance" className="text-primary focus:ring-primary rounded" />
+                <label className="flex items-center gap-3 min-h-[44px] touch-manipulation">
+                  <input type="checkbox" name="other_insurance" className="text-primary focus:ring-primary rounded w-4 h-4" />
                   <span className="text-sm text-slate-600">Other</span>
                 </label>
               </div>
@@ -380,17 +381,17 @@ export function ReferPatientForm() {
 
             {/* Order Details */}
             <div className="space-y-4">
-              <h2 className="text-xl font-semibold text-slate-800 mb-4">Order Details</h2>
+              <h2 className="text-lg sm:text-xl font-semibold text-slate-800 mb-4">Order Details</h2>
               
-              <div className="space-y-2">
+              <div className="space-y-3">
                 <label className="text-sm font-medium text-slate-700">Is medicare eligible?</label>
-                <div className="flex gap-4">
-                  <label className="flex items-center gap-2">
-                    <input type="radio" name="medicare_eligible" value="yes" className="text-primary focus:ring-primary" />
+                <div className="flex flex-wrap gap-4 sm:gap-6">
+                  <label className="flex items-center gap-2 min-h-[44px] min-w-[44px] touch-manipulation">
+                    <input type="radio" name="medicare_eligible" value="yes" className="text-primary focus:ring-primary w-4 h-4" />
                     <span className="text-sm text-slate-600">Yes</span>
                   </label>
-                  <label className="flex items-center gap-2">
-                    <input type="radio" name="medicare_eligible" value="no" className="text-primary focus:ring-primary" />
+                  <label className="flex items-center gap-2 min-h-[44px] min-w-[44px] touch-manipulation">
+                    <input type="radio" name="medicare_eligible" value="no" className="text-primary focus:ring-primary w-4 h-4" />
                     <span className="text-sm text-slate-600">No</span>
                   </label>
                 </div>
@@ -401,7 +402,7 @@ export function ReferPatientForm() {
                   type="text" 
                   name="hear_about_us"
                   placeholder="How did you hear about us?"
-                  className="w-full p-3 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all placeholder:text-slate-400"
+                  className="w-full p-4 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all placeholder:text-slate-400 min-h-[48px] touch-manipulation"
                 />
               </div>
 
@@ -409,7 +410,7 @@ export function ReferPatientForm() {
                 <select 
                   name="referral_type"
                   required
-                  className="w-full p-3 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-slate-600 appearance-none bg-white"
+                  className="w-full p-4 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-slate-600 appearance-none bg-white min-h-[48px] touch-manipulation"
                 >
                   <option value="">Referral Type*</option>
                   <option value="self">Self</option>
@@ -424,62 +425,62 @@ export function ReferPatientForm() {
               </div>
 
               <div>
-                <p className="text-sm font-medium text-slate-700 mb-3">Services Needed:</p>
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                  <label className="flex items-center gap-2">
-                    <input type="checkbox" name="bathing" className="text-primary focus:ring-primary rounded" />
+                <p className="text-sm font-medium text-slate-700 mb-4">Services Needed:</p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+                  <label className="flex items-center gap-3 min-h-[44px] touch-manipulation">
+                    <input type="checkbox" name="bathing" className="text-primary focus:ring-primary rounded w-4 h-4" />
                     <span className="text-sm text-slate-600">Bathing</span>
                   </label>
-                  <label className="flex items-center gap-2">
-                    <input type="checkbox" name="toileting" className="text-primary focus:ring-primary rounded" />
+                  <label className="flex items-center gap-3 min-h-[44px] touch-manipulation">
+                    <input type="checkbox" name="toileting" className="text-primary focus:ring-primary rounded w-4 h-4" />
                     <span className="text-sm text-slate-600">Toileting</span>
                   </label>
-                  <label className="flex items-center gap-2">
-                    <input type="checkbox" name="eating" className="text-primary focus:ring-primary rounded" />
+                  <label className="flex items-center gap-3 min-h-[44px] touch-manipulation">
+                    <input type="checkbox" name="eating" className="text-primary focus:ring-primary rounded w-4 h-4" />
                     <span className="text-sm text-slate-600">Eating</span>
                   </label>
-                  <label className="flex items-center gap-2">
-                    <input type="checkbox" name="laundry" className="text-primary focus:ring-primary rounded" />
+                  <label className="flex items-center gap-3 min-h-[44px] touch-manipulation">
+                    <input type="checkbox" name="laundry" className="text-primary focus:ring-primary rounded w-4 h-4" />
                     <span className="text-sm text-slate-600">Laundry</span>
                   </label>
-                  <label className="flex items-center gap-2">
-                    <input type="checkbox" name="medication_reminder" className="text-primary focus:ring-primary rounded" />
+                  <label className="flex items-center gap-3 min-h-[44px] touch-manipulation">
+                    <input type="checkbox" name="medication_reminder" className="text-primary focus:ring-primary rounded w-4 h-4" />
                     <span className="text-sm text-slate-600">Medication Reminder</span>
                   </label>
-                  <label className="flex items-center gap-2">
-                    <input type="checkbox" name="grocery_shopping" className="text-primary focus:ring-primary rounded" />
+                  <label className="flex items-center gap-3 min-h-[44px] touch-manipulation">
+                    <input type="checkbox" name="grocery_shopping" className="text-primary focus:ring-primary rounded w-4 h-4" />
                     <span className="text-sm text-slate-600">Grocery Shopping</span>
                   </label>
-                  <label className="flex items-center gap-2">
-                    <input type="checkbox" name="transferring" className="text-primary focus:ring-primary rounded" />
+                  <label className="flex items-center gap-3 min-h-[44px] touch-manipulation">
+                    <input type="checkbox" name="transferring" className="text-primary focus:ring-primary rounded w-4 h-4" />
                     <span className="text-sm text-slate-600">Transferring</span>
                   </label>
-                  <label className="flex items-center gap-2">
-                    <input type="checkbox" name="meal_prep" className="text-primary focus:ring-primary rounded" />
+                  <label className="flex items-center gap-3 min-h-[44px] touch-manipulation">
+                    <input type="checkbox" name="meal_prep" className="text-primary focus:ring-primary rounded w-4 h-4" />
                     <span className="text-sm text-slate-600">Meal Prep</span>
                   </label>
-                  <label className="flex items-center gap-2">
-                    <input type="checkbox" name="telephoning" className="text-primary focus:ring-primary rounded" />
+                  <label className="flex items-center gap-3 min-h-[44px] touch-manipulation">
+                    <input type="checkbox" name="telephoning" className="text-primary focus:ring-primary rounded w-4 h-4" />
                     <span className="text-sm text-slate-600">Telephoning</span>
                   </label>
-                  <label className="flex items-center gap-2">
-                    <input type="checkbox" name="housekeeping" className="text-primary focus:ring-primary rounded" />
+                  <label className="flex items-center gap-3 min-h-[44px] touch-manipulation">
+                    <input type="checkbox" name="housekeeping" className="text-primary focus:ring-primary rounded w-4 h-4" />
                     <span className="text-sm text-slate-600">Housekeeping</span>
                   </label>
-                  <label className="flex items-center gap-2">
-                    <input type="checkbox" name="continence" className="text-primary focus:ring-primary rounded" />
+                  <label className="flex items-center gap-3 min-h-[44px] touch-manipulation">
+                    <input type="checkbox" name="continence" className="text-primary focus:ring-primary rounded w-4 h-4" />
                     <span className="text-sm text-slate-600">Continence</span>
                   </label>
-                  <label className="flex items-center gap-2">
-                    <input type="checkbox" name="walking" className="text-primary focus:ring-primary rounded" />
+                  <label className="flex items-center gap-3 min-h-[44px] touch-manipulation">
+                    <input type="checkbox" name="walking" className="text-primary focus:ring-primary rounded w-4 h-4" />
                     <span className="text-sm text-slate-600">Walking</span>
                   </label>
-                  <label className="flex items-center gap-2">
-                    <input type="checkbox" name="dressing" className="text-primary focus:ring-primary rounded" />
+                  <label className="flex items-center gap-3 min-h-[44px] touch-manipulation">
+                    <input type="checkbox" name="dressing" className="text-primary focus:ring-primary rounded w-4 h-4" />
                     <span className="text-sm text-slate-600">Dressing</span>
                   </label>
-                  <label className="flex items-center gap-2">
-                    <input type="checkbox" name="traveling" className="text-primary focus:ring-primary rounded" />
+                  <label className="flex items-center gap-3 min-h-[44px] touch-manipulation">
+                    <input type="checkbox" name="traveling" className="text-primary focus:ring-primary rounded w-4 h-4" />
                     <span className="text-sm text-slate-600">Traveling</span>
                   </label>
                 </div>
@@ -489,7 +490,7 @@ export function ReferPatientForm() {
             <button 
               type="submit" 
               disabled={isSubmitting}
-              className={`w-full bg-primary hover:bg-primary/90 text-white py-3 px-4 rounded-lg transition-all text-sm font-medium flex items-center justify-center gap-2 shadow-md hover:shadow-lg ${
+              className={`w-full bg-primary hover:bg-primary/90 text-white py-4 px-4 rounded-lg transition-all text-sm font-medium flex items-center justify-center gap-2 shadow-md hover:shadow-lg min-h-[48px] touch-manipulation ${
                 isSubmitting ? 'opacity-50 cursor-not-allowed' : ''
               }`}
             >
@@ -510,7 +511,7 @@ export function ReferPatientForm() {
               <motion.div 
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="p-3 bg-green-50 border border-green-100 rounded-lg flex items-center gap-3"
+                className="p-4 bg-green-50 border border-green-100 rounded-lg flex items-center gap-3"
               >
                 <div className="flex-shrink-0 w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
                   <Check className="w-4 h-4 text-green-600" />
@@ -523,7 +524,7 @@ export function ReferPatientForm() {
               <motion.div 
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="p-3 bg-red-50 border border-red-100 rounded-lg flex items-center gap-3"
+                className="p-4 bg-red-50 border border-red-100 rounded-lg flex items-center gap-3"
               >
                 <div className="flex-shrink-0 w-8 h-8 bg-red-100 rounded-full flex items-center justify-center">
                   <AlertTriangle className="w-4 h-4 text-red-600" />
