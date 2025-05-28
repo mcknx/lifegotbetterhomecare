@@ -1,72 +1,15 @@
 "use client"
 
 import Link from "next/link"
-import { Button } from "@/components/ui/button"
 import { Menu, Phone, X, Search, ChevronDown, MapPin, Mail, ArrowRight } from 'lucide-react'
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { cn } from "@/lib/utils"
-import { useServicesPanel } from "@/lib/services-panel-context"
 import Image from "next/image"
-
-type NavItem = {
-  href: string
-  label: string
-  id: string
-}
-
-const NAV_ITEMS: NavItem[] = [
-  { href: "#home", label: "Home", id: "home" },
-  { href: "#services", label: "Services", id: "services" },
-  { href: "#about", label: "About Us", id: "about" },
-  { href: "#find-care", label: "Resources", id: "find-care" },
-]
-
-const UTILITY_NAV_ITEMS = [
-  { href: "#find-care", label: "FIND A LOCATION", id: "find-care" },
-  { href: "#contact", label: "REFER A PATIENT", id: "contact" },
-  { href: "#contact", label: "CONTACT", id: "contact" },
-]
-
-const NavLink = ({ 
-  href, 
-  label, 
-  id, 
-  onClick 
-}: NavItem & { 
-  onClick: (e: React.MouseEvent<HTMLAnchorElement>, id: string) => void 
-}) => (
-  <a
-    href={href}
-    onClick={(e) => onClick(e, id)}
-    className="text-foreground hover:text-primary-dark transition-colors px-4 py-2 text-3xl font-sans"
-  >
-    {label}
-  </a>
-)
-
-const UtilityNavLink = ({ 
-  href, 
-  label, 
-  id, 
-  onClick 
-}: NavItem & { 
-  onClick: (e: React.MouseEvent<HTMLAnchorElement>, id: string) => void 
-}) => (
-  <a
-    href={href}
-    onClick={(e) => onClick(e, id)}
-    className="text-foreground hover:text-primary-dark transition-colors px-3 text-2xl font-sans"
-  >
-    {label}
-  </a>
-)
 
 export function NavBar() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
-  const { toggleServicesPanel, openServicesPanel, closeServicesPanel } = useServicesPanel()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -89,15 +32,6 @@ export function NavBar() {
     setIsMobileMenuOpen(false)
   }
 
-  const toggleDropdown = (dropdown: string) => {
-    if (activeDropdown === dropdown) {
-      setActiveDropdown(null)
-    } else {
-      setActiveDropdown(dropdown)
-    }
-  }
-
-  // Services dropdown content
   const serviceCategories = [
     {
       title: "HOME CARE SERVICES",
@@ -139,7 +73,6 @@ export function NavBar() {
     { name: 'About Us', href: '/about' },
     { name: 'Refer a Patient', href: '/refer-patient' },
     { name: 'Careers', href: '/careers' },
-    // { name: 'Contact', href: '#contact' },
   ]
 
   return (

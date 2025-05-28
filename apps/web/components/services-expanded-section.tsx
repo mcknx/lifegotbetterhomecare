@@ -113,28 +113,28 @@ export function ServicesExpandedSection() {
             transition={{ duration: 0.3 }}
             style={{ maxHeight: '85vh' }}
           >
-            <div className="container mx-auto px-6 py-6 md:py-8">
+            <div className="container mx-auto px-4 sm:px-6 py-6 md:py-8">
               {/* Close button */}
               <div className="flex justify-end mb-4">
                 <button 
                   onClick={closeServicesPanel}
-                  className="p-2 rounded-full hover:bg-slate-100 transition-colors"
+                  className="p-2 rounded-full hover:bg-slate-100 transition-colors touch-manipulation min-h-[44px] min-w-[44px] flex items-center justify-center"
                   aria-label="Close services panel"
                 >
-                  <X className="w-6 h-6 text-slate-600" />
+                  <X className="w-5 h-5 sm:w-6 sm:h-6 text-slate-600" />
                 </button>
               </div>
               
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
                 {serviceCategories.map((category, idx) => (
                   <div key={idx} className="p-4 relative">
-                    <h3 className="text-sm font-medium text-primary-dark mb-4">{category.title}</h3>
+                    <h3 className="text-xs sm:text-sm font-medium text-primary-dark mb-4">{category.title}</h3>
                     <ul className="space-y-4">
                       {category.services.map((service, serviceIdx) => (
                         <li key={serviceIdx}>
                           <Link 
                             href={service.href}
-                            className="group block"
+                            className="group block touch-manipulation"
                             onClick={closeServicesPanel}
                           >
                             <span className="block text-slate-800 font-medium text-base md:text-lg group-hover:text-primary-dark transition-colors">
@@ -150,7 +150,7 @@ export function ServicesExpandedSection() {
                     {idx === 0 && (
                       <Link 
                         href="/services" 
-                        className="inline-flex items-center gap-1 mt-4 text-primary-dark font-medium hover:underline"
+                        className="inline-flex items-center gap-1 mt-4 text-primary-dark font-medium hover:underline touch-manipulation"
                         onClick={closeServicesPanel}
                       >
                         View all services 

@@ -77,11 +77,11 @@ export function TestimonialsSection() {
   }
   
   return (
-    <div className="py-20 bg-secondary/80">
-      <div className="container mx-auto px-4 max-w-5xl">
-        <div className="relative py-12">
+    <div className="py-16 sm:py-20 bg-secondary/80">
+      <div className="container mx-auto px-4 sm:px-6 max-w-5xl">
+        <div className="relative py-8 sm:py-12">
           {/* Testimonials */}
-          <div className="h-[320px] md:h-[280px] relative overflow-hidden">
+          <div className="min-h-[280px] sm:min-h-[320px] md:min-h-[280px] relative overflow-hidden">
             <AnimatePresence custom={direction} mode="wait">
               <motion.div
                 key={activeIndex}
@@ -94,21 +94,21 @@ export function TestimonialsSection() {
                 className="absolute inset-0 flex items-center justify-center"
               >
                 <div className="text-center max-w-3xl mx-auto px-4 relative">
-                  {/* Left Quote */}
-                  <span className="absolute left-0 -top-12 text-white text-8xl font-serif opacity-70">
+                  {/* Left Quote - positioned better for mobile */}
+                  <span className="absolute left-0 -top-6 sm:-top-8 md:-top-12 text-white text-4xl sm:text-6xl md:text-8xl font-serif opacity-70">
                     &ldquo;
                   </span>
                   
-                  <h3 className="text-3xl md:text-4xl font-light mb-6 text-[#333] leading-relaxed">
+                  <h3 className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-light mb-4 sm:mb-6 text-[#333] leading-relaxed px-6 sm:px-8">
                     {testimonials[activeIndex].quote}
                   </h3>
                   
-                  {/* Right Quote */}
-                  <span className="absolute right-0 -bottom-8 text-white text-8xl font-serif opacity-70">
+                  {/* Right Quote - positioned better for mobile */}
+                  <span className="absolute right-0 -bottom-4 sm:-bottom-6 md:-bottom-8 text-white text-4xl sm:text-6xl md:text-8xl font-serif opacity-70">
                     &rdquo;
                   </span>
                   
-                  <p className="text-xl text-[#555] font-medium">
+                  <p className="text-base sm:text-lg md:text-xl text-[#555] font-medium mt-4">
                     {testimonials[activeIndex].author}
                   </p>
                 </div>
@@ -117,17 +117,22 @@ export function TestimonialsSection() {
           </div>
           
           {/* Navigation Dots */}
-          <div className="flex justify-center mt-10 space-x-2">
+          <div className="flex justify-center mt-8 sm:mt-10 space-x-2">
             {testimonials.map((_, idx) => (
               <button
                 key={idx}
                 onClick={() => handleDotClick(idx)}
                 className={cn(
-                  "w-3 h-3 rounded-full transition-colors",
+                  "w-3 h-3 rounded-full transition-colors touch-manipulation min-h-[44px] min-w-[44px] flex items-center justify-center",
                   idx === activeIndex ? "bg-white" : "bg-white/50"
                 )}
                 aria-label={`View testimonial ${idx + 1}`}
-              />
+              >
+                <span className={cn(
+                  "w-3 h-3 rounded-full",
+                  idx === activeIndex ? "bg-white" : "bg-white/50"
+                )} />
+              </button>
             ))}
           </div>
         </div>

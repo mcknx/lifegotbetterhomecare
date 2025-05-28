@@ -54,38 +54,38 @@ export function ContactForm() {
   }
 
   return (
-    <section id="contact" className="py-20 bg-gradient-to-b from-white to-[#F7C6C7]/30 relative">
+    <section id="contact" className="py-16 sm:py-20 bg-gradient-to-b from-white to-[#F7C6C7]/30 relative">
       {/* Background decorative elements */}
-      <div className="absolute top-20 right-0 w-64 h-64 bg-primary/5 rounded-full -translate-y-1/3 translate-x-1/4 z-0"></div>
-      <div className="absolute bottom-20 left-0 w-48 h-48 bg-primary/5 rounded-full translate-y-1/3 -translate-x-1/4 z-0"></div>
+      <div className="absolute top-20 right-0 w-64 h-64 bg-primary/5 rounded-full -translate-y-1/3 translate-x-1/4 z-0 hidden md:block"></div>
+      <div className="absolute bottom-20 left-0 w-48 h-48 bg-primary/5 rounded-full translate-y-1/3 -translate-x-1/4 z-0 hidden md:block"></div>
       
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 relative z-10">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="max-w-5xl mx-auto"
         >
-          <div className="text-center mb-12">
-            <span className="inline-block text-sm font-medium py-1 px-3 rounded-full bg-primary/10 text-primary-dark mb-3">
+          <div className="text-center mb-8 sm:mb-12">
+            <span className="inline-block text-xs sm:text-sm font-medium py-1 px-3 rounded-full bg-primary/10 text-primary-dark mb-3">
               GET IN TOUCH
             </span>
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-4">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-800 mb-4">
               Ready to Experience <span className="text-primary-dark">Better Care?</span>
             </h2>
-            <p className="text-slate-600 max-w-2xl mx-auto">
+            <p className="text-slate-600 max-w-2xl mx-auto text-sm sm:text-base">
               Contact us today to discuss your care needs or career opportunities. Our team is ready to provide the support and information you're looking for.
             </p>
           </div>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-12 items-start max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start max-w-5xl mx-auto">
           {/* Left side - Form */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 relative overflow-hidden"
+            className="bg-white p-6 sm:p-8 rounded-2xl shadow-lg border border-gray-100 relative overflow-hidden order-2 lg:order-1"
           >
             <div className="absolute top-0 right-0 w-40 h-40 bg-primary/5 rounded-full -translate-y-1/2 translate-x-1/2 z-0"></div>
             
@@ -97,7 +97,7 @@ export function ContactForm() {
                   </div>
                 </div>
                 <div>
-                  <h2 className="text-2xl font-bold text-primary-dark mb-2">
+                  <h2 className="text-xl sm:text-2xl font-bold text-primary-dark mb-2">
                     Contact Us About Our Home Care
                   </h2>
                   <p className="text-slate-600 text-sm">
@@ -110,7 +110,7 @@ export function ContactForm() {
                 <div className="p-4 bg-slate-50 rounded-xl border border-slate-100">
                   <p className="text-sm font-medium text-slate-700 mb-3">I'm interested in:</p>
                   <div className="flex gap-4">
-                    <label className="relative flex items-center group cursor-pointer">
+                    <label className="relative flex items-center group cursor-pointer flex-1">
                       <input 
                         type="radio" 
                         name="service_type" 
@@ -119,13 +119,13 @@ export function ContactForm() {
                         onChange={(e) => setServiceType(e.target.value)}
                         className="absolute opacity-0 w-0 h-0" 
                       />
-                      <span className={`w-12 h-12 rounded-full flex items-center justify-center ${serviceType === 'care' ? 'bg-primary text-white' : 'bg-white text-slate-400 border border-slate-200'} transition-all group-hover:shadow-md`}>
+                      <span className={`w-12 h-12 rounded-full flex items-center justify-center ${serviceType === 'care' ? 'bg-primary text-white' : 'bg-white text-slate-400 border border-slate-200'} transition-all group-hover:shadow-md touch-manipulation`}>
                         <Heart className="w-5 h-5" />
                       </span>
                       <span className={`ml-2 text-sm ${serviceType === 'care' ? 'font-medium text-primary-dark' : 'text-slate-600'}`}>Home Care</span>
                     </label>
                     
-                    <label className="relative flex items-center group cursor-pointer">
+                    <label className="relative flex items-center group cursor-pointer flex-1">
                       <input 
                         type="radio" 
                         name="service_type" 
@@ -134,7 +134,7 @@ export function ContactForm() {
                         onChange={(e) => setServiceType(e.target.value)}
                         className="absolute opacity-0 w-0 h-0" 
                       />
-                      <span className={`w-12 h-12 rounded-full flex items-center justify-center ${serviceType === 'employment' ? 'bg-primary text-white' : 'bg-white text-slate-400 border border-slate-200'} transition-all group-hover:shadow-md`}>
+                      <span className={`w-12 h-12 rounded-full flex items-center justify-center ${serviceType === 'employment' ? 'bg-primary text-white' : 'bg-white text-slate-400 border border-slate-200'} transition-all group-hover:shadow-md touch-manipulation`}>
                         <Users className="w-5 h-5" />
                       </span>
                       <span className={`ml-2 text-sm ${serviceType === 'employment' ? 'font-medium text-primary-dark' : 'text-slate-600'}`}>Employment</span>
@@ -144,14 +144,14 @@ export function ContactForm() {
 
                 {serviceType === 'care' ? (
                   <>
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div className="relative">
                         <input 
                           type="text" 
                           name="user_name"
                           placeholder="Name*"
                           required 
-                          className="w-full p-3 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all placeholder:text-slate-400"
+                          className="w-full p-4 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all placeholder:text-slate-400 min-h-[48px] touch-manipulation"
                         />
                       </div>
                       <div className="relative">
@@ -160,19 +160,19 @@ export function ContactForm() {
                           name="user_email"
                           placeholder="Email*"
                           required 
-                          className="w-full p-3 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all placeholder:text-slate-400"
+                          className="w-full p-4 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all placeholder:text-slate-400 min-h-[48px] touch-manipulation"
                         />
                       </div>
                     </div>
 
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div className="relative">
                         <input 
                           type="tel" 
                           name="user_phone"
                           placeholder="Phone*"
                           required 
-                          className="w-full p-3 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all placeholder:text-slate-400"
+                          className="w-full p-4 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all placeholder:text-slate-400 min-h-[48px] touch-manipulation"
                         />
                       </div>
                       <div className="relative">
@@ -181,7 +181,7 @@ export function ContactForm() {
                           name="zip_code"
                           placeholder="Zip Code*"
                           required 
-                          className="w-full p-3 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all placeholder:text-slate-400"
+                          className="w-full p-4 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all placeholder:text-slate-400 min-h-[48px] touch-manipulation"
                         />
                       </div>
                     </div>
@@ -189,7 +189,7 @@ export function ContactForm() {
                     <div className="relative">
                       <select 
                         name="care_recipient" 
-                        className="w-full p-3 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-slate-600 appearance-none bg-white"
+                        className="w-full p-4 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-slate-600 appearance-none bg-white min-h-[48px] touch-manipulation"
                         required
                       >
                         <option value="">Who needs care?*</option>
@@ -206,7 +206,7 @@ export function ContactForm() {
                     <div className="relative">
                       <select 
                         name="referral_source"
-                        className="w-full p-3 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-slate-600 appearance-none bg-white"
+                        className="w-full p-4 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-slate-600 appearance-none bg-white min-h-[48px] touch-manipulation"
                         required
                       >
                         <option value="">How did you hear about us?*</option>
@@ -222,14 +222,14 @@ export function ContactForm() {
                   </>
                 ) : (
                   <>
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div className="relative">
                         <input 
                           type="text" 
                           name="user_name"
                           placeholder="Full Name*"
                           required 
-                          className="w-full p-3 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all placeholder:text-slate-400"
+                          className="w-full p-4 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all placeholder:text-slate-400 min-h-[48px] touch-manipulation"
                         />
                       </div>
                       <div className="relative">
@@ -238,25 +238,25 @@ export function ContactForm() {
                           name="user_email"
                           placeholder="Email*"
                           required 
-                          className="w-full p-3 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all placeholder:text-slate-400"
+                          className="w-full p-4 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all placeholder:text-slate-400 min-h-[48px] touch-manipulation"
                         />
                       </div>
                     </div>
 
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div className="relative">
                         <input 
                           type="tel" 
                           name="user_phone"
                           placeholder="Phone*"
                           required 
-                          className="w-full p-3 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all placeholder:text-slate-400"
+                          className="w-full p-4 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all placeholder:text-slate-400 min-h-[48px] touch-manipulation"
                         />
                       </div>
                       <div className="relative">
                         <select 
                           name="position_type"
-                          className="w-full p-3 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-slate-600 appearance-none bg-white"
+                          className="w-full p-4 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-slate-600 appearance-none bg-white min-h-[48px] touch-manipulation"
                           required
                         >
                           <option value="">Select Position*</option>
@@ -274,7 +274,7 @@ export function ContactForm() {
                     <div className="relative">
                       <select 
                         name="experience_level"
-                        className="w-full p-3 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-slate-600 appearance-none bg-white"
+                        className="w-full p-4 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-slate-600 appearance-none bg-white min-h-[48px] touch-manipulation"
                         required
                       >
                         <option value="">Years of Experience*</option>
@@ -291,7 +291,7 @@ export function ContactForm() {
                     <div className="relative">
                       <select 
                         name="availability"
-                        className="w-full p-3 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-slate-600 appearance-none bg-white"
+                        className="w-full p-4 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-slate-600 appearance-none bg-white min-h-[48px] touch-manipulation"
                         required
                       >
                         <option value="">Availability*</option>
@@ -308,7 +308,7 @@ export function ContactForm() {
                       <textarea 
                         name="additional_info"
                         placeholder="Additional Information (Optional)"
-                        className="w-full p-3 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all min-h-[100px] resize-none placeholder:text-slate-400"
+                        className="w-full p-4 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all min-h-[100px] resize-none placeholder:text-slate-400 touch-manipulation"
                       />
                     </div>
                   </>
@@ -317,7 +317,7 @@ export function ContactForm() {
                 <button 
                   type="submit" 
                   disabled={isSubmitting}
-                  className={`w-full bg-primary hover:bg-primary/90 text-white py-3 px-4 rounded-lg transition-all text-sm font-medium flex items-center justify-center gap-2 shadow-md hover:shadow-lg ${
+                  className={`w-full bg-primary hover:bg-primary/90 text-white py-4 px-4 rounded-lg transition-all text-sm font-medium flex items-center justify-center gap-2 shadow-md hover:shadow-lg min-h-[48px] touch-manipulation ${
                     isSubmitting ? 'opacity-50 cursor-not-allowed' : ''
                   }`}
                 >
@@ -373,14 +373,14 @@ export function ContactForm() {
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="space-y-8"
+            className="space-y-6 sm:space-y-8 order-1 lg:order-2"
           >
             {/* Contact info card */}
-            <div className="bg-white p-5 rounded-xl shadow-md border border-slate-100 mb-8">
+            <div className="bg-white p-5 rounded-xl shadow-md border border-slate-100 mb-6 sm:mb-8">
               <h3 className="font-semibold text-slate-800 mb-4">Get in Touch</h3>
               
               <div className="space-y-4">
-                <a href="tel:(414) 240-6913" className="flex items-center gap-3 p-3 hover:bg-slate-50 rounded-lg transition-colors">
+                <a href="tel:(414) 240-6913" className="flex items-center gap-3 p-3 hover:bg-slate-50 rounded-lg transition-colors touch-manipulation">
                   <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
                     <Phone className="w-5 h-5 text-primary-dark" />
                   </div>
@@ -390,12 +390,12 @@ export function ContactForm() {
                   </div>
                 </a>
                 
-                <a href="mailto:lifegotbetterhomecare@gmail.com" className="flex items-center gap-3 p-3 hover:bg-slate-50 rounded-lg transition-colors">
+                <a href="mailto:lifegotbetterhomecare@gmail.com" className="flex items-center gap-3 p-3 hover:bg-slate-50 rounded-lg transition-colors touch-manipulation">
                   <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
                     <Mail className="w-5 h-5 text-primary-dark" />
                   </div>
                   <div>
-                    <p className="text-sm text-slate-800 font-medium">lifegotbetterhomecare@gmail.com</p>
+                    <p className="text-sm text-slate-800 font-medium break-all">lifegotbetterhomecare@gmail.com</p>
                     <p className="text-xs text-slate-500">Email us with questions</p>
                   </div>
                 </a>
